@@ -58,6 +58,7 @@
     Private Reembolso As Double
     Private Telefono As String
     Private MontoViatico As Double
+    Private CorreoElectronico As String
 
     Public Property Cod_Empleado As Double
         Get
@@ -581,10 +582,12 @@
         End Set
     End Property
 
-
-
-
-
-
-
+    Public Property Correo_Electronico As String
+        Get
+            Return CorreoElectronico
+        End Get
+        Set(value As String)
+            CorreoElectronico = value
+        End Set
+    End Property
 End Class

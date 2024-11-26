@@ -31,7 +31,7 @@ Partial Class FrmEmpleados
         Me.labelControl51 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtCodEmpleado = New System.Windows.Forms.TextBox()
         Me.txtCorreoElectronico = New System.Windows.Forms.TextBox()
-        Me.ChkSalarioBasico = New DevExpress.XtraEditors.CheckEdit()
+        Me.ChkSalarioDolarizado = New DevExpress.XtraEditors.CheckEdit()
         Me.ChkSubsidio = New DevExpress.XtraEditors.CheckEdit()
         Me.BtnBuscarEmpleado = New DevExpress.XtraEditors.SimpleButton()
         Me.labelControl21 = New DevExpress.XtraEditors.LabelControl()
@@ -138,7 +138,7 @@ Partial Class FrmEmpleados
         Me.labelControl34 = New DevExpress.XtraEditors.LabelControl()
         Me.cboInicioSuspencion = New DevExpress.XtraEditors.DateEdit()
         Me.labelControl33 = New DevExpress.XtraEditors.LabelControl()
-        Me.checkEdit1 = New DevExpress.XtraEditors.CheckEdit()
+        Me.ChkSueldoActualBasico = New DevExpress.XtraEditors.CheckEdit()
         Me.groupControl2 = New DevExpress.XtraEditors.GroupControl()
         Me.cboFechaAumento = New DevExpress.XtraEditors.DateEdit()
         Me.labelControl32 = New DevExpress.XtraEditors.LabelControl()
@@ -188,6 +188,10 @@ Partial Class FrmEmpleados
         Me.txtSueldoPeriodo = New System.Windows.Forms.TextBox()
         Me.labelControl61 = New DevExpress.XtraEditors.LabelControl()
         Me.groupControl6 = New DevExpress.XtraEditors.GroupControl()
+        Me.cmbPagoInssPatronal = New System.Windows.Forms.ComboBox()
+        Me.cmbExcentoIr = New System.Windows.Forms.ComboBox()
+        Me.cmbExcentoInss = New System.Windows.Forms.ComboBox()
+        Me.cmbSalarioMinimo = New System.Windows.Forms.ComboBox()
         Me.cmbTipoNomina = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.CodTipoNomina = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -202,13 +206,9 @@ Partial Class FrmEmpleados
         Me.txtDiasAdicionales = New System.Windows.Forms.TextBox()
         Me.labelControl58 = New DevExpress.XtraEditors.LabelControl()
         Me.txtDiasDescuento = New System.Windows.Forms.TextBox()
-        Me.cmbPagoInssPatronal = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.labelControl57 = New DevExpress.XtraEditors.LabelControl()
-        Me.cmbExcentoIr = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.labelControl56 = New DevExpress.XtraEditors.LabelControl()
-        Me.cmbExcentoInss = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.labelControl55 = New DevExpress.XtraEditors.LabelControl()
-        Me.cmbSalarioMinimo = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.labelControl54 = New DevExpress.XtraEditors.LabelControl()
         Me.ChkSalarioFijo = New DevExpress.XtraEditors.CheckEdit()
         Me.cmbTipoPago = New DevExpress.XtraEditors.ComboBoxEdit()
@@ -216,10 +216,19 @@ Partial Class FrmEmpleados
         Me.simpleButton15 = New DevExpress.XtraEditors.SimpleButton()
         Me.labelControl52 = New DevExpress.XtraEditors.LabelControl()
         Me.btnCancelar = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl71 = New DevExpress.XtraEditors.LabelControl()
+        Me.txtNumeroCelular = New System.Windows.Forms.TextBox()
+        Me.GroupControl10 = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl72 = New DevExpress.XtraEditors.LabelControl()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl73 = New DevExpress.XtraEditors.LabelControl()
+        Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl74 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.TabEmpleados, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabEmpleados.SuspendLayout()
         Me.TabGenerales.SuspendLayout()
-        CType(Me.ChkSalarioBasico.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChkSalarioDolarizado.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChkSubsidio.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtnumeroHijos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtpFechaVacaciones.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -246,7 +255,7 @@ Partial Class FrmEmpleados
         CType(Me.cboFinSuspencion.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboInicioSuspencion.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboInicioSuspencion.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.checkEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChkSueldoActualBasico.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.groupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.groupControl2.SuspendLayout()
         CType(Me.cboFechaAumento.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -271,12 +280,14 @@ Partial Class FrmEmpleados
         CType(Me.cmbTipoNomina.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbGrupo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cmbPagoInssPatronal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cmbExcentoIr.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cmbExcentoInss.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cmbSalarioMinimo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChkSalarioFijo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbTipoPago.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl10.SuspendLayout()
+        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnNuevo
@@ -345,10 +356,12 @@ Partial Class FrmEmpleados
         '
         'TabGenerales
         '
+        Me.TabGenerales.Controls.Add(Me.LabelControl71)
+        Me.TabGenerales.Controls.Add(Me.txtNumeroCelular)
         Me.TabGenerales.Controls.Add(Me.labelControl51)
         Me.TabGenerales.Controls.Add(Me.TxtCodEmpleado)
         Me.TabGenerales.Controls.Add(Me.txtCorreoElectronico)
-        Me.TabGenerales.Controls.Add(Me.ChkSalarioBasico)
+        Me.TabGenerales.Controls.Add(Me.ChkSalarioDolarizado)
         Me.TabGenerales.Controls.Add(Me.ChkSubsidio)
         Me.TabGenerales.Controls.Add(Me.BtnBuscarEmpleado)
         Me.TabGenerales.Controls.Add(Me.labelControl21)
@@ -402,7 +415,7 @@ Partial Class FrmEmpleados
         '
         'labelControl51
         '
-        Me.labelControl51.Location = New System.Drawing.Point(517, 297)
+        Me.labelControl51.Location = New System.Drawing.Point(517, 285)
         Me.labelControl51.Name = "labelControl51"
         Me.labelControl51.Size = New System.Drawing.Size(71, 13)
         Me.labelControl51.TabIndex = 53
@@ -410,7 +423,7 @@ Partial Class FrmEmpleados
         '
         'TxtCodEmpleado
         '
-        Me.TxtCodEmpleado.Location = New System.Drawing.Point(292, 117)
+        Me.TxtCodEmpleado.Location = New System.Drawing.Point(293, 117)
         Me.TxtCodEmpleado.Name = "TxtCodEmpleado"
         Me.TxtCodEmpleado.Size = New System.Drawing.Size(124, 21)
         Me.TxtCodEmpleado.TabIndex = 15
@@ -418,22 +431,22 @@ Partial Class FrmEmpleados
         '
         'txtCorreoElectronico
         '
-        Me.txtCorreoElectronico.Location = New System.Drawing.Point(593, 270)
+        Me.txtCorreoElectronico.Location = New System.Drawing.Point(593, 256)
         Me.txtCorreoElectronico.Name = "txtCorreoElectronico"
         Me.txtCorreoElectronico.Size = New System.Drawing.Size(152, 21)
         Me.txtCorreoElectronico.TabIndex = 52
         '
-        'ChkSalarioBasico
+        'ChkSalarioDolarizado
         '
-        Me.ChkSalarioBasico.Location = New System.Drawing.Point(598, 342)
-        Me.ChkSalarioBasico.Name = "ChkSalarioBasico"
-        Me.ChkSalarioBasico.Properties.Caption = "Salario Basico Dolarizado"
-        Me.ChkSalarioBasico.Size = New System.Drawing.Size(152, 20)
-        Me.ChkSalarioBasico.TabIndex = 51
+        Me.ChkSalarioDolarizado.Location = New System.Drawing.Point(639, 342)
+        Me.ChkSalarioDolarizado.Name = "ChkSalarioDolarizado"
+        Me.ChkSalarioDolarizado.Properties.Caption = "Salario Basico Dolarizado"
+        Me.ChkSalarioDolarizado.Size = New System.Drawing.Size(152, 20)
+        Me.ChkSalarioDolarizado.TabIndex = 51
         '
         'ChkSubsidio
         '
-        Me.ChkSubsidio.Location = New System.Drawing.Point(598, 319)
+        Me.ChkSubsidio.Location = New System.Drawing.Point(496, 342)
         Me.ChkSubsidio.Name = "ChkSubsidio"
         Me.ChkSubsidio.Properties.Caption = "Empleado Subsidio"
         Me.ChkSubsidio.Size = New System.Drawing.Size(152, 20)
@@ -451,7 +464,7 @@ Partial Class FrmEmpleados
         '
         'labelControl21
         '
-        Me.labelControl21.Location = New System.Drawing.Point(488, 273)
+        Me.labelControl21.Location = New System.Drawing.Point(488, 259)
         Me.labelControl21.Name = "labelControl21"
         Me.labelControl21.Size = New System.Drawing.Size(100, 13)
         Me.labelControl21.TabIndex = 29
@@ -459,14 +472,14 @@ Partial Class FrmEmpleados
         '
         'txtCuentaBanco
         '
-        Me.txtCuentaBanco.Location = New System.Drawing.Point(593, 295)
+        Me.txtCuentaBanco.Location = New System.Drawing.Point(593, 281)
         Me.txtCuentaBanco.Name = "txtCuentaBanco"
         Me.txtCuentaBanco.Size = New System.Drawing.Size(152, 21)
         Me.txtCuentaBanco.TabIndex = 28
         '
         'labelControl20
         '
-        Me.labelControl20.Location = New System.Drawing.Point(552, 247)
+        Me.labelControl20.Location = New System.Drawing.Point(553, 237)
         Me.labelControl20.Name = "labelControl20"
         Me.labelControl20.Size = New System.Drawing.Size(33, 13)
         Me.labelControl20.TabIndex = 47
@@ -474,7 +487,7 @@ Partial Class FrmEmpleados
         '
         'labelControl19
         '
-        Me.labelControl19.Location = New System.Drawing.Point(516, 221)
+        Me.labelControl19.Location = New System.Drawing.Point(516, 215)
         Me.labelControl19.Name = "labelControl19"
         Me.labelControl19.Size = New System.Drawing.Size(73, 13)
         Me.labelControl19.TabIndex = 45
@@ -484,14 +497,14 @@ Partial Class FrmEmpleados
         '
         Me.cmbSindicalista.FormattingEnabled = True
         Me.cmbSindicalista.Items.AddRange(New Object() {"Si", "No"})
-        Me.cmbSindicalista.Location = New System.Drawing.Point(596, 194)
+        Me.cmbSindicalista.Location = New System.Drawing.Point(596, 187)
         Me.cmbSindicalista.Name = "cmbSindicalista"
         Me.cmbSindicalista.Size = New System.Drawing.Size(149, 21)
         Me.cmbSindicalista.TabIndex = 44
         '
         'labelControl18
         '
-        Me.labelControl18.Location = New System.Drawing.Point(525, 197)
+        Me.labelControl18.Location = New System.Drawing.Point(525, 191)
         Me.labelControl18.Name = "labelControl18"
         Me.labelControl18.Size = New System.Drawing.Size(60, 13)
         Me.labelControl18.TabIndex = 43
@@ -499,14 +512,14 @@ Partial Class FrmEmpleados
         '
         'txtnumeroHijos
         '
-        Me.txtnumeroHijos.Location = New System.Drawing.Point(596, 167)
+        Me.txtnumeroHijos.Location = New System.Drawing.Point(596, 164)
         Me.txtnumeroHijos.Name = "txtnumeroHijos"
         Me.txtnumeroHijos.Size = New System.Drawing.Size(120, 21)
         Me.txtnumeroHijos.TabIndex = 42
         '
         'labelControl17
         '
-        Me.labelControl17.Location = New System.Drawing.Point(518, 170)
+        Me.labelControl17.Location = New System.Drawing.Point(518, 167)
         Me.labelControl17.Name = "labelControl17"
         Me.labelControl17.Size = New System.Drawing.Size(67, 13)
         Me.labelControl17.TabIndex = 41
@@ -833,7 +846,7 @@ Partial Class FrmEmpleados
         '
         'cmbDepartamento
         '
-        Me.cmbDepartamento.Location = New System.Drawing.Point(596, 221)
+        Me.cmbDepartamento.Location = New System.Drawing.Point(596, 210)
         Me.cmbDepartamento.Name = "cmbDepartamento"
         Me.cmbDepartamento.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cmbDepartamento.Properties.NullText = ""
@@ -844,7 +857,7 @@ Partial Class FrmEmpleados
         '
         'cmbCargo
         '
-        Me.cmbCargo.Location = New System.Drawing.Point(595, 246)
+        Me.cmbCargo.Location = New System.Drawing.Point(595, 233)
         Me.cmbCargo.Name = "cmbCargo"
         Me.cmbCargo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cmbCargo.Properties.NullText = ""
@@ -872,12 +885,13 @@ Partial Class FrmEmpleados
         '
         'TabHistorico
         '
+        Me.TabHistorico.Controls.Add(Me.GroupControl10)
         Me.TabHistorico.Controls.Add(Me.groupControl5)
         Me.TabHistorico.Controls.Add(Me.groupControl4)
         Me.TabHistorico.Controls.Add(Me.cboIncapacidades)
         Me.TabHistorico.Controls.Add(Me.labelControl36)
         Me.TabHistorico.Controls.Add(Me.groupControl3)
-        Me.TabHistorico.Controls.Add(Me.checkEdit1)
+        Me.TabHistorico.Controls.Add(Me.ChkSueldoActualBasico)
         Me.TabHistorico.Controls.Add(Me.groupControl2)
         Me.TabHistorico.Name = "TabHistorico"
         Me.TabHistorico.Size = New System.Drawing.Size(794, 367)
@@ -1295,14 +1309,14 @@ Partial Class FrmEmpleados
         '
         Me.cboIncapacidades.FormattingEnabled = True
         Me.cboIncapacidades.Items.AddRange(New Object() {"Si", "No"})
-        Me.cboIncapacidades.Location = New System.Drawing.Point(622, 214)
+        Me.cboIncapacidades.Location = New System.Drawing.Point(376, 318)
         Me.cboIncapacidades.Name = "cboIncapacidades"
         Me.cboIncapacidades.Size = New System.Drawing.Size(149, 21)
         Me.cboIncapacidades.TabIndex = 58
         '
         'labelControl36
         '
-        Me.labelControl36.Location = New System.Drawing.Point(543, 217)
+        Me.labelControl36.Location = New System.Drawing.Point(297, 321)
         Me.labelControl36.Name = "labelControl36"
         Me.labelControl36.Size = New System.Drawing.Size(73, 13)
         Me.labelControl36.TabIndex = 57
@@ -1373,13 +1387,13 @@ Partial Class FrmEmpleados
         Me.labelControl33.TabIndex = 69
         Me.labelControl33.Text = "Inicio Suspencion:"
         '
-        'checkEdit1
+        'ChkSueldoActualBasico
         '
-        Me.checkEdit1.Location = New System.Drawing.Point(13, 343)
-        Me.checkEdit1.Name = "checkEdit1"
-        Me.checkEdit1.Properties.Caption = "Sueldo Actual -- Basico en Liquidacion y Vacaciones"
-        Me.checkEdit1.Size = New System.Drawing.Size(269, 20)
-        Me.checkEdit1.TabIndex = 55
+        Me.ChkSueldoActualBasico.Location = New System.Drawing.Point(13, 343)
+        Me.ChkSueldoActualBasico.Name = "ChkSueldoActualBasico"
+        Me.ChkSueldoActualBasico.Properties.Caption = "Sueldo Actual -- Basico en Liquidacion y Vacaciones"
+        Me.ChkSueldoActualBasico.Size = New System.Drawing.Size(269, 20)
+        Me.ChkSueldoActualBasico.TabIndex = 55
         '
         'groupControl2
         '
@@ -1802,6 +1816,10 @@ Partial Class FrmEmpleados
         '
         'groupControl6
         '
+        Me.groupControl6.Controls.Add(Me.cmbPagoInssPatronal)
+        Me.groupControl6.Controls.Add(Me.cmbExcentoIr)
+        Me.groupControl6.Controls.Add(Me.cmbExcentoInss)
+        Me.groupControl6.Controls.Add(Me.cmbSalarioMinimo)
         Me.groupControl6.Controls.Add(Me.cmbTipoNomina)
         Me.groupControl6.Controls.Add(Me.labelControl67)
         Me.groupControl6.Controls.Add(Me.txtDiasBasico)
@@ -1812,13 +1830,9 @@ Partial Class FrmEmpleados
         Me.groupControl6.Controls.Add(Me.txtDiasAdicionales)
         Me.groupControl6.Controls.Add(Me.labelControl58)
         Me.groupControl6.Controls.Add(Me.txtDiasDescuento)
-        Me.groupControl6.Controls.Add(Me.cmbPagoInssPatronal)
         Me.groupControl6.Controls.Add(Me.labelControl57)
-        Me.groupControl6.Controls.Add(Me.cmbExcentoIr)
         Me.groupControl6.Controls.Add(Me.labelControl56)
-        Me.groupControl6.Controls.Add(Me.cmbExcentoInss)
         Me.groupControl6.Controls.Add(Me.labelControl55)
-        Me.groupControl6.Controls.Add(Me.cmbSalarioMinimo)
         Me.groupControl6.Controls.Add(Me.labelControl54)
         Me.groupControl6.Controls.Add(Me.ChkSalarioFijo)
         Me.groupControl6.Controls.Add(Me.cmbTipoPago)
@@ -1830,6 +1844,46 @@ Partial Class FrmEmpleados
         Me.groupControl6.Size = New System.Drawing.Size(250, 342)
         Me.groupControl6.TabIndex = 0
         Me.groupControl6.Text = "Informacion Nomina"
+        '
+        'cmbPagoInssPatronal
+        '
+        Me.cmbPagoInssPatronal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbPagoInssPatronal.FormattingEnabled = True
+        Me.cmbPagoInssPatronal.Items.AddRange(New Object() {"Si", "No"})
+        Me.cmbPagoInssPatronal.Location = New System.Drawing.Point(86, 174)
+        Me.cmbPagoInssPatronal.Name = "cmbPagoInssPatronal"
+        Me.cmbPagoInssPatronal.Size = New System.Drawing.Size(128, 21)
+        Me.cmbPagoInssPatronal.TabIndex = 75
+        '
+        'cmbExcentoIr
+        '
+        Me.cmbExcentoIr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbExcentoIr.FormattingEnabled = True
+        Me.cmbExcentoIr.Items.AddRange(New Object() {"Si", "No"})
+        Me.cmbExcentoIr.Location = New System.Drawing.Point(87, 150)
+        Me.cmbExcentoIr.Name = "cmbExcentoIr"
+        Me.cmbExcentoIr.Size = New System.Drawing.Size(128, 21)
+        Me.cmbExcentoIr.TabIndex = 74
+        '
+        'cmbExcentoInss
+        '
+        Me.cmbExcentoInss.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbExcentoInss.FormattingEnabled = True
+        Me.cmbExcentoInss.Items.AddRange(New Object() {"Si", "No"})
+        Me.cmbExcentoInss.Location = New System.Drawing.Point(87, 128)
+        Me.cmbExcentoInss.Name = "cmbExcentoInss"
+        Me.cmbExcentoInss.Size = New System.Drawing.Size(128, 21)
+        Me.cmbExcentoInss.TabIndex = 73
+        '
+        'cmbSalarioMinimo
+        '
+        Me.cmbSalarioMinimo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSalarioMinimo.FormattingEnabled = True
+        Me.cmbSalarioMinimo.Items.AddRange(New Object() {"Si", "No"})
+        Me.cmbSalarioMinimo.Location = New System.Drawing.Point(87, 105)
+        Me.cmbSalarioMinimo.Name = "cmbSalarioMinimo"
+        Me.cmbSalarioMinimo.Size = New System.Drawing.Size(128, 21)
+        Me.cmbSalarioMinimo.TabIndex = 72
         '
         'cmbTipoNomina
         '
@@ -1966,15 +2020,6 @@ Partial Class FrmEmpleados
         Me.txtDiasDescuento.Text = "0"
         Me.txtDiasDescuento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'cmbPagoInssPatronal
-        '
-        Me.cmbPagoInssPatronal.EditValue = ""
-        Me.cmbPagoInssPatronal.Location = New System.Drawing.Point(87, 174)
-        Me.cmbPagoInssPatronal.Name = "cmbPagoInssPatronal"
-        Me.cmbPagoInssPatronal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbPagoInssPatronal.Size = New System.Drawing.Size(128, 20)
-        Me.cmbPagoInssPatronal.TabIndex = 61
-        '
         'labelControl57
         '
         Me.labelControl57.Location = New System.Drawing.Point(11, 177)
@@ -1982,15 +2027,6 @@ Partial Class FrmEmpleados
         Me.labelControl57.Size = New System.Drawing.Size(70, 13)
         Me.labelControl57.TabIndex = 60
         Me.labelControl57.Text = "INSS Patronal:"
-        '
-        'cmbExcentoIr
-        '
-        Me.cmbExcentoIr.EditValue = ""
-        Me.cmbExcentoIr.Location = New System.Drawing.Point(86, 151)
-        Me.cmbExcentoIr.Name = "cmbExcentoIr"
-        Me.cmbExcentoIr.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbExcentoIr.Size = New System.Drawing.Size(128, 20)
-        Me.cmbExcentoIr.TabIndex = 59
         '
         'labelControl56
         '
@@ -2000,15 +2036,6 @@ Partial Class FrmEmpleados
         Me.labelControl56.TabIndex = 58
         Me.labelControl56.Text = "Excento IR:"
         '
-        'cmbExcentoInss
-        '
-        Me.cmbExcentoInss.EditValue = ""
-        Me.cmbExcentoInss.Location = New System.Drawing.Point(86, 128)
-        Me.cmbExcentoInss.Name = "cmbExcentoInss"
-        Me.cmbExcentoInss.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbExcentoInss.Size = New System.Drawing.Size(128, 20)
-        Me.cmbExcentoInss.TabIndex = 57
-        '
         'labelControl55
         '
         Me.labelControl55.Location = New System.Drawing.Point(19, 131)
@@ -2016,15 +2043,6 @@ Partial Class FrmEmpleados
         Me.labelControl55.Size = New System.Drawing.Size(64, 13)
         Me.labelControl55.TabIndex = 56
         Me.labelControl55.Text = "Exento INSS:"
-        '
-        'cmbSalarioMinimo
-        '
-        Me.cmbSalarioMinimo.EditValue = ""
-        Me.cmbSalarioMinimo.Location = New System.Drawing.Point(86, 105)
-        Me.cmbSalarioMinimo.Name = "cmbSalarioMinimo"
-        Me.cmbSalarioMinimo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbSalarioMinimo.Size = New System.Drawing.Size(128, 20)
-        Me.cmbSalarioMinimo.TabIndex = 55
         '
         'labelControl54
         '
@@ -2087,6 +2105,86 @@ Partial Class FrmEmpleados
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.Visible = False
         '
+        'LabelControl71
+        '
+        Me.LabelControl71.Location = New System.Drawing.Point(511, 310)
+        Me.LabelControl71.Name = "LabelControl71"
+        Me.LabelControl71.Size = New System.Drawing.Size(77, 13)
+        Me.LabelControl71.TabIndex = 56
+        Me.LabelControl71.Text = "Numero Celular:"
+        '
+        'txtNumeroCelular
+        '
+        Me.txtNumeroCelular.Location = New System.Drawing.Point(592, 306)
+        Me.txtNumeroCelular.Name = "txtNumeroCelular"
+        Me.txtNumeroCelular.Size = New System.Drawing.Size(152, 21)
+        Me.txtNumeroCelular.TabIndex = 55
+        '
+        'GroupControl10
+        '
+        Me.GroupControl10.Controls.Add(Me.LabelControl72)
+        Me.GroupControl10.Controls.Add(Me.TextBox1)
+        Me.GroupControl10.Controls.Add(Me.DateEdit1)
+        Me.GroupControl10.Controls.Add(Me.LabelControl73)
+        Me.GroupControl10.Controls.Add(Me.DateEdit2)
+        Me.GroupControl10.Controls.Add(Me.LabelControl74)
+        Me.GroupControl10.Location = New System.Drawing.Point(535, 204)
+        Me.GroupControl10.Name = "GroupControl10"
+        Me.GroupControl10.Size = New System.Drawing.Size(253, 159)
+        Me.GroupControl10.TabIndex = 61
+        Me.GroupControl10.Text = "Ultima Suspencion"
+        '
+        'LabelControl72
+        '
+        Me.LabelControl72.Location = New System.Drawing.Point(58, 77)
+        Me.LabelControl72.Name = "LabelControl72"
+        Me.LabelControl72.Size = New System.Drawing.Size(36, 13)
+        Me.LabelControl72.TabIndex = 74
+        Me.LabelControl72.Text = "Motivo:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(101, 74)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(149, 21)
+        Me.TextBox1.TabIndex = 73
+        '
+        'DateEdit1
+        '
+        Me.DateEdit1.EditValue = New Date(2021, 4, 12, 0, 0, 0, 0)
+        Me.DateEdit1.Location = New System.Drawing.Point(101, 50)
+        Me.DateEdit1.Name = "DateEdit1"
+        Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit1.Size = New System.Drawing.Size(149, 20)
+        Me.DateEdit1.TabIndex = 72
+        '
+        'LabelControl73
+        '
+        Me.LabelControl73.Location = New System.Drawing.Point(19, 53)
+        Me.LabelControl73.Name = "LabelControl73"
+        Me.LabelControl73.Size = New System.Drawing.Size(75, 13)
+        Me.LabelControl73.TabIndex = 71
+        Me.LabelControl73.Text = "Fin Suspencion:"
+        '
+        'DateEdit2
+        '
+        Me.DateEdit2.EditValue = New Date(2021, 4, 12, 0, 0, 0, 0)
+        Me.DateEdit2.Location = New System.Drawing.Point(101, 26)
+        Me.DateEdit2.Name = "DateEdit2"
+        Me.DateEdit2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit2.Size = New System.Drawing.Size(149, 20)
+        Me.DateEdit2.TabIndex = 70
+        '
+        'LabelControl74
+        '
+        Me.LabelControl74.Location = New System.Drawing.Point(8, 29)
+        Me.LabelControl74.Name = "LabelControl74"
+        Me.LabelControl74.Size = New System.Drawing.Size(86, 13)
+        Me.LabelControl74.TabIndex = 69
+        Me.LabelControl74.Text = "Inicio Suspencion:"
+        '
         'FrmEmpleados
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2111,7 +2209,7 @@ Partial Class FrmEmpleados
         Me.TabEmpleados.ResumeLayout(False)
         Me.TabGenerales.ResumeLayout(False)
         Me.TabGenerales.PerformLayout()
-        CType(Me.ChkSalarioBasico.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChkSalarioDolarizado.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ChkSubsidio.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtnumeroHijos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtpFechaVacaciones.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2142,7 +2240,7 @@ Partial Class FrmEmpleados
         CType(Me.cboFinSuspencion.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboInicioSuspencion.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboInicioSuspencion.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.checkEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChkSueldoActualBasico.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.groupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.groupControl2.ResumeLayout(False)
         Me.groupControl2.PerformLayout()
@@ -2172,12 +2270,15 @@ Partial Class FrmEmpleados
         CType(Me.cmbTipoNomina.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbGrupo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cmbPagoInssPatronal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cmbExcentoIr.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cmbExcentoInss.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cmbSalarioMinimo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ChkSalarioFijo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbTipoPago.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl10.ResumeLayout(False)
+        Me.GroupControl10.PerformLayout()
+        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2192,7 +2293,7 @@ Partial Class FrmEmpleados
     Private WithEvents TabGenerales As DevExpress.XtraTab.XtraTabPage
     Private WithEvents labelControl51 As DevExpress.XtraEditors.LabelControl
     Private WithEvents txtCorreoElectronico As TextBox
-    Private WithEvents ChkSalarioBasico As DevExpress.XtraEditors.CheckEdit
+    Private WithEvents ChkSalarioDolarizado As DevExpress.XtraEditors.CheckEdit
     Private WithEvents ChkSubsidio As DevExpress.XtraEditors.CheckEdit
     Private WithEvents BtnBuscarEmpleado As DevExpress.XtraEditors.SimpleButton
     Private WithEvents labelControl21 As DevExpress.XtraEditors.LabelControl
@@ -2297,7 +2398,7 @@ Partial Class FrmEmpleados
     Private WithEvents labelControl34 As DevExpress.XtraEditors.LabelControl
     Private WithEvents cboInicioSuspencion As DevExpress.XtraEditors.DateEdit
     Private WithEvents labelControl33 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents checkEdit1 As DevExpress.XtraEditors.CheckEdit
+    Private WithEvents ChkSueldoActualBasico As DevExpress.XtraEditors.CheckEdit
     Private WithEvents groupControl2 As DevExpress.XtraEditors.GroupControl
     Private WithEvents cboFechaAumento As DevExpress.XtraEditors.DateEdit
     Private WithEvents labelControl32 As DevExpress.XtraEditors.LabelControl
@@ -2356,13 +2457,9 @@ Partial Class FrmEmpleados
     Private WithEvents txtDiasAdicionales As TextBox
     Private WithEvents labelControl58 As DevExpress.XtraEditors.LabelControl
     Private WithEvents txtDiasDescuento As TextBox
-    Private WithEvents cmbPagoInssPatronal As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents labelControl57 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents cmbExcentoIr As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents labelControl56 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents cmbExcentoInss As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents labelControl55 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents cmbSalarioMinimo As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents labelControl54 As DevExpress.XtraEditors.LabelControl
     Private WithEvents ChkSalarioFijo As DevExpress.XtraEditors.CheckEdit
     Private WithEvents cmbTipoPago As DevExpress.XtraEditors.ComboBoxEdit
@@ -2378,4 +2475,17 @@ Partial Class FrmEmpleados
     Friend WithEvents Periodo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents TxtCodEmpleado As TextBox
     Friend WithEvents btnCancelar As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents cmbSalarioMinimo As ComboBox
+    Friend WithEvents cmbExcentoInss As ComboBox
+    Friend WithEvents cmbExcentoIr As ComboBox
+    Friend WithEvents cmbPagoInssPatronal As ComboBox
+    Private WithEvents LabelControl71 As DevExpress.XtraEditors.LabelControl
+    Private WithEvents txtNumeroCelular As TextBox
+    Private WithEvents GroupControl10 As DevExpress.XtraEditors.GroupControl
+    Private WithEvents LabelControl72 As DevExpress.XtraEditors.LabelControl
+    Private WithEvents TextBox1 As TextBox
+    Private WithEvents DateEdit1 As DevExpress.XtraEditors.DateEdit
+    Private WithEvents LabelControl73 As DevExpress.XtraEditors.LabelControl
+    Private WithEvents DateEdit2 As DevExpress.XtraEditors.DateEdit
+    Private WithEvents LabelControl74 As DevExpress.XtraEditors.LabelControl
 End Class
