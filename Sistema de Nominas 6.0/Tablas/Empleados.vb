@@ -1,5 +1,7 @@
 ﻿Public Class Empleados
 
+    Inherits Historico
+
     Private CodEmpleado As Double
     Private CodEmpleado1 As String
     Private Nombre1 As String
@@ -29,36 +31,51 @@
     Private PorcentajeComision As Double
     Private OtrosIngresos As Double
     Private DescripOtrIngre As String
-    Private ExentoInss As Boolean
-    Private ExentoIr As Boolean
-    Private PagoInssPatronal As Boolean
-    Private SalarioMinimo As Boolean
+    Private ExentoInss As Integer
+    Private ExentoIr As Integer
+    Private PagoInssPatronal As Integer
+    Private SalarioMinimo As Integer
     Private Observaciones As String
-    Private Activo As Boolean
-    Private Liquidado As Boolean
-    Private Ausente As Boolean
+    Private Activo As Integer
+    Private Foto As String
+    Private Liquidado As Integer
+    Private Ausente As Integer
     Private SalarioFijo As String
-    Private SumarSubsidio As Boolean
+    Private SumarSubsidio As Integer
     Private PorcientoIncentivo As Double
-    Private Gravidez As Boolean
-    Private VacacionesBasico As Boolean
-    Private Dolarizado As Boolean
+    Private Gravidez As Integer
+    Private VacacionesBasico As Integer
+    Private Dolarizado As Integer
     Private FechaAntiguedad As String
-    Private Antiguedad As Boolean
+    Private Antiguedad As Integer
     Private CuentaBanco As String
-    Private SueldoActualBasico As Boolean
-    Private HorasTurno As Boolean
+    Private SueldoActualBasico As Integer
+    Private HorasTurno As Integer
     Private DiasBasico As Double
     Private AumentoBasico As Double
-    Private EmpleadoConstruccion As Boolean
+    Private EmpleadoConstruccion As Integer
     Private MontoPension As Double
     Private PorcentajePension As Double
     Private ViaticoxDia As Double
-    Private DeducirPorciento As Boolean
+    Private DeducirPorciento As Integer
     Private Reembolso As Double
     Private Telefono As String
     Private MontoViatico As Double
     Private CorreoElectronico As String
+    Private NumeroCelular As String
+    Private CelularEmergencia As String
+    Private Profesion As String
+    Private EstadoCivil As String
+    Private JefeInmediato As String
+    Private Incentivo As String
+    Private CuentaBancoLAFISE As String
+    Private CuentaBancoBDF As String
+    Private CuentaBancoBANPRO As String
+    Private MontoEmbargo As Double
+    Private PorcentajeEmbargo As Double
+    Private PagoCheque As Boolean
+
+
 
     Public Property Cod_Empleado As Double
         Get
@@ -321,38 +338,38 @@
         End Set
     End Property
 
-    Public Property Exento_Inss As Boolean
+    Public Property Exento_Inss As Integer
         Get
             Return ExentoInss
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             ExentoInss = value
         End Set
     End Property
 
-    Public Property Exento_Ir As Boolean
+    Public Property Exento_Ir As Integer
         Get
             Return ExentoIr
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             ExentoIr = value
         End Set
     End Property
 
-    Public Property PagoInss_Patronal As Boolean
+    Public Property PagoInss_Patronal As Integer
         Get
             Return PagoInssPatronal
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             PagoInssPatronal = value
         End Set
     End Property
 
-    Public Property Salario_Minimo As Boolean
+    Public Property Salario_Minimo As Integer
         Get
             Return SalarioMinimo
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             SalarioMinimo = value
         End Set
     End Property
@@ -366,29 +383,29 @@
         End Set
     End Property
 
-    Public Property Empleado_Activo As Boolean
+    Public Property Empleado_Activo As Integer
         Get
             Return Activo
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             Activo = value
         End Set
     End Property
 
-    Public Property Empleado_Liquidado As Boolean
+    Public Property Empleado_Liquidado As Integer
         Get
             Return Liquidado
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             Liquidado = value
         End Set
     End Property
 
-    Public Property Empleado_Ausente As Boolean
+    Public Property Empleado_Ausente As Integer
         Get
             Return Ausente
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             Ausente = value
         End Set
     End Property
@@ -402,11 +419,11 @@
         End Set
     End Property
 
-    Public Property Sumar_Subsidio As Boolean
+    Public Property Sumar_Subsidio As Integer
         Get
             Return SumarSubsidio
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             SumarSubsidio = value
         End Set
     End Property
@@ -420,29 +437,29 @@
         End Set
     End Property
 
-    Public Property Empleado_Gravidez As Boolean
+    Public Property Empleado_Gravidez As Integer
         Get
             Return Gravidez
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             Gravidez = value
         End Set
     End Property
 
-    Public Property Vacaciones_Basico As Boolean
+    Public Property Vacaciones_Basico As Integer
         Get
             Return VacacionesBasico
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             VacacionesBasico = value
         End Set
     End Property
 
-    Public Property Empleado_Dolarizado As Boolean
+    Public Property Empleado_Dolarizado As Integer
         Get
             Return Dolarizado
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             Dolarizado = value
         End Set
     End Property
@@ -456,11 +473,11 @@
         End Set
     End Property
 
-    Public Property Empleado_Antiguedad As Boolean
+    Public Property Empleado_Antiguedad As Integer
         Get
             Return Antiguedad
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             Antiguedad = value
         End Set
     End Property
@@ -474,20 +491,20 @@
         End Set
     End Property
 
-    Public Property SueldoActual_Basico As Boolean
+    Public Property SueldoActual_Basico As Integer
         Get
             Return SueldoActualBasico
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             SueldoActualBasico = value
         End Set
     End Property
 
-    Public Property Horas_Turno As Boolean
+    Public Property Horas_Turno As Integer
         Get
             Return HorasTurno
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             HorasTurno = value
         End Set
     End Property
@@ -510,11 +527,11 @@
         End Set
     End Property
 
-    Public Property Empleado_Construccion As Boolean
+    Public Property Empleado_Construccion As Integer
         Get
             Return EmpleadoConstruccion
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             EmpleadoConstruccion = value
         End Set
     End Property
@@ -546,11 +563,11 @@
         End Set
     End Property
 
-    Public Property Deducir_Porciento As Boolean
+    Public Property Deducir_Porciento As Integer
         Get
             Return DeducirPorciento
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             DeducirPorciento = value
         End Set
     End Property
@@ -588,6 +605,123 @@
         End Get
         Set(value As String)
             CorreoElectronico = value
+        End Set
+    End Property
+
+    Public Property Numero_Celular As String
+        Get
+            Return NumeroCelular
+        End Get
+        Set(value As String)
+            NumeroCelular = value
+        End Set
+    End Property
+
+    Public Property Celular_Emergencia As String
+        Get
+            Return CelularEmergencia
+        End Get
+        Set(value As String)
+            CelularEmergencia = value
+        End Set
+    End Property
+
+    Public Property Empleado_Profesion As String
+        Get
+            Return Profesion
+        End Get
+        Set(value As String)
+            Profesion = value
+        End Set
+    End Property
+
+    Public Property Estado_Civil As String
+        Get
+            Return EstadoCivil
+        End Get
+        Set(value As String)
+            EstadoCivil = value
+        End Set
+    End Property
+
+    Public Property Jefe_Inmediato As String
+        Get
+            Return JefeInmediato
+        End Get
+        Set(value As String)
+            JefeInmediato = value
+        End Set
+    End Property
+
+    Public Property Empleado_Incentivo As String
+        Get
+            Return Incentivo
+        End Get
+        Set(value As String)
+            Incentivo = value
+        End Set
+    End Property
+
+    Public Property CuentaBanco_LAFISE As String
+        Get
+            Return CuentaBancoLAFISE
+        End Get
+        Set(value As String)
+            CuentaBancoLAFISE = value
+        End Set
+    End Property
+
+    Public Property CuentaBanco_BDF As String
+        Get
+            Return CuentaBancoBDF
+        End Get
+        Set(value As String)
+            CuentaBancoBDF = value
+        End Set
+    End Property
+
+    Public Property CuentaBanco_BANPRO As String
+        Get
+            Return CuentaBancoBANPRO
+        End Get
+        Set(value As String)
+            CuentaBancoBANPRO = value
+        End Set
+    End Property
+
+    Public Property Empleado_Foto As String
+        Get
+            Return Foto
+        End Get
+        Set(value As String)
+            Foto = value
+        End Set
+    End Property
+
+    Public Property Monto_Embargo As Double
+        Get
+            Return MontoEmbargo
+        End Get
+        Set(value As Double)
+            MontoEmbargo = value
+        End Set
+    End Property
+
+    Public Property Porcentaje_Embargo As Double
+        Get
+            Return PorcentajeEmbargo
+        End Get
+        Set(value As Double)
+            PorcentajeEmbargo = value
+        End Set
+    End Property
+
+    Public Property Pago_Cheque As Boolean
+        Get
+            Return PagoCheque
+        End Get
+        Set(value As Boolean)
+            PagoCheque = value
         End Set
     End Property
 End Class

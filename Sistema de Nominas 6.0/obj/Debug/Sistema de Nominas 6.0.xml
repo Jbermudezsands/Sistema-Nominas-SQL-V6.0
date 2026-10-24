@@ -22,5 +22,250 @@ Sistema de Nominas 6.0
   búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
 </summary>
 </member>
+<member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.EdificioNegro">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.light_green">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.light_red">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.light_yellow">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.Silueta">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsEmpleadosDAL.Eliminar(System.Int32)">
+ <summary>
+ No borra: marca el empleado como inactivo (Activo = 0).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsEmpleadosDAL.ListarParaCombo">
+ <summary>
+ Empleados activos para el buscador (no exige cargo/departamento/histórico).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsEmpleadosDAL.ProximoCodigo">
+ <summary>
+ Siguiente código numérico libre (máximo numérico + 1).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsEmpleadosDAL.NormalizarParametros(System.Data.SqlClient.SqlCommand)">
+ <summary>
+ Nothing -> NULL, y fechas fuera del rango de smalldatetime
+ (p.ej. Date.MinValue de un campo vacío) -> NULL.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsDALBase">
+ <summary>
+ Base de los DAL de catálogos: toma la cadena de conexión elegida en runtime
+ y ofrece helpers parametrizados (nunca se concatenan valores del usuario).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsDALBase.SiguienteCodigo(System.String,System.String,System.Int32)">
+ <summary>Máximo código numérico + 1, rellenado con ceros a <paramref name="ancho"/>.
+ Tabla y columna son constantes del código, no entrada del usuario.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsDALBase.EsEnUso(System.Data.SqlClient.SqlException)">
+ <summary>Traduce la violación de llave foránea (547) a un mensaje claro.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsControlesDAL">
+ <summary>Parámetros del sistema: tablas Controles (Id = 1) y DatosEmpresa (Numero = 1).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsTipoDeduccionDAL.EsProtegida(System.String)">
+ <summary>Tipos 01 a 05 los usa el cálculo de nómina: no se borran y solo admiten cambiar la cuenta contable.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.TipoCalendario">
+ <summary>Qué calendario se edita: el de planilla (Fecha_Planilla) o el fiscal (PeriodoFiscal).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ResumenPeriodos">
+ <summary>Resultado de grabar un calendario.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.ResumenPeriodos.Omitidos">
+ <summary>Períodos con nómina calculada: se dejan como están.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsPeriodoDAL">
+ <summary>
+ Acceso a los calendarios de períodos. Planilla = Fecha_Planilla + Año_Actual;
+ Fiscal = PeriodoFiscal + Año_Fiscal (misma estructura de columnas).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPeriodoDAL.ObtenerAnioActual(System.String)">
+ <summary>Año marcado como actual para la nómina; Nothing si no hay ninguno.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPeriodoDAL.ListarExistentes(System.String,System.Int32)">
+ <summary>Períodos ya grabados de una nómina y año, por número de período.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPeriodoDAL.Guardar(System.String,Sistema_de_Nominas_6._0.AnioPeriodo,System.Collections.Generic.IEnumerable{Sistema_de_Nominas_6._0.PeriodoNomina})">
+ <summary>
+ Activa el año para la nómina y graba su calendario (todo en una transacción).
+ Como en la V.5.0, el período 1 de los períodos nuevos queda como actual.
+ Los períodos que ya existen solo cambian de fechas si no tienen nómina calculada.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPeriodoDAL.CopiarParametros(System.Data.SqlClient.SqlParameter[])">
+ <summary>Un SqlParameter no se puede reutilizar en otro comando.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.GeneradorPeriodos">
+ <summary>
+ Calcula el calendario de períodos de una nómina (migrado de frmFecha / FrmPeriodoFiscal de la V.5.0).
+ No toca la base de datos: devuelve la lista de períodos para un rango de fechas.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.GeneradorPeriodos.Generar(System.String,System.DateTime,System.DateTime,System.Int32)">
+ <param name="periodo">Valor de TipoNomina.Periodo.</param>
+ <param name="inicio">Primer día del calendario.</param>
+ <param name="fin">Último día del calendario.</param>
+ <param name="anio">Año que se graba en cada período.</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.GeneradorPeriodos.Quincenal(System.DateTime,System.DateTime,System.Int32)">
+ <summary>Dos períodos por mes: del 1 al 15 y del 16 al último día. Máximo 24.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.GeneradorPeriodos.Mensual(System.DateTime,System.DateTime,System.Int32)">
+ <summary>Un período por mes calendario. Máximo 12.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.GeneradorPeriodos.PorDiaDeSemana(System.DateTime,System.DateTime,System.Int32,System.DayOfWeek,System.Int32,System.Int32,System.Int32)">
+ <summary>
+ Períodos de 7 o 14 días consecutivos desde la fecha inicial. Cada mes recibe tantos períodos
+ como veces aparece <paramref name="dia"/> en él (semanales) o 2 (catorcenales, más uno en
+ los meses de ajuste: junio y diciembre en año bisiesto; julio y diciembre en los demás).
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.TipoNomina.Periodo">
+ <summary>Semanal Viernes, Semanal Sabado, Catorcenal los Viernes, Catorcenal los Sabados,
+ Quincenal, Mensual, Trimestral o Semestral.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.TipoNomina.Tipo_Pago">
+ <summary>Salario Fijo, Salario Destajo, Salario Fijo y Comision,
+ Salario Destajo y Comision o Salario Fijo,Destajo y Comision.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.TipoNomina.Moneda">
+ <summary>"CS" córdobas, "US" dólares.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.TipoNomina.Inss_Por_Porcentaje">
+ <summary>True = INSS por porcentaje fijo; False = por tabla.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.TipoNomina.Ir_Por_Porcentaje">
+ <summary>True = IR por porcentaje fijo; False = por tabla.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.PeriodoNomina">
+ <summary>Un período del calendario de una nómina (filas de Fecha_Planilla y PeriodoFiscal).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.PeriodoNomina.Mes">
+ <summary>Mes de dos dígitos ("01" a "12").</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.PeriodoNomina.Num_Nomina">
+ <summary>Número de la nómina generada para el período; 0 = sin nómina.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.PeriodoNomina.TieneNomina">
+ <summary>Un período con nómina calculada ya no debe cambiar de fechas.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.AnioPeriodo">
+ <summary>Año de planilla de una nómina (filas de Año_Actual y Año_Fiscal).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmTipoNomina">
+ <summary>
+ Catálogo de tipos de nómina. Todo el acceso a datos pasa por CsTipoNominaDAL (consultas parametrizadas).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmTipoNomina.AjustarVisibilidad">
+ <summary>Los porcentajes solo aplican si el cálculo es por porcentaje; el mantenimiento de valor solo en córdobas.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmPeriodo">
+ <summary>
+ Calendario de períodos de una nómina. Una sola pantalla para dos calendarios:
+ Planilla (V.5.0 frmFecha) y Fiscal (V.5.0 FrmPeriodoFiscal). El cálculo está en GeneradorPeriodos
+ y el acceso a datos en CsPeriodoDAL.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmPeriodo.FechasPorDefecto">
+ <summary>Planilla: 1 de enero al 31 de diciembre. Fiscal: 1 de julio al 30 de junio siguiente.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.Controles">
+ <summary>Fila única de la tabla Controles (parámetros de cálculo del sistema).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.Controles.Dias_Mes">
+ <summary>25, 30 o 365/12.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.Controles.Dias_Semana">
+ <summary>6 o 7.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.Controles.Salario_Promedio_Real">
+ <summary>True = salario promedio por diferencia de días; False = entre períodos.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.DatosEmpresa">
+ <summary>Fila única (Numero = 1) de la tabla DatosEmpresa.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.TipoDeduccion.Tipo_Deduccion">
+ <summary>"F" = fija, "V" = variable.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmCargo">
+ <summary>
+ Catálogo de cargos. Todo el acceso a datos pasa por CsCargoDAL (consultas parametrizadas).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmControles">
+ <summary>
+ Controles personalizados: datos de la empresa (DatosEmpresa) y parámetros de cálculo
+ (Controles). Todo el acceso a datos pasa por CsControlesDAL.
+ Los procesos masivos de la V.5.0 (ajuste de salarios, asignación de horarios, etc.)
+ no forman parte de este formulario.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmDeduccion">
+ <summary>
+ Catálogo de tipos de deducción. Todo el acceso a datos pasa por CsTipoDeduccionDAL (consultas parametrizadas).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmDepartamento">
+ <summary>
+ Catálogo de departamentos. Todo el acceso a datos pasa por CsDepartamentoDAL (consultas parametrizadas).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmEmpleados">
+ <summary>
+ Ficha de empleados. Todo el acceso a datos pasa por CsEmpleadosDAL
+ (consultas parametrizadas). "Eliminar" solo inactiva al empleado.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.ConfigurarLongitudes">
+ <summary>Evita que un texto largo falle al guardar (tamaños reales de las columnas).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.RefrescarListaEmpleados">
+ <summary>Recarga el buscador de empleados activos.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.CodigoDigitado">
+ <summary>Código visible del empleado: el nuevo (si está en modo Nuevo) o el seleccionado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.LeerFecha(DevExpress.XtraEditors.DateEdit)">
+ <summary>Fecha vacía => Date.MinValue (el DAL la guarda como NULL).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.CargarEmpleado(System.String)">
+ <summary>Carga un empleado por su código visible (CodEmpleado1).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.cmbTipoNomina_EditValueChanged(System.Object,System.EventArgs)">
+ <summary>Al elegir el tipo de nómina se llena "Tipo Pago" con el de esa nómina.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.BtnAnular_Click(System.Object,System.EventArgs)">
+ <summary>No borra el registro: solo lo marca como inactivo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.BtnBorrar_Click(System.Object,System.EventArgs)">
+ <summary>Quita la foto de la pantalla; se borra de la BD al grabar.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.Main.AbrirFormulario(System.Windows.Forms.Form)">
+ <summary>Muestra el formulario como hijo MDI; si ya está abierto lo trae al frente.</summary>
+</member>
 </members>
 </doc>

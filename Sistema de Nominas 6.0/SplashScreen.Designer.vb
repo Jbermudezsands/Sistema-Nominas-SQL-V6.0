@@ -49,7 +49,7 @@ Partial Class SplashScreen
         Me.peImage.Properties.ShowMenu = False
         Me.peImage.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
         Me.peImage.Properties.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.None
-        Me.peImage.Size = New System.Drawing.Size(448, 200)
+        Me.peImage.Size = New System.Drawing.Size(441, 200)
         Me.peImage.TabIndex = 14
         '
         'labelStatus
@@ -77,7 +77,7 @@ Partial Class SplashScreen
         Me.progressBarControl.EditValue = 0
         Me.progressBarControl.Location = New System.Drawing.Point(24, 232)
         Me.progressBarControl.Name = "progressBarControl"
-        Me.progressBarControl.Size = New System.Drawing.Size(402, 12)
+        Me.progressBarControl.Size = New System.Drawing.Size(395, 12)
         Me.progressBarControl.TabIndex = 10
         '
         'peLogo
@@ -93,7 +93,7 @@ Partial Class SplashScreen
         Me.peLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.peLogo.Properties.ShowMenu = False
         Me.peLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze
-        Me.peLogo.Size = New System.Drawing.Size(214, 59)
+        Me.peLogo.Size = New System.Drawing.Size(207, 59)
         Me.peLogo.TabIndex = 15
         '
         'Timer1
@@ -105,7 +105,7 @@ Partial Class SplashScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(450, 320)
+        Me.ClientSize = New System.Drawing.Size(443, 320)
         Me.Controls.Add(Me.peLogo)
         Me.Controls.Add(Me.peImage)
         Me.Controls.Add(Me.labelStatus)

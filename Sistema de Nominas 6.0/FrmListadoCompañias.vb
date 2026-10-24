@@ -24,7 +24,10 @@
         Else
             MiConexion.Cadena_Conexion = CadenaConexionSQL
             If (Compañia.CantUsuario() = 0) Then
+                Me.Hide()
                 Main.ShowDialog()
+                Nombre_Usuario = "Desconocido"
+                Me.Close()
             Else
                 Me.Hide()
                 FrmEntrada.ShowDialog()

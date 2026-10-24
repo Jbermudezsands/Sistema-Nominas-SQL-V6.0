@@ -22,6 +22,12 @@ Partial Class Main
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageCatalogo = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageGroupCatalogos = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.BarButtonCargo = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonDepartamento = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonDeduccion = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonControles = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPageProcesos = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.RibbonEmpleados = New DevExpress.XtraBars.BarButtonItem()
@@ -56,17 +62,17 @@ Partial Class Main
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.RibbonControl.SearchEditItem, Me.BarButtonIEmpleado, Me.BarButtonListaEmpleado, Me.BarButtonActivarNomina, Me.BarButtonHorasExtra, Me.BarButtonCalcularNomina, Me.BarButtonVacaciones, Me.BarButtonDespidos, Me.BarButtonListaLiquidacion, Me.BarButtonPeriodoNomina, Me.BarButtonPeriodoFiscal, Me.BarButtonTipoNomina, Me.BarButtonListaNomina, Me.BarButtonHistorialSalarial, Me.BarButtonListaVacaciones, Me.BarButtonTasaCambio, Me.BarToggleSwitchItem1, Me.BarMdiChildrenListItem1, Me.BarButtonUsuarios, Me.BarButtonItem16, Me.BarButtonSalir, Me.BarButtonRespaldar})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.RibbonControl.SearchEditItem, Me.BarButtonIEmpleado, Me.BarButtonListaEmpleado, Me.BarButtonActivarNomina, Me.BarButtonHorasExtra, Me.BarButtonCalcularNomina, Me.BarButtonVacaciones, Me.BarButtonDespidos, Me.BarButtonListaLiquidacion, Me.BarButtonPeriodoNomina, Me.BarButtonPeriodoFiscal, Me.BarButtonTipoNomina, Me.BarButtonListaNomina, Me.BarButtonHistorialSalarial, Me.BarButtonListaVacaciones, Me.BarButtonTasaCambio, Me.BarToggleSwitchItem1, Me.BarMdiChildrenListItem1, Me.BarButtonUsuarios, Me.BarButtonItem16, Me.BarButtonSalir, Me.BarButtonRespaldar, Me.BarButtonCargo, Me.BarButtonDepartamento, Me.BarButtonDeduccion, Me.BarButtonControles})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 23
+        Me.RibbonControl.MaxItemId = 27
         Me.RibbonControl.Name = "RibbonControl"
-        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1})
+        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1, Me.RibbonPageCatalogo})
         Me.RibbonControl.Size = New System.Drawing.Size(1260, 158)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageProcesos, Me.RibbonPageGroup1, Me.RibbonPageGroup2, Me.RibbonPageGroup3, Me.RibbonPageGroup4})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageProcesos, Me.RibbonPageGroup2, Me.RibbonPageGroup3, Me.RibbonPageGroup4})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Acceso"
         '
@@ -162,11 +168,58 @@ Partial Class Main
         Me.BarButtonListaLiquidacion.ImageOptions.LargeImage = CType(resources.GetObject("BarButtonItem7.ImageOptions.LargeImage"), System.Drawing.Image)
         Me.BarButtonListaLiquidacion.Name = "BarButtonListaLiquidacion"
         '
+        'RibbonPageCatalogo
+        '
+        Me.RibbonPageCatalogo.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroupCatalogos})
+        Me.RibbonPageCatalogo.Name = "RibbonPageCatalogo"
+        Me.RibbonPageCatalogo.Text = "Catalogo"
+        '
+        'RibbonPageGroupCatalogos
+        '
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonCargo)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonDepartamento)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonDeduccion)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonControles)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonTipoNomina)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonPeriodoNomina)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonPeriodoFiscal)
+        Me.RibbonPageGroupCatalogos.Name = "RibbonPageGroupCatalogos"
+        Me.RibbonPageGroupCatalogos.Text = "Catalogos"
+        '
+        'BarButtonCargo
+        '
+        Me.BarButtonCargo.Caption = "Cargos"
+        Me.BarButtonCargo.Id = 23
+        Me.BarButtonCargo.ImageOptions.ImageUri.Uri = "BO_Position"
+        Me.BarButtonCargo.Name = "BarButtonCargo"
+        Me.BarButtonCargo.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonDepartamento
+        '
+        Me.BarButtonDepartamento.Caption = "Departamentos"
+        Me.BarButtonDepartamento.Id = 24
+        Me.BarButtonDepartamento.ImageOptions.ImageUri.Uri = "BO_Department"
+        Me.BarButtonDepartamento.Name = "BarButtonDepartamento"
+        Me.BarButtonDepartamento.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonDeduccion
+        '
+        Me.BarButtonDeduccion.Caption = "Deducciones"
+        Me.BarButtonDeduccion.Id = 25
+        Me.BarButtonDeduccion.ImageOptions.ImageUri.Uri = "BO_Price"
+        Me.BarButtonDeduccion.Name = "BarButtonDeduccion"
+        Me.BarButtonDeduccion.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonControles
+        '
+        Me.BarButtonControles.Caption = "Controles"
+        Me.BarButtonControles.Id = 26
+        Me.BarButtonControles.ImageOptions.ImageUri.Uri = "Properties"
+        Me.BarButtonControles.Name = "BarButtonControles"
+        Me.BarButtonControles.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
         'RibbonPageGroup1
         '
-        Me.RibbonPageGroup1.ItemLinks.Add(Me.BarButtonPeriodoNomina)
-        Me.RibbonPageGroup1.ItemLinks.Add(Me.BarButtonPeriodoFiscal)
-        Me.RibbonPageGroup1.ItemLinks.Add(Me.BarButtonTipoNomina)
         Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
         Me.RibbonPageGroup1.Text = "Catalogo"
         '
@@ -174,25 +227,25 @@ Partial Class Main
         '
         Me.BarButtonPeriodoNomina.Caption = "Periodo Nomina"
         Me.BarButtonPeriodoNomina.Id = 9
-        Me.BarButtonPeriodoNomina.ImageOptions.Image = CType(resources.GetObject("BarButtonItem8.ImageOptions.Image"), System.Drawing.Image)
-        Me.BarButtonPeriodoNomina.ImageOptions.LargeImage = CType(resources.GetObject("BarButtonItem8.ImageOptions.LargeImage"), System.Drawing.Image)
+        Me.BarButtonPeriodoNomina.ImageOptions.ImageUri.Uri = "Calendar"
         Me.BarButtonPeriodoNomina.Name = "BarButtonPeriodoNomina"
+        Me.BarButtonPeriodoNomina.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
         'BarButtonPeriodoFiscal
         '
         Me.BarButtonPeriodoFiscal.Caption = "Periodo Fiscal"
         Me.BarButtonPeriodoFiscal.Id = 10
-        Me.BarButtonPeriodoFiscal.ImageOptions.Image = CType(resources.GetObject("BarButtonItem9.ImageOptions.Image"), System.Drawing.Image)
-        Me.BarButtonPeriodoFiscal.ImageOptions.LargeImage = CType(resources.GetObject("BarButtonItem9.ImageOptions.LargeImage"), System.Drawing.Image)
+        Me.BarButtonPeriodoFiscal.ImageOptions.ImageUri.Uri = "Calendar"
         Me.BarButtonPeriodoFiscal.Name = "BarButtonPeriodoFiscal"
+        Me.BarButtonPeriodoFiscal.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
         'BarButtonTipoNomina
         '
-        Me.BarButtonTipoNomina.Caption = "Tipo Nomina"
+        Me.BarButtonTipoNomina.Caption = "Tipos de Nomina"
         Me.BarButtonTipoNomina.Id = 11
-        Me.BarButtonTipoNomina.ImageOptions.Image = CType(resources.GetObject("BarButtonItem10.ImageOptions.Image"), System.Drawing.Image)
-        Me.BarButtonTipoNomina.ImageOptions.LargeImage = CType(resources.GetObject("BarButtonItem10.ImageOptions.LargeImage"), System.Drawing.Image)
+        Me.BarButtonTipoNomina.ImageOptions.ImageUri.Uri = "BO_Contract"
         Me.BarButtonTipoNomina.Name = "BarButtonTipoNomina"
+        Me.BarButtonTipoNomina.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
         'RibbonPageGroup2
         '
@@ -348,4 +401,10 @@ Partial Class Main
     Friend WithEvents RibbonPageGroup3 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents RibbonPageGroup4 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents BarButtonRespaldar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPageCatalogo As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents RibbonPageGroupCatalogos As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents BarButtonCargo As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonDepartamento As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonDeduccion As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonControles As DevExpress.XtraBars.BarButtonItem
 End Class

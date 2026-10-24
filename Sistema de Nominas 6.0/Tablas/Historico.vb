@@ -6,6 +6,7 @@
     Private MotivoAumento As String
     Private FechaInicialSusp As Date
     Private FechaFinalSusp As Date
+    Private FechaAumento As Date
     Private MotivoSuspencion As String
     Private FechaNacimiento As Date
     Private FechaContrato As Date
@@ -37,6 +38,9 @@
     Private CuentaHorasExtra As String
     Private INSSPatronalPagar As String
     Private CuentaSubsidio As String
+    Private CuentaBanco As String
+    Private Aumento As Boolean
+
 
     Public Property Empleado_Id As Integer
         Get
@@ -368,6 +372,33 @@
         End Get
         Set(value As String)
             CuentaSubsidio = value
+        End Set
+    End Property
+
+    Public Property Fecha_Aumento As Date
+        Get
+            Return FechaAumento
+        End Get
+        Set(value As Date)
+            FechaAumento = value
+        End Set
+    End Property
+
+    Public Property Cuenta_Banco As String
+        Get
+            Return CuentaBanco
+        End Get
+        Set(value As String)
+            CuentaBanco = value
+        End Set
+    End Property
+
+    Public Property Aumento_Historico As Boolean
+        Get
+            Return Aumento
+        End Get
+        Set(value As Boolean)
+            Aumento = value
         End Set
     End Property
 End Class

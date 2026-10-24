@@ -1,4 +1,6 @@
-﻿Public Class ConsultasSQL
+﻿Imports System.Data.SqlTypes
+
+Public Class ConsultasSQL
     Dim MiConexion As New Conexion
 
     Public Function CaseListadoSistemaNomina(Quien As String) As DataTable
@@ -33,23 +35,198 @@
     Public Sub InsertarEmpleados(TablaEmpleados As Empleados)
         Dim SqlString As String
 
-        SqlString = "INSERT INTO Empleado  ((CodEmpleado1),(Nombre1),(Nombre2),(Apellido1),(Apellido2),(NumHijos),(Direccion) ,(Nacionalidad) ,(CodigoPostal) ,(Sexo) ,(CodInss) ,(CodIr) ,(NumCedula) ,(Sindicalista),(CodDepartamento),(CodGrupo),(CodCargo),(NumeroInss),(NumeroRuc),(CodTipoNomina),(DiasDescuento),(SalPorcentaje),(CantPts),(SueldoPeriodo) ,(TarifaHoraria),(PorcentajeComision),(OtrosIngresos),(DescripOtrIngre),(ExentoInss),(ExentoIr),(PagoInssPatronal),(SalarioMinimo) ,(Observaciones),(Activo),(Liquidado),(Ausente),(SalarioFijo),(SumarSubsidio),(PorcientoIncentivo),(Gravidez) ,(VacacionesBasico) ,(Dolarizado) ,(FechaAntiguedad),(Antiguedad) ,(CuentaBanco) ,(SueldoActualBasico) ,(HorasTurno) ,(DiasBasico) ,(AumentoBasico) ,(EmpleadoConstruccion) ,(MontoPension) ,(PorcentajePension) ,(ViaticoxDia) ,(DeducirPorciento)  ,(Reembolso) ,(Telefono) ,(MontoViatico)) " +
-                               "VALUES ('" + TablaEmpleados.Cod_Empleado1 + "','" + TablaEmpleados.Primer_Nombre + "','" + TablaEmpleados.Segundo_Nombre + "','" + TablaEmpleados.Primer_Apellido + "' ,'" + TablaEmpleados.Segundo_Apellido + "'," + TablaEmpleados.Num_Hijos + ",'" + TablaEmpleados.Empleado_Direccion + "' ,'" + TablaEmpleados.Empleado_Nacionalidad + "' ,'" + TablaEmpleados.Codigo_Postal + "' ,'" + TablaEmpleados.Empleado_Sexo + "' ,'" + TablaEmpleados.Cod_Inss + "' ,'" + TablaEmpleados.Cod_Ir + "' ,'" + TablaEmpleados.Num_Cedula + "','" + TablaEmpleados.Empleado_Sindicalista + "' ,'" + TablaEmpleados.Cod_Departamento + "' ,'" + TablaEmpleados.Cod_Grupo + "' ,'" + TablaEmpleados.Cod_Cargo + "' ,'" + TablaEmpleados.Numero_Inss + "' ,'" + TablaEmpleados.Numero_Ruc + "' ,'" + TablaEmpleados.Cod_TipoNomina + "' ," + TablaEmpleados.Dias_Descuento + " ," + TablaEmpleados.Sal_Porcentaje + " ," + TablaEmpleados.Cant_Pts + "  ," + TablaEmpleados.Sueldo_Periodo + " ," + TablaEmpleados.Tarifa_Horaria + " ," + TablaEmpleados.Porcentaje_Comision + " ," + TablaEmpleados.Otros_Ingresos + ",'" + TablaEmpleados.Descrip_OtrIngre + "' ," + TablaEmpleados.Exento_Inss + " ," + TablaEmpleados.Exento_Ir + "  ," + TablaEmpleados.PagoInss_Patronal + " ," + TablaEmpleados.Salario_Minimo + " ,'" + TablaEmpleados.Empleado_Observaciones + "'  ," + TablaEmpleados.Empleado_Activo + ",'" + TablaEmpleados.Empleado_Liquidado + "'," + TablaEmpleados.Empleado_Ausente + " ,'" + TablaEmpleados.Salario_Fijo + "'," + TablaEmpleados.Sumar_Subsidio + "," + TablaEmpleados.Porciento_Incentivo + " ," + TablaEmpleados.Empleado_Gravidez + " ," + TablaEmpleados.Vacaciones_Basico + " ," + TablaEmpleados.Empleado_Dolarizado + " ," + TablaEmpleados.Fecha_Antiguedad + " ," + TablaEmpleados.Empleado_Antiguedad + ",'" + TablaEmpleados.Empleado_CuentaBanco + "'," + TablaEmpleados.SueldoActual_Basico + " ," + TablaEmpleados.Horas_Turno + " ," + TablaEmpleados.Dias_Basico + " ," + TablaEmpleados.Aumento_Basico + " ," + TablaEmpleados.Empleado_Construccion + " ," + TablaEmpleados.Monto_Pension + " ," + TablaEmpleados.Porcentaje_Pension + " , " + TablaEmpleados.Viatico_Dia + " ," + TablaEmpleados.Deducir_Porciento + " ,'" + TablaEmpleados.Empleado_Telefono + "'," + TablaEmpleados.Monto_Viatico + ") "
+        SqlString = "INSERT INTO Empleado  ((CodEmpleado1),(Nombre1),(Nombre2),(Apellido1),(Apellido2),(NumHijos),(Direccion) ,(Nacionalidad) ,(CodigoPostal) ,(Sexo) ,(CodInss) ,(CodIr) ,(NumCedula) ,(Sindicalista),(CodDepartamento),(CodGrupo),(CodCargo),(NumeroInss),(NumeroRuc),(CodTipoNomina),(DiasDescuento),(SalPorcentaje),(CantPts),(SueldoPeriodo) ,(TarifaHoraria),(PorcentajeComision),(OtrosIngresos),(DescripOtrIngre),(ExentoInss),(ExentoIr),(PagoInssPatronal),(SalarioMinimo) ,(Observaciones),(Activo),(Liquidado),(Ausente),(SalarioFijo),(SumarSubsidio),(PorcientoIncentivo),(Gravidez) ,(VacacionesBasico) ,(Dolarizado) ,(FechaAntiguedad),(Antiguedad) ,(CuentaBanco) ,(SueldoActualBasico) ,(HorasTurno) ,(DiasBasico) ,(AumentoBasico) ,(EmpleadoConstruccion) ,(MontoPension) ,(PorcentajePension) ,(ViaticoxDia) ,(DeducirPorciento)  ,(Reembolso) ,(Telefono) ,(MontoViatico),(Correo_Electronico), (Numerocelular), (Numerocelular)) " +
+                               "VALUES ('" + TablaEmpleados.Cod_Empleado1 + "','" + TablaEmpleados.Primer_Nombre + "','" + TablaEmpleados.Segundo_Nombre + "','" + TablaEmpleados.Primer_Apellido + "' ,'" + TablaEmpleados.Segundo_Apellido + "'," + TablaEmpleados.Num_Hijos + ",'" + TablaEmpleados.Empleado_Direccion + "' ,'" + TablaEmpleados.Empleado_Nacionalidad + "' ,'" + TablaEmpleados.Codigo_Postal + "' ,'" + TablaEmpleados.Empleado_Sexo + "' ,'" + TablaEmpleados.Cod_Inss + "' ,'" + TablaEmpleados.Cod_Ir + "' ,'" + TablaEmpleados.Num_Cedula + "','" + TablaEmpleados.Empleado_Sindicalista + "' ,'" + TablaEmpleados.Cod_Departamento + "' ,'" + TablaEmpleados.Cod_Grupo + "' ,'" + TablaEmpleados.Cod_Cargo + "' ,'" + TablaEmpleados.Numero_Inss + "' ,'" + TablaEmpleados.Numero_Ruc + "' ,'" + TablaEmpleados.Cod_TipoNomina + "' ," + TablaEmpleados.Dias_Descuento + " ," + TablaEmpleados.Sal_Porcentaje + " ," + TablaEmpleados.Cant_Pts + "  ," + TablaEmpleados.Sueldo_Periodo + " ," + TablaEmpleados.Tarifa_Horaria + " ," + TablaEmpleados.Porcentaje_Comision + " ," + TablaEmpleados.Otros_Ingresos + ",'" + TablaEmpleados.Descrip_OtrIngre + "' ," + TablaEmpleados.Exento_Inss + " ," + TablaEmpleados.Exento_Ir + "  ," + TablaEmpleados.PagoInss_Patronal + " ," + TablaEmpleados.Salario_Minimo + " ,'" + TablaEmpleados.Empleado_Observaciones + "'  ," + TablaEmpleados.Empleado_Activo + ",'" + TablaEmpleados.Empleado_Liquidado + "'," + TablaEmpleados.Empleado_Ausente + " ,'" + TablaEmpleados.Salario_Fijo + "'," + TablaEmpleados.Sumar_Subsidio + "," + TablaEmpleados.Porciento_Incentivo + " ," + TablaEmpleados.Empleado_Gravidez + " ," + TablaEmpleados.Vacaciones_Basico + " ," + TablaEmpleados.Empleado_Dolarizado + " ," + TablaEmpleados.Fecha_Antiguedad + " ," + TablaEmpleados.Empleado_Antiguedad + ",'" + TablaEmpleados.Empleado_CuentaBanco + "'," + TablaEmpleados.SueldoActual_Basico + " ," + TablaEmpleados.Horas_Turno + " ," + TablaEmpleados.Dias_Basico + " ," + TablaEmpleados.Aumento_Basico + " ," + TablaEmpleados.Empleado_Construccion + " ," + TablaEmpleados.Monto_Pension + " ," + TablaEmpleados.Porcentaje_Pension + " , " + TablaEmpleados.Viatico_Dia + " ," + TablaEmpleados.Deducir_Porciento + " ,'" + TablaEmpleados.Empleado_Telefono + "'," + TablaEmpleados.Monto_Viatico + ", '" & TablaEmpleados.Correo_Electronico & "', '" & TablaEmpleados.Numero_Celular & "',  '" & TablaEmpleados.Empleado_Foto & "') "
         EjecutarConsulta(SqlString)
+
+        SqlString = "INSERT INTO Historico  ([Id],[Codempleado],[FechaBaja],[MotivoBaja],[FechaAumento],[MotivoAumento],[FechaInicialSusp],[FechaFinalSusp],[MotivoSuspencion],[FechaNacimiento],[FechaContrato],[FechaContratoVac],[CargoInicial],[CargoActual],[CargoAnterior],[SueldoInicial],[SueldoAnterior],[SueldoActual],[CuentaDebito],[CuentaCredito],[CuentaPrestamo],[CuentaOtrosIngresos],[CuentaINSS],[CuentaIR],[CuentaSueldos],[ProvAguinaldo],[ProvVacaciones],[INSSPatronal],[INATEC],[AguinaldoxPagar],[VacacionesxPagar],[INSSxPagar],[INATECxPagar],[IRxPagar],[PrestamoxPagar],[NominaxPagar],[CuentaHorasExtra],[INSSPatronalPagar],[CuentaBanco],[CuentaSubsidio],[Aumento]) " &
+                                   "VALUES  ('" + TablaEmpleados.Empleado_Id & "' ," + TablaEmpleados.Cod_Empleado & " ,SET [FechaBaja] = CONVERT(DATETIME, '" & Format(TablaEmpleados.Fecha_Baja, "yyyy-MM-dd") & "', 102),'" & TablaEmpleados.Motivo_Baja & "' ,CONVERT(DATETIME, '" & Format(TablaEmpleados.Fecha_Aumento, "yyyy-MM-dd") & "', 102)  ,'" & TablaEmpleados.Motivo_Aumento & "' ,CONVERT(DATETIME, '" & Format(TablaEmpleados.FechaInicial_Susp, "yyyy-MM-dd") & "', 102) ,CONVERT(DATETIME, '" & Format(TablaEmpleados.FechaFinal_Susp, "yyyy-MM-dd") & "', 102) ,'" & TablaEmpleados.Motivo_Suspencion & "',CONVERT(DATETIME, '" & Format(TablaEmpleados.Fecha_Nacimiento, "yyyy-MM-dd") & "', 102),CONVERT(DATETIME, '" & Format(TablaEmpleados.Fecha_Contrato, "yyyy-MM-dd") & "', 102),CONVERT(DATETIME, '" & Format(TablaEmpleados.Fecha_ContratoVac, "yyyy-MM-dd") & "', 102),'" & TablaEmpleados.Cargo_Inicial & "','" & TablaEmpleados.Cargo_Actual & "','" & TablaEmpleados.Cargo_Anterior & "," & TablaEmpleados.Sueldo_Inicial & "," & TablaEmpleados.Sueldo_Anterior & "," & TablaEmpleados.Sueldo_Actual & "','" & TablaEmpleados.Cuenta_Debito & "','" & TablaEmpleados.Cuenta_Credito & "','" & TablaEmpleados.Cuenta_Prestamo & "','" & TablaEmpleados.CuentaOtros_Ingresos & "','" & TablaEmpleados.Cuenta_INSS & "','" & TablaEmpleados.Cuenta_IR & "','" & TablaEmpleados.Cuenta_Sueldos & "','" & TablaEmpleados.Prov_Aguinaldo & "','" & TablaEmpleados.Prov_Vacaciones & "','" & TablaEmpleados.INSS_Patronal & "','" & TablaEmpleados.Empleado_INATEC & "','" & TablaEmpleados.Aguinaldo_Pagar & "','" & TablaEmpleados.Vacaciones_Pagar & "','" & TablaEmpleados.INSS_Pagar & "','" & TablaEmpleados.INATEC_Pagar & "','" & TablaEmpleados.IR_Pagar & "','" & TablaEmpleados.Prestamo_Pagar & "','" & TablaEmpleados.Nomina_Pagar & "','" & TablaEmpleados.CuentaHoras_Extra & "','" & TablaEmpleados.INSSPatronal_Pagar & "','" & TablaEmpleados.Empleado_CuentaBanco & "','" & TablaEmpleados.Cuenta_Subsidio & "','" & TablaEmpleados.Aumento_Basico & "')"
+        EjecutarConsulta(SqlString)
+
 
     End Sub
     Public Sub ActualizarEmpleado(TablaEmpleado As Empleados)
         Dim SqlString As String
-        SqlString = "UPDATE Empleado  SET CodEmpleado1 = '" & TablaEmpleado.Cod_Empleado1 & "' ,Nombre1 = '" & TablaEmpleado.Primer_Nombre & "',Nombre2 = '" & TablaEmpleado.Segundo_Nombre & "' ,Apellido1  = '" & TablaEmpleado.Primer_Apellido & "' , Apellido2  = '" & TablaEmpleado.Segundo_Apellido & "', NumHijos  = " & TablaEmpleado.Num_Hijos & " , Direccion  = '" & TablaEmpleado.Empleado_Direccion & "', Nacionalidad  = '" & TablaEmpleado.Empleado_Nacionalidad & "', CodigoPostal  = '" & TablaEmpleado.Codigo_Postal & "' , Sexo  = '" & TablaEmpleado.Empleado_Sexo & "' , CodInss  = '" & TablaEmpleado.Codigo_Postal & "' , CodIr  = '" & TablaEmpleado.Cod_Ir & "', NumCedula  = '" & TablaEmpleado.Num_Cedula & "' , Sindicalista  = '" & TablaEmpleado.Empleado_Sindicalista & "', CodDepartamento  = '" & TablaEmpleado.Cod_Departamento & "' , CodGrupo  = '" & TablaEmpleado.Cod_Grupo & "' , CodCargo  = '" & TablaEmpleado.Cod_Cargo & "' , NumeroInss  = '" & TablaEmpleado.Numero_Inss & "' , NumeroRuc  = '" & TablaEmpleado.Numero_Ruc & "' , CodTipoNomina  = '" & TablaEmpleado.Cod_TipoNomina & "' , DiasDescuento  = " & TablaEmpleado.Dias_Descuento & " , SalPorcentaje  = " & TablaEmpleado.Sal_Porcentaje & ", CantPts  = " & TablaEmpleado.Cant_Pts & " , SueldoPeriodo  = " & TablaEmpleado.Sueldo_Periodo & " , TarifaHoraria  = " & TablaEmpleado.Tarifa_Horaria & " , PorcentajeComision  = " & TablaEmpleado.Porcentaje_Comision & " , OtrosIngresos  = " & TablaEmpleado.Otros_Ingresos & " , DescripOtrIngre  = '" & TablaEmpleado.Descrip_OtrIngre & "' , ExentoInss  = " & TablaEmpleado.Exento_Inss & " , ExentoIr  = " & TablaEmpleado.Exento_Ir & " , PagoInssPatronal  = " & TablaEmpleado.PagoInss_Patronal & " , SalarioMinimo  = " & TablaEmpleado.Salario_Minimo & ", Observaciones  = '" & TablaEmpleado.Empleado_Observaciones & "' , Activo  = '" & TablaEmpleado.Empleado_Activo & "', Liquidado  = " & TablaEmpleado.Empleado_Liquidado & " , Ausente  = '" & TablaEmpleado.Empleado_Ausente & "' , SalarioFijo  = '" & TablaEmpleado.Salario_Fijo & "', SumarSubsidio  = " & TablaEmpleado.Sumar_Subsidio & " , PorcientoIncentivo  = " & TablaEmpleado.Porciento_Incentivo & "  , Gravidez  = " & TablaEmpleado.Empleado_Gravidez & " , VacacionesBasico  = " & TablaEmpleado.Vacaciones_Basico & " , Dolarizado  = " & TablaEmpleado.Empleado_Dolarizado & " , FechaAntiguedad  = '" & TablaEmpleado.Fecha_Antiguedad & "' , Antiguedad  = " & TablaEmpleado.Empleado_Antiguedad & " , CuentaBanco  = '" & TablaEmpleado.Empleado_CuentaBanco & "' , SueldoActualBasico  = " & TablaEmpleado.SueldoActual_Basico & " , HorasTurno  = '" & TablaEmpleado.Horas_Turno & "' , DiasBasico  = " & TablaEmpleado.Dias_Basico & " , AumentoBasico  = " & TablaEmpleado.Aumento_Basico & " , EmpleadoConstruccion  = " & TablaEmpleado.Empleado_Construccion & " , MontoPension  = " & TablaEmpleado.Monto_Pension & " , PorcentajePension  = " & TablaEmpleado.Porcentaje_Comision & " , ViaticoxDia  = " & TablaEmpleado.Viatico_Dia & " , DeducirPorciento  = " & TablaEmpleado.Deducir_Porciento & " , Reembolso  = " & TablaEmpleado.Empleado_Reembolso & " , Telefono  = '" & TablaEmpleado.Empleado_Telefono & "' , MontoViatico  = " & TablaEmpleado.Monto_Viatico & " WHERE  (CodEmpleado = " & TablaEmpleado.Cod_Empleado & ") "
+        SqlString = "UPDATE Empleado  Set CodEmpleado1 = '" & TablaEmpleado.Cod_Empleado1 & "' ,Nombre1 = '" & TablaEmpleado.Primer_Nombre & "',Nombre2 = '" & TablaEmpleado.Segundo_Nombre & "' ,Apellido1  = '" & TablaEmpleado.Primer_Apellido & "' , Apellido2  = '" & TablaEmpleado.Segundo_Apellido & "', NumHijos  = " & TablaEmpleado.Num_Hijos & " , Direccion  = '" & TablaEmpleado.Empleado_Direccion & "', Nacionalidad  = '" & TablaEmpleado.Empleado_Nacionalidad & "', CodigoPostal  = '" & TablaEmpleado.Codigo_Postal & "' , Sexo  = '" & TablaEmpleado.Empleado_Sexo & "' , CodInss  = '" & TablaEmpleado.Codigo_Postal & "' , CodIr  = '" & TablaEmpleado.Cod_Ir & "', NumCedula  = '" & TablaEmpleado.Num_Cedula & "' , Sindicalista  = '" & TablaEmpleado.Empleado_Sindicalista & "', CodDepartamento  = '" & TablaEmpleado.Cod_Departamento & "' , CodGrupo  = '" & TablaEmpleado.Cod_Grupo & "' , CodCargo  = '" & TablaEmpleado.Cod_Cargo & "' , NumeroInss  = '" & TablaEmpleado.Numero_Inss & "' , NumeroRuc  = '" & TablaEmpleado.Numero_Ruc & "' , CodTipoNomina  = '" & TablaEmpleado.Cod_TipoNomina & "' , DiasDescuento  = " & TablaEmpleado.Dias_Descuento & " , SalPorcentaje  = " & TablaEmpleado.Sal_Porcentaje & ", CantPts  = " & TablaEmpleado.Cant_Pts & " , SueldoPeriodo  = " & TablaEmpleado.Sueldo_Periodo & " , TarifaHoraria  = " & TablaEmpleado.Tarifa_Horaria & " , PorcentajeComision  = " & TablaEmpleado.Porcentaje_Comision & " , OtrosIngresos  = " & TablaEmpleado.Otros_Ingresos & " , DescripOtrIngre  = '" & TablaEmpleado.Descrip_OtrIngre & "' , ExentoInss  = " & TablaEmpleado.Exento_Inss & " , ExentoIr  = " & TablaEmpleado.Exento_Ir & " , PagoInssPatronal  = " & TablaEmpleado.PagoInss_Patronal & " , SalarioMinimo  = " & TablaEmpleado.Salario_Minimo & ", Observaciones  = '" & TablaEmpleado.Empleado_Observaciones & "' , Activo  = '" & TablaEmpleado.Empleado_Activo & "', Liquidado  = " & TablaEmpleado.Empleado_Liquidado & " , Ausente  = '" & TablaEmpleado.Empleado_Ausente & "' , SalarioFijo  = '" & TablaEmpleado.Salario_Fijo & "', SumarSubsidio  = " & TablaEmpleado.Sumar_Subsidio & " , PorcientoIncentivo  = " & TablaEmpleado.Porciento_Incentivo & "  , Gravidez  = " & TablaEmpleado.Empleado_Gravidez & " , VacacionesBasico  = " & TablaEmpleado.Vacaciones_Basico & " , Dolarizado  = " & TablaEmpleado.Empleado_Dolarizado & " , FechaAntiguedad  = '" & TablaEmpleado.Fecha_Antiguedad & "' , Antiguedad  = " & TablaEmpleado.Empleado_Antiguedad & " , CuentaBanco  = '" & TablaEmpleado.Empleado_CuentaBanco & "' , SueldoActualBasico  = " & TablaEmpleado.SueldoActual_Basico & " , HorasTurno  = '" & TablaEmpleado.Horas_Turno & "' , DiasBasico  = " & TablaEmpleado.Dias_Basico & " , AumentoBasico  = " & TablaEmpleado.Aumento_Basico & " , EmpleadoConstruccion  = " & TablaEmpleado.Empleado_Construccion & " , MontoPension  = " & TablaEmpleado.Monto_Pension & " , PorcentajePension  = " & TablaEmpleado.Porcentaje_Comision & " , ViaticoxDia  = " & TablaEmpleado.Viatico_Dia & " , DeducirPorciento  = " & TablaEmpleado.Deducir_Porciento & " , Reembolso  = " & TablaEmpleado.Empleado_Reembolso & " , Telefono  = '" & TablaEmpleado.Empleado_Telefono & "' , MontoViatico  = " & TablaEmpleado.Monto_Viatico & ", Numerocelular = " & TablaEmpleado.Numero_Celular & " , Correo_Electronico = '" & TablaEmpleado.Correo_Electronico & "', Foto = '" & TablaEmpleado.Empleado_Foto & "' WHERE  (CodEmpleado = " & TablaEmpleado.Cod_Empleado & ") "
+        EjecutarConsulta(SqlString)
+
+        '//////////////////////ACTUALIZO LA TABLA HISTORICOS ///////////////////////////////////////////
+        SqlString = "UPDATE Historico  SET [FechaBaja] = CONVERT(DATETIME, '" & Format(TablaEmpleado.Fecha_Baja, "yyyy-MM-dd") & "', 102) ,[MotivoBaja] = '" & TablaEmpleado.Motivo_Baja & "' ,[FechaAumento] = CONVERT(DATETIME, '" & Format(TablaEmpleado.Fecha_Aumento, "yyyy-MM-dd") & "', 102) ,[MotivoAumento] = '" & TablaEmpleado.Motivo_Aumento & "' ,[FechaInicialSusp] = CONVERT(DATETIME, '" & Format(TablaEmpleado.FechaInicial_Susp, "yyyy-MM-dd") & "', 102) ,[FechaFinalSusp] = CONVERT(DATETIME, '" & Format(TablaEmpleado.FechaFinal_Susp, "yyyy-MM-dd") & "', 102) ,[MotivoSuspencion] = '" & TablaEmpleado.Motivo_Suspencion & "' ,[FechaNacimiento] = CONVERT(DATETIME, '" & Format(TablaEmpleado.Fecha_Nacimiento, "yyyy-MM-dd") & "', 102) ,[FechaContrato] =CONVERT(DATETIME, '" & Format(TablaEmpleado.Fecha_Contrato, "yyyy-MM-dd") & "', 102) ,[FechaContratoVac] = CONVERT(DATETIME, '" & Format(TablaEmpleado.Fecha_ContratoVac, "yyyy-MM-dd") & "', 102) ,[CargoInicial] = '" & TablaEmpleado.Cargo_Inicial & "' ,[CargoActual] = '" & TablaEmpleado.Cargo_Actual & "' ,[CargoAnterior] = '" & TablaEmpleado.Cargo_Anterior & "',[SueldoInicial] = " & TablaEmpleado.Sueldo_Inicial & " ,[SueldoAnterior] = " & TablaEmpleado.Sueldo_Anterior & " ,[SueldoActual] = " & TablaEmpleado.Sueldo_Actual & ",[CuentaDebito] = '" & TablaEmpleado.Cuenta_Debito & "' ,[CuentaCredito] = '" & TablaEmpleado.Cuenta_Credito & "' ,[CuentaPrestamo] = '" & TablaEmpleado.Cuenta_Prestamo & "' ,[CuentaOtrosIngresos] = '" & TablaEmpleado.CuentaOtros_Ingresos & "' ,[CuentaINSS] = '" & TablaEmpleado.Cuenta_INSS & "',[CuentaIR] = '" & TablaEmpleado.Cuenta_IR & "',[CuentaSueldos] = '" & TablaEmpleado.Cuenta_Sueldos & "' ,[ProvAguinaldo] = '" & TablaEmpleado.Prov_Aguinaldo & "' ,[ProvVacaciones] = '" & TablaEmpleado.Prov_Vacaciones & "' ,[INSSPatronal] = '" & TablaEmpleado.INSS_Patronal & "' ,[INATEC] = '" & TablaEmpleado.INATEC_Pagar & "' ,[AguinaldoxPagar] = '" & TablaEmpleado.Aguinaldo_Pagar & "' ,[VacacionesxPagar] = '" & TablaEmpleado.Vacaciones_Pagar & "' ,[INSSxPagar] = '" & TablaEmpleado.INSS_Pagar & "' ,[INATECxPagar] = '" & TablaEmpleado.INATEC_Pagar & "' ,[IRxPagar] = '" & TablaEmpleado.IR_Pagar & "' ,[PrestamoxPagar] = '" & TablaEmpleado.Prestamo_Pagar & "' ,[NominaxPagar] = '" & TablaEmpleado.Nomina_Pagar & "',[CuentaHorasExtra] = '" & TablaEmpleado.CuentaHoras_Extra & "' ,[INSSPatronalPagar] = '" & TablaEmpleado.INSSPatronal_Pagar & "' ,[CuentaBanco] = '" & TablaEmpleado.Empleado_CuentaBanco & "' ,[CuentaSubsidio] = '" & TablaEmpleado.Cuenta_Subsidio & "',[Aumento] = " & TablaEmpleado.Aumento_Basico & "   WHERE  (CodEmpleado = " & TablaEmpleado.Cod_Empleado & ") "
         EjecutarConsulta(SqlString)
     End Sub
+    Public Function BuscarHistorico(Cod_Empleado As Double) As Historico
+        Dim THistorico As New DataTable, SqlString As String
+        Dim TablaHistorico As New Historico
+
+        SqlString = "SELECT * FROM Empleado INNER JOIN Historico ON Empleado.CodEmpleado = Historico.Codempleado WHERE  (Empleado.CodEmpleado = '" & Cod_Empleado & "') AND (Empleado.Activo = 1)"
+        THistorico = FillDataTableSQL(SqlString, "HistoricoEmpleado")
+        If THistorico.Rows.Count <> 0 Then
+
+            If Not IsDBNull(THistorico.Rows(0)("Id")) Then
+                TablaHistorico.Empleado_Id = Convert.ToDouble(THistorico.Rows(0)("Id"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("FechaBaja")) Then
+                TablaHistorico.Fecha_Baja = Convert.ToDateTime(THistorico.Rows(0)("FechaBaja"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("MotivoBaja")) Then
+                TablaHistorico.Motivo_Baja = THistorico.Rows(0)("MotivoBaja").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("FechaAumento")) Then
+                TablaHistorico.Fecha_Aumento = Convert.ToDateTime(THistorico.Rows(0)("FechaAumento"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("MotivoAumento")) Then
+                TablaHistorico.Motivo_Aumento = THistorico.Rows(0)("MotivoAumento").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("FechaInicialSusp")) Then
+                TablaHistorico.FechaInicial_Susp = Convert.ToDateTime(THistorico.Rows(0)("FechaInicialSusp"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("FechaFinalSusp")) Then
+                TablaHistorico.FechaInicial_Susp = Convert.ToDateTime(THistorico.Rows(0)("FechaFinalSusp"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("MotivoSuspencion")) Then
+                TablaHistorico.Motivo_Suspencion = THistorico.Rows(0)("MotivoSuspencion").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("FechaNacimiento")) Then
+                TablaHistorico.Fecha_Nacimiento = Convert.ToDateTime(THistorico.Rows(0)("FechaNacimiento"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("FechaContrato")) Then
+                TablaHistorico.Fecha_Contrato = Convert.ToDateTime(THistorico.Rows(0)("FechaContrato"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("FechaContratoVac")) Then
+                TablaHistorico.Fecha_ContratoVac = Convert.ToDateTime(THistorico.Rows(0)("FechaContratoVac"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CargoInicial")) Then
+                TablaHistorico.Cargo_Inicial = THistorico.Rows(0)("CargoInicial").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CargoActual")) Then
+                TablaHistorico.Cargo_Actual = THistorico.Rows(0)("CargoActual").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CargoAnterior")) Then
+                TablaHistorico.Cargo_Anterior = THistorico.Rows(0)("CargoAnterior").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("SueldoInicial")) Then
+                TablaHistorico.Sueldo_Inicial = Convert.ToDouble(THistorico.Rows(0)("SueldoInicial"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("SueldoAnterior")) Then
+                TablaHistorico.Sueldo_Anterior = Convert.ToDouble(THistorico.Rows(0)("SueldoAnterior"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("SueldoActual")) Then
+                TablaHistorico.Sueldo_Actual = Convert.ToDouble(THistorico.Rows(0)("SueldoActual"))
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaDebito")) Then
+                TablaHistorico.Cuenta_Debito = THistorico.Rows(0)("CuentaDebito").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaCredito")) Then
+                TablaHistorico.Cuenta_Credito = THistorico.Rows(0)("CuentaCredito").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaPrestamo")) Then
+                TablaHistorico.Cuenta_Prestamo = THistorico.Rows(0)("CuentaPrestamo").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaOtrosIngresos")) Then
+                TablaHistorico.CuentaOtros_Ingresos = THistorico.Rows(0)("CuentaOtrosIngresos").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaINSS")) Then
+                TablaHistorico.Cuenta_INSS = THistorico.Rows(0)("CuentaINSS").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaIR")) Then
+                TablaHistorico.Cuenta_IR = THistorico.Rows(0)("CuentaIR").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaSueldos")) Then
+                TablaHistorico.Cuenta_Sueldos = THistorico.Rows(0)("CuentaSueldos").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("ProvAguinaldo")) Then
+                TablaHistorico.Prov_Aguinaldo = THistorico.Rows(0)("ProvAguinaldo").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("ProvVacaciones")) Then
+                TablaHistorico.Prov_Vacaciones = THistorico.Rows(0)("ProvVacaciones").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("INSSPatronal")) Then
+                TablaHistorico.INSS_Patronal = THistorico.Rows(0)("INSSPatronal").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("INATEC")) Then
+                TablaHistorico.Empleado_INATEC = THistorico.Rows(0)("INATEC").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("AguinaldoxPagar")) Then
+                TablaHistorico.Aguinaldo_Pagar = THistorico.Rows(0)("AguinaldoxPagar").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("VacacionesxPagar")) Then
+                TablaHistorico.Vacaciones_Pagar = THistorico.Rows(0)("VacacionesxPagar").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("INSSxPagar")) Then
+                TablaHistorico.INSS_Pagar = THistorico.Rows(0)("INSSxPagar").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("INATECxPagar")) Then
+                TablaHistorico.INATEC_Pagar = THistorico.Rows(0)("INATECxPagar").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("IRxPagar")) Then
+                TablaHistorico.IR_Pagar = THistorico.Rows(0)("IRxPagar").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("PrestamoxPagar")) Then
+                TablaHistorico.Prestamo_Pagar = THistorico.Rows(0)("PrestamoxPagar").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("NominaxPagar")) Then
+                TablaHistorico.Nomina_Pagar = THistorico.Rows(0)("NominaxPagar").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaHorasExtra")) Then
+                TablaHistorico.CuentaHoras_Extra = THistorico.Rows(0)("CuentaHorasExtra").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("INSSPatronalPagar")) Then
+                TablaHistorico.INSSPatronal_Pagar = THistorico.Rows(0)("INSSPatronalPagar").ToString()
+            End If
+
+            If Not IsDBNull(THistorico.Rows(0)("CuentaBanco")) Then
+                TablaHistorico.Cuenta_Banco = THistorico.Rows(0)("CuentaBanco").ToString()
+            End If
+
+            Return TablaHistorico
+
+        End If
+
+    End Function
+
 
     Public Function BuscarEmpleado(CodigoEmpleado As String) As Empleados
         Dim TEmpleado As New DataTable, SqlString As String
-        Dim TablaEmpleado As New Empleados, TablaHistorico As New Historico
+        Dim TablaEmpleado As New Empleados
 
         TEmpleado = New DataTable
-        'SqlString = "SELECT * FROM Empleado WHERE (CodEmpleado1 = '" & CodigoEmpleado + "') AND (Activo = 1)"
+        'SqlString = "Select * FROM Empleado WHERE (CodEmpleado1 = '" & CodigoEmpleado + "') AND (Activo = 1)"
         SqlString = "SELECT * FROM Empleado INNER JOIN Historico ON Empleado.CodEmpleado = Historico.Codempleado WHERE  (Empleado.CodEmpleado1 = '" + CodigoEmpleado + "') AND (Empleado.Activo = 1)"
         TEmpleado = FillDataTableSQL(SqlString, "Empleado")
         If TEmpleado.Rows.Count <> 0 Then
@@ -287,16 +464,204 @@
                 TablaEmpleado.Monto_Viatico = Convert.ToDouble(TEmpleado.Rows(0)("MontoViatico"))
             End If
 
+            If Not IsDBNull(TEmpleado.Rows(0)("Correo_Electronico")) Then
+                TablaEmpleado.Correo_Electronico = TEmpleado.Rows(0)("Correo_Electronico")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("Numerocelular")) Then
+                TablaEmpleado.Numero_Celular = TEmpleado.Rows(0)("Numerocelular")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CelularEmergencia")) Then
+                TablaEmpleado.Celular_Emergencia = TEmpleado.Rows(0)("CelularEmergencia")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("Profesion")) Then
+                TablaEmpleado.Empleado_Profesion = TEmpleado.Rows(0)("Profesion")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("EstadoCivil")) Then
+                TablaEmpleado.Estado_Civil = TEmpleado.Rows(0)("EstadoCivil")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("JefeInmediato")) Then
+                TablaEmpleado.Jefe_Inmediato = TEmpleado.Rows(0)("JefeInmediato")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("Incentivo")) Then
+                TablaEmpleado.Empleado_Incentivo = TEmpleado.Rows(0)("Incentivo")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaBancoLAFISE")) Then
+                TablaEmpleado.CuentaBanco_LAFISE = TEmpleado.Rows(0)("CuentaBancoLAFISE")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaBancoBDF")) Then
+                TablaEmpleado.CuentaBanco_BDF = TEmpleado.Rows(0)("CuentaBancoBDF")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaBancoBANPRO")) Then
+                TablaEmpleado.CuentaBanco_BANPRO = TEmpleado.Rows(0)("CuentaBancoBANPRO")
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("Foto")) Then
+                TablaEmpleado.Empleado_Foto = TEmpleado.Rows(0)("Foto")
+            End If
+
             '///////////////////////////////////////////////////
             '////////////////REGISTROS HISTORICOS //////////////////
             '//////////////////////////////////////////////////////////
 
+            If Not IsDBNull(TEmpleado.Rows(0)("Id")) Then
+                TablaEmpleado.Empleado_Id = Convert.ToDouble(TEmpleado.Rows(0)("Id"))
+            End If
+
             If Not IsDBNull(TEmpleado.Rows(0)("FechaBaja")) Then
-                TablaHistorico.Fecha_Baja = Convert.ToDateTime(TEmpleado.Rows(0)("FechaBaja"))
+                TablaEmpleado.Fecha_Baja = Convert.ToDateTime(TEmpleado.Rows(0)("FechaBaja"))
             End If
 
             If Not IsDBNull(TEmpleado.Rows(0)("MotivoBaja")) Then
-                Tablahistorico.Motivo_Baja = TEmpleado.Rows(0)("MotivoBaja").ToString()
+                TablaEmpleado.Motivo_Baja = TEmpleado.Rows(0)("MotivoBaja").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("FechaAumento")) Then
+                TablaEmpleado.Fecha_Aumento = Convert.ToDateTime(TEmpleado.Rows(0)("FechaAumento"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("MotivoAumento")) Then
+                TablaEmpleado.Motivo_Aumento = TEmpleado.Rows(0)("MotivoAumento").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("FechaInicialSusp")) Then
+                TablaEmpleado.FechaInicial_Susp = Convert.ToDateTime(TEmpleado.Rows(0)("FechaInicialSusp"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("FechaFinalSusp")) Then
+                TablaEmpleado.FechaInicial_Susp = Convert.ToDateTime(TEmpleado.Rows(0)("FechaFinalSusp"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("MotivoSuspencion")) Then
+                TablaEmpleado.Motivo_Suspencion = TEmpleado.Rows(0)("MotivoSuspencion").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("FechaNacimiento")) Then
+                TablaEmpleado.Fecha_Nacimiento = Convert.ToDateTime(TEmpleado.Rows(0)("FechaNacimiento"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("FechaContrato")) Then
+                TablaEmpleado.Fecha_Contrato = Convert.ToDateTime(TEmpleado.Rows(0)("FechaContrato"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("FechaContratoVac")) Then
+                TablaEmpleado.Fecha_ContratoVac = Convert.ToDateTime(TEmpleado.Rows(0)("FechaContratoVac"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CargoInicial")) Then
+                TablaEmpleado.Cargo_Inicial = TEmpleado.Rows(0)("CargoInicial").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CargoActual")) Then
+                TablaEmpleado.Cargo_Actual = TEmpleado.Rows(0)("CargoActual").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CargoAnterior")) Then
+                TablaEmpleado.Cargo_Anterior = TEmpleado.Rows(0)("CargoAnterior").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("SueldoInicial")) Then
+                TablaEmpleado.Sueldo_Inicial = Convert.ToDouble(TEmpleado.Rows(0)("SueldoInicial"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("SueldoAnterior")) Then
+                TablaEmpleado.Sueldo_Anterior = Convert.ToDouble(TEmpleado.Rows(0)("SueldoAnterior"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("SueldoActual")) Then
+                TablaEmpleado.Sueldo_Actual = Convert.ToDouble(TEmpleado.Rows(0)("SueldoActual"))
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaDebito")) Then
+                TablaEmpleado.Cuenta_Debito = TEmpleado.Rows(0)("CuentaDebito").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaCredito")) Then
+                TablaEmpleado.Cuenta_Credito = TEmpleado.Rows(0)("CuentaCredito").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaPrestamo")) Then
+                TablaEmpleado.Cuenta_Prestamo = TEmpleado.Rows(0)("CuentaPrestamo").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaOtrosIngresos")) Then
+                TablaEmpleado.CuentaOtros_Ingresos = TEmpleado.Rows(0)("CuentaOtrosIngresos").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaINSS")) Then
+                TablaEmpleado.Cuenta_INSS = TEmpleado.Rows(0)("CuentaINSS").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaIR")) Then
+                TablaEmpleado.Cuenta_IR = TEmpleado.Rows(0)("CuentaIR").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaSueldos")) Then
+                TablaEmpleado.Cuenta_Sueldos = TEmpleado.Rows(0)("CuentaSueldos").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("ProvAguinaldo")) Then
+                TablaEmpleado.Prov_Aguinaldo = TEmpleado.Rows(0)("ProvAguinaldo").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("ProvVacaciones")) Then
+                TablaEmpleado.Prov_Vacaciones = TEmpleado.Rows(0)("ProvVacaciones").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("INSSPatronal")) Then
+                TablaEmpleado.INSS_Patronal = TEmpleado.Rows(0)("INSSPatronal").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("INATEC")) Then
+                TablaEmpleado.Empleado_INATEC = TEmpleado.Rows(0)("INATEC").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("AguinaldoxPagar")) Then
+                TablaEmpleado.Aguinaldo_Pagar = TEmpleado.Rows(0)("AguinaldoxPagar").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("VacacionesxPagar")) Then
+                TablaEmpleado.Vacaciones_Pagar = TEmpleado.Rows(0)("VacacionesxPagar").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("INSSxPagar")) Then
+                TablaEmpleado.INSS_Pagar = TEmpleado.Rows(0)("INSSxPagar").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("INATECxPagar")) Then
+                TablaEmpleado.INATEC_Pagar = TEmpleado.Rows(0)("INATECxPagar").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("IRxPagar")) Then
+                TablaEmpleado.IR_Pagar = TEmpleado.Rows(0)("IRxPagar").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("PrestamoxPagar")) Then
+                TablaEmpleado.Prestamo_Pagar = TEmpleado.Rows(0)("PrestamoxPagar").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("NominaxPagar")) Then
+                TablaEmpleado.Nomina_Pagar = TEmpleado.Rows(0)("NominaxPagar").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaHorasExtra")) Then
+                TablaEmpleado.CuentaHoras_Extra = TEmpleado.Rows(0)("CuentaHorasExtra").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("INSSPatronalPagar")) Then
+                TablaEmpleado.INSSPatronal_Pagar = TEmpleado.Rows(0)("INSSPatronalPagar").ToString()
+            End If
+
+            If Not IsDBNull(TEmpleado.Rows(0)("CuentaBanco")) Then
+                TablaEmpleado.Empleado_CuentaBanco = TEmpleado.Rows(0)("CuentaBanco").ToString()
             End If
 
             Return TablaEmpleado
@@ -346,7 +711,25 @@
         MiConexion.MiConexion_SQl.Close()
         Return DataSetDatos.Tables(Nombre)
     End Function
+    Public Function BucarCargoxNombre(NombreCargo As String) As Cargos
+        Dim TablaCargo = New Cargos
+        Dim TCargo = New DataTable()
+        Dim SqlString As String
 
+        SqlString = "SELECT CodCargo, Cargo, Monto FROM Cargo WHERE (Cargo = '" & NombreCargo & "')"
+        TCargo = FillDataTableSQL(SqlString, "TablaCargo")
+
+        If TCargo.Rows.Count <> 0 Then
+
+
+            TablaCargo.Cod_Cargo = TCargo.Rows(0)("CodCargo").ToString()
+            TablaCargo.Descripcion_Cargo = TCargo.Rows(0)("Cargo").ToString()
+            TablaCargo.Monto_Cargo = 0
+            Return TablaCargo
+        Else
+            Return TablaCargo
+        End If
+    End Function
 
 
     Public Function BuscarCargo(CodigoCargo As String) As Cargos
@@ -369,8 +752,38 @@
         End If
 
     End Function
+    Public Function BuscarDepartamentoxNombre(NombreDepartmento As String) As Departamento
+        Dim TDepartamento = New DataTable()
+        Dim TablaDepartamento = New Departamento
+
+        Dim SqlString As String
+        SqlString = "SELECT CodDepartamento, Departamento FROM Departamento WHERE (Departamento = '" & NombreDepartmento & "')"
+        TDepartamento = FillDataTableSQL(SqlString, "Departamento")
+        If TDepartamento.Rows.Count <> 0 Then
+
+            If Not IsDBNull(TDepartamento.Rows(0)("CodDepartamento")) Then
+                TablaDepartamento.Cod_Departamento = TDepartamento.Rows(0)("CodDepartamento").ToString()
+            End If
 
 
+            If Not IsDBNull(TDepartamento.Rows(0)("Departamento")) Then
+                TablaDepartamento.Descripcion_Departamento = TDepartamento.Rows(0)("Departamento").ToString()
+            End If
+
+            Return TablaDepartamento
+        Else
+            Return TablaDepartamento
+        End If
+    End Function
+    Public Sub AgregarBitacora(ByVal FechaRegistro As Date, ByVal NombreUsuario As String, ByVal Modulo As String, ByVal Accion As String)
+        Dim StrSQLUpdate As String
+
+        '///////////ACTUALIZO LA EXISTENCIA PARA CADA BODEGA ////////////////////////////////////////
+        StrSQLUpdate = "INSERT INTO [Bitacora] ([FechaRegistro],[Hora],[NombreUsuario],[Modulo],[Accion]) " &
+                       "VALUES ('" & Format(FechaRegistro, "dd/MM/yyyy") & "','" & Format(CDate(FechaRegistro), "HH:MM:ss") & "','" & NombreUsuario & "','" & Modulo & "','" & Mid(Accion, 1, 100) & "')"
+        EjecutarConsulta(StrSQLUpdate)
+
+    End Sub
     Public Function BuscarDepartamento(CodigoDepartamento As String) As Departamento
         Dim TDepartamento = New DataTable()
         Dim TablaDepartamento = New Departamento

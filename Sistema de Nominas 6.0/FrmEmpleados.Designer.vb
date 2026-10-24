@@ -19,6 +19,7 @@ Partial Class FrmEmpleados
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEmpleados))
         Me.BtnNuevo = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnGuardar = New DevExpress.XtraEditors.SimpleButton()
@@ -28,6 +29,8 @@ Partial Class FrmEmpleados
         Me.BtnAnterior = New DevExpress.XtraEditors.SimpleButton()
         Me.TabEmpleados = New DevExpress.XtraTab.XtraTabControl()
         Me.TabGenerales = New DevExpress.XtraTab.XtraTabPage()
+        Me.LabelControl71 = New DevExpress.XtraEditors.LabelControl()
+        Me.txtNumeroCelular = New System.Windows.Forms.TextBox()
         Me.labelControl51 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtCodEmpleado = New System.Windows.Forms.TextBox()
         Me.txtCorreoElectronico = New System.Windows.Forms.TextBox()
@@ -85,7 +88,20 @@ Partial Class FrmEmpleados
         Me.cmbCodigoEmpleado = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.TabHistorico = New DevExpress.XtraTab.XtraTabPage()
+        Me.GroupControl10 = New DevExpress.XtraEditors.GroupControl()
+        Me.CheckEdit1 = New DevExpress.XtraEditors.CheckEdit()
+        Me.TxtCtaLAFISE = New System.Windows.Forms.TextBox()
+        Me.TxtCtaBDF = New System.Windows.Forms.TextBox()
+        Me.TxtCtaBanpro = New System.Windows.Forms.TextBox()
+        Me.txtCtaBAC = New System.Windows.Forms.TextBox()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.groupControl5 = New DevExpress.XtraEditors.GroupControl()
+        Me.SimpleButton16 = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl72 = New DevExpress.XtraEditors.LabelControl()
+        Me.txtCtaPrestamosxPagar = New System.Windows.Forms.TextBox()
         Me.simpleButton8 = New DevExpress.XtraEditors.SimpleButton()
         Me.simpleButton9 = New DevExpress.XtraEditors.SimpleButton()
         Me.simpleButton10 = New DevExpress.XtraEditors.SimpleButton()
@@ -94,7 +110,7 @@ Partial Class FrmEmpleados
         Me.simpleButton13 = New DevExpress.XtraEditors.SimpleButton()
         Me.simpleButton14 = New DevExpress.XtraEditors.SimpleButton()
         Me.labelControl44 = New DevExpress.XtraEditors.LabelControl()
-        Me.txtCtaBanco = New System.Windows.Forms.TextBox()
+        Me.txtINATECXpagar = New System.Windows.Forms.TextBox()
         Me.labelControl45 = New DevExpress.XtraEditors.LabelControl()
         Me.txtCtaNominaPagar = New System.Windows.Forms.TextBox()
         Me.labelControl46 = New DevExpress.XtraEditors.LabelControl()
@@ -128,18 +144,21 @@ Partial Class FrmEmpleados
         Me.labelControl38 = New DevExpress.XtraEditors.LabelControl()
         Me.txtCtaProvAguinaldo = New System.Windows.Forms.TextBox()
         Me.labelControl37 = New DevExpress.XtraEditors.LabelControl()
-        Me.txtCtaSaldos = New System.Windows.Forms.TextBox()
+        Me.txtCtaSueldos = New System.Windows.Forms.TextBox()
         Me.cboIncapacidades = New System.Windows.Forms.ComboBox()
         Me.labelControl36 = New DevExpress.XtraEditors.LabelControl()
         Me.groupControl3 = New DevExpress.XtraEditors.GroupControl()
+        Me.cboFinSuspencion = New DevExpress.XtraEditors.DateEdit()
         Me.labelControl35 = New DevExpress.XtraEditors.LabelControl()
         Me.txtMotivo = New System.Windows.Forms.TextBox()
-        Me.cboFinSuspencion = New DevExpress.XtraEditors.DateEdit()
         Me.labelControl34 = New DevExpress.XtraEditors.LabelControl()
         Me.cboInicioSuspencion = New DevExpress.XtraEditors.DateEdit()
         Me.labelControl33 = New DevExpress.XtraEditors.LabelControl()
         Me.ChkSueldoActualBasico = New DevExpress.XtraEditors.CheckEdit()
         Me.groupControl2 = New DevExpress.XtraEditors.GroupControl()
+        Me.cboCargoActualH = New DevExpress.XtraEditors.LookUpEdit()
+        Me.cboCargoAnteriorH = New DevExpress.XtraEditors.LookUpEdit()
+        Me.CboCargoInicialH = New DevExpress.XtraEditors.LookUpEdit()
         Me.cboFechaAumento = New DevExpress.XtraEditors.DateEdit()
         Me.labelControl32 = New DevExpress.XtraEditors.LabelControl()
         Me.labelControl31 = New DevExpress.XtraEditors.LabelControl()
@@ -155,12 +174,11 @@ Partial Class FrmEmpleados
         Me.CboFechaBaja = New DevExpress.XtraEditors.DateEdit()
         Me.labelControl26 = New DevExpress.XtraEditors.LabelControl()
         Me.labelControl25 = New DevExpress.XtraEditors.LabelControl()
-        Me.cboCaragoInicial = New System.Windows.Forms.TextBox()
+        Me.TxtSueldoInicial = New System.Windows.Forms.TextBox()
         Me.cboCargoActual = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.labelControl24 = New DevExpress.XtraEditors.LabelControl()
         Me.cboCargoAnterior = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.labelControl23 = New DevExpress.XtraEditors.LabelControl()
-        Me.cboCargoInicial = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.labelControl22 = New DevExpress.XtraEditors.LabelControl()
         Me.TabInformacion = New DevExpress.XtraTab.XtraTabPage()
         Me.groupControl9 = New DevExpress.XtraEditors.GroupControl()
@@ -216,15 +234,9 @@ Partial Class FrmEmpleados
         Me.simpleButton15 = New DevExpress.XtraEditors.SimpleButton()
         Me.labelControl52 = New DevExpress.XtraEditors.LabelControl()
         Me.btnCancelar = New DevExpress.XtraEditors.SimpleButton()
-        Me.LabelControl71 = New DevExpress.XtraEditors.LabelControl()
-        Me.txtNumeroCelular = New System.Windows.Forms.TextBox()
-        Me.GroupControl10 = New DevExpress.XtraEditors.GroupControl()
-        Me.LabelControl72 = New DevExpress.XtraEditors.LabelControl()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit()
-        Me.LabelControl73 = New DevExpress.XtraEditors.LabelControl()
-        Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit()
-        Me.LabelControl74 = New DevExpress.XtraEditors.LabelControl()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         CType(Me.TabEmpleados, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabEmpleados.SuspendLayout()
         Me.TabGenerales.SuspendLayout()
@@ -245,6 +257,13 @@ Partial Class FrmEmpleados
         CType(Me.cmbCodigoEmpleado.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabHistorico.SuspendLayout()
+        CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl10.SuspendLayout()
+        CType(Me.CheckEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.groupControl5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.groupControl5.SuspendLayout()
         CType(Me.groupControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -258,13 +277,15 @@ Partial Class FrmEmpleados
         CType(Me.ChkSueldoActualBasico.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.groupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.groupControl2.SuspendLayout()
+        CType(Me.cboCargoActualH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cboCargoAnteriorH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CboCargoInicialH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboFechaAumento.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboFechaAumento.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CboFechaBaja.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CboFechaBaja.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboCargoActual.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboCargoAnterior.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cboCargoInicial.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabInformacion.SuspendLayout()
         CType(Me.groupControl9, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.groupControl9.SuspendLayout()
@@ -282,12 +303,6 @@ Partial Class FrmEmpleados
         CType(Me.cmbGrupo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChkSalarioFijo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbTipoPago.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupControl10.SuspendLayout()
-        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnNuevo
@@ -347,7 +362,7 @@ Partial Class FrmEmpleados
         'TabEmpleados
         '
         Me.TabEmpleados.CausesValidation = False
-        Me.TabEmpleados.Location = New System.Drawing.Point(12, 1)
+        Me.TabEmpleados.Location = New System.Drawing.Point(10, 1)
         Me.TabEmpleados.Name = "TabEmpleados"
         Me.TabEmpleados.SelectedTabPage = Me.TabGenerales
         Me.TabEmpleados.Size = New System.Drawing.Size(796, 392)
@@ -413,6 +428,21 @@ Partial Class FrmEmpleados
         Me.TabGenerales.Size = New System.Drawing.Size(794, 367)
         Me.TabGenerales.Text = "Generales"
         '
+        'LabelControl71
+        '
+        Me.LabelControl71.Location = New System.Drawing.Point(511, 310)
+        Me.LabelControl71.Name = "LabelControl71"
+        Me.LabelControl71.Size = New System.Drawing.Size(77, 13)
+        Me.LabelControl71.TabIndex = 56
+        Me.LabelControl71.Text = "Numero Celular:"
+        '
+        'txtNumeroCelular
+        '
+        Me.txtNumeroCelular.Location = New System.Drawing.Point(592, 306)
+        Me.txtNumeroCelular.Name = "txtNumeroCelular"
+        Me.txtNumeroCelular.Size = New System.Drawing.Size(152, 21)
+        Me.txtNumeroCelular.TabIndex = 55
+        '
         'labelControl51
         '
         Me.labelControl51.Location = New System.Drawing.Point(517, 285)
@@ -423,7 +453,7 @@ Partial Class FrmEmpleados
         '
         'TxtCodEmpleado
         '
-        Me.TxtCodEmpleado.Location = New System.Drawing.Point(293, 117)
+        Me.TxtCodEmpleado.Location = New System.Drawing.Point(291, 118)
         Me.TxtCodEmpleado.Name = "TxtCodEmpleado"
         Me.TxtCodEmpleado.Size = New System.Drawing.Size(124, 21)
         Me.TxtCodEmpleado.TabIndex = 15
@@ -897,8 +927,104 @@ Partial Class FrmEmpleados
         Me.TabHistorico.Size = New System.Drawing.Size(794, 367)
         Me.TabHistorico.Text = "Historico"
         '
+        'GroupControl10
+        '
+        Me.GroupControl10.Controls.Add(Me.CheckEdit1)
+        Me.GroupControl10.Controls.Add(Me.TxtCtaLAFISE)
+        Me.GroupControl10.Controls.Add(Me.TxtCtaBDF)
+        Me.GroupControl10.Controls.Add(Me.TxtCtaBanpro)
+        Me.GroupControl10.Controls.Add(Me.txtCtaBAC)
+        Me.GroupControl10.Controls.Add(Me.PictureBox4)
+        Me.GroupControl10.Controls.Add(Me.PictureBox3)
+        Me.GroupControl10.Controls.Add(Me.PictureBox2)
+        Me.GroupControl10.Controls.Add(Me.PictureBox1)
+        Me.GroupControl10.Location = New System.Drawing.Point(277, 201)
+        Me.GroupControl10.Name = "GroupControl10"
+        Me.GroupControl10.Size = New System.Drawing.Size(253, 159)
+        Me.GroupControl10.TabIndex = 61
+        Me.GroupControl10.Text = "Cuentas de Bancos"
+        '
+        'CheckEdit1
+        '
+        Me.CheckEdit1.Location = New System.Drawing.Point(10, 138)
+        Me.CheckEdit1.Name = "CheckEdit1"
+        Me.CheckEdit1.Properties.Caption = "Pago se hara con Cheque"
+        Me.CheckEdit1.Size = New System.Drawing.Size(151, 20)
+        Me.CheckEdit1.TabIndex = 80
+        '
+        'TxtCtaLAFISE
+        '
+        Me.TxtCtaLAFISE.Location = New System.Drawing.Point(116, 114)
+        Me.TxtCtaLAFISE.Name = "TxtCtaLAFISE"
+        Me.TxtCtaLAFISE.Size = New System.Drawing.Size(119, 21)
+        Me.TxtCtaLAFISE.TabIndex = 79
+        '
+        'TxtCtaBDF
+        '
+        Me.TxtCtaBDF.Location = New System.Drawing.Point(116, 83)
+        Me.TxtCtaBDF.Name = "TxtCtaBDF"
+        Me.TxtCtaBDF.Size = New System.Drawing.Size(119, 21)
+        Me.TxtCtaBDF.TabIndex = 78
+        '
+        'TxtCtaBanpro
+        '
+        Me.TxtCtaBanpro.Location = New System.Drawing.Point(115, 58)
+        Me.TxtCtaBanpro.Name = "TxtCtaBanpro"
+        Me.TxtCtaBanpro.Size = New System.Drawing.Size(119, 21)
+        Me.TxtCtaBanpro.TabIndex = 77
+        '
+        'txtCtaBAC
+        '
+        Me.txtCtaBAC.Location = New System.Drawing.Point(115, 31)
+        Me.txtCtaBAC.Name = "txtCtaBAC"
+        Me.txtCtaBAC.Size = New System.Drawing.Size(119, 21)
+        Me.txtCtaBAC.TabIndex = 76
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
+        Me.PictureBox4.Location = New System.Drawing.Point(9, 110)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(100, 28)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox4.TabIndex = 3
+        Me.PictureBox4.TabStop = False
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Location = New System.Drawing.Point(10, 81)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(100, 25)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox3.TabIndex = 2
+        Me.PictureBox3.TabStop = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(10, 54)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(100, 26)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 1
+        Me.PictureBox2.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(9, 26)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(100, 26)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        '
         'groupControl5
         '
+        Me.groupControl5.Controls.Add(Me.SimpleButton16)
+        Me.groupControl5.Controls.Add(Me.LabelControl72)
+        Me.groupControl5.Controls.Add(Me.txtCtaPrestamosxPagar)
         Me.groupControl5.Controls.Add(Me.simpleButton8)
         Me.groupControl5.Controls.Add(Me.simpleButton9)
         Me.groupControl5.Controls.Add(Me.simpleButton10)
@@ -907,7 +1033,7 @@ Partial Class FrmEmpleados
         Me.groupControl5.Controls.Add(Me.simpleButton13)
         Me.groupControl5.Controls.Add(Me.simpleButton14)
         Me.groupControl5.Controls.Add(Me.labelControl44)
-        Me.groupControl5.Controls.Add(Me.txtCtaBanco)
+        Me.groupControl5.Controls.Add(Me.txtINATECXpagar)
         Me.groupControl5.Controls.Add(Me.labelControl45)
         Me.groupControl5.Controls.Add(Me.txtCtaNominaPagar)
         Me.groupControl5.Controls.Add(Me.labelControl46)
@@ -922,9 +1048,34 @@ Partial Class FrmEmpleados
         Me.groupControl5.Controls.Add(Me.txtCtaAguinaldo)
         Me.groupControl5.Location = New System.Drawing.Point(535, 8)
         Me.groupControl5.Name = "groupControl5"
-        Me.groupControl5.Size = New System.Drawing.Size(253, 190)
+        Me.groupControl5.Size = New System.Drawing.Size(253, 223)
         Me.groupControl5.TabIndex = 60
         Me.groupControl5.Text = "Cuentas Contables Credito"
+        '
+        'SimpleButton16
+        '
+        Me.SimpleButton16.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.[False]
+        Me.SimpleButton16.ImageOptions.Image = CType(resources.GetObject("SimpleButton16.ImageOptions.Image"), System.Drawing.Image)
+        Me.SimpleButton16.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.SimpleButton16.Location = New System.Drawing.Point(227, 190)
+        Me.SimpleButton16.Name = "SimpleButton16"
+        Me.SimpleButton16.Size = New System.Drawing.Size(22, 22)
+        Me.SimpleButton16.TabIndex = 77
+        '
+        'LabelControl72
+        '
+        Me.LabelControl72.Location = New System.Drawing.Point(5, 168)
+        Me.LabelControl72.Name = "LabelControl72"
+        Me.LabelControl72.Size = New System.Drawing.Size(94, 13)
+        Me.LabelControl72.TabIndex = 76
+        Me.LabelControl72.Text = "Prestamos x Pagar:"
+        '
+        'txtCtaPrestamosxPagar
+        '
+        Me.txtCtaPrestamosxPagar.Location = New System.Drawing.Point(104, 166)
+        Me.txtCtaPrestamosxPagar.Name = "txtCtaPrestamosxPagar"
+        Me.txtCtaPrestamosxPagar.Size = New System.Drawing.Size(119, 21)
+        Me.txtCtaPrestamosxPagar.TabIndex = 75
         '
         'simpleButton8
         '
@@ -998,22 +1149,22 @@ Partial Class FrmEmpleados
         '
         'labelControl44
         '
-        Me.labelControl44.Location = New System.Drawing.Point(31, 169)
+        Me.labelControl44.Location = New System.Drawing.Point(18, 144)
         Me.labelControl44.Name = "labelControl44"
-        Me.labelControl44.Size = New System.Drawing.Size(68, 13)
+        Me.labelControl44.Size = New System.Drawing.Size(81, 13)
         Me.labelControl44.TabIndex = 68
-        Me.labelControl44.Text = "Cta de Banco:"
+        Me.labelControl44.Text = "INATEC X Pagar:"
         '
-        'txtCtaBanco
+        'txtINATECXpagar
         '
-        Me.txtCtaBanco.Location = New System.Drawing.Point(103, 167)
-        Me.txtCtaBanco.Name = "txtCtaBanco"
-        Me.txtCtaBanco.Size = New System.Drawing.Size(119, 21)
-        Me.txtCtaBanco.TabIndex = 67
+        Me.txtINATECXpagar.Location = New System.Drawing.Point(104, 142)
+        Me.txtINATECXpagar.Name = "txtINATECXpagar"
+        Me.txtINATECXpagar.Size = New System.Drawing.Size(119, 21)
+        Me.txtINATECXpagar.TabIndex = 67
         '
         'labelControl45
         '
-        Me.labelControl45.Location = New System.Drawing.Point(18, 146)
+        Me.labelControl45.Location = New System.Drawing.Point(18, 193)
         Me.labelControl45.Name = "labelControl45"
         Me.labelControl45.Size = New System.Drawing.Size(79, 13)
         Me.labelControl45.TabIndex = 66
@@ -1021,7 +1172,7 @@ Partial Class FrmEmpleados
         '
         'txtCtaNominaPagar
         '
-        Me.txtCtaNominaPagar.Location = New System.Drawing.Point(103, 143)
+        Me.txtCtaNominaPagar.Location = New System.Drawing.Point(103, 190)
         Me.txtCtaNominaPagar.Name = "txtCtaNominaPagar"
         Me.txtCtaNominaPagar.Size = New System.Drawing.Size(119, 21)
         Me.txtCtaNominaPagar.TabIndex = 65
@@ -1123,7 +1274,7 @@ Partial Class FrmEmpleados
         Me.groupControl4.Controls.Add(Me.labelControl38)
         Me.groupControl4.Controls.Add(Me.txtCtaProvAguinaldo)
         Me.groupControl4.Controls.Add(Me.labelControl37)
-        Me.groupControl4.Controls.Add(Me.txtCtaSaldos)
+        Me.groupControl4.Controls.Add(Me.txtCtaSueldos)
         Me.groupControl4.Location = New System.Drawing.Point(277, 8)
         Me.groupControl4.Name = "groupControl4"
         Me.groupControl4.Size = New System.Drawing.Size(253, 190)
@@ -1294,29 +1445,29 @@ Partial Class FrmEmpleados
         '
         Me.labelControl37.Location = New System.Drawing.Point(5, 29)
         Me.labelControl37.Name = "labelControl37"
-        Me.labelControl37.Size = New System.Drawing.Size(88, 13)
+        Me.labelControl37.Size = New System.Drawing.Size(94, 13)
         Me.labelControl37.TabIndex = 56
-        Me.labelControl37.Text = "Cuenta de Saldos:"
+        Me.labelControl37.Text = "Cuenta de Sueldos:"
         '
-        'txtCtaSaldos
+        'txtCtaSueldos
         '
-        Me.txtCtaSaldos.Location = New System.Drawing.Point(100, 27)
-        Me.txtCtaSaldos.Name = "txtCtaSaldos"
-        Me.txtCtaSaldos.Size = New System.Drawing.Size(117, 21)
-        Me.txtCtaSaldos.TabIndex = 55
+        Me.txtCtaSueldos.Location = New System.Drawing.Point(100, 27)
+        Me.txtCtaSueldos.Name = "txtCtaSueldos"
+        Me.txtCtaSueldos.Size = New System.Drawing.Size(117, 21)
+        Me.txtCtaSueldos.TabIndex = 55
         '
         'cboIncapacidades
         '
         Me.cboIncapacidades.FormattingEnabled = True
         Me.cboIncapacidades.Items.AddRange(New Object() {"Si", "No"})
-        Me.cboIncapacidades.Location = New System.Drawing.Point(376, 318)
+        Me.cboIncapacidades.Location = New System.Drawing.Point(625, 342)
         Me.cboIncapacidades.Name = "cboIncapacidades"
         Me.cboIncapacidades.Size = New System.Drawing.Size(149, 21)
         Me.cboIncapacidades.TabIndex = 58
         '
         'labelControl36
         '
-        Me.labelControl36.Location = New System.Drawing.Point(297, 321)
+        Me.labelControl36.Location = New System.Drawing.Point(546, 345)
         Me.labelControl36.Name = "labelControl36"
         Me.labelControl36.Size = New System.Drawing.Size(73, 13)
         Me.labelControl36.TabIndex = 57
@@ -1324,17 +1475,27 @@ Partial Class FrmEmpleados
         '
         'groupControl3
         '
+        Me.groupControl3.Controls.Add(Me.cboFinSuspencion)
         Me.groupControl3.Controls.Add(Me.labelControl35)
         Me.groupControl3.Controls.Add(Me.txtMotivo)
-        Me.groupControl3.Controls.Add(Me.cboFinSuspencion)
         Me.groupControl3.Controls.Add(Me.labelControl34)
         Me.groupControl3.Controls.Add(Me.cboInicioSuspencion)
         Me.groupControl3.Controls.Add(Me.labelControl33)
-        Me.groupControl3.Location = New System.Drawing.Point(277, 204)
+        Me.groupControl3.Location = New System.Drawing.Point(535, 230)
         Me.groupControl3.Name = "groupControl3"
-        Me.groupControl3.Size = New System.Drawing.Size(253, 108)
+        Me.groupControl3.Size = New System.Drawing.Size(253, 107)
         Me.groupControl3.TabIndex = 56
         Me.groupControl3.Text = "Ultima Suspencion"
+        '
+        'cboFinSuspencion
+        '
+        Me.cboFinSuspencion.EditValue = New Date(2021, 4, 12, 0, 0, 0, 0)
+        Me.cboFinSuspencion.Location = New System.Drawing.Point(101, 50)
+        Me.cboFinSuspencion.Name = "cboFinSuspencion"
+        Me.cboFinSuspencion.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.cboFinSuspencion.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.cboFinSuspencion.Size = New System.Drawing.Size(149, 20)
+        Me.cboFinSuspencion.TabIndex = 75
         '
         'labelControl35
         '
@@ -1350,16 +1511,6 @@ Partial Class FrmEmpleados
         Me.txtMotivo.Name = "txtMotivo"
         Me.txtMotivo.Size = New System.Drawing.Size(149, 21)
         Me.txtMotivo.TabIndex = 73
-        '
-        'cboFinSuspencion
-        '
-        Me.cboFinSuspencion.EditValue = New Date(2021, 4, 12, 0, 0, 0, 0)
-        Me.cboFinSuspencion.Location = New System.Drawing.Point(101, 50)
-        Me.cboFinSuspencion.Name = "cboFinSuspencion"
-        Me.cboFinSuspencion.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboFinSuspencion.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboFinSuspencion.Size = New System.Drawing.Size(149, 20)
-        Me.cboFinSuspencion.TabIndex = 72
         '
         'labelControl34
         '
@@ -1389,7 +1540,7 @@ Partial Class FrmEmpleados
         '
         'ChkSueldoActualBasico
         '
-        Me.ChkSueldoActualBasico.Location = New System.Drawing.Point(13, 343)
+        Me.ChkSueldoActualBasico.Location = New System.Drawing.Point(3, 341)
         Me.ChkSueldoActualBasico.Name = "ChkSueldoActualBasico"
         Me.ChkSueldoActualBasico.Properties.Caption = "Sueldo Actual -- Basico en Liquidacion y Vacaciones"
         Me.ChkSueldoActualBasico.Size = New System.Drawing.Size(269, 20)
@@ -1397,6 +1548,9 @@ Partial Class FrmEmpleados
         '
         'groupControl2
         '
+        Me.groupControl2.Controls.Add(Me.cboCargoActualH)
+        Me.groupControl2.Controls.Add(Me.cboCargoAnteriorH)
+        Me.groupControl2.Controls.Add(Me.CboCargoInicialH)
         Me.groupControl2.Controls.Add(Me.cboFechaAumento)
         Me.groupControl2.Controls.Add(Me.labelControl32)
         Me.groupControl2.Controls.Add(Me.labelControl31)
@@ -1412,18 +1566,47 @@ Partial Class FrmEmpleados
         Me.groupControl2.Controls.Add(Me.CboFechaBaja)
         Me.groupControl2.Controls.Add(Me.labelControl26)
         Me.groupControl2.Controls.Add(Me.labelControl25)
-        Me.groupControl2.Controls.Add(Me.cboCaragoInicial)
+        Me.groupControl2.Controls.Add(Me.TxtSueldoInicial)
         Me.groupControl2.Controls.Add(Me.cboCargoActual)
         Me.groupControl2.Controls.Add(Me.labelControl24)
         Me.groupControl2.Controls.Add(Me.cboCargoAnterior)
         Me.groupControl2.Controls.Add(Me.labelControl23)
-        Me.groupControl2.Controls.Add(Me.cboCargoInicial)
         Me.groupControl2.Controls.Add(Me.labelControl22)
         Me.groupControl2.Location = New System.Drawing.Point(13, 8)
         Me.groupControl2.Name = "groupControl2"
         Me.groupControl2.Size = New System.Drawing.Size(258, 329)
         Me.groupControl2.TabIndex = 2
         Me.groupControl2.Text = "Registros Historicos"
+        '
+        'cboCargoActualH
+        '
+        Me.cboCargoActualH.Location = New System.Drawing.Point(93, 88)
+        Me.cboCargoActualH.Name = "cboCargoActualH"
+        Me.cboCargoActualH.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.cboCargoActualH.Properties.NullText = ""
+        Me.cboCargoActualH.Properties.PopupSizeable = False
+        Me.cboCargoActualH.Size = New System.Drawing.Size(149, 20)
+        Me.cboCargoActualH.TabIndex = 71
+        '
+        'cboCargoAnteriorH
+        '
+        Me.cboCargoAnteriorH.Location = New System.Drawing.Point(93, 62)
+        Me.cboCargoAnteriorH.Name = "cboCargoAnteriorH"
+        Me.cboCargoAnteriorH.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.cboCargoAnteriorH.Properties.NullText = ""
+        Me.cboCargoAnteriorH.Properties.PopupSizeable = False
+        Me.cboCargoAnteriorH.Size = New System.Drawing.Size(149, 20)
+        Me.cboCargoAnteriorH.TabIndex = 70
+        '
+        'CboCargoInicialH
+        '
+        Me.CboCargoInicialH.Location = New System.Drawing.Point(95, 36)
+        Me.CboCargoInicialH.Name = "CboCargoInicialH"
+        Me.CboCargoInicialH.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.CboCargoInicialH.Properties.NullText = ""
+        Me.CboCargoInicialH.Properties.PopupSizeable = False
+        Me.CboCargoInicialH.Size = New System.Drawing.Size(149, 20)
+        Me.CboCargoInicialH.TabIndex = 69
         '
         'cboFechaAumento
         '
@@ -1544,12 +1727,12 @@ Partial Class FrmEmpleados
         Me.labelControl25.TabIndex = 54
         Me.labelControl25.Text = "Sueldo Inicial:"
         '
-        'cboCaragoInicial
+        'TxtSueldoInicial
         '
-        Me.cboCaragoInicial.Location = New System.Drawing.Point(93, 113)
-        Me.cboCaragoInicial.Name = "cboCaragoInicial"
-        Me.cboCaragoInicial.Size = New System.Drawing.Size(149, 21)
-        Me.cboCaragoInicial.TabIndex = 53
+        Me.TxtSueldoInicial.Location = New System.Drawing.Point(93, 114)
+        Me.TxtSueldoInicial.Name = "TxtSueldoInicial"
+        Me.TxtSueldoInicial.Size = New System.Drawing.Size(149, 21)
+        Me.TxtSueldoInicial.TabIndex = 53
         '
         'cboCargoActual
         '
@@ -1582,14 +1765,6 @@ Partial Class FrmEmpleados
         Me.labelControl23.Size = New System.Drawing.Size(75, 13)
         Me.labelControl23.TabIndex = 49
         Me.labelControl23.Text = "Cargo Anterior:"
-        '
-        'cboCargoInicial
-        '
-        Me.cboCargoInicial.Location = New System.Drawing.Point(93, 36)
-        Me.cboCargoInicial.Name = "cboCargoInicial"
-        Me.cboCargoInicial.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboCargoInicial.Size = New System.Drawing.Size(149, 20)
-        Me.cboCargoInicial.TabIndex = 48
         '
         'labelControl22
         '
@@ -2105,85 +2280,15 @@ Partial Class FrmEmpleados
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.Visible = False
         '
-        'LabelControl71
+        'OpenFileDialog1
         '
-        Me.LabelControl71.Location = New System.Drawing.Point(511, 310)
-        Me.LabelControl71.Name = "LabelControl71"
-        Me.LabelControl71.Size = New System.Drawing.Size(77, 13)
-        Me.LabelControl71.TabIndex = 56
-        Me.LabelControl71.Text = "Numero Celular:"
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'txtNumeroCelular
+        'ImageList1
         '
-        Me.txtNumeroCelular.Location = New System.Drawing.Point(592, 306)
-        Me.txtNumeroCelular.Name = "txtNumeroCelular"
-        Me.txtNumeroCelular.Size = New System.Drawing.Size(152, 21)
-        Me.txtNumeroCelular.TabIndex = 55
-        '
-        'GroupControl10
-        '
-        Me.GroupControl10.Controls.Add(Me.LabelControl72)
-        Me.GroupControl10.Controls.Add(Me.TextBox1)
-        Me.GroupControl10.Controls.Add(Me.DateEdit1)
-        Me.GroupControl10.Controls.Add(Me.LabelControl73)
-        Me.GroupControl10.Controls.Add(Me.DateEdit2)
-        Me.GroupControl10.Controls.Add(Me.LabelControl74)
-        Me.GroupControl10.Location = New System.Drawing.Point(535, 204)
-        Me.GroupControl10.Name = "GroupControl10"
-        Me.GroupControl10.Size = New System.Drawing.Size(253, 159)
-        Me.GroupControl10.TabIndex = 61
-        Me.GroupControl10.Text = "Ultima Suspencion"
-        '
-        'LabelControl72
-        '
-        Me.LabelControl72.Location = New System.Drawing.Point(58, 77)
-        Me.LabelControl72.Name = "LabelControl72"
-        Me.LabelControl72.Size = New System.Drawing.Size(36, 13)
-        Me.LabelControl72.TabIndex = 74
-        Me.LabelControl72.Text = "Motivo:"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(101, 74)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(149, 21)
-        Me.TextBox1.TabIndex = 73
-        '
-        'DateEdit1
-        '
-        Me.DateEdit1.EditValue = New Date(2021, 4, 12, 0, 0, 0, 0)
-        Me.DateEdit1.Location = New System.Drawing.Point(101, 50)
-        Me.DateEdit1.Name = "DateEdit1"
-        Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DateEdit1.Size = New System.Drawing.Size(149, 20)
-        Me.DateEdit1.TabIndex = 72
-        '
-        'LabelControl73
-        '
-        Me.LabelControl73.Location = New System.Drawing.Point(19, 53)
-        Me.LabelControl73.Name = "LabelControl73"
-        Me.LabelControl73.Size = New System.Drawing.Size(75, 13)
-        Me.LabelControl73.TabIndex = 71
-        Me.LabelControl73.Text = "Fin Suspencion:"
-        '
-        'DateEdit2
-        '
-        Me.DateEdit2.EditValue = New Date(2021, 4, 12, 0, 0, 0, 0)
-        Me.DateEdit2.Location = New System.Drawing.Point(101, 26)
-        Me.DateEdit2.Name = "DateEdit2"
-        Me.DateEdit2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DateEdit2.Size = New System.Drawing.Size(149, 20)
-        Me.DateEdit2.TabIndex = 70
-        '
-        'LabelControl74
-        '
-        Me.LabelControl74.Location = New System.Drawing.Point(8, 29)
-        Me.LabelControl74.Name = "LabelControl74"
-        Me.LabelControl74.Size = New System.Drawing.Size(86, 13)
-        Me.LabelControl74.TabIndex = 69
-        Me.LabelControl74.Text = "Inicio Suspencion:"
+        Me.ImageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
+        Me.ImageList1.ImageSize = New System.Drawing.Size(16, 16)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         '
         'FrmEmpleados
         '
@@ -2227,6 +2332,14 @@ Partial Class FrmEmpleados
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabHistorico.ResumeLayout(False)
         Me.TabHistorico.PerformLayout()
+        CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl10.ResumeLayout(False)
+        Me.GroupControl10.PerformLayout()
+        CType(Me.CheckEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.groupControl5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.groupControl5.ResumeLayout(False)
         Me.groupControl5.PerformLayout()
@@ -2244,13 +2357,15 @@ Partial Class FrmEmpleados
         CType(Me.groupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.groupControl2.ResumeLayout(False)
         Me.groupControl2.PerformLayout()
+        CType(Me.cboCargoActualH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cboCargoAnteriorH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CboCargoInicialH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboFechaAumento.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboFechaAumento.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CboFechaBaja.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CboFechaBaja.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboCargoActual.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboCargoAnterior.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cboCargoInicial.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabInformacion.ResumeLayout(False)
         CType(Me.groupControl9, System.ComponentModel.ISupportInitialize).EndInit()
         Me.groupControl9.ResumeLayout(False)
@@ -2272,13 +2387,6 @@ Partial Class FrmEmpleados
         CType(Me.cmbGrupo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ChkSalarioFijo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbTipoPago.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupControl10.ResumeLayout(False)
-        Me.GroupControl10.PerformLayout()
-        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2354,7 +2462,7 @@ Partial Class FrmEmpleados
     Private WithEvents simpleButton13 As DevExpress.XtraEditors.SimpleButton
     Private WithEvents simpleButton14 As DevExpress.XtraEditors.SimpleButton
     Private WithEvents labelControl44 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents txtCtaBanco As TextBox
+    Private WithEvents txtINATECXpagar As TextBox
     Private WithEvents labelControl45 As DevExpress.XtraEditors.LabelControl
     Private WithEvents txtCtaNominaPagar As TextBox
     Private WithEvents labelControl46 As DevExpress.XtraEditors.LabelControl
@@ -2388,13 +2496,12 @@ Partial Class FrmEmpleados
     Private WithEvents labelControl38 As DevExpress.XtraEditors.LabelControl
     Private WithEvents txtCtaProvAguinaldo As TextBox
     Private WithEvents labelControl37 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents txtCtaSaldos As TextBox
+    Private WithEvents txtCtaSueldos As TextBox
     Private WithEvents cboIncapacidades As ComboBox
     Private WithEvents labelControl36 As DevExpress.XtraEditors.LabelControl
     Private WithEvents groupControl3 As DevExpress.XtraEditors.GroupControl
     Private WithEvents labelControl35 As DevExpress.XtraEditors.LabelControl
     Private WithEvents txtMotivo As TextBox
-    Private WithEvents cboFinSuspencion As DevExpress.XtraEditors.DateEdit
     Private WithEvents labelControl34 As DevExpress.XtraEditors.LabelControl
     Private WithEvents cboInicioSuspencion As DevExpress.XtraEditors.DateEdit
     Private WithEvents labelControl33 As DevExpress.XtraEditors.LabelControl
@@ -2415,12 +2522,11 @@ Partial Class FrmEmpleados
     Private WithEvents CboFechaBaja As DevExpress.XtraEditors.DateEdit
     Private WithEvents labelControl26 As DevExpress.XtraEditors.LabelControl
     Private WithEvents labelControl25 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents cboCaragoInicial As TextBox
+    Private WithEvents TxtSueldoInicial As TextBox
     Private WithEvents cboCargoActual As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents labelControl24 As DevExpress.XtraEditors.LabelControl
     Private WithEvents cboCargoAnterior As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents labelControl23 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents cboCargoInicial As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents labelControl22 As DevExpress.XtraEditors.LabelControl
     Private WithEvents TabInformacion As DevExpress.XtraTab.XtraTabPage
     Private WithEvents groupControl9 As DevExpress.XtraEditors.GroupControl
@@ -2482,10 +2588,23 @@ Partial Class FrmEmpleados
     Private WithEvents LabelControl71 As DevExpress.XtraEditors.LabelControl
     Private WithEvents txtNumeroCelular As TextBox
     Private WithEvents GroupControl10 As DevExpress.XtraEditors.GroupControl
+    Private WithEvents CboCargoInicialH As DevExpress.XtraEditors.LookUpEdit
+    Private WithEvents cboCargoAnteriorH As DevExpress.XtraEditors.LookUpEdit
+    Private WithEvents cboCargoActualH As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents SaveFileDialog1 As SaveFileDialog
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents ImageList1 As ImageList
     Private WithEvents LabelControl72 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents TextBox1 As TextBox
-    Private WithEvents DateEdit1 As DevExpress.XtraEditors.DateEdit
-    Private WithEvents LabelControl73 As DevExpress.XtraEditors.LabelControl
-    Private WithEvents DateEdit2 As DevExpress.XtraEditors.DateEdit
-    Private WithEvents LabelControl74 As DevExpress.XtraEditors.LabelControl
+    Private WithEvents txtCtaPrestamosxPagar As TextBox
+    Private WithEvents SimpleButton16 As DevExpress.XtraEditors.SimpleButton
+    Private WithEvents txtCtaBAC As TextBox
+    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Private WithEvents CheckEdit1 As DevExpress.XtraEditors.CheckEdit
+    Private WithEvents TxtCtaLAFISE As TextBox
+    Private WithEvents TxtCtaBDF As TextBox
+    Private WithEvents TxtCtaBanpro As TextBox
+    Private WithEvents cboFinSuspencion As DevExpress.XtraEditors.DateEdit
 End Class

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Reference Include="DevExpress.Data.Desktop.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Drawing.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Images.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v24.1.Core, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -82,6 +83,60 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\CsEmpleadoDAL.vb" />
+    <Compile Include="Clases\CsDALBase.vb" />
+    <Compile Include="Clases\CsCargoDAL.vb" />
+    <Compile Include="Clases\CsControlesDAL.vb" />
+    <Compile Include="Clases\CsDepartamentoDAL.vb" />
+    <Compile Include="Clases\CsTipoDeduccionDAL.vb" />
+    <Compile Include="Clases\CsTipoNominaDAL.vb" />
+    <Compile Include="Clases\CsPeriodoDAL.vb" />
+    <Compile Include="Clases\GeneradorPeriodos.vb" />
+    <Compile Include="Tablas\TipoNomina.vb" />
+    <Compile Include="Tablas\PeriodoNomina.vb" />
+    <Compile Include="Tablas\AnioPeriodo.vb" />
+    <Compile Include="FrmTipoNomina.Designer.vb">
+      <DependentUpon>FrmTipoNomina.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTipoNomina.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPeriodo.Designer.vb">
+      <DependentUpon>FrmPeriodo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPeriodo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tablas\Controles.vb" />
+    <Compile Include="Tablas\DatosEmpresa.vb" />
+    <Compile Include="Tablas\TipoDeduccion.vb" />
+    <Compile Include="FrmCargo.Designer.vb">
+      <DependentUpon>FrmCargo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCargo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmControles.Designer.vb">
+      <DependentUpon>FrmControles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmControles.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDeduccion.Designer.vb">
+      <DependentUpon>FrmDeduccion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDeduccion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDepartamento.Designer.vb">
+      <DependentUpon>FrmDepartamento.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDepartamento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modulo\Conversion.vb" />
+    <Compile Include="Modulo\Variables.vb" />
+    <Compile Include="Tablas\Bitacora.vb" />
     <Compile Include="Tablas\Cargos.vb" />
     <Compile Include="Clases\Compañias.vb" />
     <Compile Include="Clases\Conexion.vb" />
@@ -112,7 +167,6 @@
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -172,6 +226,21 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Silueta.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EdificioNegro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\light_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\light_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\light_yellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

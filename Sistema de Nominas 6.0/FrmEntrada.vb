@@ -13,6 +13,7 @@
         End If
 
         If (Compañia.ContraseñaCorrecta(TxtUsuario.Text, TxtContraseña.Text) = True) Then
+            Nombre_Usuario = TxtUsuario.Text
             Me.Hide()
             Main.ShowDialog()
         Else
