@@ -58,6 +58,8 @@
     <Reference Include="DevExpress.XtraBars.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraGrid.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v24.1, Version=24.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -84,7 +86,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\CsEmpleadoDAL.vb" />
+    <Compile Include="Tablas\EmpleadoBaja.vb" />
+    <Compile Include="Tablas\SalarioMesBaja.vb" />
+    <Compile Include="Tablas\OpcionesLiquidacion.vb" />
+    <Compile Include="Tablas\Liquidacion.vb" />
+    <Compile Include="Clases\CalculadoraLiquidacion.vb" />
+    <Compile Include="Clases\CalculadoraIRBaja.vb" />
+    <Compile Include="Clases\CsBajasDAL.vb" />
+    <Compile Include="Clases\CsLiquidacion.vb" />
+    <Compile Include="Reportes\RptLiquidacion.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrmVisorReporte.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBajas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Clases\CsDALBase.vb" />
+    <Compile Include="Clases\CalculadoraVacaciones.vb" />
+    <Compile Include="Clases\CsVacacionesDAL.vb" />
+    <Compile Include="Clases\CsMovimientosDAL.vb" />
+    <Compile Include="Clases\CsPrestamoDAL.vb" />
+    <Compile Include="Clases\CalculadoraPrestamo.vb" />
+    <Compile Include="Tablas\CuotaPrestamo.vb" />
+    <Compile Include="UcMovimientosEmpleado.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcPrestamoEmpleado.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Clases\CsCargoDAL.vb" />
     <Compile Include="Clases\CsControlesDAL.vb" />
     <Compile Include="Clases\CsDepartamentoDAL.vb" />
@@ -92,6 +123,139 @@
     <Compile Include="Clases\CsTipoNominaDAL.vb" />
     <Compile Include="Clases\CsPeriodoDAL.vb" />
     <Compile Include="Clases\GeneradorPeriodos.vb" />
+    <Compile Include="Clases\EstiloGrid.vb" />
+    <Compile Include="Clases\ExportadorGrid.vb" />
+    <Compile Include="Clases\CsHorasExtraDAL.vb" />
+    <Compile Include="Clases\CsMovimientoNominaDAL.vb" />
+    <Compile Include="FrmMovimientos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\CsNominaDAL.vb" />
+    <Compile Include="Clases\CsActivarNominaDAL.vb" />
+    <Compile Include="Tablas\CurriculumEmpleado.vb" />
+    <Compile Include="Tablas\DatosCarnet.vb" />
+    <Compile Include="Tablas\TasaCambio.vb" />
+    <Compile Include="Tablas\Justificacion.vb" />
+    <Compile Include="Tablas\ResultadoConsulta.vb" />
+    <Compile Include="Clases\CsCurriculumDAL.vb" />
+    <Compile Include="Clases\CsCarnetDAL.vb" />
+    <Compile Include="Clases\CsCambioMonedaDAL.vb" />
+    <Compile Include="Clases\CsJustificacionDAL.vb" />
+    <Compile Include="Clases\CsInssIrDAL.vb" />
+    <Compile Include="Clases\CsConsultaDAL.vb" />
+    <Compile Include="Clases\CsCargaMasivaDAL.vb" />
+    <Compile Include="Clases\CsHistorialEmpleadoDAL.vb" />
+    <Compile Include="Clases\LectorExcel.vb" />
+    <Compile Include="Clases\CsImportacionDAL.vb" />
+    <Compile Include="FrmListadoEmpleados.Designer.vb">
+      <DependentUpon>FrmListadoEmpleados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmListadoEmpleados.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmListadoHorasExtra.Designer.vb">
+      <DependentUpon>FrmListadoHorasExtra.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmListadoHorasExtra.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmListNomina.Designer.vb">
+      <DependentUpon>FrmListNomina.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmListNomina.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmActivarNomina.Designer.vb">
+      <DependentUpon>FrmActivarNomina.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmActivarNomina.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\CsTipoComisionDAL.vb" />
+    <Compile Include="Clases\CsTipoDestajoDAL.vb" />
+    <Compile Include="Clases\CsTipoIncapacidadDAL.vb" />
+    <Compile Include="Clases\CsIncapacidadDAL.vb" />
+    <Compile Include="Tablas\TipoComision.vb" />
+    <Compile Include="Tablas\TipoDestajo.vb" />
+    <Compile Include="Tablas\TipoIncapacidad.vb" />
+    <Compile Include="Tablas\IncapacidadEmpleado.vb" />
+    <Compile Include="FrmTipoComision.Designer.vb">
+      <DependentUpon>FrmTipoComision.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTipoComision.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTipoDestajo.Designer.vb">
+      <DependentUpon>FrmTipoDestajo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTipoDestajo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTipoIncapacidad.Designer.vb">
+      <DependentUpon>FrmTipoIncapacidad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTipoIncapacidad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAnotaciones.Designer.vb">
+      <DependentUpon>FrmAnotaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAnotaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCarnet.Designer.vb">
+      <DependentUpon>FrmCarnet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCarnet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTasaCambio.Designer.vb">
+      <DependentUpon>FrmTasaCambio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTasaCambio.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInssIr.Designer.vb">
+      <DependentUpon>FrmInssIr.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInssIr.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmJustificaciones.Designer.vb">
+      <DependentUpon>FrmJustificaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmJustificaciones.vb" />
+    <Compile Include="FrmQuery.Designer.vb">
+      <DependentUpon>FrmQuery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmQuery.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCargaMasiva.Designer.vb">
+      <DependentUpon>FrmCargaMasiva.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCargaMasiva.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHistorial.Designer.vb">
+      <DependentUpon>FrmHistorial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHistorial.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmImportar.Designer.vb">
+      <DependentUpon>FrmImportar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmImportar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\CodigoBarras39.vb" />
+    <Compile Include="FrmIncapacidades.Designer.vb">
+      <DependentUpon>FrmIncapacidades.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIncapacidades.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tablas\TipoNomina.vb" />
     <Compile Include="Tablas\PeriodoNomina.vb" />
     <Compile Include="Tablas\AnioPeriodo.vb" />
@@ -134,6 +298,14 @@
     <Compile Include="FrmDepartamento.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmUsuarios.Designer.vb">
+      <DependentUpon>FrmUsuarios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUsuarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\CsUsuarioDAL.vb" />
+    <Compile Include="Tablas\Usuarios.vb" />
     <Compile Include="Modulo\Conversion.vb" />
     <Compile Include="Modulo\Variables.vb" />
     <Compile Include="Tablas\Bitacora.vb" />
@@ -198,8 +370,35 @@
     <EmbeddedResource Include="FrmEntrada.resx">
       <DependentUpon>FrmEntrada.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmHistorial.resx">
+      <DependentUpon>FrmHistorial.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInssIr.resx">
+      <DependentUpon>FrmInssIr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmJustificaciones.resx">
+      <DependentUpon>FrmJustificaciones.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmListadoCompañias.resx">
       <DependentUpon>FrmListadoCompañias.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmListadoEmpleados.resx">
+      <DependentUpon>FrmListadoEmpleados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmListadoHorasExtra.resx">
+      <DependentUpon>FrmListadoHorasExtra.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmListNomina.resx">
+      <DependentUpon>FrmListNomina.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPeriodo.resx">
+      <DependentUpon>FrmPeriodo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmQuery.resx">
+      <DependentUpon>FrmQuery.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTasaCambio.resx">
+      <DependentUpon>FrmTasaCambio.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>

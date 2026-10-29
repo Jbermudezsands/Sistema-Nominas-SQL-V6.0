@@ -736,6 +736,52 @@ ORDER BY CodEmpleado1
 
     End Function
 
+    ''' <summary>
+    ''' Listado general de empleados activos (FrmListadoEmpleados). LEFT JOIN: un empleado sin
+    ''' departamento, cargo o histórico igual aparece (la V.5.0 con INNER JOIN lo ocultaba).
+    ''' </summary>
+    Public Function ListarDetallado() As DataTable
+
+        Dim dt As New DataTable
+
+        Dim Sql As String =
+"
+SELECT
+e.CodEmpleado1,
+LTRIM(RTRIM(ISNULL(e.Nombre1, '') + ' ' + ISNULL(e.Nombre2, '') + ' ' + ISNULL(e.Apellido1, '') + ' ' + ISNULL(e.Apellido2, ''))) AS Nombres,
+e.NumCedula,
+e.NumeroInss,
+d.Departamento,
+c.Cargo,
+e.SueldoPeriodo,
+e.Sexo,
+e.NumHijos,
+e.TarifaHoraria,
+e.Dolarizado,
+h.FechaNacimiento,
+h.FechaContrato
+FROM Empleado e
+LEFT JOIN Departamento d ON e.CodDepartamento = d.CodDepartamento
+LEFT JOIN Cargo c ON e.CodCargo = c.CodCargo
+LEFT JOIN Historico h ON e.CodEmpleado = h.Codempleado
+WHERE e.Activo = 1
+ORDER BY e.CodEmpleado1
+"
+
+        Using cn As New SqlConnection(CadenaConexion)
+
+            Using da As New SqlDataAdapter(Sql, cn)
+
+                da.Fill(dt)
+
+            End Using
+
+        End Using
+
+        Return dt
+
+    End Function
+
 #End Region
 
 #Region "HISTORICO"

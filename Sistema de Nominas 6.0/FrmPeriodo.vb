@@ -52,15 +52,6 @@ Public Class FrmPeriodo
                 .NullText = ""
             End With
 
-            With gridView1
-                .Columns.Clear()
-                .Columns.AddVisible("Periodo", "Período")
-                .Columns.AddVisible("Mes", "Mes")
-                .Columns.AddVisible("Inicio", "Desde")
-                .Columns.AddVisible("Final", "Hasta")
-                .Columns.AddVisible("Estado", "Estado")
-            End With
-
             _cargando = False
 
             BtnGuardar.Enabled = False
@@ -151,7 +142,7 @@ Public Class FrmPeriodo
 
         Dim dt As New DataTable
         dt.Columns.Add("Periodo", GetType(Integer))
-        dt.Columns.Add("Mes", GetType(String))
+        dt.Columns.Add("Mes", GetType(Integer))
         dt.Columns.Add("Inicio", GetType(Date))
         dt.Columns.Add("Final", GetType(Date))
         dt.Columns.Add("Estado", GetType(String))
@@ -163,18 +154,73 @@ Public Class FrmPeriodo
 
             If existentes.TryGetValue(p.Periodo, ex) Then estado = If(ex.TieneNomina, "Con nómina (no se modifica)", "Existe (se actualiza)")
 
-            dt.Rows.Add(p.Periodo, p.Mes, p.Inicio, p.Final, estado)
+            Dim numMes As Integer
+            If Not Integer.TryParse(p.Mes, numMes) OrElse numMes < 1 OrElse numMes > 12 Then numMes = p.Inicio.Month
+
+            ' Año*100+mes: agrupa en orden cronológico (el calendario fiscal empieza en julio)
+            dt.Rows.Add(p.Periodo, p.Inicio.Year * 100 + numMes, p.Inicio, p.Final, estado)
 
         Next
 
         gridPeriodos.DataSource = dt
-        gridView1.Columns("Inicio").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        gridView1.Columns("Inicio").DisplayFormat.FormatString = "dd/MM/yyyy"
-        gridView1.Columns("Final").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        gridView1.Columns("Final").DisplayFormat.FormatString = "dd/MM/yyyy"
-        gridView1.BestFitColumns()
+        ConfigurarGrid()
 
         BtnGuardar.Enabled = (_periodos.Count > 0)
+
+    End Sub
+
+    ''' <summary>Períodos agrupados por mes, como el listado de V.5.0: "Enero" y debajo "1  01/01/2026 al 15/01/2026".</summary>
+    Private Sub ConfigurarGrid()
+
+        With gridView1
+
+            .OptionsView.ShowGroupPanel = False
+            EstiloGrid.Aplicar(gridView1)
+            .OptionsView.ColumnAutoWidth = True
+            .OptionsView.ShowIndicator = False
+            .OptionsView.ShowGroupedColumns = False
+            .OptionsBehavior.AutoExpandAllGroups = True
+            .OptionsCustomization.AllowGroup = False
+            .OptionsSelection.EnableAppearanceFocusedCell = False
+            .GroupFormat = "{1}"
+            .Appearance.GroupRow.Font = New Font("Tahoma", 9.0F, FontStyle.Bold)
+            .Appearance.Row.Font = New Font("Tahoma", 9.0F)
+
+            .Columns("Periodo").Caption = "Período"
+            .Columns("Periodo").Width = 70
+            .Columns("Periodo").AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+
+            .Columns("Mes").GroupIndex = 0
+            .Columns("Mes").SortOrder = DevExpress.Data.ColumnSortOrder.Ascending
+
+            For Each nombre As String In New String() {"Inicio", "Final"}
+                With .Columns(nombre)
+                    .Caption = If(nombre = "Inicio", "Desde", "Hasta")
+                    .DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+                    .DisplayFormat.FormatString = "dd/MM/yyyy"
+                    .Width = 110
+                    .AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+                End With
+            Next
+
+            .Columns("Estado").Width = 230
+
+            .ExpandAllGroups()
+
+        End With
+
+    End Sub
+
+    Private Sub gridView1_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles gridView1.CustomColumnDisplayText
+
+        If e.Column.FieldName <> "Mes" OrElse e.Value Is Nothing OrElse IsDBNull(e.Value) Then Exit Sub
+
+        Dim mes As Integer = Convert.ToInt32(e.Value) Mod 100
+
+        If mes >= 1 AndAlso mes <= 12 Then
+            Dim cultura As Globalization.CultureInfo = Globalization.CultureInfo.GetCultureInfo("es-ES")
+            e.DisplayText = cultura.TextInfo.ToTitleCase(cultura.DateTimeFormat.GetMonthName(mes))
+        End If
 
     End Sub
 

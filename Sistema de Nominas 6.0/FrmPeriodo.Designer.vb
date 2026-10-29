@@ -19,7 +19,6 @@ Partial Class FrmPeriodo
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.groupDatos = New DevExpress.XtraEditors.GroupControl()
         Me.lblTipo = New DevExpress.XtraEditors.LabelControl()
         Me.cmbTipoNomina = New DevExpress.XtraEditors.LookUpEdit()
@@ -37,13 +36,15 @@ Partial Class FrmPeriodo
         Me.BtnGuardar = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSalir = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.groupDatos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.groupDatos.SuspendLayout()
         CType(Me.cmbTipoNomina.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtAnio.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtpInicio.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpInicio.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtpFinal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpFinal.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridPeriodos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.groupDatos.SuspendLayout()
         Me.SuspendLayout()
         '
         'groupDatos
@@ -68,7 +69,7 @@ Partial Class FrmPeriodo
         '
         Me.lblTipo.Location = New System.Drawing.Point(15, 38)
         Me.lblTipo.Name = "lblTipo"
-        Me.lblTipo.Size = New System.Drawing.Size(80, 13)
+        Me.lblTipo.Size = New System.Drawing.Size(76, 13)
         Me.lblTipo.TabIndex = 1
         Me.lblTipo.Text = "Tipo de nómina:"
         '
@@ -76,45 +77,45 @@ Partial Class FrmPeriodo
         '
         Me.cmbTipoNomina.Location = New System.Drawing.Point(120, 35)
         Me.cmbTipoNomina.Name = "cmbTipoNomina"
-        Me.cmbTipoNomina.Size = New System.Drawing.Size(260, 20)
-        Me.cmbTipoNomina.TabIndex = 2
         Me.cmbTipoNomina.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cmbTipoNomina.Properties.NullText = ""
+        Me.cmbTipoNomina.Size = New System.Drawing.Size(260, 20)
+        Me.cmbTipoNomina.TabIndex = 2
         '
         'lblPeriodo
         '
         Me.lblPeriodo.Location = New System.Drawing.Point(400, 38)
         Me.lblPeriodo.Name = "lblPeriodo"
-        Me.lblPeriodo.Size = New System.Drawing.Size(41, 13)
+        Me.lblPeriodo.Size = New System.Drawing.Size(40, 13)
         Me.lblPeriodo.TabIndex = 3
         Me.lblPeriodo.Text = "Período:"
         '
         'LblPeriodoValor
         '
-        Me.LblPeriodoValor.Location = New System.Drawing.Point(450, 38)
-        Me.LblPeriodoValor.Name = "LblPeriodoValor"
-        Me.LblPeriodoValor.Size = New System.Drawing.Size(10, 13)
-        Me.LblPeriodoValor.TabIndex = 4
         Me.LblPeriodoValor.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.LblPeriodoValor.Appearance.Options.UseFont = True
+        Me.LblPeriodoValor.Location = New System.Drawing.Point(450, 38)
+        Me.LblPeriodoValor.Name = "LblPeriodoValor"
+        Me.LblPeriodoValor.Size = New System.Drawing.Size(0, 13)
+        Me.LblPeriodoValor.TabIndex = 4
         '
         'lblAnio
         '
         Me.lblAnio.Location = New System.Drawing.Point(15, 70)
         Me.lblAnio.Name = "lblAnio"
-        Me.lblAnio.Size = New System.Drawing.Size(25, 13)
+        Me.lblAnio.Size = New System.Drawing.Size(23, 13)
         Me.lblAnio.TabIndex = 5
         Me.lblAnio.Text = "Año:"
         '
         'TxtAnio
         '
+        Me.TxtAnio.EditValue = 2000
         Me.TxtAnio.Location = New System.Drawing.Point(120, 67)
         Me.TxtAnio.Name = "TxtAnio"
-        Me.TxtAnio.Size = New System.Drawing.Size(70, 20)
-        Me.TxtAnio.TabIndex = 6
-        Me.TxtAnio.EditValue = 2000
         Me.TxtAnio.Properties.Mask.EditMask = "0000"
         Me.TxtAnio.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TxtAnio.Size = New System.Drawing.Size(70, 20)
+        Me.TxtAnio.TabIndex = 6
         '
         'lblInicio
         '
@@ -126,47 +127,51 @@ Partial Class FrmPeriodo
         '
         'dtpInicio
         '
+        Me.dtpInicio.EditValue = New Date(2026, 10, 28, 0, 0, 0, 0)
         Me.dtpInicio.Location = New System.Drawing.Point(260, 67)
         Me.dtpInicio.Name = "dtpInicio"
+        Me.dtpInicio.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpInicio.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.dtpInicio.Size = New System.Drawing.Size(110, 20)
         Me.dtpInicio.TabIndex = 8
-        Me.dtpInicio.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         '
         'lblFinal
         '
         Me.lblFinal.Location = New System.Drawing.Point(395, 70)
         Me.lblFinal.Name = "lblFinal"
-        Me.lblFinal.Size = New System.Drawing.Size(33, 13)
+        Me.lblFinal.Size = New System.Drawing.Size(32, 13)
         Me.lblFinal.TabIndex = 9
         Me.lblFinal.Text = "Hasta:"
         '
         'dtpFinal
         '
+        Me.dtpFinal.EditValue = New Date(2026, 10, 28, 0, 0, 0, 0)
         Me.dtpFinal.Location = New System.Drawing.Point(440, 67)
         Me.dtpFinal.Name = "dtpFinal"
+        Me.dtpFinal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpFinal.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.dtpFinal.Size = New System.Drawing.Size(110, 20)
         Me.dtpFinal.TabIndex = 10
-        Me.dtpFinal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         '
         'gridPeriodos
         '
         Me.gridPeriodos.Location = New System.Drawing.Point(12, 120)
-        Me.gridPeriodos.Name = "gridPeriodos"
-        Me.gridPeriodos.Size = New System.Drawing.Size(736, 380)
-        Me.gridPeriodos.TabIndex = 11
         Me.gridPeriodos.MainView = Me.gridView1
+        Me.gridPeriodos.Name = "gridPeriodos"
+        Me.gridPeriodos.Size = New System.Drawing.Size(736, 329)
+        Me.gridPeriodos.TabIndex = 11
         Me.gridPeriodos.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView1})
         '
         'gridView1
         '
-        Me.gridView1.Name = "gridView1"
         Me.gridView1.GridControl = Me.gridPeriodos
+        Me.gridView1.Name = "gridView1"
         Me.gridView1.OptionsBehavior.Editable = False
         Me.gridView1.OptionsView.ShowGroupPanel = False
         '
         'BtnGenerar
         '
-        Me.BtnGenerar.Location = New System.Drawing.Point(13, 512)
+        Me.BtnGenerar.Location = New System.Drawing.Point(13, 455)
         Me.BtnGenerar.Name = "BtnGenerar"
         Me.BtnGenerar.Size = New System.Drawing.Size(95, 35)
         Me.BtnGenerar.TabIndex = 13
@@ -174,7 +179,7 @@ Partial Class FrmPeriodo
         '
         'BtnGuardar
         '
-        Me.BtnGuardar.Location = New System.Drawing.Point(119, 512)
+        Me.BtnGuardar.Location = New System.Drawing.Point(119, 455)
         Me.BtnGuardar.Name = "BtnGuardar"
         Me.BtnGuardar.Size = New System.Drawing.Size(95, 35)
         Me.BtnGuardar.TabIndex = 14
@@ -182,7 +187,7 @@ Partial Class FrmPeriodo
         '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(653, 512)
+        Me.BtnSalir.Location = New System.Drawing.Point(653, 455)
         Me.BtnSalir.Name = "BtnSalir"
         Me.BtnSalir.Size = New System.Drawing.Size(95, 35)
         Me.BtnSalir.TabIndex = 15
@@ -192,7 +197,7 @@ Partial Class FrmPeriodo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(760, 555)
+        Me.ClientSize = New System.Drawing.Size(760, 499)
         Me.Controls.Add(Me.groupDatos)
         Me.Controls.Add(Me.gridPeriodos)
         Me.Controls.Add(Me.BtnGenerar)
@@ -204,14 +209,16 @@ Partial Class FrmPeriodo
         Me.Name = "FrmPeriodo"
         Me.Text = "Periodos"
         CType(Me.groupDatos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupDatos.ResumeLayout(False)
+        Me.groupDatos.PerformLayout()
         CType(Me.cmbTipoNomina.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtAnio.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpInicio.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtpInicio.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpFinal.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtpFinal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridPeriodos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.groupDatos.ResumeLayout(False)
-        Me.groupDatos.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

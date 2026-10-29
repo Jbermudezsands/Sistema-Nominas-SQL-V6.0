@@ -82,6 +82,56 @@ Tres botones más en `RibbonPageGroupCatalogos` (antes estaban sin handler en la
 - **Diferencias con la V.5.0**: los períodos que ya tienen nómina calculada (`Calculada` o `NumNomina > 0`) no se modifican (se cuentan como omitidos); el mes se deriva de las fechas reales; el rango por defecto es 1-ene/31-dic (planilla) y 1-jul/30-jun (fiscal) cuando la nómina no tiene año actual.
 - **Verificado**: el generador reproduce las 24 filas existentes de `Fecha_Planilla` 2024-2026 y `PeriodoFiscal` 2024 (tipo `01`, ene-dic); CRUD de `TipoNomina` con código temporal `ZZ` y "en uso" (`01`); grabación de calendario nuevo (24 insertados, período 1 actual), re-grabación con un período calculado (0/11/1) y cambio de año actual (el anterior pasa a `Actual = 0`); todo limpiado después.
 
+### Listados y procesos (página "Acceso") y catálogos de incapacidad/comisión/destajo
+
+Todos como clase con DAL propio y métodos **públicos** para que otros formularios los llamen (se abren como hijos MDI con `AbrirFormulario(My.Forms.X)` desde `Main`).
+
+| Botón (`Main`) | Formulario | DAL | Públicos |
+|---|---|---|---|
+| `BarButtonListaEmpleado` | `FrmListadoEmpleados` (V.5.0 `FrmListaEmpleados`) | `CsEmpleadosDAL.ListarDetallado` | `Recargar`, `CodigoSeleccionado`; abre `FrmEmpleados.CargarEmpleado` / `NuevoEmpleado` (nuevo, público) |
+| `BarButtonHorasExtra` | `FrmListadoHorasExtra` | `CsHorasExtraDAL` | `Recargar` |
+| `BarButtonActivarNomina` | `FrmActivarNomina` | `CsActivarNominaDAL` | `RecargarTipos`, `SeleccionarTipoNomina`, evento `NominaActivada` |
+| `BarButtonListaNomina` | `FrmListNomina` | `CsNominaDAL` | `Recargar`, `NominaSeleccionada` |
+| `BarButtonIncapacidades` | `FrmIncapacidades` | `CsIncapacidadDAL` | `CargarEmpleado(codigoVisible)`, `RecargarTipos` |
+| `BarButtonTipoComision` / `TipoDestajo` / `TipoIncapacidad` | `FrmTipoComision` / `FrmTipoDestajo` / `FrmTipoIncapacidad` | `CsTipoComisionDAL` / `CsTipoDestajoDAL` / `CsTipoIncapacidadDAL` | molde `FrmCargo` |
+
+`FrmTipoNomina` ya estaba migrado (botón `BarButtonTipoNomina`). `ExportadorGrid.ExportarAExcel` (Clases/) exporta cualquier `GridView` a .xlsx y reemplaza los bucles con `Excel.Application` de la V.5.0.
+
+- **Catálogos nuevos**: `TipoComision.Porcentaje` se guarda como fracción (`real`; la pantalla muestra 0-100). `TipoDestajo.Monto` es `float`; el botón "Monto a todos" es el "Repetir" de la V.5.0 (con confirmación). `CuentaContable` es texto libre (no se migró el buscador `FrmConsulta`). `Incapacidad` no tiene llave propia: se identifica por empleado + tipo + fecha (la V.5.0 grababa siempre 01/01/2000; ahora se elige la fecha y no se permiten duplicados).
+- **Activar nómina** (`CsActivarNominaDAL.Activar`, una transacción): valida que el tipo esté inactivo, que el período exista en `Fecha_Planilla` y que no haya nómina cerrada en el rango; toma el número de `Consecutivos.Nominas` (UPDLOCK) y lo incrementa; inserta `Nomina` con totales en 0 (`Mes/Ano/Periodo` ya completos); deja el período como único `Actual` del tipo en `Fecha_Planilla` y `PeriodoFiscal` (solo si hay período fiscal que empiece ese día) con su `NumNomina`; `TipoNomina.Activa = 1`. `SugerirPeriodo`: el período actual si su nómina no está cerrada, si no el siguiente. **Diferencias con la V.5.0**: un solo algoritmo para todos los tipos (la V.5.0 invertía la comprobación de "cerrada" en Quincenal/Mensual); la fecha final solo se edita en Quincenal/Mensual; se valida inicio <= final (la V.5.0 comparaba contra una variable inexistente); limpia el `Actual` de todos los años del tipo, no solo del año elegido (en la BD de pruebas el tipo `01` tiene varios `Actual = 1` heredados).
+- **Listado de nóminas** (`CsNominaDAL`): lista todas (`Estado` = Anulada/Cerrada/Activa/Procesada) con totales y detalle por empleado. **Anular** (solo `Cerrada`, una transacción) borra `DetalleNomina`, deja totales en 0 (`Procesada = 1`, `Anulada = 1`), reabre los movimientos (`DetalleDeduccion`/`DetalleIncentivo`/`Comisiones`/`Destajo` `Pagado = 0`, `HorasExtras.Pagada = 0`, `MovPrestamo.Cancelado = 0`) y devuelve `CuotaIgual` al `Prestamo.Saldo`. Diferencias: rechaza nóminas ya anuladas (la V.5.0 sumaba el saldo dos veces), contabilizadas o activas sin cerrar.
+- **Listado de empleados**: `LEFT JOIN` a departamento/cargo/histórico (la V.5.0 con `INNER JOIN` ocultaba 1 de 769 activos).
+- **No migrado**: reportes/impresión (`ArepHorasExtras`, `FrmReportes`/`FrmNominaActiva`, colilla, CSV, `CmdPrNomina`), (`FrmMovimientos` ya migrado: botones Nuevo/Editar del listado de horas extra, `CsMovimientoNominaDAL`; pestañas Horas extra / Comisiones / Otros destajos, interfaz armada por código; probado solo en lectura, sin grabar), "Agregar Viático" (`FrmIncentivosGrupo`), buscador de cuenta contable (`FrmConsulta`).
+- **Verificado** en la BD de pruebas con datos temporales (tipo `ZZ`, préstamo/horas extra 99001, códigos `ZZ`) y limpieza posterior: CRUD de los tres catálogos, incapacidades (alta/duplicada/en uso), activación completa (número, consecutivo, calendarios, errores sin gastar consecutivo), período cerrado → siguiente, anulación con reversión de movimientos y saldo, rechazos; los 8 formularios instanciados y abiertos desde `Main` (iconos del ribbon por `ImageUri` sin comprobar visualmente).
+
+### Anotaciones, carnet, tasa de cambio y RibbonPage "Opciones"
+
+Cada formulario es solo UI sobre un DAL propio (`Clases/Cs*DAL.vb`) y expone métodos públicos para llamarlo desde otros.
+
+| Acceso | Formulario | DAL | Públicos |
+|---|---|---|---|
+| `FrmEmpleados.BtnAnotar` | `FrmAnotaciones` (V.5.0 `frmAnotaciones`, tabla `Curriculum`) | `CsCurriculumDAL` | `CargarEmpleado(cod, codigoVisible)`, `Grabar`; `FrmEmpleados.AbrirAnotaciones` |
+| `FrmEmpleados.BtnCarnet` | `FrmCarnet` (foto + código de barras Code 39 dibujado por `CodigoBarras39`) | `CsCarnetDAL` | `CargarEmpleado(cod)`; `FrmEmpleados.AbrirCarnet` |
+| `BarButtonTasaCambio` | `FrmTasaCambio` (`CambioMoneda`) | `CsCambioMonedaDAL` | `Recargar`, `TasaSeleccionada` |
+| `RibbonPageOpciones` > `BarButtonCargaMasiva` | `FrmCargaMasiva` | `CsCargaMasivaDAL` | `ProcesarDeduccion`, `ProcesarIncentivo` |
+| `BarButtonControles` (segundo enlace al mismo botón del Catálogo) | `FrmControles` | — | — |
+| `BarButtonHistorial` | `FrmHistorial` | `CsHistorialEmpleadoDAL` | `CargarEmpleado(codigo1)`, `Recargar` |
+| `BarButtonImportar` | `FrmImportar` | `CsImportacionDAL` + `LectorExcel` (OleDb ACE) | `AbrirArchivo`, `Importar` (tipo 3 = catálogo de empleados: `ImportarEmpleados`, columnas por encabezado, crea cargo/departamento/grupo faltantes; sin Userinfo ni horario; tipo 4 = saldo de vacaciones: `CsVacacionesDAL.ImportarSaldos` + `CalculadoraVacaciones`, port de `CalculoDiasVacaciones`; también `CalcularSaldo(codigo, fecha)`; tipo 5 = ingresos/incentivos: `ImportarIncentivos`; tipo 6 = solicitudes: `ImportarSolicitudes`) |
+| `BarButtonJustificaciones` | `FrmJustificaciones` | `CsJustificacionDAL` | `CargarEmpleado(codigo1)`, `RecargarTipos`, `RecargarLista` |
+| `BarButtonQuery` | `FrmQuery` | `CsConsultaDAL` | `EjecutarConsulta` |
+| `BarButtonInssIr` | `FrmInssIr` | `CsInssIrDAL` | `Recargar`, `Guardar` |
+
+- **Lecciones de esquema**: `Consecutivos.Deducciones` está desfasado (5007 frente a un máximo real de 13079): los números de deducción salen de `MAX(NumDeduccion)+1` y no se toca `Consecutivos`. `DetalleIncentivo` tiene PK `(Id, NumIncentivo)`, con `Id` = número de vez (la carga masiva usa 1). `Curriculum.Id` no es identity y `Faltas` es `nvarchar(2)` (Si/No). `smalldatetime` llega hasta 2079. SQL Server 2014: no hay `CREATE OR ALTER`.
+- **Carga masiva**: solo empleados activos del tipo de nómina, todo en una transacción.
+- **Historial**: `CopiarPerfil` crea un empleado nuevo (código visible `S1`+aaMM+correlativo o el mismo) copiando ficha, histórico y horario. `Desactivar` también quita al empleado de la nómina activa.
+- **Importar / Eliminar pendientes**: los `Eliminar*Pendientes` borran de verdad (con confirmación); no probarlos sobre datos reales.
+- **FrmQuery** ejecuta SQL libre sin restricción de acceso (no se conoce la escala de `NivelAcceso`); los `SELECT`/`WITH` no piden confirmación, el resto sí.
+- **FrmImportar rediseñado**: menú lateral `AccordionControl` (`Menu`) con las 8 importaciones + Consultas SQL + Eliminar pendientes; cada sección (`Seccion`) trae título, descripción y columnas esperadas, y descarta el archivo cargado al cambiar. Admite arrastrar y soltar un .xls/.xlsx. `CmbTipo` quedó oculto solo para conservar los índices de tipo de `Importar`. Revisado con `DrawToBitmap`, no con datos reales.
+- **FrmImportar, opciones añadidas** (sin probar contra la BD): tipo 7 "Solicitud total" (`CsImportacionDAL.ImportarSolicitudTotal`, port de `CargarArchivoST`/`BtnImportarSolTotal`; valida todo antes de grabar, escribe `DescuentoDiasVacaciones`), "Eliminar solicitudes" y "Eliminar empleados" (borra TODO), y consola SQL Consultar/Ejecutar (reutiliza `CsConsultaDAL`); los controles nuevos se crean por código en `CrearPanelAvanzado`.
+- **No migrado**: Constancia/Trasladar de Historial; reportes de INSS/IR y justificaciones; `Instalar_Tabla_Reportes`/`sp_LlenarReportes_AsistenciaMensual` de FrmQuery; botón "Pegar" de la tasa de cambio y el bloqueo al cerrar sin tasa de hoy (ahora es una etiqueta roja).
+- **Verificado**: DAL contra la BD de pruebas con datos temporales `ZZ`; los 9 formularios abiertos con datos reales y capturados con `DrawToBitmap`. Pendiente de ver en pantalla real: iconos del ribbon (`Add`, `History`, `Open`, `Edit`, `Find`, `Percent`) y el flujo modal BtnAnotar/BtnCarnet desde `FrmEmpleados`.
+- **Incidente de pruebas**: una limpieza mal calculada borró filas reales de `Deduccion`/`DetalleDeduccion` en la BD de pruebas; se restauraron desde el `.bak` y se verificaron los conteos. Regla: las pruebas destructivas usan códigos `ZZ` y borran solo por ids exactos.
+
 ## Formulario de empleados (`FrmEmpleados.vb`)
 
 Refactorizado: solo usa `CsEmpleadosDAL` + la entidad `Empleados` (ya no usa `ConsultasSQL`).
@@ -114,3 +164,31 @@ Password=P@ssword;Persist Security Info=True;User ID=sa;Initial Catalog=SistemaN
 ```
 "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "Sistema de Nominas 6.0\Sistema de Nominas 6.0.sln" /p:Configuration=Debug
 ```
+### Pestañas Préstamo / Incentivos / Deducciones / Subsidios de `FrmEmpleados`
+
+Migradas de `frmEmpleado.frm` (V.5.0). Se agregan por código en `FrmEmpleados.CrearPestanasMovimientos` (no están en el Designer) y se recargan con `CargarMovimientos` al cargar/limpiar la ficha; quedan inactivas si el empleado aún no está guardado.
+- **UI**: `UcPrestamoEmpleado` y `UcMovimientosEmpleado(TipoMovimiento)` (un solo control para las tres pestañas de movimientos; solo cambian Descripción en subsidios y Anular en incentivos).
+- **Datos/negocio**: `CsMovimientosDAL` (Incentivo/Deduccion/Subsidio), `CsPrestamoDAL`, `CalculadoraPrestamo` (libreta: interés sobre saldo, `CuotaIgual = (capital + interés total) / cuotas`), entidades `PrestamoEmpleado`/`CuotaPrestamo`. `CsDALBase` ganó `EnTransaccion`, `EscalarEn`, `EjecutarEn`.
+- Incentivos y deducciones exigen nómina activa del tipo de nómina del empleado; "n" = indefinido (incentivo: una fila `NumVez='n'`; deducción: una fila `NumVez=9999`). Eliminar borra el movimiento completo (el detalle cae en cascada).
+- **No migrado**: botones de histórico/reportes (`FrmVerReportes`), estado de préstamo (`ARPagoPrestamo`), exportar préstamo a archivo, edición en línea (`FrmPrestamos`), bitácora, `Consecutivos`. **Diferencia**: "Anular" incentivo deja en 0 la vez seleccionada (V.5.0 tocaba la primera fila del incentivo).
+- **Verificado** en la BD de pruebas con el empleado `ZZTEST-CLAUDE`: alta/anular/eliminar de los tres movimientos, préstamo (1200, 4 cuotas, 5% → cuota igual 337.50), rechazo del segundo préstamo y cancelación; datos de prueba eliminados.
+### Bajas / liquidación (RibbonPage "Procesos") y reportes DevExpress
+
+`RibbonPageProcesosBajas` ("Procesos") > `BarButtonBajas` abre `FrmBajas` (V.5.0 `FrmBajas.frm` + reporte `ARBaja`); "Despidos y Renuncias" de la página Acceso (`BarButtonDespidos`) abre la misma pantalla. Interfaz armada por código (sin Designer).
+
+| Pieza | Rol |
+|---|---|
+| `CsLiquidacion` (Clases/) | Servicio: `CargarEmpleado`, `CambiarFechaEgreso`, `CambiarFechaHistorial`, `Calcular` (graba `Bajas` + bitácora), `Procesar`, `CrearReporte` |
+| `CalculadoraLiquidacion` | Sin BD: `DiasAntiguedad` (CalcularDiasAntiguedad), `DiasAguinaldo` (CalcularDiasAguinaldo, resta suspensiones), `DiasVacaciones` (CalcularDiasVaca), `DiasPlanilla`, `TiempoAlCargar` (÷360) / `TiempoAlCambiarEgreso` (÷358), `Calcular` (montos de CmdCalculos_Click) |
+| `CalculadoraIRBaja` | IR de la baja (CalcularMontoIrBajas/BuscarIrAnual); tabla IR anual, se omite el tramo exento |
+| `CsBajasDAL` | Datos (todo parametrizado); `Guardar` (update de la fila del empleado o insert con `MAX(Id)+1`) y `Procesar` en transacción |
+| Entidades | `EmpleadoBaja`, `SalarioMesBaja`, `OpcionesLiquidacion`, `Liquidacion` |
+| `RptLiquidacion` (Reportes/) | XtraReport por código con la estructura de ARBaja (datos generales, historial, ingresos, egresos, total, constancia, firmas) |
+| `FrmVisorReporte` | **Visor común para todos los reportes**: `FrmVisorReporte.Mostrar(reporte, nombreArchivo, propietario)`; imprimir, zoom, exportar a PDF y Excel (.xlsx). Referencias nuevas: `DevExpress.XtraReports.v24.1`, `DevExpress.XtraPrinting.v24.1` |
+
+- **Procesar** (una transacción): `Empleado.Liquidado = 1` y `Activo = PagarDiasPlanilla`; préstamos (`Prestamo.Cancelado`) y deducciones (`DetalleDeduccion.Pagado`) si se liquidaron; sin "pagar días en planilla" borra su `DetalleNomina` de la nómina activa, con ella agrega solicitud `AusenteBasico` por los días no trabajados; borra su detalle de las nóminas activas de subsidio, vacaciones y 13vo; `Bajas.Procesada = 1` (la V.5.0 no lo marcaba).
+- Al cargar el empleado se recalcula `Historico.SueldoActual` (como la V.5.0 con `ActualizaSueldoActualHistorico`).
+- **Diferencias con la V.5.0**: usa el `Periodo`/`IrUltimaSemana` del tipo de nómina **del empleado** (la V.5.0 leía la primera fila de `TipoNomina`); IR quincenal sin vacaciones = impuesto anual ÷ 12 (la V.5.0 devolvía el anual); nómina semanal divide entre los viernes/sábados del mes (la V.5.0 dividía entre una variable sin asignar); antigüedad base sin fila en la tabla `Antiguedad` deja el salario sin recargo (la V.5.0 lo dejaba en 0); horas extra pendientes = suma (la V.5.0 tomaba la primera fila); `TipoBaja` "Fin" siempre (nvarchar(10)); no graba solicitud con 0 días; `Otro` guarda el concepto de otros ingresos. **Se conserva** de la V.5.0: los adelantos de 13vo/vacaciones no se restan del monto final (sí de la base de INSS/IR de vacaciones) y "otros ingresos planilla" suma todo el historial.
+- **No migrado**: "Imp Detalle" (`ArepDetalleLiquidaBono`), "Imp Historial" (`ArpHistorialLiquida`), "Renovación" (`CmdRenovar`), el botón oculto `CmdCalcular` (`ArepBajas`), buscador `FrmConsulta`.
+- **Verificado** en la BD de pruebas: los montos de 3 liquidaciones grabadas por la V.5.0 (códigos 3670, 5078, 3706, baja 31/12/2025, quincenales) coinciden exactamente (vacaciones con los días digitados, aguinaldo, antigüedad, INSS, IR, años, meses); flujo completo con el empleado 1064 (cálculo, grabado, reporte, exportación PDF/XLSX) y `Procesar` con `ZZTEST-CLAUDE`, todo limpiado y restaurado después; `FrmBajas`, `FrmVisorReporte` y la página del ribbon capturados con `DrawToBitmap`. Pendiente: probar en la app real (no se probó la impresión física).
+- Pruebas desde PowerShell 5.1: el `AssemblyResolve` hecho con un scriptblock provoca StackOverflow al resolver tipos como `[Nullable[double]]` o `New-Object` de tipos anidados; usar un resolver en C# con `Add-Type` y `$asm.CreateInstance(...)`.

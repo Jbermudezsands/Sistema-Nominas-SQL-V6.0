@@ -7,8 +7,48 @@
       "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:main.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmimportar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmimportar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmhistorial.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmhistorial.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmcargamasiva.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmcargamasiva.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmjustificaciones.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmjustificaciones.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmlistadohorasextra.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmlistadohorasextra.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmentrada.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmentrada.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frminssir.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frminssir.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmcargo.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmcargo.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\main.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:main.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmempleados.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
       "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmempleados.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmempleados.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmempleados.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Sistema de Nominas 6.0||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
@@ -16,10 +56,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\clases\\csempleadodal.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:clases\\csempleadodal.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmempleados.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmempleados.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\clases\\conexion.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
@@ -46,10 +82,6 @@
       "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:splashscreen.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmentrada.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmentrada.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\frmentrada.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{C8C3D0D5-E2B4-4C0E-B468-D5D0CA776483}|Sistema de Nominas 6.0.vbproj|solutionrelative:frmentrada.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
@@ -61,11 +93,66 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FrmCargaMasiva.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmCargaMasiva.vb",
+              "RelativeDocumentMoniker": "FrmCargaMasiva.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmCargaMasiva.vb [Dise\u00F1o]",
+              "RelativeToolTip": "FrmCargaMasiva.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-29T02:42:52.869Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FrmHistorial.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmHistorial.vb",
+              "RelativeDocumentMoniker": "FrmHistorial.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmHistorial.vb [Dise\u00F1o]",
+              "RelativeToolTip": "FrmHistorial.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-29T02:39:30.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FrmImportar.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmImportar.vb",
+              "RelativeDocumentMoniker": "FrmImportar.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmImportar.vb [Dise\u00F1o]",
+              "RelativeToolTip": "FrmImportar.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-29T02:39:23.555Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FrmInssIr.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmInssIr.vb",
+              "RelativeDocumentMoniker": "FrmInssIr.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmInssIr.vb [Dise\u00F1o]",
+              "RelativeToolTip": "FrmInssIr.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-29T02:38:59.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FrmListadoHorasExtra.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmListadoHorasExtra.vb",
+              "RelativeDocumentMoniker": "FrmListadoHorasExtra.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmListadoHorasExtra.vb [Dise\u00F1o]",
+              "RelativeToolTip": "FrmListadoHorasExtra.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-29T02:33:51.212Z"
             },
             {
               "$type": "Document",
@@ -81,7 +168,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "FrmJustificaciones.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmJustificaciones.vb",
+              "RelativeDocumentMoniker": "FrmJustificaciones.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmJustificaciones.vb [Dise\u00F1o]",
+              "RelativeToolTip": "FrmJustificaciones.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-29T02:56:41.531Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FrmCargo.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmCargo.vb",
+              "RelativeDocumentMoniker": "FrmCargo.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmCargo.vb [Dise\u00F1o]",
+              "RelativeToolTip": "FrmCargo.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-27T02:23:08.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FrmEntrada.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEntrada.vb",
+              "RelativeDocumentMoniker": "FrmEntrada.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEntrada.vb [Dise\u00F1o]",
+              "RelativeToolTip": "FrmEntrada.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-01-10T22:55:59.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Main.vb",
+              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\Main.vb",
+              "RelativeDocumentMoniker": "Main.vb",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\Main.vb",
+              "RelativeToolTip": "Main.vb",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAiwE8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-25T21:42:30.952Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Sistema de Nominas 6.0",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\Sistema de Nominas 6.0.vbproj",
               "RelativeDocumentMoniker": "Sistema de Nominas 6.0.vbproj",
@@ -92,7 +224,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 14,
               "Title": "Conexion.vb",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\Clases\\Conexion.vb",
               "RelativeDocumentMoniker": "Clases\\Conexion.vb",
@@ -104,7 +236,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 13,
               "Title": "CsEmpleadoDAL.vb",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\Clases\\CsEmpleadoDAL.vb",
               "RelativeDocumentMoniker": "Clases\\CsEmpleadoDAL.vb",
@@ -112,23 +244,24 @@
               "RelativeToolTip": "Clases\\CsEmpleadoDAL.vb",
               "ViewState": "AgIAAFMDAAAAAAAAAAAAAFMDAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-05-13T17:28:15.028Z"
+              "WhenOpened": "2026-05-13T17:28:15.028Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "FrmEmpleados.vb",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEmpleados.vb",
               "RelativeDocumentMoniker": "FrmEmpleados.vb",
-              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEmpleados.vb",
-              "RelativeToolTip": "FrmEmpleados.vb",
-              "ViewState": "AgIAAIgAAAAAAAAAAAAAAMACAAAAAAAAAAAAAA==",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEmpleados.vb*",
+              "RelativeToolTip": "FrmEmpleados.vb*",
+              "ViewState": "AgIAAGwDAAAAAAAAAAAAAKEDAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2026-05-13T16:13:38.339Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 15,
               "Title": "ConsultasSQL.vb",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\Clases\\ConsultasSQL.vb",
               "RelativeDocumentMoniker": "Clases\\ConsultasSQL.vb",
@@ -136,22 +269,23 @@
               "RelativeToolTip": "Clases\\ConsultasSQL.vb",
               "ViewState": "AgIAACUDAAAAAAAAAADwvy8DAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-05-13T16:02:41.489Z"
+              "WhenOpened": "2026-05-13T16:02:41.489Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "FrmEmpleados.vb [Dise\u00F1o]",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEmpleados.vb",
               "RelativeDocumentMoniker": "FrmEmpleados.vb",
-              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEmpleados.vb [Dise\u00F1o]",
-              "RelativeToolTip": "FrmEmpleados.vb [Dise\u00F1o]",
+              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEmpleados.vb [Dise\u00F1o]*",
+              "RelativeToolTip": "FrmEmpleados.vb [Dise\u00F1o]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2026-02-20T20:17:45.194Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 17,
               "Title": "Cargos.vb",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\Tablas\\Cargos.vb",
               "RelativeDocumentMoniker": "Tablas\\Cargos.vb",
@@ -163,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 16,
               "Title": "SplashScreen.vb [Dise\u00F1o]",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\SplashScreen.vb",
               "RelativeDocumentMoniker": "SplashScreen.vb",
@@ -174,7 +308,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 18,
               "Title": "Historico.vb",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\Tablas\\Historico.vb",
               "RelativeDocumentMoniker": "Tablas\\Historico.vb",
@@ -186,18 +320,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "FrmEntrada.vb [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEntrada.vb",
-              "RelativeDocumentMoniker": "FrmEntrada.vb",
-              "ToolTip": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEntrada.vb [Dise\u00F1o]",
-              "RelativeToolTip": "FrmEntrada.vb [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-01-10T22:55:59.335Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "SplashScreen.vb",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\SplashScreen.vb",
               "RelativeDocumentMoniker": "SplashScreen.vb",
@@ -209,7 +332,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 20,
               "Title": "FrmEntrada.vb",
               "DocumentMoniker": "D:\\Sistemas\\Sistema-de-Nominas-SQL-V.6.0\\Sistema-Nominas-SQL-V6.0\\Sistema de Nominas 6.0\\FrmEntrada.vb",
               "RelativeDocumentMoniker": "FrmEntrada.vb",

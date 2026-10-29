@@ -62,11 +62,349 @@ Sistema de Nominas 6.0
  Siguiente código numérico libre (máximo numérico + 1).
  </summary>
 </member>
+<member name="M:Sistema_de_Nominas_6._0.CsEmpleadosDAL.ListarDetallado">
+ <summary>
+ Listado general de empleados activos (FrmListadoEmpleados). LEFT JOIN: un empleado sin
+ departamento, cargo o histórico igual aparece (la V.5.0 con INNER JOIN lo ocultaba).
+ </summary>
+</member>
 <member name="M:Sistema_de_Nominas_6._0.CsEmpleadosDAL.NormalizarParametros(System.Data.SqlClient.SqlCommand)">
  <summary>
  Nothing -> NULL, y fechas fuera del rango de smalldatetime
  (p.ej. Date.MinValue de un campo vacío) -> NULL.
  </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.EmpleadoBaja">
+ <summary>Datos del empleado que usa la liquidación (Empleado + Cargo + Departamento + Historico + TipoNomina).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.EmpleadoBaja.Sueldo_Periodo">
+ <summary>Sueldo del período tal como está en Empleado (en dólares si <see cref="P:Sistema_de_Nominas_6._0.EmpleadoBaja.Dolarizado"/>).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.EmpleadoBaja.Salario_Fijo">
+ <summary>"S" salario fijo / "N" variable (NULL se toma como "S", igual que la V.5.0).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.EmpleadoBaja.Sueldo_Actual_Basico">
+ <summary>Empleado.SueldoActualBasico; Nothing cuando la columna es NULL (la V.5.0 distinguía NULL de False).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.EmpleadoBaja.Sueldo_Actual">
+ <summary>Historico.SueldoActual (mensual, en córdobas).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.EmpleadoBaja.Tasa_Inss">
+ <summary>TipoNomina.TasaInss en fracción (7 % = 0.07).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.SalarioMesBaja">
+ <summary>Ingresos de un mes de nómina del empleado (historial de salarios de la liquidación).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.OpcionesLiquidacion">
+ <summary>Lo que el usuario fija en la pantalla de bajas antes de calcular la liquidación (V.5.0 FrmBajas).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.OpcionesLiquidacion.Salario_Basico">
+ <summary>Salario básico de referencia (la V.5.0 lo llenaba con DatosEmpresa.SalarioMinimo).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.OpcionesLiquidacion.Dias_Planilla">
+ <summary>Días a pagar desde la última nómina (TxtDias).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.OpcionesLiquidacion.Dias_Trabajados">
+ <summary>Días trabajados para antigüedad (TxtDiasTrabajados).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.OpcionesLiquidacion.Dias_Vacaciones_Manual">
+ <summary>Días de vacaciones digitados (TxtDiasVaca); Nothing = se calculan.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.OpcionesLiquidacion.Tipo_Baja">
+ <summary>"Despido", "Renuncia" o "Fin" (Bajas.TipoBaja es nvarchar(10)).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.Liquidacion">
+ <summary>Liquidación calculada de un empleado (tabla Bajas) más los datos que solo usa el reporte.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.Liquidacion.Dias_Antiguedad">
+ <summary>Días de indemnización por antigüedad (Bajas.DiasTrabajados).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.Liquidacion.Referencia">
+ <summary>Detalle de la base usada para el IR (V.5.0 FrmBajas.Referencia).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraLiquidacion">
+ <summary>
+ Cálculos de la liquidación (bajas), portados de FrmBajas.frm y Funciones.bas de la V.5.0 sin acceso a datos:
+ días de antigüedad (CalcularDiasAntiguedad), días de aguinaldo/vacaciones (CalcularDiasAguinaldo), días de
+ planilla (CalcularDiasPlanilla), salario promedio/alto y los montos de CmdCalculos_Click. Los valores de la base
+ de datos los entrega quien llama (<see cref="T:Sistema_de_Nominas_6._0.CsLiquidacion"/>). Los redondeos imitan el Format() de la V.5.0.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.DatosCalculo">
+ <summary>Valores de la base de datos que necesita <see cref="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.Calcular(Sistema_de_Nominas_6._0.EmpleadoBaja,Sistema_de_Nominas_6._0.OpcionesLiquidacion,Sistema_de_Nominas_6._0.CalculadoraLiquidacion.DatosCalculo)"/>.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.DatosCalculo.Suspensiones">
+ <summary>Días de suspensión del empleado con FechaInicio entre las dos fechas (para el aguinaldo).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.Resultado">
+ <summary>Liquidación calculada sin IR, más las bases que necesita <see cref="T:Sistema_de_Nominas_6._0.CalculadoraIRBaja"/>.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.Resultado.Base_Ir_Mensual">
+ <summary>Ingresos del mes de la baja ya sin INSS (horas extra + otros + días de planilla).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.Resultado.Vacaciones_Base">
+ <summary>Vacaciones antes del redondeo final y menos adelantos (la V.5.0 usaba este valor para INSS e IR).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.DiasAntiguedad(System.DateTime,System.DateTime,System.Boolean)">
+ <summary>Días de antigüedad acumulados (2.5 por mes completo), port de CalcularDiasAntiguedad.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.DiasAguinaldo(System.DateTime,System.DateTime,System.Boolean,System.Func{System.DateTime,System.DateTime,System.Double})">
+ <summary>Días de aguinaldo/vacaciones ganados menos suspensiones, port de CalcularDiasAguinaldo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.Recorrer(System.DateTime,System.DateTime,System.Boolean,System.Boolean,System.Func{System.DateTime,System.DateTime,System.Double})">
+ <summary>
+ Recorrido mes a mes común a las dos funciones de la V.5.0; solo cambian el acumulado de febrero, la condición
+ de cierre y que el aguinaldo resta suspensiones. Se conserva el tramo extra que la V.5.0 sumaba al terminar.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.Acumulado(System.DateTime,System.DateTime,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>Días ganados en un tramo, tal como los calculaban CalcularDiasAntiguedad / CalcularDiasAguinaldo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.DiasVacaciones(System.DateTime,System.DateTime,System.Boolean)">
+ <summary>Días entre dos fechas contando meses de 30 días (CalcularDiasVaca).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.DiasPlanilla(System.DateTime,System.DateTime,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+ <summary>Días a pagar de la nómina activa hasta la fecha de egreso (CalcularDiasPlanilla). 0 si no hay nómina activa.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.TiempoAlCargar(System.DateTime,System.DateTime,System.Double,System.Double@,System.String@)">
+ <summary>Tiempo trabajado al cargar el empleado (txtCodEmpleado_Change): días, años (÷360) y "m meses y d días".</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.TiempoAlCambiarEgreso(System.DateTime,System.DateTime,System.Double,System.Double@,System.String@)">
+ <summary>Tiempo trabajado al cambiar la fecha de egreso (TxtUltFechaNomina_Change): años ÷358 como en la V.5.0.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.PromedioYAlto(System.Collections.Generic.IList{Sistema_de_Nominas_6._0.SalarioMesBaja},System.Boolean,System.Double,System.Double@,System.Double@)">
+ <summary>Salario promedio y más alto de los meses (rama "salario variable" de la V.5.0).</summary>
+ <param name="sueldoActualSiPocos">Con "salario promedio real" y menos de 6 meses, la V.5.0 usaba el sueldo actual.</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.SueldoMensualFijo(Sistema_de_Nominas_6._0.EmpleadoBaja,Sistema_de_Nominas_6._0.SalarioMesBaja,System.Boolean,System.Double)">
+ <summary>Sueldo mensual de un empleado de salario fijo según el tipo de nómina (último mes del historial).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.Calcular(Sistema_de_Nominas_6._0.EmpleadoBaja,Sistema_de_Nominas_6._0.OpcionesLiquidacion,Sistema_de_Nominas_6._0.CalculadoraLiquidacion.DatosCalculo)">
+ <summary>Montos de la liquidación (CmdCalculos_Click de la V.5.0), sin el IR.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.AjusteFebrero(System.DateTime,System.DateTime)">
+ <summary>La V.5.0 retrocedía 2 días (febrero de 28) o 1 (de 29) la fecha cuando el contrato era en febrero.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraLiquidacion.MesesDelTexto(System.String)">
+ <summary>Número inicial de "40 m y 5 d" (la V.5.0 grababa Val(TxtMeses)).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraIRBaja">
+ <summary>
+ IR de la liquidación, port de CalcularMontoIrBajas / BuscarIrAnual (FrmBajas.frm, V.5.0) sin acceso a datos.
+ La tabla IR es anual; el primer tramo (exento) se omite como hacía la V.5.0 con MoveNext.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraIRBaja.Calcular(System.String,System.Collections.Generic.IList{Sistema_de_Nominas_6._0.CalculadoraIRBaja.TramoIR},System.Double,System.Double,System.Int32)">
+ <summary>IR a retener en la liquidación.</summary>
+ <param name="periodo">TipoNomina.Periodo del empleado.</param>
+ <param name="tramos">Tabla IR ordenada por Desde (incluye el tramo exento).</param>
+ <param name="brutoMensual">Ingreso del mes sin INSS (nómina del mes + ingresos de la baja).</param>
+ <param name="vacaciones">Vacaciones sin INSS; en nómina quincenal se calcula el IR del incremento anual que producen.</param>
+ <param name="semanasMes">Viernes/sábados del mes de la baja (nóminas semanales).</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraIRBaja.SemanasDelMes(System.DateTime,System.String)">
+ <summary>Cantidad de viernes (Semanal Viernes) o sábados (resto) del mes de la fecha.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsBajasDAL">
+ <summary>
+ Acceso a datos de la liquidación de empleados (tabla Bajas y lo que lee FrmBajas de la V.5.0).
+ Todo parametrizado; Guardar y Procesar trabajan en una transacción.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsBajasDAL.VarianteSalarios">
+ <summary>Historial de salarios: qué columnas suma cada variante (las de la V.5.0).</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.CsBajasDAL.VarianteSalarios.Normal">
+ <summary>DetalleNomina normal (ChkSueldoActual sin marcar).</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.CsBajasDAL.VarianteSalarios.SueldoActual">
+ <summary>Salario básico = Historico.SueldoActual (ChkSueldoActual marcado).</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.CsBajasDAL.VarianteSalarios.BonoProduccion">
+ <summary>Formato de nómina "Nomina Bono Produccion".</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsBajasDAL.DevengadoMes">
+ <summary>Lo devengado por el empleado en las otras nóminas del mes de la baja (IR con "IR última semana").</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.ListarEmpleadosActivos">
+ <summary>Empleados que se pueden dar de baja (activos y no liquidados), para el buscador.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.BuscarEmpleado(System.String)">
+ <summary>Empleado por código visible (sin filtrar activos: quien llama valida). Nothing si no existe.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.ActualizarSueldoActual(System.Decimal,System.Double)">
+ <summary>
+ Recalcula Historico.SueldoActual desde Empleado.SueldoPeriodo (V.5.0 ActualizaSueldoActualHistorico, que
+ FrmBajas ejecutaba al cargar el empleado). Sin tasa de hoy usa la última grabada; sin ninguna, 36.6243.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.TasaCambio(System.DateTime)">
+ <summary>Tasa de cambio del día; 1 si no está grabada (V.5.0 BuscaTasaCambio).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.NominaActiva(System.Decimal)">
+ <summary>Nómina activa del tipo de nómina del empleado; Nothing si no hay.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.InicioAnioPlanilla(System.String,System.Int32)">
+ <summary>Inicio del período 1 del año en Fecha_Planilla para el tipo de nómina.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.MesesConNomina(System.Decimal,System.Nullable{System.DateTime})">
+ <summary>
+ Meses con nómina del empleado (básico + destajo [+ comisiones] distinto de 0), en orden, con su primera fecha
+ de inicio y su última fecha de nómina. Con <paramref name="tope"/> solo los meses que terminan hasta esa fecha.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.ListarSalarios(System.Decimal,System.DateTime,System.DateTime,Sistema_de_Nominas_6._0.CsBajasDAL.VarianteSalarios,System.Boolean,System.Boolean)">
+ <summary>
+ Ingresos por mes de las nóminas cuya primera fecha de nómina cae entre <paramref name="desde"/> y <paramref name="hasta"/>.
+ Las columnas sumadas son las de la V.5.0 para cada variante; los fragmentos SQL son constantes del código.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.PorcentajeAntiguedad(System.Int32)">
+ <summary>Porcentaje de la tabla Antiguedad para los años acumulados (fracción); Nothing si no hay fila.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.OtrosIngresosPlanilla(System.Decimal)">
+ <summary>Otros ingresos de todas las nóminas del empleado (así lo sumaba la V.5.0).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.CuotasPrestamoPendientes(System.Decimal,System.Double)">
+ <summary>Cuotas de préstamo sin cancelar; las de préstamos en dólares se convierten con la tasa.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.Suspensiones(System.String)">
+ <summary>Suspensiones (SolicitudVacaciones tipo "Suspension") del empleado o de "Todos": fecha de inicio y días.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.DevengadoDelMes(System.Decimal,System.String,System.DateTime)">
+ <summary>
+ Devengado, INSS y viáticos (incentivo tipo 14) del empleado en las nóminas del mes de la baja que no son el
+ período actual. Nothing si la fecha no cae en el calendario o el mes no tiene período actual.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.Guardar(Sistema_de_Nominas_6._0.Liquidacion,System.DateTime)">
+ <summary>Graba el cálculo: actualiza la fila de Bajas del empleado o inserta una nueva (Id = máximo + 1). Devuelve el Id.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.Procesar(Sistema_de_Nominas_6._0.EmpleadoBaja,Sistema_de_Nominas_6._0.Liquidacion,System.String)">
+ <summary>
+ Procesa la baja (V.5.0 CmdEfectuar_Click) en una transacción: marca al empleado como liquidado (y lo inactiva si
+ no se pagan los días en planilla), cancela préstamos y deducciones si se liquidaron, lo quita de la nómina activa
+ o registra la solicitud "AusenteBasico" por los días no trabajados, lo quita de las nóminas activas de
+ subsidio, vacaciones y 13vo, y deja la fila de Bajas como procesada.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsBajasDAL.AgregarSolicitudAusencia(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,Sistema_de_Nominas_6._0.EmpleadoBaja,System.Double,System.String)">
+ <summary>
+ Con "pagar días en planilla" el empleado sigue en la nómina activa: se registra una solicitud "AusenteBasico"
+ por los días de la nómina que no trabajará (V.5.0 Agregar_Solicitud desde CmdEfectuar).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsLiquidacion">
+ <summary>
+ Proceso de baja/liquidación de un empleado (V.5.0 FrmBajas): carga del empleado con su historial de salarios,
+ recálculos al cambiar fechas, cálculo y grabado de la liquidación (con IR) y proceso final de la baja.
+ Une CsBajasDAL (datos), CalculadoraLiquidacion y CalculadoraIRBaja (negocio); el formulario solo muestra.
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsLiquidacion.Salarios">
+ <summary>Meses usados para el salario promedio/alto (se muestran en pantalla y en el reporte).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsLiquidacion.Estado">
+ <summary>Valores que la pantalla muestra después de cargar o recalcular.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsLiquidacion.Salario_Promedio_Real">
+ <summary>Controles.SalarioPromedioReal: valor inicial de la casilla "Salario prom. diferencia fecha".</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.CargarEmpleado(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Carga el empleado (txtCodEmpleado_Change de la V.5.0). Lanza InvalidOperationException si no existe, ya fue dado
+ de baja o no tiene fecha de contrato. Como la V.5.0, primero recalcula Historico.SueldoActual.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.CambiarFechaEgreso(System.DateTime,Sistema_de_Nominas_6._0.CsLiquidacion.Estado)">
+ <summary>Nueva fecha de egreso (TxtUltFechaNomina_Change): solo cambia años, meses, días trabajados y días de planilla.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.CambiarFechaHistorial(System.DateTime,Sistema_de_Nominas_6._0.CsLiquidacion.Estado,System.Boolean,System.Boolean)">
+ <summary>
+ Recalcula salario promedio/alto con los 6 meses anteriores a la fecha de historial (TxtFechaHistorial_Change).
+ Esta rama de la V.5.0 siempre suma incentivos y no distingue el formato bono producción.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.Ventana(System.Collections.Generic.List{Sistema_de_Nominas_6._0.SalarioMesBaja},System.DateTime@,System.DateTime@)">
+ <summary>De la lista ordenada de meses toma el inicio del 6.º desde el final y el fin del último (hoy si no hay).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.FactorAntiguedad(System.Boolean,System.Double,Sistema_de_Nominas_6._0.CsLiquidacion.Estado)">
+ <summary>1 + porcentaje de la tabla Antiguedad cuando se marca "Antigüedad base para cálculo".</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.FechasInicio(Sistema_de_Nominas_6._0.EmpleadoBaja,System.DateTime,System.DateTime,Sistema_de_Nominas_6._0.CsLiquidacion.Estado)">
+ <summary>
+ Inicio de aguinaldo y vacaciones: si el contrato es anterior al año de planilla, aguinaldo desde el 1 de diciembre
+ anterior y vacaciones desde el 1 de junio (egreso después de mayo) o el 1 de diciembre anterior; si no, desde el contrato.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.Calcular(Sistema_de_Nominas_6._0.OpcionesLiquidacion,System.DateTime,System.String)">
+ <summary>Calcula la liquidación con IR, la graba en Bajas y registra la bitácora (CmdCalculos_Click).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.CalcularIr(Sistema_de_Nominas_6._0.EmpleadoBaja,Sistema_de_Nominas_6._0.OpcionesLiquidacion,Sistema_de_Nominas_6._0.CalculadoraLiquidacion.Resultado)">
+ <summary>
+ Base del IR (CalcularMontoIrBajas): con "IR última semana" suma lo ya devengado en el mes; si no hay nómina del mes
+ pero sí vacaciones, toma el salario promedio como nómina del mes y descuenta el INSS de las vacaciones.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.Procesar(System.String)">
+ <summary>Da de baja al empleado con la última liquidación calculada (CmdEfectuar_Click).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.CrearReporte(System.String,System.String)">
+ <summary>Reporte de la última liquidación calculada (V.5.0 ARBaja).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsLiquidacion.RutaFotoEmpleado">
+ <summary>Foto del empleado en DatosEmpresa.RutaFoto (código visible + .jpg/.gif/.bmp); "" si no hay.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.RptLiquidacion">
+ <summary>
+ Liquidación final de un empleado (V.5.0 ARBaja de ActiveReports), armada por código sin diseñador:
+ datos generales, historial de salarios, ingresos, egresos, total a pagar, constancia y firmas.
+ Se muestra con <see cref="T:Sistema_de_Nominas_6._0.FrmVisorReporte"/>, que permite imprimir y exportar a PDF o Excel.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptLiquidacion.Conceptos(System.Collections.Generic.List{System.String[]},System.String,System.Double)">
+ <summary>Tabla Concepto | Detalle | Monto con su total.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptLiquidacion.Imagen(System.String,System.Drawing.RectangleF)">
+ <summary>Imagen desde archivo; Nothing si la ruta está vacía, no existe o no es una imagen.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmVisorReporte">
+ <summary>
+ Visor común de reportes DevExpress (reemplaza el visor de ActiveReports de la V.5.0): vista previa con
+ impresión, zoom y exportación a PDF o Excel. Se abre con <see cref="M:Sistema_de_Nominas_6._0.FrmVisorReporte.Mostrar(DevExpress.XtraReports.UI.XtraReport,System.String,System.Windows.Forms.IWin32Window)"/>; la interfaz se arma por código.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmVisorReporte.Mostrar(DevExpress.XtraReports.UI.XtraReport,System.String,System.Windows.Forms.IWin32Window)">
+ <summary>Muestra el reporte en una ventana modal. <paramref name="nombreArchivo"/> es el nombre sugerido al exportar (sin extensión).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmVisorReporte.Exportar(System.Boolean)">
+ <summary>Pide la ruta y exporta el reporte a PDF o a Excel (.xlsx); ofrece abrir el archivo.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmBajas">
+ <summary>
+ Despidos y renuncias (V.5.0 FrmBajas): carga el empleado, calcula y graba su liquidación, muestra el reporte
+ (vista previa con exportación a PDF/Excel) y procesa la baja. Solo UI: todo pasa por <see cref="T:Sistema_de_Nominas_6._0.CsLiquidacion"/>.
+ <see cref="M:Sistema_de_Nominas_6._0.FrmBajas.CargarEmpleado(System.String)"/> es público para abrir la pantalla con un empleado desde otros formularios.
+ La interfaz se arma por código (no hay Designer).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmBajas.MostrarOpcionales">
+ <summary>Los campos de días a descontar, otros ingresos y otras deducciones solo se ven con su casilla marcada.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmBajas.RecargarEmpleados">
+ <summary>Vuelve a leer los empleados activos no liquidados del buscador.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmBajas.CargarEmpleado(System.String)">
+ <summary>Carga un empleado por su código visible (también lo usan otros formularios).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmBajas.MostrarEstado">
+ <summary>Pasa a la pantalla los valores calculados por el servicio (sin disparar los recálculos).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmBajas.Recargar_Opcion(System.Object,System.EventArgs)">
+ <summary>Incentivos, horas extra y antigüedad base cambian el historial de salarios: se vuelve a cargar el empleado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmBajas.MostrarReporte">
+ <summary>Vista previa del reporte de la liquidación calculada, con impresión y exportación a PDF/Excel.</summary>
 </member>
 <member name="T:Sistema_de_Nominas_6._0.CsDALBase">
  <summary>
@@ -74,12 +412,138 @@ Sistema de Nominas 6.0
  y ofrece helpers parametrizados (nunca se concatenan valores del usuario).
  </summary>
 </member>
+<member name="M:Sistema_de_Nominas_6._0.CsDALBase.EnTransaccion(System.Action{System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction})">
+ <summary>Ejecuta varias operaciones en una sola transacción (commit al terminar, rollback si falla).</summary>
+</member>
 <member name="M:Sistema_de_Nominas_6._0.CsDALBase.SiguienteCodigo(System.String,System.String,System.Int32)">
  <summary>Máximo código numérico + 1, rellenado con ceros a <paramref name="ancho"/>.
  Tabla y columna son constantes del código, no entrada del usuario.</summary>
 </member>
 <member name="M:Sistema_de_Nominas_6._0.CsDALBase.EsEnUso(System.Data.SqlClient.SqlException)">
  <summary>Traduce la violación de llave foránea (547) a un mensaje claro.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraVacaciones">
+ <summary>
+ Saldo de días de vacaciones de un empleado, portado de CalculoDiasVacaciones (Funciones.bas, V.5.0): recorre mes a mes desde
+ la fecha de contrato para vacaciones acumulando 0.0833 días por día (2.5 por mes completo con 30 días por mes, 2.58 con
+ meses de 31) y resta los días solicitados en cada mes. Sin acceso a datos: los días solicitados los entrega quien llama.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraVacaciones.DiasSolicitados">
+ <summary>Días solicitados con FechaInicio entre <c>desde</c> y <c>hasta</c> (ambos inclusive).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraVacaciones.Saldo(System.DateTime,System.DateTime,System.Boolean,Sistema_de_Nominas_6._0.CalculadoraVacaciones.DiasSolicitados)">
+ <param name="diasMes30">Controles.DiasMes = 30; cualquier otro valor se trata como mes calendario.</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraVacaciones.Acumulado(System.DateTime,System.DateTime,System.Boolean,System.Boolean)">
+ <summary>
+ Días ganados en el tramo. En febrero la V.5.0 sumaba días extra para equipararlo a 30 días; en el último tramo
+ (<paramref name="ultimoTramo"/>) solo sumaba 1.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsVacacionesDAL">
+ <summary>
+ Saldo de vacaciones: cálculo contra SolicitudVacaciones y ajuste automático desde un saldo de Excel
+ (V.5.0 FrmImportarEmpleados, pestaña "Saldo Vacaciones"). Las filas con problema no detienen la importación:
+ se devuelven en el resultado; un error inesperado de base de datos deshace todo.
+ </summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.CsVacacionesDAL.TiposExcluidos">
+ <summary>Tipos de solicitud que no descuentan vacaciones.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsVacacionesDAL.CalcularSaldo(System.String,System.DateTime)">
+ <summary>Saldo de días al <paramref name="hasta"/> del empleado activo con ese código visible; Nothing si no existe o está inactivo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsVacacionesDAL.ImportarSaldos(System.Data.DataTable,System.DateTime,System.Boolean)">
+ <summary>
+ Columnas por posición: 0 = código visible, 1 = nombre, 2 = saldo según Excel (negativo = días a favor que se suman).
+ Por cada empleado con diferencia entre el saldo del sistema y el de Excel registra una solicitud "Vacaciones" con
+ "AJUSTE AUTOMATICO" en <paramref name="fecha"/>. Con <paramref name="segunNomina"/> el saldo del sistema se limita a 15
+ días y se le restan las vacaciones disfrutadas dentro del período de la nómina de vacaciones activa del empleado.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsMovimientosDAL">
+ <summary>
+ Incentivos, deducciones y subsidios de un empleado (V.5.0 pestañas Incentivos / Deducciones / Subsidios).
+ Las tres comparten la forma cabecera + detalle por vez; el nombre de tablas y columnas sale de
+ constantes de esta clase, nunca de la entrada del usuario.
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsMovimientosDAL.ColNum">
+ <summary>Llave de la cabecera: NumIncentivo / NumDeduccion / NumSubsidio.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientosDAL.ListarPendientes(System.Double)">
+ <summary>Detalles pendientes de pago del empleado (los pagados ya no se muestran).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientosDAL.NominaActiva(System.Double)">
+ <summary>NumNomina de la nómina activa (abierta y no anulada) del tipo de nómina del empleado; 0 si no hay.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientosDAL.NormalizarVeces(System.String)">
+ <summary>"n" = indefinido; si no, un entero entre 1 y 9999 (NumVeces es nvarchar(4)). Devuelve el texto normalizado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientosDAL.Agregar(System.Double,System.String,System.String,System.Double,System.String,System.Int32)">
+ <param name="numVeces">Texto ya normalizado con <see cref="M:Sistema_de_Nominas_6._0.CsMovimientosDAL.NormalizarVeces(System.String)"/>.</param>
+ <param name="numNomina">Nómina activa (incentivos y deducciones); ignorado en subsidios.</param>
+ <param name="descripcion">Solo subsidios (máx. 25).</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientosDAL.Eliminar(System.Int32)">
+ <summary>Borra el movimiento completo (cabecera y todas sus veces; el detalle cae en cascada).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientosDAL.Anular(System.Int32,System.Int32)">
+ <summary>Solo incentivos (V.5.0 CmdAnular): deja en 0 el valor de esa vez sin borrarla.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsPrestamoDAL">
+ <summary>Préstamos del empleado (V.5.0 pestaña Préstamo): Prestamo + MovPrestamo (libreta).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPrestamoDAL.BuscarVigente(System.Double)">
+ <summary>Préstamo vigente (no cancelado) del empleado, o Nothing. Incluye cuentas, saldo y libreta.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPrestamoDAL.ListarLibreta(System.Double)">
+ <summary>Cuotas no canceladas del préstamo vigente.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPrestamoDAL.Crear(Sistema_de_Nominas_6._0.PrestamoEmpleado)">
+ <summary>Crea Prestamo y su libreta en una transacción. Un empleado no puede tener dos préstamos con saldo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPrestamoDAL.Cancelar(System.Double)">
+ <summary>Marca como cancelado el préstamo vigente y sus cuotas (no borra).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraPrestamo">
+ <summary>
+ Libreta de un préstamo (V.5.0 CmdAfectuar_Click): capital en cuotas iguales,
+ interés sobre el saldo pendiente de cada cuota y CuotaIgual = (capital + interés total) / cuotas.
+ Sin acceso a BD.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraPrestamo.Calcular(System.Double,System.Int32,System.Double)">
+ <param name="interesPorcentaje">Tasa por cuota en porcentaje (5 = 5%).</param>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CuotaPrestamo">
+ <summary>Una cuota de la libreta de un préstamo (fila de MovPrestamo).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.PrestamoEmpleado">
+ <summary>Cabecera del préstamo (fila de Prestamo) más su libreta.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.UcMovimientosEmpleado">
+ <summary>
+ Pestaña Incentivos / Deducciones / Subsidios de la ficha del empleado (V.5.0). Un solo control para
+ las tres: solo cambian la tabla (CsMovimientosDAL), el campo Descripción (subsidios) y Anular (incentivos).
+ Solo UI: los datos y las reglas están en CsMovimientosDAL.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.UcMovimientosEmpleado.Cargar(System.Double)">
+ <summary>Muestra los movimientos pendientes del empleado; 0 = sin empleado guardado (pestaña inactiva).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.UcPrestamoEmpleado">
+ <summary>
+ Pestaña Préstamo de la ficha del empleado (V.5.0): genera la libreta, la muestra y cancela el préstamo.
+ Solo UI: el cálculo está en CalculadoraPrestamo y los datos en CsPrestamoDAL.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.UcPrestamoEmpleado.Cargar(System.Double)">
+ <summary>Muestra el préstamo vigente del empleado; 0 = sin empleado guardado (pestaña inactiva).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.UcPrestamoEmpleado.txtMonto_EditValueChanged(System.Object,System.EventArgs)">
+ <summary>El saldo inicial del préstamo es el monto (V.5.0 TxtMontoPrestamoUS_LostFocus).</summary>
 </member>
 <member name="T:Sistema_de_Nominas_6._0.CsControlesDAL">
  <summary>Parámetros del sistema: tablas Controles (Id = 1) y DatosEmpresa (Numero = 1).</summary>
@@ -143,6 +607,582 @@ Sistema de Nominas 6.0
  los meses de ajuste: junio y diciembre en año bisiesto; julio y diciembre en los demás).
  </summary>
 </member>
+<member name="T:Sistema_de_Nominas_6._0.EstiloGrid">
+ <summary>
+ Colores de los listados de la V.5.0 (TDBGrid): filas pares azul claro, impares blancas, barra de botones lavanda.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ExportadorGrid">
+ <summary>Exporta a Excel lo que muestra un GridView (con sus filtros y orden). Reemplaza los bucles con Excel.Application de la V.5.0.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.ExportadorGrid.ExportarAExcel(DevExpress.XtraGrid.Views.Grid.GridView,System.String)">
+ <summary>Pide el archivo destino y exporta la vista a .xlsx. Devuelve la ruta, o "" si el usuario canceló.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsHorasExtraDAL">
+ <summary>Horas extra pendientes de pago (tabla HorasExtras).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsHorasExtraDAL.ListarPendientes">
+ <summary>Horas extra con horas y sin pagar, por empleado y número de nómina.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsHorasExtraDAL.EliminarPendiente(System.Int32)">
+ <summary>Borra un registro de horas extra que aún no se ha pagado. Devuelve False si ya no existe o ya está pagado.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsMovimientoNominaDAL">
+ <summary>
+ Movimientos de la nómina activa de un empleado (V.5.0 FrmMovimientos): horas extra, comisiones (DetalleComisiones)
+ y otros destajos (DestalleDestajos). Todo se registra contra la nómina activa del tipo de nómina del empleado.
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsMovimientoNominaDAL.DatosEmpleado.NumNomina">
+ <summary>Nómina activa de su tipo de nómina; 0 si no hay.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientoNominaDAL.BuscarEmpleado(System.String)">
+ <summary>Empleado activo por código visible, con su tipo de pago y nómina activa; Nothing si no existe.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientoNominaDAL.GuardarHorasExtra(System.Decimal,System.Int32,System.Double)">
+ <summary>Graba las horas del empleado en la nómina; si ya tenía las reemplaza (y las deja sin pagar). Devuelve True si reemplazó.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientoNominaDAL.ListarTipos(System.Boolean)">
+ <summary>Tipos disponibles: Cod, Nombre.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientoNominaDAL.ListarDetalle(System.Boolean,System.Decimal,System.Int32)">
+ <summary>Movimientos del empleado en la nómina: Id, Tipo, Valor (porcentaje o monto), Cantidad, Total = Cantidad x Valor.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientoNominaDAL.GuardarDetalle(System.Boolean,System.Decimal,System.Int32,System.String,System.Double)">
+ <summary>Agrega el movimiento; si el empleado ya tiene ese tipo en la nómina reemplaza la cantidad. Devuelve True si reemplazó.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsMovimientoNominaDAL.AplicarAlEmpleado(System.Boolean,System.Decimal,System.Double)">
+ <summary>Deja el total en la ficha del empleado: PorcentajeComision (comisiones) o TarifaHoraria (destajos).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmMovimientos">
+ <summary>
+ Movimientos de la nómina activa de un empleado: horas extra, comisiones y otros destajos (V.5.0 FrmMovimientos).
+ Acceso a datos por CsMovimientoNominaDAL. <see cref="M:Sistema_de_Nominas_6._0.FrmMovimientos.CargarEmpleado(System.String,System.Nullable{System.Double})"/> queda público para abrirlo desde el listado de horas extra;
+ <see cref="E:Sistema_de_Nominas_6._0.FrmMovimientos.MovimientoGuardado"/> avisa para que el listado se refresque. La interfaz se arma por código (no hay Designer).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmMovimientos.PaginaDetalle">
+ <summary>Controles de una pestaña de comisiones o destajos (las dos son iguales).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmMovimientos.CargarEmpleado(System.String,System.Nullable{System.Double})">
+ <summary>Elige el empleado (código visible) y, si viene, deja las horas extra indicadas en pantalla (como el botón Editar del listado).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmMovimientos.HabilitarPestanas">
+ <summary>Según el tipo de pago de la nómina se activan comisiones y/o destajos; con salario fijo del empleado ninguno.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsNominaDAL">
+ <summary>Consulta de nóminas, su detalle por empleado y la anulación de una nómina cerrada.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsNominaDAL.Listar">
+ <summary>Todas las nóminas, la más reciente primero. <c>Estado</c> = Anulada / Cerrada / Activa / Procesada.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsNominaDAL.ListarDetalle(System.Int32)">
+ <summary>Detalle de una nómina: una fila por empleado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsNominaDAL.Anular(System.Int32)">
+ <summary>
+ Anula una nómina cerrada: borra su detalle, deja los totales en 0 y revierte los movimientos que pagó
+ (deducciones, incentivos, comisiones, destajos, horas extra, cuotas de préstamo y saldo del préstamo).
+ Todo en una sola transacción. Lanza una excepción con el motivo si no se puede anular.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsNominaDAL.CopiaParametro(System.Data.SqlClient.SqlParameter)">
+ <summary>Un SqlParameter no se puede asignar a dos comandos: cada uno recibe su copia.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsActivarNominaDAL">
+ <summary>
+ Activación de una nómina (V.5.0 FrmActivarNomina): elige el período del calendario, crea la fila de
+ Nomina con totales en 0, marca el período como actual (planilla y fiscal) y deja activo el tipo de nómina.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsActivarNominaDAL.ListarTiposInactivos">
+ <summary>Tipos de nómina sin nómina activa, que son los que se pueden activar.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsActivarNominaDAL.ListarPeriodos(System.String,System.Int32)">
+ <summary>Períodos del calendario de planilla que aún no se calculan, para el combo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsActivarNominaDAL.SugerirPeriodo(System.String)">
+ <summary>
+ Período que toca activar: el período actual del calendario si su nómina aún no se cierra; si ya se
+ cerró, el siguiente (o el primero del año siguiente). Lanza una excepción con el motivo si no hay.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsActivarNominaDAL.Activar(System.String,System.Int32,System.Int32,System.DateTime,System.DateTime)">
+ <summary>
+ Activa la nómina del período indicado y devuelve su número. <paramref name="final"/> es la fecha de
+ pago (FechaNomina). Todo en una transacción: si algo falla no queda nada a medias.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CurriculumEmpleado">
+ <summary>Anotaciones / currículum de un empleado (tabla Curriculum).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.DatosCarnet">
+ <summary>Datos que se imprimen en el carnet de un empleado.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.DatosCarnet.Foto">
+ <summary>Foto guardada en Empleado.Foto (texto); vacía si el empleado no tiene.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.TasaCambio">
+ <summary>Tasa de cambio de un día (tabla CambioMoneda).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.Justificacion">
+ <summary>Justificación (permiso, subsidio, etc.) de un empleado (tabla UserLeave).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ResultadoConsulta">
+ <summary>Resultado de ejecutar una sentencia SQL libre (ver CsConsultaDAL).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.ResultadoConsulta.EsConsulta">
+ <summary>True si la sentencia devolvió un conjunto de filas (SELECT, WITH, EXEC).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.ResultadoConsulta.FilasAfectadas">
+ <summary>Filas afectadas por una sentencia que no es consulta (INSERT, UPDATE, DELETE...).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsCurriculumDAL">
+ <summary>Anotaciones / currículum del empleado (tabla Curriculum, una fila por empleado).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCurriculumDAL.NombreEmpleado(System.Decimal)">
+ <summary>Código visible y nombre completo del empleado; Nothing si no existe.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCurriculumDAL.Guardar(Sistema_de_Nominas_6._0.CurriculumEmpleado)">
+ <summary>Crea la anotación del empleado o, si ya existe, la actualiza.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsCarnetDAL">
+ <summary>Datos del carnet de un empleado (empleado + cargo).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCarnetDAL.Buscar(System.Decimal)">
+ <summary>Nothing si el empleado no existe.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsCambioMonedaDAL">
+ <summary>Tasas de cambio diarias (tabla CambioMoneda, una por fecha).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCambioMonedaDAL.Buscar(System.DateTime)">
+ <summary>Tasa de la fecha indicada; Nothing si ese día no se ha grabado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCambioMonedaDAL.TasaDeHoy">
+ <summary>Tasa de hoy; Nothing si todavía no se ha grabado (VB6 avisaba y no dejaba cerrar).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCambioMonedaDAL.UltimaTasa">
+ <summary>Última tasa grabada (la más reciente por fecha); Nothing si la tabla está vacía.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCambioMonedaDAL.Guardar(Sistema_de_Nominas_6._0.TasaCambio)">
+ <summary>Graba la tasa de la fecha: crea la fila o, si ya existe, cambia el monto.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsJustificacionDAL">
+ <summary>
+ Justificaciones de asistencia (UserLeave) y sus tipos (LeaveClass). El empleado se enlaza con
+ el reloj biométrico por Userinfo.IDCard = Empleado.CodEmpleado1.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsJustificacionDAL.AgregarTipo(System.String)">
+ <summary>Crea un tipo de justificación y devuelve su código.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsJustificacionDAL.Agregar(Sistema_de_Nominas_6._0.Justificacion)">
+ <summary>Registra la justificación. Lanza si el empleado no está en el reloj (Userinfo) o las fechas no son válidas.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsInssIrDAL">
+ <summary>Tablas de tramos del INSS laboral/patronal y del IR (tablas INSS e IR), editables como cuadrícula.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsInssIrDAL.GuardarInss(System.Data.DataTable)">
+ <summary>Aplica a la tabla INSS las filas nuevas, modificadas y borradas de <paramref name="datos"/>. Devuelve las filas tocadas.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsInssIrDAL.Guardar(System.Data.DataTable,System.String,System.String,System.String[])">
+ <summary>Los nombres de tabla/columna son constantes de este módulo, nunca entrada del usuario.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsConsultaDAL">
+ <summary>
+ Consola SQL del administrador (FrmQuery) e instalación de los procedimientos y columnas que usa el
+ módulo de asistencia. Ejecuta lo que el administrador escribe: no se parametriza por diseño, así que
+ el formulario que la use debe quedar restringido a quien administra la base.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsConsultaDAL.EjecutarSentencia(System.String)">
+ <summary>SELECT/WITH/EXEC devuelven filas; cualquier otra sentencia devuelve las filas afectadas.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsConsultaDAL.DevuelveFilas(System.String)">
+ <summary>True si la sentencia empieza por SELECT, WITH, EXEC o EXECUTE (se muestra como tabla); si no, es una acción.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsConsultaDAL.SoloLee(System.String)">
+ <summary>True si la sentencia solo lee (SELECT o WITH): no pide confirmación en pantalla.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsConsultaDAL.InstalarAsistenciaUnificada">
+ <summary>Crea o reemplaza sp_AsistenciaUnificada.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsConsultaDAL.ActualizarEstructuraAsistencia">
+ <summary>Agrega las columnas que el módulo de asistencia espera (OPinfo.OPPwd2, UserLeave.Opid y FechaRegistro) si faltan.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsConsultaDAL.ScriptsEstructuraAsistencia">
+ <summary>Sentencias de estructura, en el orden en que se ejecutan (cada una es un lote independiente).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsConsultaDAL.ScriptsAsistenciaUnificada">
+ <summary>Quita el procedimiento si existe y lo crea de nuevo (CREATE OR ALTER no existe antes de SQL Server 2016).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsCargaMasivaDAL">
+ <summary>
+ Carga masiva de una deducción o un incentivo (mismo monto) a todos los empleados activos de un tipo de
+ nómina, dentro de la nómina activa de ese tipo. Cada carga es una sola transacción: o entran todos o ninguno.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsCargaMasivaDAL.AvanceCarga">
+ <summary>Avance de una carga: (procesados, total, texto del empleado actual).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCargaMasivaDAL.ListarNominasActivas">
+ <summary>Tipos de nómina que tienen una nómina activa, con su número y fechas.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCargaMasivaDAL.NominaActivaDelTipo(System.String)">
+ <summary>Número de nómina activa del tipo; 0 si no hay.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCargaMasivaDAL.CargarDeduccion(System.String,System.String,System.Double,Sistema_de_Nominas_6._0.CsCargaMasivaDAL.AvanceCarga)">
+ <summary>Agrega la deducción (una vez, sin pagar) a cada empleado activo del tipo de nómina. Devuelve cuántos recibieron.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCargaMasivaDAL.CargarIncentivo(System.String,System.String,System.Double,Sistema_de_Nominas_6._0.CsCargaMasivaDAL.AvanceCarga)">
+ <summary>Agrega el incentivo (una vez, sin pagar) a cada empleado activo del tipo de nómina. Devuelve cuántos recibieron.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsHistorialEmpleadoDAL">
+ <summary>
+ Historial de pagos de un empleado y su estado (activar, desactivar, copiar perfil, detectar duplicados).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsHistorialEmpleadoDAL.Historial(System.Decimal)">
+ <summary>Pagos del empleado acumulados por mes y año de nómina.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsHistorialEmpleadoDAL.Desactivar(System.Decimal)">
+ <summary>Desactiva al empleado y lo quita del detalle de la nómina activa (no de las cerradas).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsHistorialEmpleadoDAL.ListarDuplicados">
+ <summary>Códigos visibles que tienen más de un empleado activo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsHistorialEmpleadoDAL.CopiarPerfil(System.Decimal,System.Boolean)">
+ <summary>
+ Crea un empleado nuevo (activo) copiando la ficha, el histórico y el horario de <paramref name="codEmpleado"/>.
+ Con <paramref name="reutilizarCodigo"/> el nuevo empleado conserva el código visible; si no, recibe uno
+ nuevo con el formato S1 + año + mes + correlativo. Devuelve el código visible del empleado nuevo.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsHistorialEmpleadoDAL.SiguienteCodigoNuevo(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction)">
+ <summary>S1 + año(2) + mes(2) + correlativo(4) más alto del mes + 1.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.LectorExcel">
+ <summary>Lee la primera hoja de un libro de Excel (.xls o .xlsx) como DataTable; la primera fila son los encabezados.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsImportacionDAL">
+ <summary>
+ Importación de movimientos desde tablas leídas de Excel (horas extra, deducciones, movimiento salarial) y
+ limpieza de movimientos pendientes. Las filas con problema no detienen la importación: se devuelven en
+ el resultado para que el usuario las revise; un error inesperado de base de datos sí deshace todo.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsImportacionDAL.ResultadoImportacion">
+ <summary>Líneas "código, mensaje" de lo ocurrido con cada fila.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.ImportarHorasExtra(System.Data.DataTable,System.Boolean)">
+ <summary>Columnas por posición: 0 = código del empleado, 1 = nombre, 2 = horas.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.ImportarDeducciones(System.Data.DataTable)">
+ <summary>Columnas por posición: 0 = INSS, 1 = código del empleado, 2 = nombre, 3 = monto, 4 = código de deducción.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.ImportarIncentivos(System.Data.DataTable)">
+ <summary>
+ Columnas por posición: 0 = INSS, 1 = código del empleado, 2 = nombre, 3 = monto, 4 = código del tipo de incentivo.
+ Un incentivo por empleado y tipo (se reutiliza el existente); en la nómina activa del empleado se corrige el
+ monto de la vez sin pagar o se agrega una vez nueva.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.ImportarSolicitudes(System.Data.DataTable,System.String,System.String,System.DateTime)">
+ <summary>
+ Columnas por posición: 0 = código del empleado, 1 = nombre, 2 = cantidad (días o horas según el tipo). El empleado debe estar
+ activo y figurar en el detalle de una nómina activa; la solicitud se fecha al inicio de esa nómina. Vacaciones, Vacaciones
+ Pagadas/Programadas y Subsidio llevan la cantidad en días (las tres últimas con fecha final = inicio + días); el resto
+ (Ausente, Feriado, Permiso Programado, Suspension, AusenteBasico*) es 1 día, o cantidad / horas del tipo de nómina si
+ la cantidad viene en horas. No se evitan duplicados: importar dos veces el mismo archivo agrega las solicitudes dos veces.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.ImportarMovimientoSalarial(System.Data.DataTable)">
+ <summary>Columnas por posición: 0 = código, 1 = nombre, 2 = salario básico más nivelación (0 = no cambiarlo), 3 = aumento en córdobas (OtrosIngresos).</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.CsImportacionDAL.ColumnasEmpleado">
+ <summary>Posición del encabezado en la hoja de la V.5.0 (se usa si el encabezado no se encuentra por nombre).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.ImportarEmpleados(System.Data.DataTable,System.Boolean,System.Boolean)">
+ <summary>
+ Crea o actualiza empleados (catálogo inicial). Las columnas se buscan por encabezado (Codigo, Nombre1, Nombre2, Apellido1,
+ Apellido2, Direccion, Nacionalidad, Sexo, FechaIngreso, Cargo, Departamento, RUC, INSS, Cedula, Hijos, TipoNomina,
+ GrupoNomina, SueldoPeriodo, TarifaHoraria, CuentaBanco, Turnos, FechaNacimiento, Numerocelular, CelularEmergencia,
+ Profesion, EstadoCivil, JefeInmediato, Incentivo, CorreoElectronico, CuentaBancoLAFISE/BANPRO/BDF) y, si la hoja no
+ trae los encabezados Codigo y Nombre1, por la posición de la hoja de la V.5.0. Cargo, departamento y grupo que no existen se crean; el tipo de nómina debe existir.
+ Los empleados nuevos reciben histórico (fechas de contrato y, con <paramref name="sueldoActualEnCordobas"/>, el sueldo
+ actual = última tasa de cambio x sueldo del período). No se crea el registro del reloj (Userinfo) ni el horario.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.FechaONulo(System.String)">
+ <summary>Fecha válida para smalldatetime o DBNull.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.BuscarTipoNomina(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.String)">
+ <summary>Código del tipo de nómina cuyo nombre (o código) coincide; "" si no existe.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.CodigoCatalogo(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.String,System.String,System.String,System.String)">
+ <summary>
+ Código del registro con ese nombre; si no existe lo crea (máximo numérico + 1, con el ancho de los códigos existentes).
+ Sin nombre devuelve NULL. Tabla y columnas son constantes del código, no entrada del usuario.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.ImportarSolicitudTotal(System.Data.DataTable,System.Boolean)">
+ <summary>
+ Asistencia total del período (V.5.0 pestaña "Solicitud Total"). Columnas por encabezado: CodEmpleado, HorasExtra, LlegadasTarde (min),
+ DiasVacaciones, DiasVacaPagadas, DiasAusencia, DiasSubsidio, FechaIniNomina, FechaFinNomina, FechaAplica y, opcionales, Nombres,
+ DiasSubsidioRiesgo, Rtar3DiasSubsidio. Las filas del mismo empleado y fechas se acumulan. Si algo no valida no se importa nada
+ (los errores quedan en <see cref="P:Sistema_de_Nominas_6._0.CsImportacionDAL.ResultadoImportacion.Mensajes"/>). Cada cantidad > 0 genera su solicitud (o actualiza la que ya
+ exista con el mismo empleado, tipo y fecha de inicio) con sus días en DescuentoDiasVacaciones; las horas extra van a la nómina activa.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.DiasValidos(System.Double)">
+ <summary>Días válidos: 0, una fracción de día (&lt; 1, se guarda por horas) o un entero.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.GrabarSolicitudST(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,Sistema_de_Nominas_6._0.CsImportacionDAL.FilaSolicitudTotal,System.String,System.String,System.Double,System.Int32,System.Boolean,System.Int32@,System.Collections.Generic.List{System.String})">
+ <summary>Cantidad = días, o minutos si <paramref name="esMinutos"/>. Devuelve 1 si grabó o actualizó la solicitud, 0 si no había cantidad.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.GrabarDescuentosST(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.String,System.String,System.String,System.DateTime,System.DateTime,System.Double)">
+ <summary>Regenera los días de la solicitud: uno por día, o uno solo con la cantidad total en Vacaciones Pagadas.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.EliminarSolicitudesPendientes(System.Int32,System.String)">
+ <summary>Borra las solicitudes del tipo de los empleados que figuran en el detalle de la nómina activa indicada, con sus días.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.EliminarTodosLosEmpleados">
+ <summary>
+ Borra TODOS los empleados con sus horas extra, deducciones, incentivos y solicitudes (V.5.0 "Eliminar Empleados"), en una transacción.
+ Si algún otro dato depende de un empleado (llave foránea), no se borra nada y se lanza el error. Devuelve los empleados borrados.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.EliminarHorasExtraPendientes(System.Int32)">
+ <summary>Borra las horas extra sin pagar de la nómina. Devuelve las filas borradas.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.EliminarDeduccionesPendientes(System.Int32,System.String)">
+ <summary>Borra las deducciones sin pagar del tipo en la nómina, con su detalle.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.EliminarIncentivosPendientes(System.String)">
+ <summary>Borra los incentivos sin pagar del tipo, con su detalle sin pagar.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.BuscarEmpleadoYNomina(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.String,System.Decimal@,System.Int32@)">
+ <summary>Devuelve "" si el empleado está activo y su tipo de nómina tiene nómina activa; si no, el motivo.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmListadoEmpleados">
+ <summary>
+ Listado de empleados activos. Los datos vienen de CsEmpleadosDAL.ListarDetallado; la ficha se abre
+ con <see cref="T:Sistema_de_Nominas_6._0.FrmEmpleados"/> (CargarEmpleado / NuevoEmpleado).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmListadoEmpleados.Recargar">
+ <summary>Vuelve a leer el listado (p. ej. después de guardar un empleado en la ficha).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmListadoEmpleados.CodigoSeleccionado">
+ <summary>Código visible del empleado seleccionado en la rejilla; "" si no hay.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmListadoHorasExtra">
+ <summary>
+ Listado de horas extra pendientes de pago. Acceso a datos por CsHorasExtraDAL; <see cref="M:Sistema_de_Nominas_6._0.FrmListadoHorasExtra.Recargar"/>
+ queda público para que otros formularios (p. ej. el de movimientos) refresquen el listado.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmListNomina">
+ <summary>
+ Listado de nóminas con su detalle por empleado y la anulación de una nómina cerrada.
+ Acceso a datos por CsNominaDAL. <see cref="M:Sistema_de_Nominas_6._0.FrmListNomina.Recargar"/> queda público para que otros formularios
+ (p. ej. Activar Nómina) refresquen el listado.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmListNomina.NominaSeleccionada">
+ <summary>Número de la nómina seleccionada; 0 si no hay.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmActivarNomina">
+ <summary>
+ Activación de nóminas. Elige un tipo de nómina sin nómina activa, propone el período que toca
+ (CsActivarNominaDAL.SugerirPeriodo) y lo activa. Otros formularios pueden abrirlo y llamar a
+ <see cref="M:Sistema_de_Nominas_6._0.FrmActivarNomina.SeleccionarTipoNomina(System.String)"/>, y escuchar <see cref="E:Sistema_de_Nominas_6._0.FrmActivarNomina.NominaActivada"/> para refrescarse.
+ </summary>
+</member>
+<member name="E:Sistema_de_Nominas_6._0.FrmActivarNomina.NominaActivada">
+ <summary>Se dispara cuando se activó una nómina; trae su número.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmActivarNomina.RecargarTipos">
+ <summary>Vuelve a leer los tipos de nómina que se pueden activar.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmActivarNomina.SeleccionarTipoNomina(System.String)">
+ <summary>Deja seleccionado un tipo de nómina por su código (si está en la lista de inactivos).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsTipoDestajoDAL.AplicarMontoATodos(System.Decimal)">
+ <summary>"Repetir" de la V.5.0: deja el mismo monto a todos los tipos de destajo. Devuelve cuántos cambió.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsIncapacidadDAL">
+ <summary>Incapacidades de los empleados (tabla Incapacidad, sin llave propia: se identifican por empleado + tipo + fecha).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.TipoComision">
+ <summary>Tipo de comisión (tabla TipoComision).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.TipoComision.Porcentaje">
+ <summary>Porcentaje como fracción (0.15 = 15%), tal como se guarda en la tabla.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.TipoDestajo">
+ <summary>Tipo de destajo (tabla TipoDestajo).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.TipoIncapacidad">
+ <summary>Tipo de incapacidad (tabla TipoIncapacidad).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.IncapacidadEmpleado">
+ <summary>Una incapacidad registrada a un empleado (tabla Incapacidad).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.IncapacidadEmpleado.Cod_Empleado">
+ <summary>Llave interna del empleado (Empleado.CodEmpleado), no el código visible.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmTipoComision">
+ <summary>
+ Catálogo de tipos de comisión. Todo el acceso a datos pasa por CsTipoComisionDAL (consultas parametrizadas).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmTipoDestajo">
+ <summary>
+ Catálogo de tipos de destajo. Todo el acceso a datos pasa por CsTipoDestajoDAL (consultas parametrizadas).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmTipoDestajo.BtnAplicarTodos_Click(System.Object,System.EventArgs)">
+ <summary>Equivale al botón Repetir de la V.5.0: deja el monto en pantalla a todos los tipos de destajo.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmTipoIncapacidad">
+ <summary>
+ Catálogo de tipos de incapacidad. Todo el acceso a datos pasa por CsTipoIncapacidadDAL (consultas parametrizadas).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmAnotaciones">
+ <summary>
+ Anotaciones (currículum) de un empleado. Acceso a datos por CsCurriculumDAL; la ficha del empleado la abre con
+ <see cref="M:Sistema_de_Nominas_6._0.FrmAnotaciones.CargarEmpleado(System.Decimal,System.String)"/>, que también queda público para otros formularios.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmAnotaciones.CargarEmpleado(System.Decimal,System.String)">
+ <summary>Muestra las anotaciones del empleado (<paramref name="codEmpleado"/> es su código interno, Empleado.CodEmpleado).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmCarnet">
+ <summary>
+ Carnet de un empleado (nombre, cargo, código, foto y código de barras). Datos por CsCarnetDAL;
+ <see cref="M:Sistema_de_Nominas_6._0.FrmCarnet.CargarEmpleado(System.Decimal)"/> queda público para abrir el carnet desde otros formularios.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmCarnet.CargarEmpleado(System.Decimal)">
+ <summary>Muestra el carnet del empleado (<paramref name="codEmpleado"/> es su código interno, Empleado.CodEmpleado).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmTasaCambio">
+ <summary>
+ Tasas de cambio diarias. Acceso a datos por CsCambioMonedaDAL; <see cref="M:Sistema_de_Nominas_6._0.FrmTasaCambio.TasaSeleccionada"/> deja a otros
+ formularios tomar la tasa elegida en la lista, y <see cref="M:Sistema_de_Nominas_6._0.FrmTasaCambio.Recargar"/> refresca la cuadrícula.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmTasaCambio.TasaSeleccionada">
+ <summary>Tasa de la fila elegida en la lista; Nothing si no hay ninguna.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmInssIr">
+ <summary>
+ Tablas de tramos del INSS y del IR, editables en cuadrícula. Acceso a datos por CsInssIrDAL;
+ <see cref="M:Sistema_de_Nominas_6._0.FrmInssIr.Recargar"/> queda público para refrescar desde otros formularios.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmInssIr.Guardar">
+ <summary>Aplica a la base las altas, cambios y bajas hechos en ambas cuadrículas.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmJustificaciones">
+ <summary>
+ Justificaciones de asistencia por empleado. Acceso a datos por CsJustificacionDAL;
+ <see cref="M:Sistema_de_Nominas_6._0.FrmJustificaciones.CargarEmpleado(System.String)"/> queda público para abrir el formulario ya posicionado en un empleado.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmJustificaciones.RecargarTipos">
+ <summary>Vuelve a leer los tipos de justificación.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmJustificaciones.CargarEmpleado(System.String)">
+ <summary>Deja seleccionado al empleado de código visible <paramref name="codigoEmpleado1"/> y muestra sus justificaciones.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmQuery">
+ <summary>
+ Consola de consultas SQL para el administrador. Acceso a datos por CsConsultaDAL; <see cref="M:Sistema_de_Nominas_6._0.FrmQuery.EjecutarConsulta(System.String)"/>
+ queda público para lanzar una consulta desde otro formulario.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmQuery.AjustarColumnas">
+ <summary>Ajusta cada columna a su contenido (como AutoSize del TDBGrid), sin pasar de un ancho razonable.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmQuery.EjecutarConsulta(System.String)">
+ <summary>Pone <paramref name="sentencia"/> en el editor y la ejecuta.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmCargaMasiva">
+ <summary>
+ Carga masiva de una deducción o un incentivo (mismo monto) a todos los empleados activos de un tipo de nómina.
+ Acceso a datos por CsCargaMasivaDAL; <see cref="M:Sistema_de_Nominas_6._0.FrmCargaMasiva.ProcesarDeduccion(System.String,System.String,System.Double)"/> y <see cref="M:Sistema_de_Nominas_6._0.FrmCargaMasiva.ProcesarIncentivo(System.String,System.String,System.Double)"/> quedan
+ públicos para lanzar la carga desde otro formulario.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmCargaMasiva.ProcesarDeduccion(System.String,System.String,System.Double)">
+ <summary>Agrega la deducción a todos los empleados activos del tipo de nómina. Devuelve cuántos la recibieron (0 si se canceló o falló).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmCargaMasiva.ProcesarIncentivo(System.String,System.String,System.Double)">
+ <summary>Agrega el incentivo a todos los empleados activos del tipo de nómina. Devuelve cuántos lo recibieron (0 si se canceló o falló).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmHistorial">
+ <summary>
+ Historial de pagos de un empleado y cambio de su estado (activar, desactivar, copiar perfil, duplicados).
+ Acceso a datos por CsHistorialEmpleadoDAL; <see cref="M:Sistema_de_Nominas_6._0.FrmHistorial.CargarEmpleado(System.String)"/> queda público para abrir el
+ formulario ya posicionado en un empleado.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmHistorial.CargarEmpleado(System.String)">
+ <summary>Deja seleccionado al empleado de código visible <paramref name="codigoEmpleado1"/> y muestra su historial.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmHistorial.Recargar">
+ <summary>Vuelve a leer la lista de empleados y el historial del seleccionado.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmImportar">
+ <summary>
+ Importación desde Excel (empleados, saldo de vacaciones, movimiento salarial, horas extra, deducciones, ingresos, solicitudes y
+ solicitud total), consola SQL y eliminación de movimientos pendientes. Menú lateral de secciones, cada una con su descripción y las
+ columnas que espera el archivo. Acceso a datos por CsImportacionDAL y LectorExcel; <see cref="M:Sistema_de_Nominas_6._0.FrmImportar.Importar(System.Int32,System.Data.DataTable)"/> y <see cref="M:Sistema_de_Nominas_6._0.FrmImportar.AbrirArchivo(System.String)"/>
+ quedan públicos para llamarlos desde otro formulario.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmImportar.Seccion">
+ <summary>Sección del menú. Tipo = el de <see cref="M:Sistema_de_Nominas_6._0.FrmImportar.Importar(System.Int32,System.Data.DataTable)"/>, -1 = consola SQL, -2 = eliminar.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmImportar.CrearOpciones">
+ <summary>Opciones propias de cada sección; se agregan al panel de opciones y se muestran según el tipo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmImportar.CrearPanelesAvanzados">
+ <summary>Paneles de "Eliminar" (solicitudes y empleados) y "Consultas SQL"; se agregan por código, no están en el Designer.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmImportar.MostrarSeccion(Sistema_de_Nominas_6._0.FrmImportar.Seccion)">
+ <summary>Cambia de sección: título, descripción, columnas esperadas y los controles que le corresponden. Descarta el archivo cargado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmImportar.CmbSolTipo_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>Propone la clasificación según el tipo, como la V.5.0; se puede cambiar.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmImportar.AbrirArchivo(System.String)">
+ <summary>Lee la primera hoja del libro y la muestra como vista previa.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmImportar.Importar(System.Int32,System.Data.DataTable)">
+ <summary>Importa la tabla según el tipo (0 = horas extra, 1 = deducciones, 2 = movimiento salarial, 3 = catálogo de empleados, 4 = saldo de vacaciones, 5 = incentivos, 6 = solicitudes, 7 = solicitud total) y muestra lo ocurrido por fila.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CodigoBarras39">
+ <summary>Dibuja códigos de barras Code 39 (el que usaba el carnet con la fuente "3 of 9") sin depender de fuentes instaladas.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CodigoBarras39.Dibujar(System.String,System.Int32,System.Int32)">
+ <summary>Imagen del código de barras de <paramref name="texto"/> (se pasa a mayúsculas; los caracteres que Code 39 no admite se omiten).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmIncapacidades">
+ <summary>
+ Incapacidades de los empleados. El acceso a datos pasa por CsIncapacidadDAL / CsTipoIncapacidadDAL.
+ Otros formularios pueden abrirlo y llamar a <see cref="M:Sistema_de_Nominas_6._0.FrmIncapacidades.CargarEmpleado(System.String)"/> con el código visible del empleado.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmIncapacidades.RecargarTipos">
+ <summary>Vuelve a leer los tipos de incapacidad (p. ej. después de editarlos en su catálogo).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmIncapacidades.CargarEmpleado(System.String)">
+ <summary>Carga un empleado por su código visible (CodEmpleado1) y muestra sus incapacidades.</summary>
+</member>
 <member name="P:Sistema_de_Nominas_6._0.TipoNomina.Periodo">
  <summary>Semanal Viernes, Semanal Sabado, Catorcenal los Viernes, Catorcenal los Sabados,
  Quincenal, Mensual, Trimestral o Semestral.</summary>
@@ -193,6 +1233,9 @@ Sistema de Nominas 6.0
 <member name="M:Sistema_de_Nominas_6._0.FrmPeriodo.FechasPorDefecto">
  <summary>Planilla: 1 de enero al 31 de diciembre. Fiscal: 1 de julio al 30 de junio siguiente.</summary>
 </member>
+<member name="M:Sistema_de_Nominas_6._0.FrmPeriodo.ConfigurarGrid">
+ <summary>Períodos agrupados por mes, como el listado de V.5.0: "Enero" y debajo "1  01/01/2026 al 15/01/2026".</summary>
+</member>
 <member name="T:Sistema_de_Nominas_6._0.Controles">
  <summary>Fila única de la tabla Controles (parámetros de cálculo del sistema).</summary>
 </member>
@@ -234,11 +1277,40 @@ Sistema de Nominas 6.0
  Catálogo de departamentos. Todo el acceso a datos pasa por CsDepartamentoDAL (consultas parametrizadas).
  </summary>
 </member>
+<member name="T:Sistema_de_Nominas_6._0.FrmUsuarios">
+ <summary>
+ Registro de usuarios (V.5.0 frmClaves). Todo el acceso a datos pasa por CsUsuarioDAL.
+ Un usuario con nivel distinto de 0 no puede ver/editar usuarios de nivel mayor ni asignar un nivel mayor al suyo.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmUsuarios.NivelActual">
+ <summary>Nivel del usuario conectado; 0 = sin restricción (regla de la V.5.0).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsUsuarioDAL">
+ <summary>
+ Acceso a datos de Usuarios y de sus permisos (tabla Accesos). Port de frmClaves (V.5.0).
+ </summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.CsUsuarioDAL.AccesosPredeterminados">
+ <summary>Permisos que la V.5.0 daba a todo usuario nuevo (frmClaves.CmdGrabar).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsUsuarioDAL.Guardar(Sistema_de_Nominas_6._0.Usuarios,System.Boolean)">
+ <summary>Inserta (con los permisos predeterminados, en una transacción) o actualiza clave y nivel.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsUsuarioDAL.Eliminar(System.Int32)">
+ <summary>Borra el usuario y sus permisos en una transacción.</summary>
+</member>
 <member name="T:Sistema_de_Nominas_6._0.FrmEmpleados">
  <summary>
  Ficha de empleados. Todo el acceso a datos pasa por CsEmpleadosDAL
  (consultas parametrizadas). "Eliminar" solo inactiva al empleado.
  </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.CrearPestanasMovimientos">
+ <summary>Agrega las pestañas de movimientos (controles propios, fuera del diseñador).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.CargarMovimientos">
+ <summary>Recarga las cuatro pestañas para el empleado cargado (0 = ninguno guardado).</summary>
 </member>
 <member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.ConfigurarLongitudes">
  <summary>Evita que un texto largo falle al guardar (tamaños reales de las columnas).</summary>
@@ -258,11 +1330,23 @@ Sistema de Nominas 6.0
 <member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.cmbTipoNomina_EditValueChanged(System.Object,System.EventArgs)">
  <summary>Al elegir el tipo de nómina se llena "Tipo Pago" con el de esa nómina.</summary>
 </member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.NuevoEmpleado">
+ <summary>Deja la ficha lista para un empleado nuevo (la usa también el listado de empleados).</summary>
+</member>
 <member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.BtnAnular_Click(System.Object,System.EventArgs)">
  <summary>No borra el registro: solo lo marca como inactivo.</summary>
 </member>
 <member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.BtnBorrar_Click(System.Object,System.EventArgs)">
  <summary>Quita la foto de la pantalla; se borra de la BD al grabar.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.AbrirAnotaciones">
+ <summary>Abre las anotaciones (currículum) del empleado que está en pantalla.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmEmpleados.AbrirCarnet">
+ <summary>Abre el carnet del empleado que está en pantalla.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.Main.BarButtonBajas_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
+ <summary>Página "Procesos" > Bajas; "Despidos y Renuncias" de la página Acceso abre la misma pantalla.</summary>
 </member>
 <member name="M:Sistema_de_Nominas_6._0.Main.AbrirFormulario(System.Windows.Forms.Form)">
  <summary>Muestra el formulario como hijo MDI; si ya está abierto lo trae al frente.</summary>

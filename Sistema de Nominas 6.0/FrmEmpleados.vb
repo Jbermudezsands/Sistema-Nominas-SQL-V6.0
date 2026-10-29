@@ -18,6 +18,12 @@ Public Class FrmEmpleados
     Private _modoNuevo As Boolean = False
     Private _listaEmpleados As DataTable
 
+    ' Pestañas Préstamo / Incentivos / Deducciones / Subsidios: operan sobre el empleado ya guardado.
+    Private _ucPrestamo As UcPrestamoEmpleado
+    Private _ucIncentivos As UcMovimientosEmpleado
+    Private _ucDeducciones As UcMovimientosEmpleado
+    Private _ucSubsidios As UcMovimientosEmpleado
+
     Private ReadOnly Property EsNuevo As Boolean
         Get
             Return _modoNuevo
@@ -29,6 +35,7 @@ Public Class FrmEmpleados
     Private Sub FrmEmpleados_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
+            CrearPestanasMovimientos()
             ConfigurarLongitudes()
             CargarCatalogos()
             RefrescarListaEmpleados()
@@ -36,6 +43,40 @@ Public Class FrmEmpleados
         Catch ex As Exception
             MostrarError(ex)
         End Try
+
+    End Sub
+
+    ''' <summary>Agrega las pestañas de movimientos (controles propios, fuera del diseñador).</summary>
+    Private Sub CrearPestanasMovimientos()
+
+        _ucPrestamo = New UcPrestamoEmpleado
+        _ucIncentivos = New UcMovimientosEmpleado(TipoMovimiento.Incentivo)
+        _ucDeducciones = New UcMovimientosEmpleado(TipoMovimiento.Deduccion)
+        _ucSubsidios = New UcMovimientosEmpleado(TipoMovimiento.Subsidio)
+
+        AgregarPestana("TabPrestamo", "Préstamo", _ucPrestamo)
+        AgregarPestana("TabIncentivos", "Incentivos", _ucIncentivos)
+        AgregarPestana("TabDeducciones", "Deducciones", _ucDeducciones)
+        AgregarPestana("TabSubsidios", "Subsidios", _ucSubsidios)
+
+    End Sub
+
+    Private Sub AgregarPestana(nombre As String, texto As String, contenido As Control)
+
+        Dim pagina As New DevExpress.XtraTab.XtraTabPage With {.Name = nombre, .Text = texto}
+
+        pagina.Controls.Add(contenido)
+        TabEmpleados.TabPages.Add(pagina)
+
+    End Sub
+
+    ''' <summary>Recarga las cuatro pestañas para el empleado cargado (0 = ninguno guardado).</summary>
+    Private Sub CargarMovimientos()
+
+        _ucPrestamo.Cargar(_codEmpleado)
+        _ucIncentivos.Cargar(_codEmpleado)
+        _ucDeducciones.Cargar(_codEmpleado)
+        _ucSubsidios.Cargar(_codEmpleado)
 
     End Sub
 
@@ -442,6 +483,8 @@ Public Class FrmEmpleados
 
             Me.Text = If(emp.Empleado_Activo = 0, "Empleados - INACTIVO", "Empleados")
 
+            CargarMovimientos()
+
         Finally
             _cargando = False
         End Try
@@ -576,6 +619,11 @@ Public Class FrmEmpleados
 #Region "NUEVO / CANCELAR / LIMPIAR"
 
     Private Sub BtnNuevo_Click(sender As Object, e As EventArgs) Handles BtnNuevo.Click
+        NuevoEmpleado()
+    End Sub
+
+    ''' <summary>Deja la ficha lista para un empleado nuevo (la usa también el listado de empleados).</summary>
+    Public Sub NuevoEmpleado()
 
         Try
             Limpiar_Empleados()
@@ -683,6 +731,8 @@ Public Class FrmEmpleados
             cboFinSuspencion.EditValue = Nothing
 
             MostrarFoto("")
+
+            CargarMovimientos()
 
         Finally
             _cargando = False
@@ -869,6 +919,51 @@ Public Class FrmEmpleados
 
 #End Region
 
+#Region "ANOTACIONES / CARNET"
+
+    Private Sub BtnAnotar_Click(sender As Object, e As EventArgs) Handles BtnAnotar.Click
+        AbrirAnotaciones()
+    End Sub
+
+    Private Sub BtnCarnet_Click(sender As Object, e As EventArgs) Handles BtnCarnet.Click
+        AbrirCarnet()
+    End Sub
+
+    ''' <summary>Abre las anotaciones (currículum) del empleado que está en pantalla.</summary>
+    Public Sub AbrirAnotaciones()
+
+        If Not HayEmpleadoGuardado() Then Exit Sub
+
+        Using f As New FrmAnotaciones
+            f.CargarEmpleado(Convert.ToDecimal(_codEmpleado), TxtCodEmpleado.Text)
+            f.ShowDialog(Me)
+        End Using
+
+    End Sub
+
+    ''' <summary>Abre el carnet del empleado que está en pantalla.</summary>
+    Public Sub AbrirCarnet()
+
+        If Not HayEmpleadoGuardado() Then Exit Sub
+
+        Using f As New FrmCarnet
+            f.CargarEmpleado(Convert.ToDecimal(_codEmpleado))
+            f.ShowDialog(Me)
+        End Using
+
+    End Sub
+
+    Private Function HayEmpleadoGuardado() As Boolean
+
+        If _codEmpleado > 0 Then Return True
+
+        MessageBox.Show("Seleccione o guarde primero un empleado.", "Zeus Nominas", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Return False
+
+    End Function
+
+#End Region
     Private Sub BtnSalir_Click(sender As Object, e As EventArgs) Handles BtnSalir.Click
         Me.Close()
     End Sub

@@ -54,6 +54,40 @@ Public MustInherit Class CsDALBase
 
     End Function
 
+    ''' <summary>Ejecuta varias operaciones en una sola transacción (commit al terminar, rollback si falla).</summary>
+    Protected Sub EnTransaccion(accion As Action(Of SqlConnection, SqlTransaction))
+
+        Using cn As New SqlConnection(CadenaConexion)
+            cn.Open()
+            Using tr As SqlTransaction = cn.BeginTransaction()
+                Try
+                    accion(cn, tr)
+                    tr.Commit()
+                Catch
+                    tr.Rollback()
+                    Throw
+                End Try
+            End Using
+        End Using
+
+    End Sub
+
+    Protected Shared Function EscalarEn(cn As SqlConnection, tr As SqlTransaction, sql As String,
+                                        ParamArray parametros() As SqlParameter) As Object
+        Using cmd As New SqlCommand(sql, cn, tr)
+            cmd.Parameters.AddRange(parametros)
+            Return cmd.ExecuteScalar()
+        End Using
+    End Function
+
+    Protected Shared Function EjecutarEn(cn As SqlConnection, tr As SqlTransaction, sql As String,
+                                         ParamArray parametros() As SqlParameter) As Integer
+        Using cmd As New SqlCommand(sql, cn, tr)
+            cmd.Parameters.AddRange(parametros)
+            Return cmd.ExecuteNonQuery()
+        End Using
+    End Function
+
     ''' <summary>Máximo código numérico + 1, rellenado con ceros a <paramref name="ancho"/>.
     ''' Tabla y columna son constantes del código, no entrada del usuario.</summary>
     Protected Function SiguienteCodigo(tabla As String, columna As String, ancho As Integer) As String

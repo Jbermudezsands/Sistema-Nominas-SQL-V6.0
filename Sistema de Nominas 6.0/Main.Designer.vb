@@ -28,6 +28,10 @@ Partial Class Main
         Me.BarButtonDepartamento = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonDeduccion = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonControles = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonIncapacidades = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonTipoComision = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonTipoDestajo = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonTipoIncapacidad = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPageProcesos = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.RibbonEmpleados = New DevExpress.XtraBars.BarButtonItem()
@@ -56,17 +60,28 @@ Partial Class Main
         Me.BarButtonItem16 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonSalir = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonRespaldar = New DevExpress.XtraBars.BarButtonItem()
-        CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RibbonPageOpciones = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageGroupOpciones = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.BarButtonCargaMasiva = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonHistorial = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonImportar = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonJustificaciones = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonQuery = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonInssIr = New DevExpress.XtraBars.BarButtonItem()
+        Me.RibbonPageProcesosBajas = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageGroupProcesos = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.BarButtonBajas = New DevExpress.XtraBars.BarButtonItem()
+        CType(Me.RibbonControl,System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.RibbonControl.SearchEditItem, Me.BarButtonIEmpleado, Me.BarButtonListaEmpleado, Me.BarButtonActivarNomina, Me.BarButtonHorasExtra, Me.BarButtonCalcularNomina, Me.BarButtonVacaciones, Me.BarButtonDespidos, Me.BarButtonListaLiquidacion, Me.BarButtonPeriodoNomina, Me.BarButtonPeriodoFiscal, Me.BarButtonTipoNomina, Me.BarButtonListaNomina, Me.BarButtonHistorialSalarial, Me.BarButtonListaVacaciones, Me.BarButtonTasaCambio, Me.BarToggleSwitchItem1, Me.BarMdiChildrenListItem1, Me.BarButtonUsuarios, Me.BarButtonItem16, Me.BarButtonSalir, Me.BarButtonRespaldar, Me.BarButtonCargo, Me.BarButtonDepartamento, Me.BarButtonDeduccion, Me.BarButtonControles})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.RibbonControl.SearchEditItem, Me.BarButtonIEmpleado, Me.BarButtonListaEmpleado, Me.BarButtonActivarNomina, Me.BarButtonHorasExtra, Me.BarButtonCalcularNomina, Me.BarButtonVacaciones, Me.BarButtonDespidos, Me.BarButtonListaLiquidacion, Me.BarButtonPeriodoNomina, Me.BarButtonPeriodoFiscal, Me.BarButtonTipoNomina, Me.BarButtonListaNomina, Me.BarButtonHistorialSalarial, Me.BarButtonListaVacaciones, Me.BarButtonTasaCambio, Me.BarToggleSwitchItem1, Me.BarMdiChildrenListItem1, Me.BarButtonUsuarios, Me.BarButtonItem16, Me.BarButtonSalir, Me.BarButtonRespaldar, Me.BarButtonCargo, Me.BarButtonDepartamento, Me.BarButtonDeduccion, Me.BarButtonControles, Me.BarButtonIncapacidades, Me.BarButtonTipoComision, Me.BarButtonTipoDestajo, Me.BarButtonTipoIncapacidad, Me.BarButtonCargaMasiva, Me.BarButtonHistorial, Me.BarButtonImportar, Me.BarButtonJustificaciones, Me.BarButtonQuery, Me.BarButtonInssIr, Me.BarButtonBajas})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 27
+        Me.RibbonControl.MaxItemId = 38
         Me.RibbonControl.Name = "RibbonControl"
-        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1, Me.RibbonPageCatalogo})
+        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1, Me.RibbonPageCatalogo, Me.RibbonPageProcesosBajas, Me.RibbonPageOpciones})
         Me.RibbonControl.Size = New System.Drawing.Size(1260, 158)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
@@ -183,8 +198,98 @@ Partial Class Main
         Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonTipoNomina)
         Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonPeriodoNomina)
         Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonPeriodoFiscal)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonTipoComision)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonTipoDestajo)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonTipoIncapacidad)
+        Me.RibbonPageGroupCatalogos.ItemLinks.Add(Me.BarButtonIncapacidades)
         Me.RibbonPageGroupCatalogos.Name = "RibbonPageGroupCatalogos"
         Me.RibbonPageGroupCatalogos.Text = "Catalogos"
+        '
+        'RibbonPageProcesosBajas
+        '
+        Me.RibbonPageProcesosBajas.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroupProcesos})
+        Me.RibbonPageProcesosBajas.Name = "RibbonPageProcesosBajas"
+        Me.RibbonPageProcesosBajas.Text = "Procesos"
+        '
+        'RibbonPageGroupProcesos
+        '
+        Me.RibbonPageGroupProcesos.ItemLinks.Add(Me.BarButtonBajas)
+        Me.RibbonPageGroupProcesos.Name = "RibbonPageGroupProcesos"
+        Me.RibbonPageGroupProcesos.Text = "Procesos"
+        '
+        'BarButtonBajas
+        '
+        Me.BarButtonBajas.Caption = "Bajas"
+        Me.BarButtonBajas.Id = 37
+        Me.BarButtonBajas.ImageOptions.ImageUri.Uri = "BO_Employee"
+        Me.BarButtonBajas.Name = "BarButtonBajas"
+        Me.BarButtonBajas.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'RibbonPageOpciones
+        '
+        Me.RibbonPageOpciones.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroupOpciones})
+        Me.RibbonPageOpciones.Name = "RibbonPageOpciones"
+        Me.RibbonPageOpciones.Text = "Opciones"
+        '
+        'RibbonPageGroupOpciones
+        '
+        Me.RibbonPageGroupOpciones.ItemLinks.Add(Me.BarButtonCargaMasiva)
+        Me.RibbonPageGroupOpciones.ItemLinks.Add(Me.BarButtonControles)
+        Me.RibbonPageGroupOpciones.ItemLinks.Add(Me.BarButtonHistorial)
+        Me.RibbonPageGroupOpciones.ItemLinks.Add(Me.BarButtonImportar)
+        Me.RibbonPageGroupOpciones.ItemLinks.Add(Me.BarButtonJustificaciones)
+        Me.RibbonPageGroupOpciones.ItemLinks.Add(Me.BarButtonQuery)
+        Me.RibbonPageGroupOpciones.ItemLinks.Add(Me.BarButtonInssIr)
+        Me.RibbonPageGroupOpciones.Name = "RibbonPageGroupOpciones"
+        Me.RibbonPageGroupOpciones.Text = "Opciones"
+        '
+        'BarButtonCargaMasiva
+        '
+        Me.BarButtonCargaMasiva.Caption = "Carga Masiva"
+        Me.BarButtonCargaMasiva.Id = 31
+        Me.BarButtonCargaMasiva.ImageOptions.ImageUri.Uri = "Add"
+        Me.BarButtonCargaMasiva.Name = "BarButtonCargaMasiva"
+        Me.BarButtonCargaMasiva.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonHistorial
+        '
+        Me.BarButtonHistorial.Caption = "Historial"
+        Me.BarButtonHistorial.Id = 32
+        Me.BarButtonHistorial.ImageOptions.ImageUri.Uri = "History"
+        Me.BarButtonHistorial.Name = "BarButtonHistorial"
+        Me.BarButtonHistorial.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonImportar
+        '
+        Me.BarButtonImportar.Caption = "Importar"
+        Me.BarButtonImportar.Id = 33
+        Me.BarButtonImportar.ImageOptions.ImageUri.Uri = "Open"
+        Me.BarButtonImportar.Name = "BarButtonImportar"
+        Me.BarButtonImportar.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonJustificaciones
+        '
+        Me.BarButtonJustificaciones.Caption = "Justificaciones"
+        Me.BarButtonJustificaciones.Id = 34
+        Me.BarButtonJustificaciones.ImageOptions.ImageUri.Uri = "Edit"
+        Me.BarButtonJustificaciones.Name = "BarButtonJustificaciones"
+        Me.BarButtonJustificaciones.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonQuery
+        '
+        Me.BarButtonQuery.Caption = "Query"
+        Me.BarButtonQuery.Id = 35
+        Me.BarButtonQuery.ImageOptions.ImageUri.Uri = "Find"
+        Me.BarButtonQuery.Name = "BarButtonQuery"
+        Me.BarButtonQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonInssIr
+        '
+        Me.BarButtonInssIr.Caption = "INSS / IR"
+        Me.BarButtonInssIr.Id = 36
+        Me.BarButtonInssIr.ImageOptions.ImageUri.Uri = "Percent"
+        Me.BarButtonInssIr.Name = "BarButtonInssIr"
+        Me.BarButtonInssIr.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
         'BarButtonCargo
         '
@@ -217,6 +322,38 @@ Partial Class Main
         Me.BarButtonControles.ImageOptions.ImageUri.Uri = "Properties"
         Me.BarButtonControles.Name = "BarButtonControles"
         Me.BarButtonControles.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonIncapacidades
+        '
+        Me.BarButtonIncapacidades.Caption = "Incapacidades"
+        Me.BarButtonIncapacidades.Id = 27
+        Me.BarButtonIncapacidades.ImageOptions.ImageUri.Uri = "BO_Employee"
+        Me.BarButtonIncapacidades.Name = "BarButtonIncapacidades"
+        Me.BarButtonIncapacidades.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonTipoComision
+        '
+        Me.BarButtonTipoComision.Caption = "Tipos de Comision"
+        Me.BarButtonTipoComision.Id = 28
+        Me.BarButtonTipoComision.ImageOptions.ImageUri.Uri = "BO_Opportunity"
+        Me.BarButtonTipoComision.Name = "BarButtonTipoComision"
+        Me.BarButtonTipoComision.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonTipoDestajo
+        '
+        Me.BarButtonTipoDestajo.Caption = "Tipos de Destajo"
+        Me.BarButtonTipoDestajo.Id = 29
+        Me.BarButtonTipoDestajo.ImageOptions.ImageUri.Uri = "BO_Product"
+        Me.BarButtonTipoDestajo.Name = "BarButtonTipoDestajo"
+        Me.BarButtonTipoDestajo.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'BarButtonTipoIncapacidad
+        '
+        Me.BarButtonTipoIncapacidad.Caption = "Tipos de Incapacidad"
+        Me.BarButtonTipoIncapacidad.Id = 30
+        Me.BarButtonTipoIncapacidad.ImageOptions.ImageUri.Uri = "BO_Task"
+        Me.BarButtonTipoIncapacidad.Name = "BarButtonTipoIncapacidad"
+        Me.BarButtonTipoIncapacidad.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
         'RibbonPageGroup1
         '
@@ -407,4 +544,19 @@ Partial Class Main
     Friend WithEvents BarButtonDepartamento As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarButtonDeduccion As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarButtonControles As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPageOpciones As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents RibbonPageGroupOpciones As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents BarButtonCargaMasiva As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonHistorial As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonImportar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonJustificaciones As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonQuery As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonInssIr As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPageProcesosBajas As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents RibbonPageGroupProcesos As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents BarButtonBajas As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonIncapacidades As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonTipoComision As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonTipoDestajo As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonTipoIncapacidad As DevExpress.XtraBars.BarButtonItem
 End Class
