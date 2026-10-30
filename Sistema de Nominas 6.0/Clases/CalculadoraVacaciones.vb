@@ -10,6 +10,13 @@ Public Class CalculadoraVacaciones
 
     ''' <param name="diasMes30">Controles.DiasMes = 30; cualquier otro valor se trata como mes calendario.</param>
     Public Shared Function Saldo(contratoVacaciones As Date, hasta As Date, diasMes30 As Boolean, solicitados As DiasSolicitados) As Double
+        Return Calcular(contratoVacaciones, hasta, diasMes30, solicitados).Saldo
+    End Function
+
+    ''' <summary>Igual que <see cref="Saldo"/>, pero con el total acumulado y el total solicitado (V.5.0 FrmSolicitud.CargarSolicitud).</summary>
+    Public Shared Function Calcular(contratoVacaciones As Date, hasta As Date, diasMes30 As Boolean, solicitados As DiasSolicitados) As ResumenVacaciones
+
+        Dim r As New ResumenVacaciones
 
         Dim inicio As Date = contratoVacaciones.Date
         Dim fin As Date = hasta.Date
@@ -22,7 +29,7 @@ Public Class CalculadoraVacaciones
 
             If diasMes30 AndAlso tFin.Day > 30 Then tFin = tFin.AddDays(-1)
 
-            saldoActual += Acumulado(tInicio, tFin, diasMes30, False) - Solicitado(tInicio, tFin, solicitados)
+            saldoActual += Tramo(r, Acumulado(tInicio, tFin, diasMes30, False), Solicitado(tInicio, tFin, solicitados))
 
             If tFin.AddDays(2) >= fin Then
 
@@ -42,7 +49,7 @@ Public Class CalculadoraVacaciones
                     tFin = fin
                     If diasMes30 AndAlso tFin.Day > 30 Then tFin = tFin.AddDays(-1)
 
-                    saldoActual += Acumulado(tInicio, tFin, diasMes30, True) - Solicitado(tInicio, tFin, solicitados)
+                    saldoActual += Tramo(r, Acumulado(tInicio, tFin, diasMes30, True), Solicitado(tInicio, tFin, solicitados))
 
                     inicio = fin
 
@@ -52,8 +59,17 @@ Public Class CalculadoraVacaciones
 
         Loop
 
-        Return saldoActual
+        r.Saldo = saldoActual
 
+        Return r
+
+    End Function
+
+    ''' <summary>Suma el tramo a los totales y devuelve su diferencia (el saldo se sigue sumando tramo a tramo, como antes).</summary>
+    Private Shared Function Tramo(r As ResumenVacaciones, acumulado As Double, solicitado As Double) As Double
+        r.Acumulado += acumulado
+        r.Solicitado += solicitado
+        Return acumulado - solicitado
     End Function
 
     Private Shared Function Solicitado(tInicio As Date, tFin As Date, solicitados As DiasSolicitados) As Double

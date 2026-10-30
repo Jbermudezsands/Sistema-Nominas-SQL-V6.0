@@ -36,6 +36,8 @@ Public Class FrmHistorial
             If cmbEmpleadoView.Columns("CodEmpleado") IsNot Nothing Then cmbEmpleadoView.Columns("CodEmpleado").Visible = False
             If cmbEmpleadoView.Columns("Nombres") IsNot Nothing Then cmbEmpleadoView.Columns("Nombres").Width = 300
 
+            FrmConsulta.AgregarBotonBuscar(cmbEmpleado, TipoBusqueda.EmpleadoTodos, Me)
+
             ActualizarBotones()
 
         Catch ex As Exception

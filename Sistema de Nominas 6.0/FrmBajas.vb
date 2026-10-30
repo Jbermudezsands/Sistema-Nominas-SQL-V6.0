@@ -47,7 +47,7 @@ Public Class FrmBajas
     Public Sub New()
 
         Text = "Despidos y Renuncias"
-        ClientSize = New Size(1110, 660)
+        ClientSize = New Size(1225, 620)
         StartPosition = FormStartPosition.CenterParent
 
         CrearInterfaz()
@@ -174,13 +174,26 @@ Public Class FrmBajas
         BtnCalcular = Boton("Calcular", "CalculateNow", 8)
         BtnImprimir = Boton("Imprimir", "Print", 109)
         BtnProcesar = Boton("Procesar", "Apply", 210)
-        BtnCerrar = Boton("Cerrar", "Close", 1007)
+        BtnCerrar = Boton("Cerrar", "Close", 0)
         AddHandler BtnCalcular.Click, AddressOf BtnCalcular_Click
         AddHandler BtnImprimir.Click, Sub(s, e) MostrarReporte()
         AddHandler BtnProcesar.Click, AddressOf BtnProcesar_Click
         AddHandler BtnCerrar.Click, Sub(s, e) Close()
 
-        Controls.AddRange(New Control() {gEmpleado, gTiempo, gSalario, gTipo, gPrest, gDed, gHist, BtnCalcular, BtnImprimir, BtnProcesar, BtnCerrar})
+        ' Los botones van apilados en una columna derecha acoplada (siempre visibles); el resto hace scroll si no cabe.
+        Dim pnlBotones As New PanelControl With {.Dock = DockStyle.Right, .Width = 111, .BorderStyle = BorderStyles.NoBorder}
+        Dim yBoton As Integer = 8
+        For Each b As SimpleButton In New SimpleButton() {BtnCalcular, BtnImprimir, BtnProcesar, BtnCerrar}
+            b.Location = New Point(8, yBoton)
+            yBoton += 43
+            pnlBotones.Controls.Add(b)
+        Next
+
+        Dim pnlContenido As New XtraScrollableControl With {.Dock = DockStyle.Fill}
+        pnlContenido.Controls.AddRange(New Control() {gEmpleado, gTiempo, gSalario, gTipo, gPrest, gDed, gHist})
+
+        Controls.Add(pnlContenido)
+        Controls.Add(pnlBotones)
 
         MostrarOpcionales()
 
@@ -232,7 +245,7 @@ Public Class FrmBajas
     End Function
 
     Private Function Boton(texto As String, icono As String, x As Integer) As SimpleButton
-        Dim b As New SimpleButton With {.Text = texto, .Location = New Point(x, 615), .Size = New Size(95, 35)}
+        Dim b As New SimpleButton With {.Text = texto, .Location = New Point(x, 7), .Size = New Size(95, 35)}
         b.ImageOptions.ImageUri.Uri = icono
         Return b
     End Function
@@ -260,6 +273,7 @@ Public Class FrmBajas
             ChkPromedioReal.Checked = _svc.Salario_Promedio_Real
             ChkExtra.Text = If(_svc.Es_Formato_Bono, "Horas extra (en salario)", "Horas extra")
             RecargarEmpleados()
+            FrmConsulta.AgregarBotonBuscar(CmbEmpleado, TipoBusqueda.Empleado, Me)
         Catch ex As Exception
             XtraMessageBox.Show("No se pudo abrir la pantalla de bajas: " & ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

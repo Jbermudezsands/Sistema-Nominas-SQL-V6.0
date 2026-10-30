@@ -34,6 +34,8 @@ Public Class FrmJustificaciones
             End If
             If cmbEmpleadoView.Columns("Nombre") IsNot Nothing Then cmbEmpleadoView.Columns("Nombre").Width = 300
 
+            FrmConsulta.AgregarBotonBuscar(cmbEmpleado, TipoBusqueda.Empleado, Me)
+
             RecargarTipos()
             Limpiar()
 

@@ -406,6 +406,298 @@ Sistema de Nominas 6.0
 <member name="M:Sistema_de_Nominas_6._0.FrmBajas.MostrarReporte">
  <summary>Vista previa del reporte de la liquidación calculada, con impresión y exportación a PDF/Excel.</summary>
 </member>
+<member name="T:Sistema_de_Nominas_6._0.TipoBusqueda">
+ <summary>
+ Consultas que ofrece <see cref="T:Sistema_de_Nominas_6._0.FrmConsulta"/> (V.5.0 QueProducto de FrmConsulta).
+ </summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.TipoBusqueda.Empleado">
+ <summary>Empleados activos (V.5.0 "CodigoEmpleado", "EmpleadosSoli", "CodigoEmpleadoReportesIni/Fin").</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.TipoBusqueda.EmpleadoTodos">
+ <summary>Todos los empleados, activos o no (V.5.0 "CodigoProductoHistorico").</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.TipoBusqueda.Solicitud">
+ <summary>Solicitudes de vacaciones y ausencias (V.5.0 "Solicitud").</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.TipoBusqueda.Justificacion">
+ <summary>Tipos de justificación (V.5.0 "Justifica").</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.TipoBusqueda.Proceso">
+ <summary>Procesos de producción con su precio (V.5.0 "Produccion").</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ColumnaBusqueda">
+ <summary>Una columna del grid de <see cref="T:Sistema_de_Nominas_6._0.FrmConsulta"/>.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.ColumnaBusqueda.Formato">
+ <summary>Formato numérico o de fecha (p. ej. "n2", "dd/MM/yyyy"); vacío = sin formato.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.DefinicionBusqueda">
+ <summary>
+ Qué consulta muestra <see cref="T:Sistema_de_Nominas_6._0.FrmConsulta"/>: título, SQL (siempre constante del código, sin parámetros del usuario),
+ columnas y la columna que identifica el registro elegido.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ResultadoBusqueda">
+ <summary>
+ La fila que el usuario eligió en <see cref="T:Sistema_de_Nominas_6._0.FrmConsulta"/>. Reemplaza las propiedades públicas del FrmConsulta de la V.5.0
+ (CodigoEmpleado1, NumeroSolicitud, FechaSolicitud, TipoSolicitud, ...): se leen por nombre de campo con <see cref="M:Sistema_de_Nominas_6._0.ResultadoBusqueda.Texto(System.String)"/>.
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.ResultadoBusqueda.Codigo">
+ <summary>Valor de la columna clave de la consulta.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CatalogoBusquedas">
+ <summary>
+ Define cada consulta de <see cref="T:Sistema_de_Nominas_6._0.FrmConsulta"/> (V.5.0 Form_Load de FrmConsulta, un caso por QueProducto).
+ Los SQL son constantes: el usuario filtra en el grid, nunca se concatena su texto.
+ Solo difiere de la V.5.0 en que los empleados se unen con LEFT JOIN (el INNER JOIN ocultaba a los que no tenían cargo o departamento).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsBuscadorDAL">
+ <summary>
+ Datos de <see cref="T:Sistema_de_Nominas_6._0.FrmConsulta"/>: ejecuta la consulta de una <see cref="T:Sistema_de_Nominas_6._0.DefinicionBusqueda"/>.
+ El filtrado lo hace el grid en memoria (como el FilterBar del TDBGrid de la V.5.0), no hay SQL dinámico.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmConsulta">
+ <summary>
+ Consulta de registros (V.5.0 FrmConsulta): ventana modal con un grid y barra de filtros que elige un registro para otro formulario.
+ Se usa con <see cref="M:Sistema_de_Nominas_6._0.FrmConsulta.Elegir(Sistema_de_Nominas_6._0.TipoBusqueda,System.Windows.Forms.IWin32Window)"/>, que devuelve el registro elegido (<see cref="T:Sistema_de_Nominas_6._0.ResultadoBusqueda"/>)
+ o Nothing si se cancela. Qué consulta se muestra lo define <see cref="T:Sistema_de_Nominas_6._0.CatalogoBusquedas"/>; los datos vienen de <see cref="T:Sistema_de_Nominas_6._0.CsBuscadorDAL"/>.
+ La interfaz se arma por código (no hay Designer).
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.FrmConsulta.Resultado">
+ <summary>El registro elegido; Nothing mientras no se haya pegado nada.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmConsulta.Elegir(Sistema_de_Nominas_6._0.TipoBusqueda,System.Windows.Forms.IWin32Window)">
+ <summary>Abre la consulta como diálogo y devuelve el registro elegido (Nothing si se cancela o falla la carga).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmConsulta.Elegir(Sistema_de_Nominas_6._0.DefinicionBusqueda,System.Windows.Forms.IWin32Window)">
+ <summary>Igual, con una definición propia (columnas y SQL de la consulta).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmConsulta.AgregarBotonBuscar(DevExpress.XtraEditors.SearchLookUpEdit,Sistema_de_Nominas_6._0.TipoBusqueda,System.Windows.Forms.IWin32Window)">
+ <summary>
+ Agrega al combo de código de un formulario el botón de lupa (V.5.0 botón "Consultar" junto al código) que abre esta consulta
+ y deja el código elegido en el combo. Se llama una vez al cargar el formulario.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmConsulta.Pegar">
+ <summary>Pegar (V.5.0 CmdPegar): guarda la fila actual como resultado y cierra.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsSolicitudDAL">
+ <summary>
+ Solicitudes de vacaciones, ausencias, subsidios, feriados, etc. (tabla SolicitudVacaciones), port de Solicitudes.bas (V.5.0).
+ Grabar regenera los días de la solicitud en DescuentoDiasVacaciones. Las solicitudes procesadas en una nómina
+ (NumNomina distinto de 0) no se modifican ni se eliminan. Los errores de validación salen como InvalidOperationException.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.ListarNominas">
+ <summary>Nombres de nómina (TipoNomina.Nomina) para crear una solicitud a todos sus empleados activos.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.BuscarEmpleado(System.String)">
+ <summary>Empleado activo con ese código visible; Nothing si no existe o está inactivo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.ListarPorEmpleado(System.String)">
+ <summary>Solicitudes del empleado, de la más reciente a la más antigua (grid de la pantalla).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.Buscar(System.String)">
+ <summary>La solicitud con ese número; Nothing si no existe.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.ProximoNumero">
+ <summary>Número que tendría la próxima solicitud (5 dígitos, máximo numérico + 1).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.HorasDia(System.String)">
+ <summary>Horas laborales por día según el tipo de nómina del empleado (0 si no se encuentra).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.Guardar(Sistema_de_Nominas_6._0.SolicitudVacaciones)">
+ <summary>
+ Crea la solicitud (número vacío o inexistente) o la modifica, y regenera sus días en DescuentoDiasVacaciones.
+ Devuelve el número grabado.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.GuardarParaNomina(Sistema_de_Nominas_6._0.SolicitudVacaciones,System.String)">
+ <summary>
+ Crea una solicitud por cada empleado activo de la nómina (TipoNomina.Nomina), en una sola transacción.
+ Devuelve cuántas se grabaron. Si falla una no se graba ninguna (la V.5.0 dejaba grabadas las anteriores).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.Eliminar(System.String)">
+ <summary>Elimina la solicitud y sus días. No elimina solicitudes procesadas en una nómina.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.DiasDisfrutar(Sistema_de_Nominas_6._0.SolicitudVacaciones,System.Double)">
+ <summary>Valor que se guarda en DiasDisfrutar: los días, o la fracción de día si la solicitud es de 1 día por horas.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.Validar(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,Sistema_de_Nominas_6._0.SolicitudVacaciones)">
+ <summary>V.5.0 SolicitudValidar. Devuelve las horas por día del empleado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsSolicitudDAL.GrabarDescuentosEn(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.String,System.String,System.String,System.DateTime,System.DateTime,System.Double)">
+ <summary>
+ Regenera los días de la solicitud en DescuentoDiasVacaciones: uno por día del rango, o uno solo con
+ <paramref name="cantidadPagadas"/> en "Vacaciones Pagadas" (V.5.0 SolicitudGrabarDescuentos/GrabaDescuentoDias).
+ También lo usa la importación de solicitudes.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.SolicitudVacaciones">
+ <summary>
+ Solicitud de vacaciones, ausencia, subsidio, feriado, etc. (tabla SolicitudVacaciones; V.5.0 TSolicitud de Solicitudes.bas).
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Numero_Solicitud">
+ <summary>Vacío = asignar el siguiente número al grabar.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Codigo_Empleado">
+ <summary>Código visible del empleado (Empleado.CodEmpleado1).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Clasificacion">
+ <summary>Vacío = no se modifica al grabar.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Dias_Solicitud">
+ <summary>Días del rango (1 cuando la solicitud es por horas).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Horas_Solicitud">
+ <summary>0 = la solicitud es por días.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Dias_Vacaciones">
+ <summary>Informativo: días acumulados al grabar.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Dias_Disfrutados">
+ <summary>Informativo: días disfrutados al grabar.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Dias_Disfrutar">
+ <summary>Valor guardado en DiasDisfrutar (días, o fracción de día si es por horas).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.SolicitudVacaciones.Num_Nomina">
+ <summary>Nómina que procesó la solicitud (0 = pendiente; no se puede modificar ni eliminar si es distinta de 0).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ResumenVacaciones">
+ <summary>Días de vacaciones de un empleado a una fecha: acumulados, solicitados (disfrutados) y saldo.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.ResumenVacaciones.Saldo">
+ <summary>Acumulado - Solicitado, sumado mes a mes como en la V.5.0.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.EmpleadoSolicitud">
+ <summary>Datos del empleado que muestra la pantalla de solicitudes.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.EmpleadoSolicitud.Fecha_Contrato_Vac">
+ <summary>Historico.FechaContratoVac (inicio del cómputo de vacaciones).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.EmpleadoSolicitud.Horas_Dia">
+ <summary>TipoNomina.Horas del tipo de nómina del empleado (0 si no tiene).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.RptSolicitudVacaLargo">
+ <summary>
+ Constancia de solicitud de vacaciones (V.5.0 ArepSolicitudVacaLargo de ActiveReports 2.0, el que imprimía FrmSolicitud
+ para más de 3 días), armada por código sin diseñador: encabezado, carta del empleado con las fechas de descanso y
+ regreso, firmas y resumen de días. Se muestra con <see cref="T:Sistema_de_Nominas_6._0.FrmVisorReporte"/>.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptSolicitudVacaLargo.#ctor(Sistema_de_Nominas_6._0.DatosEmpresa,Sistema_de_Nominas_6._0.SolicitudVacaciones,Sistema_de_Nominas_6._0.EmpleadoSolicitud,System.Double,System.Double,System.Double,System.Nullable{System.Double},System.Nullable{System.DateTime})">
+ <param name="diasAcumulados">Días de vacaciones acumulados (pantalla: Días vacaciones).</param>
+ <param name="diasSolicitados">Días disfrutados incluida esta solicitud (pantalla: Días disfrutados).</param>
+ <param name="saldo">Días disponibles después de esta solicitud.</param>
+ <param name="saldoPeriodosAnteriores">Línea 1 del resumen; la V.5.0 la dejaba vacía (Nothing = vacía).</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptSolicitudVacaLargo.CrearCarta(Sistema_de_Nominas_6._0.DatosEmpresa,Sistema_de_Nominas_6._0.SolicitudVacaciones,Sistema_de_Nominas_6._0.EmpleadoSolicitud,System.DateTime)">
+ <summary>Texto de la constancia (Label19-Label30 de la V.5.0), con los datos en negrita.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptSolicitudVacaLargo.B(System.String)">
+ <summary>Texto en negrita para un XRLabel con markup (escapa los caracteres reservados).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptSolicitudVacaLargo.Imagen(System.String,System.Drawing.RectangleF)">
+ <summary>Imagen desde archivo; Nothing si la ruta está vacía, no existe o no es una imagen.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptSolicitudVacaLargo.Dias(System.Double)">
+ <summary>Días sin decimales si son enteros (5) y con dos si no (0.50).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.RptSolicitudVacaCorto">
+ <summary>
+ Solicitud de vacaciones en formato corto (V.5.0 ArepSolicitudVacaCorto de ActiveReports 2.0, el que imprimía
+ FrmSolicitud para 3 días o menos), armada por código sin diseñador: encabezado, datos del empleado, de la solicitud
+ y del período vacacional, y firmas. Se muestra con <see cref="T:Sistema_de_Nominas_6._0.FrmVisorReporte"/>.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptSolicitudVacaCorto.#ctor(Sistema_de_Nominas_6._0.DatosEmpresa,Sistema_de_Nominas_6._0.SolicitudVacaciones,Sistema_de_Nominas_6._0.EmpleadoSolicitud,System.Double,System.Double,System.Double,System.Nullable{System.DateTime})">
+ <param name="diasVacaciones">Días de vacaciones acumulados (pantalla: Días vacaciones).</param>
+ <param name="diasDisfrutados">Días disfrutados incluida esta solicitud.</param>
+ <param name="diasDisponibles">Días disponibles después de esta solicitud.</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptSolicitudVacaCorto.Campos(System.String[][])">
+ <summary>Filas de dos pares etiqueta / valor.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptSolicitudVacaCorto.Imagen(System.String,System.Drawing.RectangleF)">
+ <summary>Imagen desde archivo; Nothing si la ruta está vacía, no existe o no es una imagen.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmSolicitud">
+ <summary>
+ Solicitud y autorización de días de vacaciones, ausencias, subsidios, feriados, etc. (V.5.0 FrmSolicitud).
+ Solo UI: los datos pasan por <see cref="T:Sistema_de_Nominas_6._0.CsSolicitudDAL"/> y el saldo por <see cref="T:Sistema_de_Nominas_6._0.CsVacacionesDAL"/>.
+ <see cref="M:Sistema_de_Nominas_6._0.FrmSolicitud.CargarEmpleado(System.String)"/> y <see cref="M:Sistema_de_Nominas_6._0.FrmSolicitud.CargarSolicitud(System.String)"/> son públicos para abrir la pantalla desde otros formularios.
+ El botón de impresión es <c>BtnImprimir</c> (en la V.5.0 se llamaba <c>CmdBorrar</c> aunque imprimía).
+ La interfaz se arma por código (no hay Designer).
+ </summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.FrmSolicitud.DiasFormatoLargo">
+ <summary>Más de estos días se imprime el formato largo (<see cref="T:Sistema_de_Nominas_6._0.RptSolicitudVacaLargo"/>); si no, el corto (<see cref="T:Sistema_de_Nominas_6._0.RptSolicitudVacaCorto"/>).</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.FrmSolicitud._cargada">
+ <summary>Solicitud abierta para modificar; Nothing = solicitud nueva.</summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.FrmSolicitud._diasGuardados">
+ <summary>Días de la solicitud abierta que ya están contados en <see cref="F:Sistema_de_Nominas_6._0.FrmSolicitud._resumen"/>.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.RecargarEmpleados">
+ <summary>Vuelve a leer los empleados activos del buscador.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.Limpiar">
+ <summary>Deja la pantalla lista para una solicitud nueva (V.5.0 BackToLife).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.CargarEmpleado(System.String)">
+ <summary>Carga el empleado por su código visible: datos, solicitudes y saldo de vacaciones a hoy.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.CargarSolicitud(System.String)">
+ <summary>Abre una solicitud existente para verla, modificarla, anularla o imprimirla. False si no existe.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.ChkNomina_CheckedChanged(System.Object,System.EventArgs)">
+ <summary>"Toda la nómina": la solicitud se graba para cada empleado activo de la nómina elegida (V.5.0: código = nombre de nómina).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.CmbTipoSolicitud_EditValueChanged(System.Object,System.EventArgs)">
+ <summary>La clasificación sigue al tipo de solicitud (V.5.0 CmbTipoSolicitud_Click).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.Fechas_EditValueChanged(System.Object,System.EventArgs)">
+ <summary>Los días se recalculan con el rango de fechas (fin - inicio + 1).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.AjustarDias">
+ <summary>
+ Un solo día: los días quedan fijos y se pueden pedir horas. Varios días: se pueden rebajar los días (p. ej. sin
+ fines de semana) y las horas quedan en 0 (V.5.0 DtpFechaInicio_Change / TxtDiasSolicitud_Change).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.MostrarTotales">
+ <summary>
+ Días acumulados, disfrutados (incluida esta solicitud) y disponibles. Ausente y Suspensión no muestran los días
+ (V.5.0 CmbTipoSolicitud_LostFocus); los tipos que no descuentan vacaciones no suman a los disfrutados.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.BtnBuscar_Click(System.Object,System.EventArgs)">
+ <summary>Abre una solicitud por su número (V.5.0 PushButton1 + FrmConsulta "Solicitud").</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.BtnGrabar_Click(System.Object,System.EventArgs)">
+ <summary>Autorizar (V.5.0 CmdGrabar): crea o modifica la solicitud, o la crea para toda la nómina.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.BtnAnular_Click(System.Object,System.EventArgs)">
+ <summary>Anular (V.5.0 CmdAnular): elimina la solicitud abierta y sus días.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.BtnImprimir_Click(System.Object,System.EventArgs)">
+ <summary>
+ Imprimir (V.5.0 <c>cmdborrar_Click</c>) con los datos de la pantalla: con más de 3 días la constancia larga
+ <see cref="T:Sistema_de_Nominas_6._0.RptSolicitudVacaLargo"/>; con 3 o menos el formato corto <see cref="T:Sistema_de_Nominas_6._0.RptSolicitudVacaCorto"/>.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmSolicitud.LeerSolicitud">
+ <summary>Pasa los datos de la pantalla a la entidad (V.5.0 LeerSolicitud).</summary>
+</member>
 <member name="T:Sistema_de_Nominas_6._0.CsDALBase">
  <summary>
  Base de los DAL de catálogos: toma la cadena de conexión elegida en runtime
@@ -435,6 +727,12 @@ Sistema de Nominas 6.0
 <member name="M:Sistema_de_Nominas_6._0.CalculadoraVacaciones.Saldo(System.DateTime,System.DateTime,System.Boolean,Sistema_de_Nominas_6._0.CalculadoraVacaciones.DiasSolicitados)">
  <param name="diasMes30">Controles.DiasMes = 30; cualquier otro valor se trata como mes calendario.</param>
 </member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraVacaciones.Calcular(System.DateTime,System.DateTime,System.Boolean,Sistema_de_Nominas_6._0.CalculadoraVacaciones.DiasSolicitados)">
+ <summary>Igual que <see cref="M:Sistema_de_Nominas_6._0.CalculadoraVacaciones.Saldo(System.DateTime,System.DateTime,System.Boolean,Sistema_de_Nominas_6._0.CalculadoraVacaciones.DiasSolicitados)"/>, pero con el total acumulado y el total solicitado (V.5.0 FrmSolicitud.CargarSolicitud).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraVacaciones.Tramo(Sistema_de_Nominas_6._0.ResumenVacaciones,System.Double,System.Double)">
+ <summary>Suma el tramo a los totales y devuelve su diferencia (el saldo se sigue sumando tramo a tramo, como antes).</summary>
+</member>
 <member name="M:Sistema_de_Nominas_6._0.CalculadoraVacaciones.Acumulado(System.DateTime,System.DateTime,System.Boolean,System.Boolean)">
  <summary>
  Días ganados en el tramo. En febrero la V.5.0 sumaba días extra para equipararlo a 30 días; en el último tramo
@@ -461,6 +759,12 @@ Sistema de Nominas 6.0
  "AJUSTE AUTOMATICO" en <paramref name="fecha"/>. Con <paramref name="segunNomina"/> el saldo del sistema se limita a 15
  días y se le restan las vacaciones disfrutadas dentro del período de la nómina de vacaciones activa del empleado.
  </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsVacacionesDAL.CalcularResumen(System.String,System.DateTime)">
+ <summary>Días acumulados, solicitados y saldo al <paramref name="hasta"/>; Nothing si el empleado no existe o está inactivo.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsVacacionesDAL.DescuentaVacaciones(System.String)">
+ <summary>False para los tipos de solicitud que no descuentan días de vacaciones (Ausente, Subsidio, Suspension, Feriado).</summary>
 </member>
 <member name="T:Sistema_de_Nominas_6._0.CsMovimientosDAL">
  <summary>
@@ -940,9 +1244,6 @@ Sistema de Nominas 6.0
 <member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.GrabarSolicitudST(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,Sistema_de_Nominas_6._0.CsImportacionDAL.FilaSolicitudTotal,System.String,System.String,System.Double,System.Int32,System.Boolean,System.Int32@,System.Collections.Generic.List{System.String})">
  <summary>Cantidad = días, o minutos si <paramref name="esMinutos"/>. Devuelve 1 si grabó o actualizó la solicitud, 0 si no había cantidad.</summary>
 </member>
-<member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.GrabarDescuentosST(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.String,System.String,System.String,System.DateTime,System.DateTime,System.Double)">
- <summary>Regenera los días de la solicitud: uno por día, o uno solo con la cantidad total en Vacaciones Pagadas.</summary>
-</member>
 <member name="M:Sistema_de_Nominas_6._0.CsImportacionDAL.EliminarSolicitudesPendientes(System.Int32,System.String)">
  <summary>Borra las solicitudes del tipo de los empleados que figuran en el detalle de la nómina activa indicada, con sus días.</summary>
 </member>
@@ -1347,6 +1648,9 @@ Sistema de Nominas 6.0
 </member>
 <member name="M:Sistema_de_Nominas_6._0.Main.BarButtonBajas_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
  <summary>Página "Procesos" > Bajas; "Despidos y Renuncias" de la página Acceso abre la misma pantalla.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.Main.BarButtonVacaciones_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
+ <summary>Página "Procesos" > Vacaciones: solicitudes de vacaciones, ausencias, subsidios, etc. (V.5.0 FrmSolicitud).</summary>
 </member>
 <member name="M:Sistema_de_Nominas_6._0.Main.AbrirFormulario(System.Windows.Forms.Form)">
  <summary>Muestra el formulario como hijo MDI; si ya está abierto lo trae al frente.</summary>

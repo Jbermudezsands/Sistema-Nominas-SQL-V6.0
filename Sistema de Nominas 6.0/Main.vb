@@ -102,6 +102,11 @@
         AbrirFormulario(My.Forms.FrmBajas)
     End Sub
 
+    ''' <summary>Página "Procesos" > Vacaciones: solicitudes de vacaciones, ausencias, subsidios, etc. (V.5.0 FrmSolicitud).</summary>
+    Private Sub BarButtonVacaciones_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonVacaciones.ItemClick
+
+    End Sub
+
     Private Sub BarButtonUsuarios_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonUsuarios.ItemClick
         AbrirFormulario(My.Forms.FrmUsuarios)
     End Sub
@@ -115,5 +120,9 @@
         frm.MdiParent = Me
         frm.Show()
         frm.Activate()
+    End Sub
+
+    Private Sub BarButtonSolicitud_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonSolicitud.ItemClick
+        AbrirFormulario(My.Forms.FrmSolicitud)
     End Sub
 End Class

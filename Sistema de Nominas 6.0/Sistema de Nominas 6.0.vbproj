@@ -103,6 +103,24 @@
     <Compile Include="FrmBajas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Tablas\TipoBusqueda.vb" />
+    <Compile Include="Tablas\ColumnaBusqueda.vb" />
+    <Compile Include="Tablas\DefinicionBusqueda.vb" />
+    <Compile Include="Tablas\ResultadoBusqueda.vb" />
+    <Compile Include="Clases\CatalogoBusquedas.vb" />
+    <Compile Include="Clases\CsBuscadorDAL.vb" />
+    <Compile Include="FrmConsulta.vb" />
+    <Compile Include="Clases\CsSolicitudDAL.vb" />
+    <Compile Include="Tablas\SolicitudVacaciones.vb" />
+    <Compile Include="Tablas\ResumenVacaciones.vb" />
+    <Compile Include="Tablas\EmpleadoSolicitud.vb" />
+    <Compile Include="Reportes\RptSolicitudVacaLargo.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RptSolicitudVacaCorto.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrmSolicitud.vb" />
     <Compile Include="Clases\CsDALBase.vb" />
     <Compile Include="Clases\CalculadoraVacaciones.vb" />
     <Compile Include="Clases\CsVacacionesDAL.vb" />
@@ -224,7 +242,9 @@
     <Compile Include="FrmJustificaciones.Designer.vb">
       <DependentUpon>FrmJustificaciones.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmJustificaciones.vb" />
+    <Compile Include="FrmJustificaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmQuery.Designer.vb">
       <DependentUpon>FrmQuery.vb</DependentUpon>
     </Compile>
@@ -390,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmListNomina.resx">
       <DependentUpon>FrmListNomina.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMovimientos.resx">
+      <DependentUpon>FrmMovimientos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPeriodo.resx">
       <DependentUpon>FrmPeriodo.vb</DependentUpon>

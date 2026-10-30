@@ -123,8 +123,33 @@ Public Class CsVacacionesDAL
 
     End Function
 
+    ''' <summary>Días acumulados, solicitados y saldo al <paramref name="hasta"/>; Nothing si el empleado no existe o está inactivo.</summary>
+    Public Function CalcularResumen(codigoVisible As String, hasta As Date) As ResumenVacaciones
+
+        Dim r As ResumenVacaciones = Nothing
+
+        EnTransaccion(Sub(cn, tr) r = CalcularResumenEn(cn, tr, codigoVisible, hasta, DiasMesEs30(cn, tr)))
+
+        Return r
+
+    End Function
+
+    ''' <summary>False para los tipos de solicitud que no descuentan días de vacaciones (Ausente, Subsidio, Suspension, Feriado).</summary>
+    Public Shared Function DescuentaVacaciones(tipoSolicitud As String) As Boolean
+        Return Not {"Ausente", "Subsidio", "Suspension", "Feriado"}.Contains(tipoSolicitud)
+    End Function
+
     Private Shared Function CalcularSaldoEn(cn As SqlConnection, tr As SqlTransaction, codigoVisible As String, hasta As Date,
                                             es30 As Boolean) As Double?
+
+        Dim r As ResumenVacaciones = CalcularResumenEn(cn, tr, codigoVisible, hasta, es30)
+
+        Return If(r Is Nothing, CType(Nothing, Double?), r.Saldo)
+
+    End Function
+
+    Private Shared Function CalcularResumenEn(cn As SqlConnection, tr As SqlTransaction, codigoVisible As String, hasta As Date,
+                                              es30 As Boolean) As ResumenVacaciones
 
         Dim contrato As Object = EscalarEn(cn, tr,
             "SELECT TOP 1 h.FechaContratoVac FROM Empleado e INNER JOIN Historico h ON e.CodEmpleado = h.Codempleado " &
@@ -132,7 +157,7 @@ Public Class CsVacacionesDAL
 
         If contrato Is Nothing OrElse IsDBNull(contrato) Then Return Nothing
 
-        Return CalculadoraVacaciones.Saldo(Convert.ToDateTime(contrato), hasta, es30,
+        Return CalculadoraVacaciones.Calcular(Convert.ToDateTime(contrato), hasta, es30,
             Function(desde As Date, limite As Date)
 
                 Dim r As Object = EscalarEn(cn, tr,

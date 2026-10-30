@@ -56,6 +56,7 @@ Tablas SQL conocidas: `Empleado`, `Historico`, `Cargo`, `Departamento`, `TipoNom
 
 ## Convenciones y advertencias
 
+- **Espacio reducido en el MDI**: el área de `Main` (ribbon + barra de estado) deja poco alto y ancho a los formularios hijos, y lo que no cabe se corta (p. ej. `FrmBajas` perdía sus botones). Todo formulario nuevo o migrado debe **calzar dentro del MDI**: tamaño base moderado (alto ≈ 600 o menos, ancho ≈ 1200 o menos; la V.5.0 usaba pantallas más grandes, no copiar sus medidas), botones en una franja/columna **acoplada** (`Dock` abajo o a la derecha) y nunca en una `Location` fija al fondo, y el contenido en un `XtraScrollableControl` o con `Anchor`/`Dock` para que haga scroll si la ventana es menor. Los formularios de captura son `FrmBajas` (columna de botones a la derecha) y `FrmConsulta` (barra inferior) como referencia. Comprobar abriéndolos como hijos MDI, no solo sueltos.
 - Nombres en español; entidades con propiedades estilo `Cod_Empleado`, `Primer_Nombre`, etc. (propiedad ≠ columna SQL: ver `Mapear`/`Parametros`).
 - **Preferir `CsEmpleadosDAL` (parametrizado)** para código nuevo; `ConsultasSQL` y `Compañias` concatenan entrada del usuario (inyección SQL, incl. login con contraseña en texto plano). Migrarlos al estilo parametrizado si se tocan.
 - Bugs visibles en `ConsultasSQL` (no corregidos): `InsertarEmpleados` lista `Numerocelular` dos veces y tiene `SET` dentro de un `VALUES` del INSERT a `Historico`; `ActualizarEmpleado` asigna `CodInss` desde `Codigo_Postal` y `PorcentajePension` desde `Porcentaje_Comision`; `BuscaCompañia` hace `Return` antes de cerrar la conexión Access; `Format(..., "HH:MM:ss")` en `AgregarBitacora` usa `MM` (mes) en vez de `mm` (minutos).
@@ -192,3 +193,36 @@ Migradas de `frmEmpleado.frm` (V.5.0). Se agregan por código en `FrmEmpleados.C
 - **No migrado**: "Imp Detalle" (`ArepDetalleLiquidaBono`), "Imp Historial" (`ArpHistorialLiquida`), "Renovación" (`CmdRenovar`), el botón oculto `CmdCalcular` (`ArepBajas`), buscador `FrmConsulta`.
 - **Verificado** en la BD de pruebas: los montos de 3 liquidaciones grabadas por la V.5.0 (códigos 3670, 5078, 3706, baja 31/12/2025, quincenales) coinciden exactamente (vacaciones con los días digitados, aguinaldo, antigüedad, INSS, IR, años, meses); flujo completo con el empleado 1064 (cálculo, grabado, reporte, exportación PDF/XLSX) y `Procesar` con `ZZTEST-CLAUDE`, todo limpiado y restaurado después; `FrmBajas`, `FrmVisorReporte` y la página del ribbon capturados con `DrawToBitmap`. Pendiente: probar en la app real (no se probó la impresión física).
 - Pruebas desde PowerShell 5.1: el `AssemblyResolve` hecho con un scriptblock provoca StackOverflow al resolver tipos como `[Nullable[double]]` o `New-Object` de tipos anidados; usar un resolver en C# con `Add-Type` y `$asm.CreateInstance(...)`.
+### Solicitudes de vacaciones (`FrmSolicitud`) y reportes `RptSolicitudVacaLargo` / `RptSolicitudVacaCorto`
+
+`BarButtonVacaciones` abre `FrmSolicitud`; está en la página **Procesos** (junto a Bajas, `RibbonPageGroupProcesos`) y también en el grupo "Procesos" (`RibbonPageProcesos`) de la página Acceso. Se abre con `My.Forms.FrmSolicitud` (V.5.0 `FrmSolicitud.frm` + `Solicitudes.bas`). Interfaz armada por código (sin Designer; la clase lleva `DesignerCategory("Code")` para que Visual Studio abra el código y no un diseñador vacío).
+
+| Pieza | Rol |
+|---|---|
+| `CsSolicitudDAL` | `ListarEmpleados`, `ListarNominas`, `BuscarEmpleado`, `ListarPorEmpleado`, `Buscar(numero)`, `ProximoNumero`, `HorasDia`, `Guardar` (alta/cambio + `DescuentoDiasVacaciones` en una transacción), `GuardarParaNomina` (una por empleado activo de `TipoNomina.Nomina`, todo o nada), `Eliminar`, `DiasDisfrutar`; `GrabarDescuentosEn` (Friend) también lo usa `CsImportacionDAL` (se quitó su copia) |
+| `CsVacacionesDAL` | `CalcularResumen(codigo, hasta)` (acumulado/solicitado/saldo) y `DescuentaVacaciones(tipo)`; `CalculadoraVacaciones.Calcular` devuelve el desglose (`Saldo` sigue igual) |
+| Entidades | `SolicitudVacaciones`, `EmpleadoSolicitud`, `ResumenVacaciones` |
+| `RptSolicitudVacaLargo` (Reportes/) | XtraReport por código que reemplaza `ArepSolicitudVacaLargo` (ActiveReports 2.0): encabezado, carta del empleado (fechas de descanso y regreso = fin + 1), firmas (empleado / RRHH / jefe), resumen de 4 líneas y observaciones. Textos recuperados del `.dsx` (typos corregidos) |
+| `RptSolicitudVacaCorto` (Reportes/) | Reemplaza `ArepSolicitudVacaCorto`: encabezado, datos del empleado (nombre, código, cargo, departamento), de la solicitud (inicio, fin, días, horas, observaciones), del período vacacional (vacaciones, disfrutados, disponibles) y firmas (empleado / autorizado por). La V.5.0 no llenaba las observaciones; ahora sí |
+
+- El botón de imprimir se llama **`BtnImprimir`** (en la V.5.0 era `CmdBorrar`/`cmdborrar_Click` aunque imprimía). Más de 3 días → `RptSolicitudVacaLargo`; 3 o menos → `RptSolicitudVacaCorto` (como la V.5.0).
+- Pantalla: Nuevo, Seleccionar (o doble clic en el grid), Autorizar (= grabar), Anular (borra de verdad, como la V.5.0), Imprimir, Buscar solicitud (por número; reemplaza `FrmConsulta` "Solicitud"). "Toda la nómina" reemplaza teclear el nombre de nómina como código.
+- **Diferencias con la V.5.0**: números de solicitud = `MAX` numérico + 1 bajo `TABLOCKX` (y `Consecutivos.Solicitud` solo sube); la constancia usa el mismo cálculo de la pantalla (la V.5.0 recalculaba con otro bucle que contaba todos los tipos); disfrutados/disponibles = solicitado - días ya guardados de esta solicitud + días actuales (sin el +1/-1 fijo ni la suma doble de días y horas de la V.5.0); tras grabar se reabre la solicitud grabada (la V.5.0 limpiaba). La línea "1. Vacaciones períodos anteriores" sale vacía como en la V.5.0.
+- **Verificado** en la BD de pruebas (empleado 1064, solicitud temporal `ZZTEST-CLAUDE`, eliminada y `Consecutivos` restaurado): alta (5 descuentos), cambio a Vacaciones Pagadas por 4 h (0.5 día, 1 descuento), rechazos (horas > horas/día, fin < inicio), eliminación; acumulado igual al guardado por la V.5.0 en 4 de 5 solicitudes (la 5.ª difiere 0.17 por el redondeo 0.0833 frente a ÷12); ambos reportes exportados a PDF/PNG (el corto sin grabar nada) y pantalla capturada con `DrawToBitmap`. Pendiente: probar en la app real e imprimir en papel.
+
+### Consulta de registros (`FrmConsulta`, buscador común)
+
+Migración de `FrmConsulta` de la V.5.0 (el real es `Formularios\FrmConsulCompra.frm`: grid TDBGrid con barra de filtros y un `Select Case QueProducto`). Ventana modal que **devuelve el registro elegido** a quien la llama.
+
+| Pieza | Rol |
+|---|---|
+| `FrmConsulta` | UI: `GridView` con fila de filtro automático (texto = contiene, como el `LIKE '%x%'` de la V.5.0; número/fecha = igual), Pegar/Cancelar, doble clic o Enter eligen. Se usa con `FrmConsulta.Elegir(TipoBusqueda.X, Me)` → `ResultadoBusqueda` o `Nothing` si se cancela |
+| `TipoBusqueda` (Tablas/) | `Empleado` (activos), `EmpleadoTodos`, `Solicitud`, `Justificacion`, `Proceso` |
+| `CatalogoBusquedas` (Clases/) | Un `DefinicionBusqueda` por tipo (SQL constante, columnas, columna clave). **Para agregar una consulta: un caso aquí y un valor del enum** |
+| `CsBuscadorDAL` | `Listar(definicion)`; el filtrado lo hace el grid en memoria, sin SQL dinámico |
+| `ResultadoBusqueda` | Reemplaza las propiedades públicas de la V.5.0 (`CodigoEmpleado1`, `NumeroSolicitud`...): `.Codigo` (columna clave), `.Texto("campo")`, `.Fecha("campo")` |
+
+- Usado por `FrmSolicitud.BtnBuscar` (antes un `InputBox`) y, con `FrmConsulta.AgregarBotonBuscar(combo, tipo, Me)` (lupa en el combo de código), por `FrmSolicitud`, `FrmBajas`, `FrmHistorial` (todos los empleados) y `FrmJustificaciones`. Para otros formularios basta `FrmConsulta.Elegir(TipoBusqueda.Empleado, Me)` y leer `.Codigo`.
+- **Diferencias con la V.5.0**: empleados con `LEFT JOIN` a departamento/cargo (el `INNER JOIN` ocultaba empleados); el orden se cambia haciendo clic en el encabezado (reemplaza `CmdOrden`); sin la búsqueda por teclas (`Respuesta`/`Lectura`, código retirado en la V.5.0).
+- **No migrado**: `CuentaContable` (consulta la tabla `Cuentas` de la BD del sistema contable, `ConexionContable`; no existe en la BD de nómina) y los `QueProducto` de empleado/historial con "pegar" directo en controles de `FrmProduccion`.
+- **Verificado**: compila; las 5 consultas contra la BD de pruebas (769 activos, 1174 totales, 2545 solicitudes; `LeaveClass` y `Procesos` vacías). Pendiente: ver la ventana en pantalla real.

@@ -1021,60 +1021,11 @@ Public Class CsImportacionDAL
 
         End If
 
-        GrabarDescuentosST(cn, tr, f.Cod, tipo, numero, inicio, fin, If(tipo = "Vacaciones Pagadas", If(horasSol = 0 AndAlso diasSol >= 1, (fin - inicio).Days + 1, diasDisfrutar), 0))
+        CsSolicitudDAL.GrabarDescuentosEn(cn, tr, f.Cod, tipo, numero, inicio, fin, If(tipo = "Vacaciones Pagadas", If(horasSol = 0 AndAlso diasSol >= 1, (fin - inicio).Days + 1, diasDisfrutar), 0))
 
         mensajes.Add(f.Cod & ", " & tipo & " " & If(esMinutos, cantidad & " min", cantidad & " días") & If(existente Is Nothing OrElse IsDBNull(existente), ", solicitud agregada", ", solicitud actualizada"))
 
         Return 1
-
-    End Function
-
-    ''' <summary>Regenera los días de la solicitud: uno por día, o uno solo con la cantidad total en Vacaciones Pagadas.</summary>
-    Private Shared Sub GrabarDescuentosST(cn As SqlConnection, tr As SqlTransaction, codigo As String, tipo As String, numero As String,
-                                          inicio As Date, fin As Date, cantidadPagadas As Double)
-
-        EjecutarEn(cn, tr, "DELETE FROM DescuentoDiasVacaciones WHERE NumeroSolicitud = @Num", New SqlParameter("@Num", numero))
-
-        If tipo = "Vacaciones Pagadas" Then
-            GrabarDescuentoDia(cn, tr, inicio, codigo, tipo, numero, cantidadPagadas)
-            Return
-        End If
-
-        Dim dia As Date = inicio
-
-        Do While dia <= fin
-            GrabarDescuentoDia(cn, tr, dia, codigo, tipo, numero, 1)
-            dia = dia.AddDays(1)
-        Loop
-
-    End Sub
-
-    Private Shared Sub GrabarDescuentoDia(cn As SqlConnection, tr As SqlTransaction, fecha As Date, codigo As String, tipo As String, numero As String, cantDias As Double)
-
-        Dim color As Object = ColorDescuento(tipo)
-
-        EjecutarEn(cn, tr,
-            "IF EXISTS (SELECT 1 FROM DescuentoDiasVacaciones WHERE FechaDescuento = @F AND TipoDescuento = @T AND CodigoEmpleado = @C) " &
-            "UPDATE DescuentoDiasVacaciones SET CantDias = @D WHERE FechaDescuento = @F AND TipoDescuento = @T AND CodigoEmpleado = @C " &
-            "ELSE INSERT INTO DescuentoDiasVacaciones (FechaDescuento, CodigoEmpleado, TipoDescuento, NumeroSolicitud, CantDias, Color) " &
-            "VALUES (@F, @C, @T, @N, @D, @Col)",
-            New SqlParameter("@F", fecha.Date), New SqlParameter("@C", codigo), New SqlParameter("@T", tipo),
-            New SqlParameter("@N", numero), New SqlParameter("@D", cantDias), New SqlParameter("@Col", color))
-
-    End Sub
-
-    Private Shared Function ColorDescuento(tipo As String) As Object
-
-        Select Case tipo
-            Case "Vacaciones Pagadas" : Return "&H0000C000&"
-            Case "Vacaciones" : Return "&H00FFC0C0&"
-            Case "Subsidio" : Return "&H0080C0FF&"
-            Case "Ausente" : Return "&H00FF80FF&"
-            Case "Feriado" : Return "&H008888FB&"
-            Case "Vacaciones Programadas" : Return "&H0080FFFF&"
-            Case "Permiso Programado" : Return "&H00FFFF00&"
-            Case Else : Return DBNull.Value
-        End Select
 
     End Function
 
