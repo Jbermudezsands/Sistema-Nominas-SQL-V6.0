@@ -76,6 +76,29 @@ Public Class CsBajasDAL
     ''' </summary>
     Public Sub ActualizarSueldoActual(codEmpleado As Decimal, diasMes As Double)
 
+        Ejecutar(SqlActualizarSueldoActual("E.CodEmpleado = @Cod"),
+                 New SqlParameter("@DiasMes", SqlDbType.Float) With {.Value = diasMes},
+                 New SqlParameter("@Tasa", SqlDbType.Float) With {.Value = TasaParaSueldos()},
+                 ParCod(codEmpleado))
+
+    End Sub
+
+    ''' <summary>
+    ''' Lo mismo para todos los empleados activos de un tipo de nómina (V.5.0 ActualizaSueldoActualMasivo, que usa el
+    ''' cálculo del aguinaldo antes de empezar).
+    ''' </summary>
+    Public Sub ActualizarSueldoActualPorTipo(codTipoNomina As String, diasMes As Double)
+
+        Ejecutar(SqlActualizarSueldoActual("E.CodTipoNomina = @Tipo AND E.Activo = 1"),
+                 New SqlParameter("@DiasMes", SqlDbType.Float) With {.Value = diasMes},
+                 New SqlParameter("@Tasa", SqlDbType.Float) With {.Value = TasaParaSueldos()},
+                 New SqlParameter("@Tipo", SqlDbType.NVarChar, 10) With {.Value = codTipoNomina})
+
+    End Sub
+
+    ''' <summary>Tasa para empleados dolarizados: la de hoy; sin tasa de hoy la última grabada; sin ninguna, 36.6243.</summary>
+    Private Function TasaParaSueldos() As Double
+
         Dim tasa As Double = TasaCambio(Date.Today)
         If tasa = 0 OrElse tasa = 1 Then
             Dim ultima As Object = Escalar("SELECT TOP 1 MontoDia FROM CambioMoneda ORDER BY FechaDia DESC")
@@ -83,8 +106,13 @@ Public Class CsBajasDAL
             If tasa = 0 OrElse tasa = 1 Then tasa = 36.6243
         End If
 
-        Ejecutar(
-            "UPDATE H SET H.SueldoActual = " &
+        Return tasa
+
+    End Function
+
+    ''' <summary>UPDATE de Historico.SueldoActual; <paramref name="filtro"/> es un fragmento constante del código, nunca entrada del usuario.</summary>
+    Private Shared Function SqlActualizarSueldoActual(filtro As String) As String
+        Return "UPDATE H SET H.SueldoActual = " &
             "(CASE WHEN TN.Periodo = 'Semanal' THEN ISNULL(E.SueldoPeriodo,0) * 4 " &
             "      WHEN TN.Periodo = 'Quincenal' THEN ISNULL(E.SueldoPeriodo,0) * 2 " &
             "      WHEN TN.Periodo = 'Mensual' THEN ISNULL(E.SueldoPeriodo,0) " &
@@ -93,12 +121,8 @@ Public Class CsBajasDAL
             "(CASE WHEN ISNULL(E.Dolarizado,0) = 1 THEN @Tasa ELSE 1 END) " &
             "FROM Empleado E INNER JOIN Historico H ON E.CodEmpleado = H.Codempleado " &
             "INNER JOIN TipoNomina TN ON E.CodTipoNomina = TN.CodTipoNomina " &
-            "WHERE E.CodEmpleado = @Cod",
-            New SqlParameter("@DiasMes", SqlDbType.Float) With {.Value = diasMes},
-            New SqlParameter("@Tasa", SqlDbType.Float) With {.Value = tasa},
-            ParCod(codEmpleado))
-
-    End Sub
+            "WHERE " & filtro
+    End Function
 
     ''' <summary>Tasa de cambio del día; 1 si no está grabada (V.5.0 BuscaTasaCambio).</summary>
     Public Function TasaCambio(fecha As Date) As Double

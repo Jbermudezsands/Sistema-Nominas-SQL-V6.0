@@ -102,9 +102,35 @@
         AbrirFormulario(My.Forms.FrmBajas)
     End Sub
 
-    ''' <summary>Página "Procesos" > Vacaciones: solicitudes de vacaciones, ausencias, subsidios, etc. (V.5.0 FrmSolicitud).</summary>
+    ''' <summary>Página "Procesos" > Vacaciones: nómina de vacaciones (V.5.0 Frm13VacaMes, parte de vacaciones). Las solicitudes tienen su propio botón.</summary>
     Private Sub BarButtonVacaciones_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonVacaciones.ItemClick
+        AbrirUnico(Of FrmNominaVacaciones)(Function() New FrmNominaVacaciones)
+    End Sub
 
+    ''' <summary>Página "Procesos" > Aguinaldo: nómina de 13vo mes (V.5.0 Frm13VacaMes, parte del 13vo).</summary>
+    Private Sub BarButtonAguinaldo_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonAguinaldo.ItemClick
+        AbrirUnico(Of FrmAguinaldo)(Function() New FrmAguinaldo)
+    End Sub
+
+    ''' <summary>Página "Historicos": listado de nóminas de vacaciones (V.5.0 FrmListadoNominaVacaciones, pestaña de vacaciones).</summary>
+    Private Sub BarButtonListadoVacaciones_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonListadoVacaciones.ItemClick
+        AbrirUnico(Of FrmListadoNominaVacaciones)(Function() New FrmListadoNominaVacaciones)
+    End Sub
+
+    ''' <summary>Página "Historicos": listado de nóminas de 13vo mes (pestaña de 13vo de la V.5.0).</summary>
+    Private Sub BarButtonListado13vo_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonListado13vo.ItemClick
+        AbrirUnico(Of FrmListadoNomina13vo)(Function() New FrmListadoNomina13vo)
+    End Sub
+
+    ''' <summary>Historial salarial: se abre en la pestaña del aguinaldo y el usuario indica el número de nómina.</summary>
+    Private Sub BarButtonHistorialSalarial_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonHistorialSalarial.ItemClick
+        AbrirUnico(Of FrmSalarioHistorial)(Function() New FrmSalarioHistorial(CsHistorialSalarialDAL.TipoAguinaldo, 0, 0))
+    End Sub
+
+    ''' <summary>Para formularios que se crean con <c>New</c> (no con My.Forms): trae al frente el ya abierto o crea uno nuevo como hijo MDI.</summary>
+    Private Sub AbrirUnico(Of T As Form)(crear As Func(Of T))
+        Dim abierto As Form = MdiChildren.FirstOrDefault(Function(f) TypeOf f Is T AndAlso Not f.IsDisposed)
+        AbrirFormulario(If(abierto, crear()))
     End Sub
 
     Private Sub BarButtonUsuarios_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonUsuarios.ItemClick

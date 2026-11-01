@@ -86,6 +86,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\CsEmpleadoDAL.vb" />
+    <Compile Include="Clases\CalculadoraAguinaldo.vb" />
+    <Compile Include="Clases\CsAguinaldoDAL.vb" />
+    <Compile Include="Clases\CalculadoraNominaVacaciones.vb" />
+    <Compile Include="Clases\CsNominaVacacionesDAL.vb" />
+    <Compile Include="Clases\ExportadorBancos.vb" />
+    <Compile Include="Reportes\RptColillaPago.vb" />
+    <Compile Include="FrmDatosBanco.vb" />
+    <Compile Include="FrmNominaVacaciones.vb" />
+    <Compile Include="FrmAguinaldo.vb" />
+    <Compile Include="FrmListadoNominaBase.vb" />
+    <Compile Include="FrmListadoNominaVacaciones.vb" />
+    <Compile Include="FrmListadoNomina13vo.vb" />
+    <Compile Include="Tablas\NominaPrestacion.vb" />
+    <Compile Include="Clases\CalculadoraDenominaciones.vb" />
+    <Compile Include="Reportes\ConstructorReporte.vb" />
+    <Compile Include="Reportes\RptDenominaciones.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RptTabular.vb" />
+    <Compile Include="Clases\CsHistorialSalarialDAL.vb" />
+    <Compile Include="Reportes\RptHistorialSalarial.vb" />
+    <Compile Include="FrmSalarioHistorial.vb" />
+    <Compile Include="FrmMonedas13vo.vb" />
     <Compile Include="Tablas\EmpleadoBaja.vb" />
     <Compile Include="Tablas\SalarioMesBaja.vb" />
     <Compile Include="Tablas\OpcionesLiquidacion.vb" />
