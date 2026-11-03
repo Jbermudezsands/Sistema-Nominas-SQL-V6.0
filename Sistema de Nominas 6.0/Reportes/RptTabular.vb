@@ -39,7 +39,7 @@ Public Class RptTabular
 
     ''' <param name="campoGrupo">Campo por el que se agrupa (por ejemplo "Departamento"); vacío = sin grupos.</param>
     Public Sub New(empresa As DatosEmpresa, titulo As String, periodo As String, tabla As DataTable,
-                   columnas As IList(Of ColumnaReporte), Optional campoGrupo As String = "", Optional tituloGrupo As String = "")
+                   columnas As IList(Of ColumnaReporte), Optional campoGrupo As String = "", Optional tituloGrupo As String = "", Optional paginaPorGrupo As Boolean = False)
 
         DisplayName = titulo
         PaperKind = DevExpress.Drawing.Printing.DXPaperKind.Letter
@@ -53,10 +53,10 @@ Public Class RptTabular
         Dim encabezado As New ReportHeaderBand
         encabezado.HeightF = ConstructorReporte.Encabezado(encabezado, empresa, titulo, periodo, ancho)
 
-        Dim titulos As New PageHeaderBand With {.HeightF = 24}
+        Dim titulos As New PageHeaderBand With {.HeightF = 32}
         Dim x As Single = 0
         For Each c As ColumnaReporte In columnas
-            Dim lbl As XRLabel = ConstructorReporte.Etiqueta(c.Titulo, x, 2, c.Ancho, 20, True, 8, If(c.Derecha, TextAlignment.MiddleRight, TextAlignment.MiddleLeft))
+            Dim lbl As XRLabel = ConstructorReporte.Etiqueta(c.Titulo, x, 2, c.Ancho, 28, True, 8, If(c.Derecha, TextAlignment.MiddleRight, TextAlignment.MiddleLeft))
             lbl.BackColor = ColorEncabezado
             lbl.Borders = BorderSide.Bottom
             titulos.Controls.Add(lbl)
@@ -87,9 +87,10 @@ Public Class RptTabular
 
         If Not String.IsNullOrEmpty(campoGrupo) Then
             Dim cabeza As New GroupHeaderBand With {.HeightF = 22, .RepeatEveryPage = False}
+            If paginaPorGrupo Then cabeza.PageBreak = PageBreak.BeforeBand
             cabeza.GroupFields.Add(New GroupField(campoGrupo))
-            Dim lblGrupo As XRLabel = ConstructorReporte.Campo(campoGrupo, 70, 3, ancho - 70, 16, "", True, 9)
-            cabeza.Controls.Add(ConstructorReporte.Etiqueta(tituloGrupo & ":", 0, 3, 70, 16, True, 9))
+            Dim lblGrupo As XRLabel = ConstructorReporte.Campo(campoGrupo, 95, 3, ancho - 95, 16, "", True, 9)
+            cabeza.Controls.Add(ConstructorReporte.Etiqueta(tituloGrupo & ":", 0, 3, 95, 16, True, 9))
             cabeza.Controls.Add(lblGrupo)
             Dim piePie As New GroupFooterBand With {.HeightF = 30}
             piePie.Controls.Add(New XRLine With {.BoundsF = New RectangleF(0, 2, ancho, 1)})
@@ -101,7 +102,7 @@ Public Class RptTabular
             Bands.Add(detalle)
         End If
 
-        Bands.Add(total)
+        If columnas.Any(Function(c) c.Sumar) Then Bands.Add(total)
         Bands.Add(pie)
 
     End Sub

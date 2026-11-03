@@ -73,6 +73,36 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property BancoBAC() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BancoBAC", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property BancoBancentro() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BancoBancentro", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property BancoBanpro() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BancoBanpro", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property light_green() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("light_green", resourceCulture)

@@ -102,6 +102,11 @@
         AbrirFormulario(My.Forms.FrmBajas)
     End Sub
 
+    ''' <summary>Página "Procesos" > Calcular Nómina (V.5.0 FrmCalcularNomina): calcula, exporta y cierra la nómina activa.</summary>
+    Private Sub BarButtonCalcularNomina_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonCalcularNomina.ItemClick
+        AbrirUnico(Of FrmCalcularNomina)(Function() New FrmCalcularNomina)
+    End Sub
+
     ''' <summary>Página "Procesos" > Vacaciones: nómina de vacaciones (V.5.0 Frm13VacaMes, parte de vacaciones). Las solicitudes tienen su propio botón.</summary>
     Private Sub BarButtonVacaciones_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonVacaciones.ItemClick
         AbrirUnico(Of FrmNominaVacaciones)(Function() New FrmNominaVacaciones)
@@ -120,6 +125,11 @@
     ''' <summary>Página "Historicos": listado de nóminas de 13vo mes (pestaña de 13vo de la V.5.0).</summary>
     Private Sub BarButtonListado13vo_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonListado13vo.ItemClick
         AbrirUnico(Of FrmListadoNomina13vo)(Function() New FrmListadoNomina13vo)
+    End Sub
+
+    ''' <summary>Página "Historicos" > Reportes de Nómina (V.5.0 FrmReportes, rediseñado como FrmReportesNomina).</summary>
+    Private Sub BarButtonReportesNomina_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonReportesNomina.ItemClick
+        AbrirUnico(Of FrmReportesNomina)(Function() New FrmReportesNomina)
     End Sub
 
     ''' <summary>Historial salarial: se abre en la pestaña del aguinaldo y el usuario indica el número de nómina.</summary>

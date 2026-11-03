@@ -77,15 +77,16 @@ Partial Class Main
         Me.RibbonPageGroupHistoricos = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.BarButtonListadoVacaciones = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonListado13vo = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonReportesNomina = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarButtonIEmpleado, Me.BarButtonListaEmpleado, Me.BarButtonActivarNomina, Me.BarButtonHorasExtra, Me.BarButtonCalcularNomina, Me.BarButtonVacaciones, Me.BarButtonDespidos, Me.BarButtonListaLiquidacion, Me.BarButtonPeriodoNomina, Me.BarButtonPeriodoFiscal, Me.BarButtonTipoNomina, Me.BarButtonListaNomina, Me.BarButtonHistorialSalarial, Me.BarButtonListaVacaciones, Me.BarButtonTasaCambio, Me.BarToggleSwitchItem1, Me.BarMdiChildrenListItem1, Me.BarButtonUsuarios, Me.BarButtonItem16, Me.BarButtonSalir, Me.BarButtonRespaldar, Me.BarButtonCargo, Me.BarButtonDepartamento, Me.BarButtonDeduccion, Me.BarButtonControles, Me.BarButtonIncapacidades, Me.BarButtonTipoComision, Me.BarButtonTipoDestajo, Me.BarButtonTipoIncapacidad, Me.BarButtonCargaMasiva, Me.BarButtonHistorial, Me.BarButtonImportar, Me.BarButtonJustificaciones, Me.BarButtonQuery, Me.BarButtonInssIr, Me.BarButtonBajas, Me.BarButtonAguinaldo, Me.BarButtonSolicitud, Me.BarButtonListadoVacaciones, Me.BarButtonListado13vo})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarButtonIEmpleado, Me.BarButtonListaEmpleado, Me.BarButtonActivarNomina, Me.BarButtonHorasExtra, Me.BarButtonCalcularNomina, Me.BarButtonVacaciones, Me.BarButtonDespidos, Me.BarButtonListaLiquidacion, Me.BarButtonPeriodoNomina, Me.BarButtonPeriodoFiscal, Me.BarButtonTipoNomina, Me.BarButtonListaNomina, Me.BarButtonHistorialSalarial, Me.BarButtonListaVacaciones, Me.BarButtonTasaCambio, Me.BarToggleSwitchItem1, Me.BarMdiChildrenListItem1, Me.BarButtonUsuarios, Me.BarButtonItem16, Me.BarButtonSalir, Me.BarButtonRespaldar, Me.BarButtonCargo, Me.BarButtonDepartamento, Me.BarButtonDeduccion, Me.BarButtonControles, Me.BarButtonIncapacidades, Me.BarButtonTipoComision, Me.BarButtonTipoDestajo, Me.BarButtonTipoIncapacidad, Me.BarButtonCargaMasiva, Me.BarButtonHistorial, Me.BarButtonImportar, Me.BarButtonJustificaciones, Me.BarButtonQuery, Me.BarButtonInssIr, Me.BarButtonBajas, Me.BarButtonAguinaldo, Me.BarButtonSolicitud, Me.BarButtonListadoVacaciones, Me.BarButtonListado13vo, Me.BarButtonReportesNomina})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 40
+        Me.RibbonControl.MaxItemId = 43
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1, Me.RibbonPageCatalogo, Me.RibbonPageProcesosBajas, Me.RibbonPageHistoricos, Me.RibbonPageOpciones})
         Me.RibbonControl.Size = New System.Drawing.Size(1260, 158)
@@ -468,6 +469,7 @@ Partial Class Main
         '
         Me.RibbonPageGroupHistoricos.ItemLinks.Add(Me.BarButtonListadoVacaciones)
         Me.RibbonPageGroupHistoricos.ItemLinks.Add(Me.BarButtonListado13vo)
+        Me.RibbonPageGroupHistoricos.ItemLinks.Add(Me.BarButtonReportesNomina)
         Me.RibbonPageGroupHistoricos.Name = "RibbonPageGroupHistoricos"
         Me.RibbonPageGroupHistoricos.Text = "Historicos"
         '
@@ -484,6 +486,13 @@ Partial Class Main
         Me.BarButtonListado13vo.Id = 41
         Me.BarButtonListado13vo.ImageOptions.ImageUri.Uri = "History"
         Me.BarButtonListado13vo.Name = "BarButtonListado13vo"
+        '
+        'BarButtonReportesNomina
+        '
+        Me.BarButtonReportesNomina.Caption = "Reportes de Nomina"
+        Me.BarButtonReportesNomina.Id = 42
+        Me.BarButtonReportesNomina.ImageOptions.ImageUri.Uri = "Report"
+        Me.BarButtonReportesNomina.Name = "BarButtonReportesNomina"
         '
         'RibbonPageOpciones
         '
@@ -615,4 +624,5 @@ Partial Class Main
     Friend WithEvents RibbonPageGroupHistoricos As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents BarButtonListadoVacaciones As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarButtonListado13vo As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonReportesNomina As DevExpress.XtraBars.BarButtonItem
 End Class

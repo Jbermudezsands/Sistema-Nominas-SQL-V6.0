@@ -92,6 +92,7 @@
     <Compile Include="Clases\CsNominaVacacionesDAL.vb" />
     <Compile Include="Clases\ExportadorBancos.vb" />
     <Compile Include="Reportes\RptColillaPago.vb" />
+    <Compile Include="Reportes\RptColillaDetalle.vb" />
     <Compile Include="FrmDatosBanco.vb" />
     <Compile Include="FrmNominaVacaciones.vb" />
     <Compile Include="FrmAguinaldo.vb" />
@@ -104,6 +105,8 @@
     <Compile Include="Reportes\RptDenominaciones.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\CatalogoReportesNomina.vb" />
+    <Compile Include="Reportes\ReportesNominaActiva.vb" />
     <Compile Include="Reportes\RptTabular.vb" />
     <Compile Include="Clases\CsHistorialSalarialDAL.vb" />
     <Compile Include="Reportes\RptHistorialSalarial.vb" />
@@ -115,6 +118,19 @@
     <Compile Include="Tablas\Liquidacion.vb" />
     <Compile Include="Clases\CalculadoraLiquidacion.vb" />
     <Compile Include="Clases\CalculadoraIRBaja.vb" />
+    <Compile Include="Clases\CalculadoraIR.vb" />
+    <Compile Include="Clases\CalculadoraInss.vb" />
+    <Compile Include="Clases\CalculadoraAusencias.vb" />
+    <Compile Include="Clases\CalculadoraNomina.vb" />
+    <Compile Include="Clases\CsCalculoNominaDAL.vb" />
+    <Compile Include="Clases\CsCierreNominaDAL.vb" />
+    <Compile Include="Clases\CsPlanillaNominaDAL.vb" />
+    <Compile Include="Clases\CsReportesNominaDAL.vb" />
+    <Compile Include="Clases\CsNominaActivaDAL.vb" />
+    <Compile Include="Clases\ExportadorCsv.vb" />
+    <Compile Include="FrmCalcularNomina.vb" />
+    <Compile Include="FrmReportesNomina.vb" />
+    <Compile Include="FrmNominaActiva.vb" />
     <Compile Include="Clases\CsBajasDAL.vb" />
     <Compile Include="Clases\CsLiquidacion.vb" />
     <Compile Include="Reportes\RptLiquidacion.vb">
@@ -477,6 +493,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\EdificioNegro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BancoBAC.png" />
+    <None Include="Resources\BancoBanpro.png" />
+    <None Include="Resources\BancoBancentro.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\light_green.png" />

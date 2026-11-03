@@ -10,7 +10,7 @@ Public Class CsVacacionesDAL
     Inherits CsDALBase
 
     ''' <summary>Tipos de solicitud que no descuentan vacaciones.</summary>
-    Private Const TiposExcluidos As String = "('Ausente', 'Subsidio', 'Suspension', 'Feriado')"
+    Friend Const TiposExcluidos As String = "('Ausente', 'Subsidio', 'Suspension', 'Feriado')"
 
     ''' <summary>Saldo de días al <paramref name="hasta"/> del empleado activo con ese código visible; Nothing si no existe o está inactivo.</summary>
     Public Function CalcularSaldo(codigoVisible As String, hasta As Date) As Double?
@@ -148,7 +148,7 @@ Public Class CsVacacionesDAL
 
     End Function
 
-    Private Shared Function CalcularResumenEn(cn As SqlConnection, tr As SqlTransaction, codigoVisible As String, hasta As Date,
+    Friend Shared Function CalcularResumenEn(cn As SqlConnection, tr As SqlTransaction, codigoVisible As String, hasta As Date,
                                               es30 As Boolean) As ResumenVacaciones
 
         Dim contrato As Object = EscalarEn(cn, tr,
@@ -173,7 +173,7 @@ Public Class CsVacacionesDAL
 
     End Function
 
-    Private Shared Function DiasMesEs30(cn As SqlConnection, tr As SqlTransaction) As Boolean
+    Friend Shared Function DiasMesEs30(cn As SqlConnection, tr As SqlTransaction) As Boolean
 
         Dim r As Object = EscalarEn(cn, tr, "SELECT TOP 1 DiasMes FROM Controles")
 

@@ -109,7 +109,9 @@ Public Class RptColillaPago
         cuerpo.Controls.Add(New XRLine With {.BoundsF = New RectangleF(100, y + 14, 260, 1)})
 
         ' Separador entre colillas
-        cuerpo.Controls.Add(New XRLine With {.BoundsF = New RectangleF(0, AltoColilla - 6, Ancho, 1), .LineStyle = DevExpress.Drawing.DXDashStyle.Dash})
+        ' La altura depende de cuántos conceptos lleva el formato.
+        cuerpo.HeightF = y + 28
+        cuerpo.Controls.Add(New XRLine With {.BoundsF = New RectangleF(0, cuerpo.HeightF - 6, Ancho, 1), .LineStyle = DevExpress.Drawing.DXDashStyle.Dash})
 
     End Sub
 

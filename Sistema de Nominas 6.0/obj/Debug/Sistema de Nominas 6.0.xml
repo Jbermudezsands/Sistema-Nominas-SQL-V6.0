@@ -27,6 +27,21 @@ Sistema de Nominas 6.0
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.BancoBAC">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.BancoBancentro">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.BancoBanpro">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Sistema_de_Nominas_6._0.My.Resources.Resources.light_green">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
@@ -388,6 +403,42 @@ Sistema de Nominas 6.0
  nueva (la tabla debe venir ordenada por Departamento). Se muestra con <see cref="T:Sistema_de_Nominas_6._0.FrmVisorReporte"/>.
  </summary>
 </member>
+<member name="T:Sistema_de_Nominas_6._0.RptSubDeducciones">
+ <summary>
+ Sub-reporte con una fila por deducción del empleado (V.5.0 SubColillaDeduccion): crece con la cantidad de filas. Se llena con la
+ vista ya filtrada al empleado (columnas Deduccion y Valor).
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.RptColillaDetalle">
+ <summary>
+ Colilla de pago "Trides" (V.5.0 ArepColillasPago4), con la disposición de la impresión de la V.5.0: tres colillas por hoja carta,
+ logo de la empresa, ingresos y deducciones con sus cantidades y, a la derecha, el cuadro "Detalle Deducciones" con un
+ sub-reporte (<see cref="T:Sistema_de_Nominas_6._0.RptSubDeducciones"/>) que crece con cada deducción y empuja hacia abajo el total. La tabla es la de
+ <see cref="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.ListarParaReporte(System.Int32,System.String,System.Boolean)"/> y <c>detalleDeducciones</c> la de
+ <see cref="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.ListarDetalleDeducciones(System.Int32)"/> (Codigo, Deduccion, Valor).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptColillaDetalle.Fila(DevExpress.XtraReports.UI.DetailBand,System.Single,System.Single,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Una línea "título … cantidad … monto" (título y monto en la columna que empieza en <paramref name="x"/>); devuelve la siguiente Y.
+ Con <paramref name="campoTitulo"/> el título sale de un campo de la tabla.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptColillaDetalle.TextoPeriodo(System.String)">
+ <summary>"Colilla de Pago # 33, Correspondiente del martes, 16 de diciembre de 2025 al miércoles, 31 de diciembre de 2025" (V.5.0).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptColillaDetalle.PrepararColumnas(System.Data.DataTable)">
+ <summary>Agrega a la tabla los campos derivados que usa el diseño (etiqueta del subsidio).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptColillaDetalle.EtiquetaSubsidio(System.String)">
+ <summary>Rótulo del subsidio según la clasificación (V.5.0 Detail_Format de ArepColillasPago4).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptColillaDetalle.Logo_BeforePrint(System.Object,System.ComponentModel.CancelEventArgs)">
+ <summary>Logo de la empresa (como la V.5.0, que lo ponía sobre la foto); si no hay logo, la foto del empleado (RutaFoto\código.jpg|gif|bmp).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.RptColillaDetalle.Subreporte_BeforePrint(System.Object,System.ComponentModel.CancelEventArgs)">
+ <summary>Arma el sub-reporte con las deducciones del empleado que se está imprimiendo.</summary>
+</member>
 <member name="T:Sistema_de_Nominas_6._0.FrmDatosBanco">
  <summary>
  Datos que pide el banco antes de generar el archivo de pago (V.5.0 FrmExportaBac y los datos fijos de CmdExportaBanpro):
@@ -507,6 +558,51 @@ Sistema de Nominas 6.0
  <param name="subtitulo">Nómina a la que pertenece (por ejemplo "Aguinaldo No. 3").</param>
  <param name="cantidades">Cantidad por denominación, en el orden de <see cref="F:Sistema_de_Nominas_6._0.CalculadoraDenominaciones.Valores"/>.</param>
 </member>
+<member name="T:Sistema_de_Nominas_6._0.CatalogoReportesNomina">
+ <summary>
+ Formatos de colilla y de nómina que la V.5.0 resolvía con ActiveReports (ArepColillas*, ArepNomina*): cada formato es el mismo
+ diseño con otros conceptos o con otra agrupación, así que se definen aquí como datos sobre <see cref="T:Sistema_de_Nominas_6._0.RptColillaPago"/> y
+ <see cref="T:Sistema_de_Nominas_6._0.RptTabular"/>. La tabla debe venir de <see cref="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.ListarParaReporte(System.Int32,System.String,System.Boolean)"/>.
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CatalogoReportesNomina.Formato.ValorV5">
+ <summary>Valor de DatosEmpresa.Formato_Colilla / Formato_Nomina de la V.5.0 que corresponde a este formato.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CatalogoReportesNomina.ClaveDe(System.Collections.Generic.IList{Sistema_de_Nominas_6._0.CatalogoReportesNomina.Formato},System.String)">
+ <summary>Clave del formato que corresponde al valor guardado en la V.5.0; si no hay equivalente, la primera de la lista.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CatalogoReportesNomina.OrdenNomina(System.String)">
+ <summary>Campo por el que debe venir ordenada la tabla para el formato de nómina (Grupo, Departamento o Cargo).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CatalogoReportesNomina.ColumnasNomina(System.String)">
+ <summary>Columnas del formato de nómina con sus anchos relativos (sin ajustar a la hoja).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ReporteNominaActiva">
+ <summary>Un reporte de la lista de FrmNominaActiva.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.ReporteNominaActiva.Imprime">
+ <summary>Se puede ver/imprimir (la nómina sin formato solo se exporta).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ReportesNominaActiva">
+ <summary>
+ Reportes de la nómina activa de la V.5.0 (FrmNominaActiva) con DevExpress: reemplaza ArepListadoCheque, ArepHorasExtras, ArepNomina,
+ ArepNominaDepartamento, ArepNominaDpto, ArepNominaDptoResumen, ArepProduccion y ArepPersepciones. Cada reporte sale de una consulta de
+ <see cref="T:Sistema_de_Nominas_6._0.CsNominaActivaDAL"/> o <see cref="T:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL"/> y se dibuja con <see cref="T:Sistema_de_Nominas_6._0.RptTabular"/> o
+ <see cref="T:Sistema_de_Nominas_6._0.RptColillaPago"/>; los mismos datos y columnas sirven para exportar a Excel y CSV.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.ReportesNominaActiva.ClaveNomina(System.String)">
+ <summary>Formato de nómina que usa el reporte (cuando es uno de los de planilla); vacío para los demás.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.ReportesNominaActiva.Columnas(System.String)">
+ <summary>Columnas del reporte: se usan para dibujarlo y para titular las exportaciones.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.ReportesNominaActiva.TablaExportable(System.String,System.Data.DataTable)">
+ <summary>Copia de los datos con los títulos de las columnas del reporte como encabezados, lista para Excel.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.ReportesNominaActiva.ColumnasCsv(System.String,System.Data.DataTable)">
+ <summary>Pares encabezado/campo para <see cref="T:Sistema_de_Nominas_6._0.ExportadorCsv"/>.</summary>
+</member>
 <member name="T:Sistema_de_Nominas_6._0.ColumnaReporte">
  <summary>Una columna de <see cref="T:Sistema_de_Nominas_6._0.RptTabular"/>: título, campo de la tabla, ancho (centésimas de pulgada) y formato.</summary>
 </member>
@@ -524,7 +620,7 @@ Sistema de Nominas 6.0
  ordenada por el campo de grupo. Se muestra con <see cref="T:Sistema_de_Nominas_6._0.FrmVisorReporte"/>.
  </summary>
 </member>
-<member name="M:Sistema_de_Nominas_6._0.RptTabular.#ctor(Sistema_de_Nominas_6._0.DatosEmpresa,System.String,System.String,System.Data.DataTable,System.Collections.Generic.IList{Sistema_de_Nominas_6._0.ColumnaReporte},System.String,System.String)">
+<member name="M:Sistema_de_Nominas_6._0.RptTabular.#ctor(Sistema_de_Nominas_6._0.DatosEmpresa,System.String,System.String,System.Data.DataTable,System.Collections.Generic.IList{Sistema_de_Nominas_6._0.ColumnaReporte},System.String,System.String,System.Boolean)">
  <param name="campoGrupo">Campo por el que se agrupa (por ejemplo "Departamento"); vacío = sin grupos.</param>
 </member>
 <member name="M:Sistema_de_Nominas_6._0.RptTabular.FormatoEnlace(Sistema_de_Nominas_6._0.ColumnaReporte)">
@@ -727,6 +823,348 @@ Sistema de Nominas 6.0
 </member>
 <member name="M:Sistema_de_Nominas_6._0.CalculadoraIRBaja.SemanasDelMes(System.DateTime,System.String)">
  <summary>Cantidad de viernes (Semanal Viernes) o sábados (resto) del mes de la fecha.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraIR">
+ <summary>
+ IR de la nómina, port de CalcularMontoIr / BuscarIrAnual (FrmCalcularNomina.frm, V.5.0) sin acceso a datos ni
+ variables globales. Quien llama (CsCalculoNominaDAL) reúne los acumulados y arma <see cref="T:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR"/>.
+ La tabla IR es anual; el primer tramo (exento) se omite como hacía la V.5.0 con MoveNext.
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.TipoCalculoIr">
+ <summary>"Calcular IR x 12" u otro valor (DatosEmpresa.TipoCalculoIR).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.PorcientoIr">
+ <summary>TipoNomina.PorcientoIr: IR = % fijo sobre el bruto en lugar de la tabla.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.Moneda">
+ <summary>"US" = nómina en dólares (se convierte con TasaCambio).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.Tramos">
+ <summary>Tabla IR ordenada por Desde, incluyendo el tramo exento.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.InssSalario">
+ <summary>INSS del salario (sin vacaciones) que se resta del devengado.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.SueldoPeriodo">
+ <summary>Sueldo del período, para el caso de subsidio de 15 días o más sin monto (BuscaSalarioPeriodo).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.InssVacaciones">
+ <summary>INSS de las vacaciones pagadas (CalculadoraInss sobre MontoVacacionesPagadas).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.DiaFin">
+ <summary>Día del mes de la fecha final de la nómina.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.EsUltimaSemanaDelMes">
+ <summary>BuscaUltimaSemana: la nómina es la última semana del mes (semanales).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR.NumeroPeriodo">
+ <summary>Períodos que faltan en el año fiscal (24 - (período - 1) quincenal, 12 - (...) mensual).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraIR.ImpuestoAnual(System.Collections.Generic.IList{Sistema_de_Nominas_6._0.CalculadoraIRBaja.TramoIR},System.Double)">
+ <summary>Impuesto anual sobre un monto anual (BuscarIrAnual de la V.5.0, rama quincenal): 0 si cae en el tramo exento.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraIR.CalcularBases(Sistema_de_Nominas_6._0.CalculadoraIR.ParametrosIR,System.Double@,System.Double@,System.Double@)">
+ <summary>Calcula MontoBruto, MontoBrutoMensual y MontoBrutoAnual según el período (primer Select Case de la V.5.0).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraIR.TramoMensual(System.Collections.Generic.List{Sistema_de_Nominas_6._0.CalculadoraIRBaja.TramoIR},System.Double,System.Double)">
+ <summary>Tramo del bruto mensual (bruto*12 contra la tabla) si alcanza el mínimo gravable.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraInss">
+ <summary>
+ INSS laboral y patronal de la nómina, port de CalcularMontoINSS (Funciones.bas, V.5.0) sin acceso a datos ni
+ variables globales. Lo usan todos los formularios que calculan nómina (normal, vacaciones, liquidación...).
+ Dos modos, según TipoNomina.PorcientoInss: porcentaje (TasaInss/TasaInssPatronal) o tabla (tabla Inss).
+ </summary>
+</member>
+<member name="F:Sistema_de_Nominas_6._0.CalculadoraInss.TechoMensual">
+ <summary>Techo mensual de cotización (constante fija de la V.5.0).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraInss.TramoInss">
+ <summary>Fila de la tabla Inss. Columnas 1 = semanal, 4 = mes de 4 semanas, 5 = mes de 5 semanas.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraInss.ParametrosInss.Periodo">
+ <summary>TipoNomina.Periodo (Quincenal, Mensual, Semanal Viernes...).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraInss.ParametrosInss.Tramos">
+ <summary>Tabla Inss ordenada por Desde (solo en modo tabla).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraInss.ParametrosInss.SalarioMensual">
+ <summary>Base para buscar el tramo de la tabla (en la V.5.0 el parámetro SalarioMensual).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraInss.ParametrosInss.DiaFin">
+ <summary>Día del mes de la fecha final de la nómina (DiaFin >= 28 = cierre de mes).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraInss.ParametrosInss.CantSabados">
+ <summary>Sábados/viernes del mes: 4 usa la columna 4 de la tabla, otro valor la 5.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraInss.ParametrosInss.InssAnterior">
+ <summary>INSS ya retenido en las nóminas anteriores del mismo mes.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraInss.ResultadoInss.Mensual">
+ <summary>INSS acumulado del mes (anterior + el de esta nómina).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraInss.DiasPeriodo(System.String)">
+ <summary>Días de cada período (PeriodoDias de la V.5.0).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraAusencias">
+ <summary>
+ Ausencias, subsidio, vacaciones pagadas y antigüedad de la nómina. Port de la clasificación de solicitudes de
+ CmdCalcular_Click, CalcularSubsidio, CalcularVacacionesPagadasSolicitud y del bloque de antigüedad
+ (FrmCalcularNomina.frm, V.5.0), sin acceso a datos ni variables globales.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraAusencias.SolicitudDias">
+ <summary>Solicitud de ausencia ya agrupada por tipo (SolicitudVacaciones.DiasDisfrutar).</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraAusencias.SolicitudSubsidio">
+ <summary>Solicitud de subsidio que se cruza con el período de la nómina.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraAusencias.SolicitudSubsidio.Clasificacion">
+ <summary>Embarazo, Riesgo Laboral u otra (Clasificacion de la solicitud).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraAusencias.ResultadoAusencias.DiasDescuento">
+ <summary>ConDiasDescuento: días que se descuentan como falta (deducción 01).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraAusencias.ResultadoAusencias.DiasBasico">
+ <summary>DiasBasico: días de salario básico que se restan del devengado.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraAusencias.ResultadoSubsidio.DiasSubsidio">
+ <summary>Días de subsidio del período (pDiasSubsidio).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraAusencias.ResultadoSubsidio.DiasBasico">
+ <summary>Días que se suman a DiasBasico (TotalDiasBasico).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraAusencias.ResultadoSubsidio.Clasificacion">
+ <summary>Clasificación de la última solicitud (se graba en DetalleNomina.Clasificacion_Subsidio).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraAusencias.ClasificarSolicitudes(System.Collections.Generic.IEnumerable{Sistema_de_Nominas_6._0.CalculadoraAusencias.SolicitudDias})">
+ <summary>Convierte las solicitudes del período en días de descuento y de salario básico.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraAusencias.DiasTraslape(System.DateTime,System.DateTime,System.DateTime,System.DateTime)">
+ <summary>Días calendario del traslape entre una solicitud y el período (las cuatro comparaciones de la V.5.0, en el mismo orden).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraAusencias.CalcularSubsidio(System.Collections.Generic.IEnumerable{Sistema_de_Nominas_6._0.CalculadoraAusencias.SolicitudSubsidio},System.DateTime,System.DateTime,System.Double,System.Double,System.Double,System.Boolean)">
+ <summary>CalcularSubsidio de la V.5.0.</summary>
+ <param name="montoDia">BuscaMontoDia del tipo de nómina (<see cref="M:Sistema_de_Nominas_6._0.CalculadoraNomina.MontoDiaPeriodo(System.String,System.Double,System.Double,System.Double,System.Double,System.Double)"/>).</param>
+ <param name="diasDescuento">ConDiasDescuento ya clasificado.</param>
+ <param name="porcientoSubsidio">DatosEmpresa.PorcientoSubsidio (0 = el subsidio paga el día completo).</param>
+ <param name="restar3Dias">DatosEmpresa.Restar3DiasSubsidio.</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraAusencias.VacacionesPagadas(System.Collections.Generic.IEnumerable{System.Double},System.Double)">
+ <summary>
+ Vacaciones pagadas por solicitud (CalcularVacacionesPagadasSolicitud). La V.5.0 acumulaba los días entre
+ solicitudes y volvía a sumar el monto anterior, con lo que pagaba de más si había dos o más; aquí es días × valor del día.
+ </summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraAusencias.TramoAntiguedad">
+ <summary>Fila de la tabla Antiguedad (años acumulados → % sobre el sueldo).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraAusencias.AniosAntiguedad(System.DateTime,System.DateTime)">
+ <summary>Años de antigüedad a la fecha final de la nómina, redondeados a dos decimales como la V.5.0 (días / 365).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraAusencias.Antiguedad(System.Double,System.Collections.Generic.IEnumerable{Sistema_de_Nominas_6._0.CalculadoraAusencias.TramoAntiguedad},System.Double)">
+ <summary>Recargo por antigüedad del período; 0 si no hay fila para los años cumplidos.</summary>
+ <param name="sueldoBase">SueldoPeriodo + AumentoBasico (la V.5.0 sumaba además el MontoSubsidio del empleado anterior, un residuo del ciclo; aquí no).</param>
+ <remarks>La V.5.0 tenía una rama por horas (HoraBasico × tarifa) para los demás períodos, pero preguntaba por una variable mal escrita (siempre 0), así que nunca se ejecutaba; se conserva el resultado real: porcentaje sobre el sueldo.</remarks>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CalculadoraNomina">
+ <summary>
+ Cálculo de un empleado en la nómina, port del cuerpo de CmdCalcular_Click (FrmCalcularNomina.frm, V.5.0) sin
+ acceso a datos ni variables globales: quien llama arma <see cref="T:Sistema_de_Nominas_6._0.CalculadoraNomina.EntradaNomina"/> (empleado, configuración,
+ movimientos y acumulados) y recibe <see cref="T:Sistema_de_Nominas_6._0.CalculadoraNomina.ResultadoNomina"/> con los valores de DetalleNomina.
+ Usa <see cref="T:Sistema_de_Nominas_6._0.CalculadoraInss"/> y <see cref="T:Sistema_de_Nominas_6._0.CalculadoraIR"/> para las retenciones.
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraNomina.EntradaNomina.SueldoPeriodo">
+ <summary>Empleado.SueldoPeriodo ya multiplicado por la tasa de cambio si es dolarizado.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraNomina.EntradaNomina.MontoBasico">
+ <summary>Descuento de días de salario básico (MontoBasico = DiasBasico * MontoDia).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CalculadoraNomina.EntradaNomina.MontoHora">
+ <summary>BuscaMontoHora ya calculado (<see cref="M:Sistema_de_Nominas_6._0.CalculadoraNomina.MontoHoraPeriodo(System.String,System.Double,System.Double,System.Double,System.Double,System.Double)"/>).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraNomina.DeduccionPorFaltas(System.String,System.Double,System.Double,System.Double,System.Double,System.Double)">
+ <summary>BuscaDeduccionPorFalta de la V.5.0.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraNomina.TarifaHorariaSueldo(System.String,System.Double,System.Double)">
+ <summary>Tarifa horaria que la V.5.0 deriva del sueldo del período (variable TarifaHoraria, redondeada a dos decimales); base del séptimo día.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraNomina.MontoHoraPeriodo(System.String,System.Double,System.Double,System.Double,System.Double,System.Double)">
+ <summary>BuscaMontoHora de la V.5.0 (valor de la hora ordinaria, usado para las horas extra).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraNomina.MontoDiaPeriodo(System.String,System.Double,System.Double,System.Double,System.Double,System.Double)">
+ <summary>BuscaMontoDia de la V.5.0 (valor del día, para descuentos de salario y vacaciones pagadas).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraNomina.ProvisionMes13Vacaciones(System.String,System.Double,System.Double,System.Double,System.Double,System.Int32,System.Double)">
+ <summary>CalcularProvMes13Vaca de la V.5.0: devuelve (provisión de vacaciones, 13vo mes).</summary>
+ <param name="salario">Base del período; con 0 y subsidio completo sin monto se provisiona sobre SueldoPeriodo.</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CalculadoraNomina.Redondear(System.Double,System.Boolean)">
+ <summary>Redondear de la V.5.0 (Controles.CalcularRedondeado): entero más cercano si está activo, si no el mismo valor.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsCalculoNominaDAL">
+ <summary>
+ Calcula la nómina activa de un tipo de nómina (CmdCalcular_Click de FrmCalcularNomina, V.5.0): lee empleado y
+ movimientos, llama a <see cref="T:Sistema_de_Nominas_6._0.CalculadoraNomina"/> y graba DetalleNomina y los totales de Nomina, todo en una
+ sola transacción. <see cref="M:Sistema_de_Nominas_6._0.CsCalculoNominaDAL.Simular(System.String)"/> hace el mismo proceso y lo deshace, para contrastar con lo calculado.
+ </summary>
+ <remarks>
+ Aún no cubre (se avisa con NotSupportedException o en <see cref="P:Sistema_de_Nominas_6._0.CsCalculoNominaDAL.ResumenCalculo.Advertencias"/>): nómina por horas
+ trabajadas/producción, períodos semanales, IR distinto de "Calcular IR x 12", puntos/horas turno, indemnización,
+ días adicionales, empleados suspendidos y el viático automático por configuración.
+ </remarks>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsCalculoNominaDAL.ResumenCalculo.Detalle">
+ <summary>Filas de DetalleNomina resultantes (solo se llena en <see cref="M:Sistema_de_Nominas_6._0.CsCalculoNominaDAL.Simular(System.String)"/>).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCalculoNominaDAL.Simular(System.String)">
+ <summary>Calcula y deshace la transacción; <see cref="P:Sistema_de_Nominas_6._0.CsCalculoNominaDAL.ResumenCalculo.Detalle"/> trae lo que se habría grabado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCalculoNominaDAL.NombreCompleto(System.Data.DataRow)">
+ <summary>Los cuatro nombres del empleado sin espacios sobrantes; el progreso lo entrega junto al código, separado por tabulador.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsCierreNominaDAL">
+ <summary>
+ Cierre de la nómina (CmdCerrarNomina_Click, V.5.0): paga los movimientos, descuenta los préstamos, prepara las cuotas siguientes,
+ limpia los conceptos variables del empleado y cierra la nómina. Todo en una transacción, con rastro en la Bitacora.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsCierreNominaDAL.Registrar(System.String,System.String)">
+ <summary>Rastro de una acción de la pantalla (cálculo, exportaciones) en la Bitacora.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL">
+ <summary>
+ Consultas de la planilla de una nómina (FrmCalcularNomina): estado de la nómina activa, detalle por empleado y las
+ listas que alimentan los archivos de banco y las denominaciones.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.BuscarNomina(System.String)">
+ <summary>La nómina abierta del tipo; si no hay, la última (cerrada) para poder consultarla. Nothing si el tipo no tiene ninguna.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.ListarParaReporte(System.Int32,System.String,System.Boolean)">
+ <summary>
+ Planilla para colillas y reportes: <see cref="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.ListarPlanilla(System.Int32)"/> más Grupo, FechaIngreso y SalarioMensual, ordenada por el
+ campo de agrupación del reporte (Grupo, Departamento o Cargo; otro valor = por código). Con <paramref name="mostrarCeros"/>
+ en falso omite a los empleados sin devengado (MostraEmpleadoCero del tipo de nómina).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.ListarDetalleDeducciones(System.Int32)">
+ <summary>
+ Una fila por deducción de cada empleado en la nómina (V.5.0 SubColillaDeduccion): Codigo, Deduccion, Valor. Excluye solo la falta (01), que la
+ colilla muestra como "Dias Ausente"; así la suma coincide con DetalleNomina.Deducciones (otras deducciones + adelantos).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.ListarParaBanco(System.Int32)">
+ <summary>Pagos a banco: una fila por empleado con neto distinto de cero.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsReportesNominaDAL">
+ <summary>
+ Catálogo y consultas de los reportes de FrmReportesNomina (V.5.0 FrmReportes). Cada reporte es una consulta parametrizada más la
+ definición de sus columnas; <see cref="T:Sistema_de_Nominas_6._0.RptTabular"/> los dibuja todos. Los reportes por rango suman las nóminas calculadas
+ (Procesada, no anuladas) cuyo fin cae entre las fechas indicadas, del tipo elegido o de todos.
+ </summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsReportesNominaDAL.DefinicionReporte.UsaRango">
+ <summary>El reporte usa el tipo de nómina y el rango de fechas.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsReportesNominaDAL.DefinicionReporte.UsaFechaCorte">
+ <summary>Sin rango: usa solo la fecha "Hasta" como corte (vacaciones).</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsReportesNominaDAL.DefinicionReporte.UsaNumeroNomina">
+ <summary>Reporte de una sola nómina: pide el número de nómina.</summary>
+</member>
+<member name="P:Sistema_de_Nominas_6._0.CsReportesNominaDAL.DefinicionReporte.UsaSaldoMinimo">
+ <summary>Habilita el filtro "Saldo mayor a".</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsReportesNominaDAL.ConsolidadoVacaciones(System.String,System.DateTime,System.Nullable{System.Double})">
+ <summary>
+ Saldo de vacaciones al <paramref name="corte"/> de los empleados activos (del tipo, o todos), con el mismo cálculo que la
+ solicitud de vacaciones (<see cref="T:Sistema_de_Nominas_6._0.CalculadoraVacaciones"/>). Con <paramref name="saldoMinimo"/> solo los de saldo mayor.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsReportesNominaDAL.RangoDisponible(System.String)">
+ <summary>Rango de fechas de las nóminas calculadas del tipo (o de todos): para proponer las fechas del reporte.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsReportesNominaDAL.UltimaNomina(System.String)">
+ <summary>Número de la última nómina calculada del tipo (o de todos); 0 si no hay.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsReportesNominaDAL.PorEmpleado(System.String)">
+ <summary>Una fila por empleado con las sumas del rango; el interior reutiliza las columnas de la planilla.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.CsNominaActivaDAL">
+ <summary>
+ Consultas de los reportes de la nómina activa (FrmNominaActiva de la V.5.0): pago por cheque, horas extra, producción, resumen
+ por cargo, percepciones y la nómina sin formato. Las nóminas por código, departamento y cargo salen de
+ <see cref="M:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL.ListarParaReporte(System.Int32,System.String,System.Boolean)"/>.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsNominaActivaDAL.ListarCheques(System.Int32)">
+ <summary>Empleados que se pagan con cheque (Empleado.PagoCheque): el neto resta también pensión y embargo, que ya van en SqlDeducir.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsNominaActivaDAL.ListarResumenPorCargo(System.Int32)">
+ <summary>Resumen por cargo: empleados y totales (V.5.0 ArepNominaDptoResumen); omite a quienes no tienen devengado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsNominaActivaDAL.ListarPercepciones(System.Int32)">
+ <summary>
+ Percepciones y deducciones totales de la nómina, como lista Concepto / Monto (V.5.0 ArepPersepciones). Diferencia con la V.5.0:
+ los adelantos ya van dentro de "Otras deducciones" y los días de descuento se muestran como días, no se suman a las deducciones.
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.CsNominaActivaDAL.ListarSinFormato(System.Int32)">
+ <summary>Nómina sin formato para Excel (V.5.0 "Exportar Nomina sin Formato"): empleados con neto distinto de cero, por grupo y código.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.ExportadorCsv">
+ <summary>Escribe una tabla como archivo .csv (separador coma, números con punto y dos decimales, UTF-8).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.ExportadorCsv.Escribir(System.Data.DataTable,System.Collections.Generic.IList{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.String)">
+ <param name="columnas">Pares (encabezado del archivo, campo de la tabla) en el orden de salida.</param>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmCalcularNomina">
+ <summary>
+ Calcular nómina (FrmCalcularNomina de la V.5.0): calcula la nómina activa de un tipo, muestra la planilla, la exporta a Excel,
+ a los bancos (BAC, Banpro, Bancentro) y a CSV, desglosa billetes/monedas y cierra la nómina. Solo UI: el cálculo está en
+ <see cref="T:Sistema_de_Nominas_6._0.CsCalculoNominaDAL"/>, el cierre en <see cref="T:Sistema_de_Nominas_6._0.CsCierreNominaDAL"/> y las consultas en <see cref="T:Sistema_de_Nominas_6._0.CsPlanillaNominaDAL"/>.
+ La interfaz se arma por código (no hay Designer).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmCalcularNomina.BotonBanco(System.String,System.Drawing.Image,System.Int32)">
+ <summary>Botón con el logo del banco, escalado a 22 px de alto.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmCalcularNomina.MostrarProgreso(System.Boolean)">
+ <summary>Muestra la barra y el empleado en proceso en lugar del texto de estado.</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmCalcularNomina.SeleccionarFormatosDeEmpresa">
+ <summary>Deja elegidos los formatos que la empresa tiene configurados en la V.5.0 (Controles: FormatoColilla / FormatoNomina).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmCalcularNomina.BtnReportes_Click(System.Object,System.EventArgs)">
+ <summary>Botón "Reportes" de la V.5.0: abre FrmNominaActiva con la nómina que se está viendo.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmReportesNomina">
+ <summary>
+ Reportes de nómina (FrmReportes de la V.5.0, rediseñado): se elige el reporte de una lista, el tipo de nómina y el rango de fechas,
+ se consulta en pantalla y se imprime con DevExpress (<see cref="T:Sistema_de_Nominas_6._0.RptTabular"/>) o se exporta a Excel. Solo UI: las consultas y las
+ columnas de cada reporte están en <see cref="T:Sistema_de_Nominas_6._0.CsReportesNominaDAL"/>. La interfaz se arma por código (no hay Designer).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmReportesNomina.ProponerFechas">
+ <summary>Propone como rango el de todas las nóminas calculadas del tipo elegido.</summary>
+</member>
+<member name="T:Sistema_de_Nominas_6._0.FrmNominaActiva">
+ <summary>
+ Reportes de la nómina activa (FrmNominaActiva de la V.5.0, que se abría con el botón "Reportes" de FrmCalcularNomina): lista de
+ reportes de la nómina, vista previa/impresión con DevExpress y exportación a Excel y CSV. Solo UI: los datos salen de
+ <see cref="T:Sistema_de_Nominas_6._0.ReportesNominaActiva"/> (consultas en <see cref="T:Sistema_de_Nominas_6._0.CsNominaActivaDAL"/>). La interfaz se arma por código (no hay Designer).
+ </summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmNominaActiva.#ctor(System.Int32,System.String,System.Boolean)">
+ <param name="numNomina">Número de la nómina activa que se reporta.</param>
+ <param name="periodo">Texto del encabezado, por ejemplo "Nómina No. 33 - Del 16/12/2025 al 31/12/2025".</param>
+ <param name="mostrarCeros">MostraEmpleadoCero del tipo de nómina.</param>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.FrmNominaActiva.ActualizarBotones">
+ <summary>Las colillas no se exportan; la nómina sin formato no se imprime.</summary>
 </member>
 <member name="T:Sistema_de_Nominas_6._0.CsBajasDAL">
  <summary>
@@ -2190,6 +2628,9 @@ Sistema de Nominas 6.0
 <member name="M:Sistema_de_Nominas_6._0.Main.BarButtonBajas_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
  <summary>Página "Procesos" > Bajas; "Despidos y Renuncias" de la página Acceso abre la misma pantalla.</summary>
 </member>
+<member name="M:Sistema_de_Nominas_6._0.Main.BarButtonCalcularNomina_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
+ <summary>Página "Procesos" > Calcular Nómina (V.5.0 FrmCalcularNomina): calcula, exporta y cierra la nómina activa.</summary>
+</member>
 <member name="M:Sistema_de_Nominas_6._0.Main.BarButtonVacaciones_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
  <summary>Página "Procesos" > Vacaciones: nómina de vacaciones (V.5.0 Frm13VacaMes, parte de vacaciones). Las solicitudes tienen su propio botón.</summary>
 </member>
@@ -2201,6 +2642,9 @@ Sistema de Nominas 6.0
 </member>
 <member name="M:Sistema_de_Nominas_6._0.Main.BarButtonListado13vo_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
  <summary>Página "Historicos": listado de nóminas de 13vo mes (pestaña de 13vo de la V.5.0).</summary>
+</member>
+<member name="M:Sistema_de_Nominas_6._0.Main.BarButtonReportesNomina_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
+ <summary>Página "Historicos" > Reportes de Nómina (V.5.0 FrmReportes, rediseñado como FrmReportesNomina).</summary>
 </member>
 <member name="M:Sistema_de_Nominas_6._0.Main.BarButtonHistorialSalarial_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)">
  <summary>Historial salarial: se abre en la pestaña del aguinaldo y el usuario indica el número de nómina.</summary>
