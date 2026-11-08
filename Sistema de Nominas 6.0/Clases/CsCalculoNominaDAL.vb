@@ -260,7 +260,7 @@ Public Class CsCalculoNominaDAL
         ' ---- Antigüedad ----
         Dim anios As Double = 0
         Dim montoAntiguedad As Double = 0
-        Dim contrato As Object = EscalarEn(cn, tr, "SELECT TOP 1 FechaContrato FROM Historico WHERE Codempleado = @e", P("@e", codigo1))
+        Dim contrato As Object = EscalarEn(cn, tr, "SELECT TOP 1 FechaContrato FROM Historico WHERE Codempleado = @e", P("@e", codigo))
         If contrato IsNot Nothing AndAlso Not IsDBNull(contrato) Then
             anios = CalculadoraAusencias.AniosAntiguedad(Convert.ToDateTime(contrato), c.Fin)
             montoAntiguedad = CalculadoraAusencias.Antiguedad(anios, c.Antiguedad, sueldo + aumentoBasico + sub1.MontoSubsidio)

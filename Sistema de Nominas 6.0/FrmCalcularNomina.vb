@@ -385,11 +385,24 @@ Public Class FrmCalcularNomina
     Private Sub BtnExcel_Click(sender As Object, e As EventArgs)
 
         Try
-            Dim ruta As String = ExportadorGrid.ExportarAExcel(Vista, $"Nomina {_estado.Numero}")
-            If ruta = "" Then Return
+            If _estado Is Nothing Then Return
+
+            ' Formato de la V.5.0: una columna por cada incentivo y deducción de la nómina (deducciones en negativo).
+            Dim ruta As String
+            Using dlg As New SaveFileDialog With {.Filter = "Libro de Excel (*.xlsx)|*.xlsx", .FileName = $"Nomina {_estado.Numero}", .Title = "Exportar a Excel"}
+                If dlg.ShowDialog(Me) <> DialogResult.OK Then Return
+                ruta = dlg.FileName
+            End Using
+
+            Cursor = Cursors.WaitCursor
+            Dim empresa As DatosEmpresa = New CsControlesDAL().ObtenerDatosEmpresa()
+            Dim exportador As New ExportadorPlanilla
+            exportador.Exportar(ruta, _estado.Numero, empresa.Nombre_Empresa, _estado.Inicio, _estado.Fin, MostrarEmpleadosEnCero())
             Process.Start(New ProcessStartInfo(ruta) With {.UseShellExecute = True})
         Catch ex As Exception
             XtraMessageBox.Show("No se pudo exportar o abrir el archivo: " & ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            Cursor = Cursors.Default
         End Try
 
     End Sub

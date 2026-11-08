@@ -50,7 +50,7 @@ Public Class RptLiquidacion
 
     Private Sub CrearEncabezado(banda As ReportHeaderBand, empresa As CsBajasDAL.DatosEmpresaBaja, rutaFoto As String)
 
-        Dim logo As XRPictureBox = Imagen(empresa.Ruta_Logo, New RectangleF(0, 0, 110, 70))
+        Dim logo As XRPictureBox = Imagen(empresa.Logo, New RectangleF(0, 0, 110, 70))
         If logo IsNot Nothing Then banda.Controls.Add(logo)
         Dim foto As XRPictureBox = Imagen(rutaFoto, New RectangleF(Ancho - 80, 0, 80, 90))
         If foto IsNot Nothing Then banda.Controls.Add(foto)
@@ -247,6 +247,10 @@ Public Class RptLiquidacion
             .Text = If(texto, ""), .BoundsF = New RectangleF(x, y, ancho, alto), .TextAlignment = alineacion,
             .Font = New DXFont(Fuente, tamano, If(negrita, DXFontStyle.Bold, DXFontStyle.Regular)),
             .Padding = New PaddingInfo(2, 2, 0, 0), .CanGrow = False}
+    End Function
+
+    Private Shared Function Imagen(datos As Byte(), limites As RectangleF) As XRPictureBox
+        Return ConstructorReporte.Imagen(datos, limites)
     End Function
 
     ''' <summary>Imagen desde archivo; Nothing si la ruta está vacía, no existe o no es una imagen.</summary>

@@ -1,0 +1,78 @@
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\Sistema de Nominas 6.0.exe.config
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\Sistema de Nominas 6.0.exe
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\Sistema de Nominas 6.0.pdb
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\Sistema de Nominas 6.0.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Data.Desktop.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Data.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Drawing.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Images.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Printing.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Utils.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraBars.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraEditors.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraGrid.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraPrinting.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraReports.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Pdf.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Pdf.v24.1.Drawing.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Sparkline.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraLayout.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.RichEdit.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraTreeList.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraCharts.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Xpo.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.DataAccess.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.CodeParser.v24.1.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Office.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraGauges.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.PivotGrid.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Charts.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.DataVisualization.v24.1.Core.dll
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Data.Desktop.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Drawing.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Data.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Printing.v24.1.Core.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Utils.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraBars.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraEditors.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraGrid.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraPrinting.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraReports.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Pdf.v24.1.Core.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Pdf.v24.1.Drawing.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Sparkline.v24.1.Core.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraLayout.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.RichEdit.v24.1.Core.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraTreeList.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraCharts.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Xpo.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.DataAccess.v24.1.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Office.v24.1.Core.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.XtraGauges.v24.1.Core.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.PivotGrid.v24.1.Core.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Release\DevExpress.Charts.v24.1.Core.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema de Nominas 6.0.vbproj.AssemblyReference.cache
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmControles.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmEmpleados.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmEntrada.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmHistorial.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmInssIr.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmJustificaciones.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmListadoCompañias.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmListadoEmpleados.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmListadoHorasExtra.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmListNomina.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmMovimientos.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmPeriodo.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmQuery.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.FrmTasaCambio.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.Main.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.Resources.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema_de_Nominas_6._0.SplashScreen.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema de Nominas 6.0.vbproj.GenerateResource.cache
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema de Nominas 6.0.exe.licenses
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema de Nominas 6.0.vbproj.CoreCompileInputs.cache
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema .99F07B77.Up2Date
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema de Nominas 6.0.exe
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema de Nominas 6.0.xml
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Release\Sistema de Nominas 6.0.pdb

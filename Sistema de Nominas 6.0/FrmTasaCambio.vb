@@ -172,6 +172,50 @@ Public Class FrmTasaCambio
 
     End Sub
 
+    ''' <summary>Importa tasas de un archivo de texto (FECHA tab USXCS); las fechas que ya existen se actualizan.</summary>
+    Private Sub BtnImportar_Click(sender As Object, e As EventArgs) Handles BtnImportar.Click
+
+        Using dlg As New OpenFileDialog With {.Filter = "Archivo de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*", .Title = "Importar tasas de cambio"}
+
+            If dlg.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
+
+            Try
+
+                Dim leidas As ImportadorTasas.Resultado = ImportadorTasas.Leer(dlg.FileName)
+
+                If leidas.Tasas.Count = 0 Then
+                    MessageBox.Show("El archivo no tiene tasas válidas. Formato esperado: fecha (dd/MM/yyyy), tabulador y tasa.", "Zeus Nominas",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                Dim desde As Date = leidas.Tasas.Min(Function(t) t.Fecha)
+                Dim hasta As Date = leidas.Tasas.Max(Function(t) t.Fecha)
+
+                If MessageBox.Show($"Se importarán {leidas.Tasas.Count} tasas del {desde:dd/MM/yyyy} al {hasta:dd/MM/yyyy}." & vbCrLf &
+                                   "Las fechas que ya tienen tasa se actualizarán. ¿Desea continuar?", "Zeus Nominas",
+                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes Then Exit Sub
+
+                Cursor = Cursors.WaitCursor
+                Dim r = _dal.GuardarVarias(leidas.Tasas)
+                Recargar()
+
+                Dim mensaje As String = $"Tasas agregadas: {r.Agregadas}" & vbCrLf & $"Tasas actualizadas: {r.Actualizadas}"
+                If leidas.Rechazadas.Count > 0 Then
+                    mensaje &= vbCrLf & vbCrLf & $"Líneas omitidas ({leidas.Rechazadas.Count}):" & vbCrLf & String.Join(vbCrLf, leidas.Rechazadas.Take(10))
+                End If
+                MessageBox.Show(mensaje, "Zeus Nominas", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            Catch ex As Exception
+                MostrarError(ex)
+            Finally
+                Cursor = Cursors.Default
+            End Try
+
+        End Using
+
+    End Sub
+
     Private Sub BtnSalir_Click(sender As Object, e As EventArgs) Handles BtnSalir.Click
         Close()
     End Sub

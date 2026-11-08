@@ -349,6 +349,34 @@ Public Class CsLiquidacion
 
     End Function
 
+    ''' <summary>Historial de salarios por mes (V.5.0 CmdImprimirHistorial). No necesita que la liquidación esté calculada.</summary>
+    Public Function CrearReporteHistorial(datos As DatosHistorialBaja) As RptHistorialLiquidacion
+        RequiereEmpleado()
+        If Salarios.Count = 0 Then Throw New InvalidOperationException("El empleado no tiene nóminas en el período del historial.")
+        Return New RptHistorialLiquidacion(EmpresaReporte(), datos, Salarios, Es_Formato_Bono)
+    End Function
+
+    ''' <summary>Detalle de salarios por nómina, del mismo período que el historial (V.5.0 CmdDetalle).</summary>
+    Public Function CrearReporteDetalle(datos As DatosHistorialBaja, opc As OpcionesLiquidacion) As RptDetalleLiquidacion
+
+        RequiereEmpleado()
+        If Salarios.Count = 0 Then Throw New InvalidOperationException("El empleado no tiene nóminas en el período del historial.")
+
+        Dim variante As CsBajasDAL.VarianteSalarios = If(Es_Formato_Bono, CsBajasDAL.VarianteSalarios.BonoProduccion, CsBajasDAL.VarianteSalarios.Normal)
+        Dim detalle As DataTable = _dal.ListarDetalleNominas(Empleado.Cod_Empleado, Salarios.First().Fecha_Inicio, Salarios.Last().Fecha_Fin,
+                                                             variante, opc.Incentivos, opc.Horas_Extra)
+
+        If detalle.Rows.Count = 0 Then Throw New InvalidOperationException("No hay nóminas del empleado en el período del historial.")
+
+        Return New RptDetalleLiquidacion(EmpresaReporte(), datos, detalle, Es_Formato_Bono)
+
+    End Function
+
+    ''' <summary>Empresa (nombre, dirección y logo de la base de datos) en el formato que usan los reportes tabulares.</summary>
+    Private Function EmpresaReporte() As DatosEmpresa
+        Return New DatosEmpresa With {.Nombre_Empresa = Empresa.Nombre_Empresa, .Direccion = Empresa.Direccion, .Logo = Empresa.Logo}
+    End Function
+
     ''' <summary>Foto del empleado en DatosEmpresa.RutaFoto (código visible + .jpg/.gif/.bmp); "" si no hay.</summary>
     Private Function RutaFotoEmpleado() As String
         If String.IsNullOrWhiteSpace(Empresa.Ruta_Foto) Then Return ""

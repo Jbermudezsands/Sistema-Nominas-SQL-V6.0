@@ -74,7 +74,7 @@ Public Class CsControlesDAL
         d.Telefono = Texto(r("Telefono"))
         d.Fax = Texto(r("Fax"))
         d.Email = Texto(r("Email"))
-        d.Ruta_Logo = Texto(r("RutaLogo"))
+        d.Logo = If(dt.Columns.Contains("Logo"), LogoDesdeTexto(Texto(r("Logo"))), Nothing)
         d.Ruta_Foto = Texto(r("RutaFoto"))
         d.Formato_Colilla = Texto(r("FormatoColilla"))
         d.Formato_Nomina = Texto(r("FormatoNomina"))
@@ -105,7 +105,7 @@ Public Class CsControlesDAL
             New SqlParameter("@Tel", ValorODbNull(d.Telefono)),
             New SqlParameter("@Fax", ValorODbNull(d.Fax)),
             New SqlParameter("@Email", ValorODbNull(d.Email)),
-            New SqlParameter("@Logo", ValorODbNull(d.Ruta_Logo)),
+            New SqlParameter("@Logo", SqlDbType.NVarChar, -1) With {.Value = If(d.Logo Is Nothing OrElse d.Logo.Length = 0, DBNull.Value, CObj(Convert.ToBase64String(d.Logo)))},
             New SqlParameter("@Foto", ValorODbNull(d.Ruta_Foto)),
             New SqlParameter("@Colilla", ValorODbNull(d.Formato_Colilla)),
             New SqlParameter("@FNomina", ValorODbNull(d.Formato_Nomina)),
@@ -120,7 +120,7 @@ Public Class CsControlesDAL
 
         Dim n As Integer = Ejecutar(
             "UPDATE DatosEmpresa SET NombreEmpresa = @Nombre, NumeroRUC = @Ruc, Direccion = @Dir, " &
-            "Telefono = @Tel, Fax = @Fax, Email = @Email, RutaLogo = @Logo, RutaFoto = @Foto, " &
+            "Telefono = @Tel, Fax = @Fax, Email = @Email, Logo = @Logo, RutaFoto = @Foto, " &
             "FormatoColilla = @Colilla, FormatoNomina = @FNomina, MetodoVacaciones = @Vaca, " &
             "TipoCalculoIR = @IR, ConexionSistemaContable = @Conta, PorcientoSubsidio = @Subsidio, " &
             "HorasExtra = @Horas, Calcular7mo = @Sept, Restar3DiasSubsidio = @Restar3", p)
@@ -128,7 +128,7 @@ Public Class CsControlesDAL
         If n = 0 Then
             Ejecutar(
                 "INSERT INTO DatosEmpresa (Numero, NombreEmpresa, NumeroRUC, Direccion, Telefono, Fax, Email, " &
-                "RutaLogo, RutaFoto, FormatoColilla, FormatoNomina, MetodoVacaciones, TipoCalculoIR, " &
+                "Logo, RutaFoto, FormatoColilla, FormatoNomina, MetodoVacaciones, TipoCalculoIR, " &
                 "ConexionSistemaContable, PorcientoSubsidio, HorasExtra, Calcular7mo, Restar3DiasSubsidio) " &
                 "VALUES (1, @Nombre, @Ruc, @Dir, @Tel, @Fax, @Email, @Logo, @Foto, @Colilla, @FNomina, @Vaca, @IR, " &
                 "@Conta, @Subsidio, @Horas, @Sept, @Restar3)",
@@ -138,6 +138,22 @@ Public Class CsControlesDAL
     End Sub
 
 #End Region
+
+    ''' <summary>
+    ''' Convierte el texto de DatosEmpresa.Logo a bytes. Formato actual: base64; también acepta el formato
+    ''' heredado de Empleado.Foto ("b1,b2,..."). Devuelve Nothing si está vacío o no se puede leer.
+    ''' </summary>
+    Public Shared Function LogoDesdeTexto(texto As String) As Byte()
+        If String.IsNullOrWhiteSpace(texto) Then Return Nothing
+        Try
+            If texto.Contains(",") Then
+                Return texto.Split(","c).Where(Function(s) s.Trim <> "").Select(Function(s) Byte.Parse(s.Trim)).ToArray()
+            End If
+            Return Convert.FromBase64String(texto.Trim)
+        Catch
+            Return Nothing
+        End Try
+    End Function
 
     Private Shared Function Bit(valor As Object) As Boolean
         Return Not IsDBNull(valor) AndAlso Convert.ToBoolean(valor)

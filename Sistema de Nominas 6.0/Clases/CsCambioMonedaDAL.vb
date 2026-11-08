@@ -60,6 +60,41 @@ Public Class CsCambioMonedaDAL
 
     End Sub
 
+    ''' <summary>
+    ''' Graba varias tasas en una sola transacción (crea las que faltan y cambia el monto de las que ya existen). Devuelve cuántas se
+    ''' agregaron y cuántas se actualizaron.
+    ''' </summary>
+    Public Function GuardarVarias(tasas As IEnumerable(Of TasaCambio)) As (Agregadas As Integer, Actualizadas As Integer)
+
+        Dim agregadas As Integer = 0
+        Dim actualizadas As Integer = 0
+
+        For Each t As TasaCambio In tasas
+            If t.Monto <= 0 Then Throw New InvalidOperationException($"La tasa del {t.Fecha:dd/MM/yyyy} debe ser mayor que cero.")
+        Next
+
+        EnTransaccion(
+            Sub(cn, tr)
+                For Each t As TasaCambio In tasas
+                    Dim f As Date = t.Fecha.Date
+                    Dim m As Decimal = t.Monto
+                    If EjecutarEn(cn, tr, "UPDATE CambioMoneda SET MontoDia = @M WHERE FechaDia = @F",
+                                  New SqlParameter("@F", SqlDbType.SmallDateTime) With {.Value = f},
+                                  New SqlParameter("@M", SqlDbType.Money) With {.Value = m}) > 0 Then
+                        actualizadas += 1
+                    Else
+                        EjecutarEn(cn, tr, "INSERT INTO CambioMoneda (FechaDia, MontoDia) VALUES (@F, @M)",
+                                   New SqlParameter("@F", SqlDbType.SmallDateTime) With {.Value = f},
+                                   New SqlParameter("@M", SqlDbType.Money) With {.Value = m})
+                        agregadas += 1
+                    End If
+                Next
+            End Sub)
+
+        Return (agregadas, actualizadas)
+
+    End Function
+
     Public Function Eliminar(fecha As DateTime) As Boolean
         Return Ejecutar("DELETE FROM CambioMoneda WHERE FechaDia = @F",
                         New SqlParameter("@F", SqlDbType.SmallDateTime) With {.Value = fecha.Date}) > 0

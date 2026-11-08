@@ -108,6 +108,70 @@ Public Class CsPlanillaNominaDAL
             New SqlParameter("@Num", SqlDbType.Int) With {.Value = numNomina})
     End Function
 
+#Region "PLANILLA A EXCEL (V.5.0 PushButton2)"
+
+    ' Devengado y deducciones tal como los calculaba el Excel de la V.5.0 (incluye reembolso, viáticos, subsidio y el descuento por faltas).
+    Private Const SqlDevengadoExcel As String =
+        "(ISNULL(D.SalarioBasico, 0) + ISNULL(D.Comisiones, 0) + ISNULL(D.Incentivos, 0) + ISNULL(D.HorasExtras, 0) + ISNULL(D.OtrosIngresos, 0) + " &
+        "ISNULL(D.Destajo, 0) + ISNULL(D.VacacionesPagadas, 0) + ISNULL(D.SeptimoDia, 0) + ISNULL(D.IncetivoProduccion, 0) + ISNULL(D.BonoProduccion, 0) + " &
+        "ISNULL(D.Reembolso, 0) + ISNULL(D.Viaticos, 0) + ISNULL(D.TotalSubsidio, 0))"
+
+    Private Const SqlDeducirExcel As String =
+        "(ISNULL(D.Prestamo, 0) + ISNULL(D.MontoINSS, 0) + ISNULL(D.MontoIR, 0) + ISNULL(D.Deducciones, 0) + ISNULL(D.MontoPension, 0) + " &
+        "ISNULL(D.EmbargoJudicial, 0) + ISNULL(D.DiasDescuento, 0))"
+
+    ''' <summary>Una fila por empleado con los conceptos fijos de la planilla de Excel. Sin <paramref name="mostrarCeros"/> omite a los que no tienen ingresos.</summary>
+    Public Function ListarParaExcel(numNomina As Integer, mostrarCeros As Boolean) As DataTable
+        Return ConsultarTabla(
+            "SELECT E.CodEmpleado, E.CodEmpleado1, ISNULL(Dp.Departamento, '') AS Departamento, " & SqlNombres & " AS Nombres, ISNULL(E.NumCedula, '') AS NumCedula, " &
+            "ISNULL(E.NumeroInss, '') AS NumeroInss, ISNULL(D.SalarioBasico, 0) AS SalarioBasico, ISNULL(D.TotalSubsidio, 0) AS TotalSubsidio, " &
+            "ISNULL(D.HorasExtras, 0) AS HorasExtras, ISNULL(D.Viaticos, 0) AS Viaticos, ISNULL(D.Comisiones, 0) AS Comisiones, " &
+            "ISNULL(D.VacacionesPagadas, 0) AS VacacionesPagadas, ISNULL(D.OtrosIngresos, 0) AS OtrosIngresos, " & SqlDevengadoExcel & " AS TotalDevengado, " &
+            "ISNULL(D.MontoINSS, 0) AS MontoINSS, ISNULL(D.MontoIR, 0) AS MontoIR, ISNULL(D.Prestamo, 0) AS Prestamo, ISNULL(D.MontoPension, 0) AS MontoPension, " &
+            "ISNULL(D.EmbargoJudicial, 0) AS EmbargoJudicial, " & SqlDeducirExcel & " AS TotalDeducir, " & SqlDevengadoExcel & " - " & SqlDeducirExcel & " AS NetoPagar, " &
+            "ISNULL(D.INATEC, 0) AS INATEC, ISNULL(D.INSSPatronal, 0) AS INSSPatronal, ISNULL(D.Mes13, 0) AS Mes13, ISNULL(D.ProvIndemnizacion, 0) AS ProvIndemnizacion " &
+            "FROM DetalleNomina D INNER JOIN Empleado E ON E.CodEmpleado = D.CodEmpleado LEFT JOIN Departamento Dp ON Dp.CodDepartamento = E.CodDepartamento " &
+            "WHERE D.NumNomina = @Num AND (@Cero = 1 OR (" & SqlDevengadoExcel & " + ISNULL(D.Antiguedad, 0)) <> 0) ORDER BY E.CodEmpleado1",
+            New SqlParameter("@Num", SqlDbType.Int) With {.Value = numNomina},
+            New SqlParameter("@Cero", SqlDbType.Bit) With {.Value = mostrarCeros})
+    End Function
+
+    ''' <summary>Tipos de incentivo pagados en la nómina (una columna de Excel por tipo): Codigo, Nombre.</summary>
+    Public Function ListarTiposIncentivoNomina(numNomina As Integer) As DataTable
+        Return ConsultarTabla(
+            "SELECT DISTINCT i.CodTipoIncentivo AS Codigo, ti.Incentivo AS Nombre FROM DetalleIncentivo di " &
+            "INNER JOIN Incentivo i ON i.NumIncentivo = di.NumIncentivo INNER JOIN TipoIncentivo ti ON ti.CodTipoIncentivo = i.CodTipoIncentivo " &
+            "WHERE di.NumNomina = @Num ORDER BY i.CodTipoIncentivo",
+            New SqlParameter("@Num", SqlDbType.Int) With {.Value = numNomina})
+    End Function
+
+    ''' <summary>Tipos de deducción descontados en la nómina (una columna de Excel por tipo): Codigo, Nombre.</summary>
+    Public Function ListarTiposDeduccionNomina(numNomina As Integer) As DataTable
+        Return ConsultarTabla(
+            "SELECT DISTINCT d.CodTipoDeduccion AS Codigo, t.Deduccion AS Nombre FROM DetalleDeduccion dd " &
+            "INNER JOIN Deduccion d ON d.NumDeduccion = dd.NumDeduccion INNER JOIN TipoDeduccion t ON t.CodTipoDeduccion = d.CodTipoDeduccion " &
+            "WHERE dd.NumNomina = @Num ORDER BY d.CodTipoDeduccion",
+            New SqlParameter("@Num", SqlDbType.Int) With {.Value = numNomina})
+    End Function
+
+    ''' <summary>Monto de cada incentivo por empleado en la nómina: CodEmpleado, Codigo, Valor.</summary>
+    Public Function ListarMontosIncentivoNomina(numNomina As Integer) As DataTable
+        Return ConsultarTabla(
+            "SELECT i.CodEmpleado, i.CodTipoIncentivo AS Codigo, SUM(di.Valor) AS Valor FROM DetalleIncentivo di " &
+            "INNER JOIN Incentivo i ON i.NumIncentivo = di.NumIncentivo WHERE di.NumNomina = @Num GROUP BY i.CodEmpleado, i.CodTipoIncentivo",
+            New SqlParameter("@Num", SqlDbType.Int) With {.Value = numNomina})
+    End Function
+
+    ''' <summary>Monto de cada deducción por empleado en la nómina: CodEmpleado, Codigo, Valor.</summary>
+    Public Function ListarMontosDeduccionNomina(numNomina As Integer) As DataTable
+        Return ConsultarTabla(
+            "SELECT d.CodEmpleado, d.CodTipoDeduccion AS Codigo, SUM(dd.Valor) AS Valor FROM DetalleDeduccion dd " &
+            "INNER JOIN Deduccion d ON d.NumDeduccion = dd.NumDeduccion WHERE dd.NumNomina = @Num GROUP BY d.CodEmpleado, d.CodTipoDeduccion",
+            New SqlParameter("@Num", SqlDbType.Int) With {.Value = numNomina})
+    End Function
+
+#End Region
+
     ''' <summary>Pagos a banco: una fila por empleado con neto distinto de cero.</summary>
     Public Function ListarParaBanco(numNomina As Integer) As DataTable
         Return ConsultarTabla(

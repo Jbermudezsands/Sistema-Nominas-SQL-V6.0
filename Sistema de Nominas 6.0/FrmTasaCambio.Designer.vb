@@ -30,6 +30,7 @@ Partial Class FrmTasaCambio
         Me.BtnGrabar = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnEliminar = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSalir = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnImportar = New DevExpress.XtraEditors.SimpleButton()
         Me.gridTasas = New DevExpress.XtraGrid.GridControl()
         Me.gridViewTasas = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.panelDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -111,6 +112,7 @@ Partial Class FrmTasaCambio
         Me.panelBotones.Controls.Add(Me.BtnNuevo)
         Me.panelBotones.Controls.Add(Me.BtnGrabar)
         Me.panelBotones.Controls.Add(Me.BtnEliminar)
+        Me.panelBotones.Controls.Add(Me.BtnImportar)
         Me.panelBotones.Controls.Add(Me.BtnSalir)
         Me.panelBotones.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.panelBotones.Location = New System.Drawing.Point(0, 381)
@@ -122,32 +124,40 @@ Partial Class FrmTasaCambio
         '
         Me.BtnNuevo.Location = New System.Drawing.Point(13, 10)
         Me.BtnNuevo.Name = "BtnNuevo"
-        Me.BtnNuevo.Size = New System.Drawing.Size(95, 35)
+        Me.BtnNuevo.Size = New System.Drawing.Size(80, 35)
         Me.BtnNuevo.TabIndex = 0
         Me.BtnNuevo.Text = "Nuevo"
         '
         'BtnGrabar
         '
-        Me.BtnGrabar.Location = New System.Drawing.Point(119, 10)
+        Me.BtnGrabar.Location = New System.Drawing.Point(99, 10)
         Me.BtnGrabar.Name = "BtnGrabar"
-        Me.BtnGrabar.Size = New System.Drawing.Size(95, 35)
+        Me.BtnGrabar.Size = New System.Drawing.Size(80, 35)
         Me.BtnGrabar.TabIndex = 1
         Me.BtnGrabar.Text = "Grabar"
         '
         'BtnEliminar
         '
-        Me.BtnEliminar.Location = New System.Drawing.Point(225, 10)
+        Me.BtnEliminar.Location = New System.Drawing.Point(185, 10)
         Me.BtnEliminar.Name = "BtnEliminar"
-        Me.BtnEliminar.Size = New System.Drawing.Size(95, 35)
+        Me.BtnEliminar.Size = New System.Drawing.Size(80, 35)
         Me.BtnEliminar.TabIndex = 2
         Me.BtnEliminar.Text = "Eliminar"
         '
+        'BtnImportar
+        '
+        Me.BtnImportar.Location = New System.Drawing.Point(271, 10)
+        Me.BtnImportar.Name = "BtnImportar"
+        Me.BtnImportar.Size = New System.Drawing.Size(80, 35)
+        Me.BtnImportar.TabIndex = 3
+        Me.BtnImportar.Text = "Importar"
+        '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(331, 10)
+        Me.BtnSalir.Location = New System.Drawing.Point(357, 10)
         Me.BtnSalir.Name = "BtnSalir"
-        Me.BtnSalir.Size = New System.Drawing.Size(95, 35)
-        Me.BtnSalir.TabIndex = 3
+        Me.BtnSalir.Size = New System.Drawing.Size(80, 35)
+        Me.BtnSalir.TabIndex = 4
         Me.BtnSalir.Text = "Salir"
         '
         'gridTasas
@@ -202,6 +212,7 @@ Partial Class FrmTasaCambio
     Friend WithEvents BtnNuevo As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnGrabar As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnEliminar As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnImportar As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnSalir As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents gridTasas As DevExpress.XtraGrid.GridControl
     Friend WithEvents gridViewTasas As DevExpress.XtraGrid.Views.Grid.GridView

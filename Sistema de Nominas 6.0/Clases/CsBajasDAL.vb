@@ -21,7 +21,7 @@ Public Class CsBajasDAL
     Public Class DatosEmpresaBaja
         Public Property Nombre_Empresa As String = ""
         Public Property Direccion As String = ""
-        Public Property Ruta_Logo As String = ""
+        Public Property Logo As Byte() = Nothing
         Public Property Ruta_Foto As String = ""
         Public Property Salario_Minimo As Double
         Public Property Formato_Nomina As String = ""
@@ -160,13 +160,13 @@ Public Class CsBajasDAL
     End Function
 
     Public Function ObtenerDatosEmpresa() As DatosEmpresaBaja
-        Dim dt As DataTable = ConsultarTabla("SELECT TOP 1 NombreEmpresa, Direccion, RutaLogo, RutaFoto, SalarioMinimo, FormatoNomina FROM DatosEmpresa")
+        Dim dt As DataTable = ConsultarTabla("SELECT TOP 1 NombreEmpresa, Direccion, Logo, RutaFoto, SalarioMinimo, FormatoNomina FROM DatosEmpresa")
         Dim d As New DatosEmpresaBaja
         If dt.Rows.Count = 0 Then Return d
         Dim f As DataRow = dt.Rows(0)
         d.Nombre_Empresa = Texto(f("NombreEmpresa"))
         d.Direccion = Texto(f("Direccion"))
-        d.Ruta_Logo = Texto(f("RutaLogo"))
+        d.Logo = CsControlesDAL.LogoDesdeTexto(Texto(f("Logo")))
         d.Ruta_Foto = Texto(f("RutaFoto"))
         d.Salario_Minimo = Numero(f("SalarioMinimo"))
         d.Formato_Nomina = Texto(f("FormatoNomina"))
@@ -252,6 +252,41 @@ Public Class CsBajasDAL
                 .Otros = Numero(f("Otros")), .Incentivos = Numero(f("Incentivos")), .Reembolso = Numero(f("Reembolso")),
                 .Bono_Produccion = Numero(f("BonoProduccion")), .Horas_Extras = Numero(f("HorasExtras")),
                 .Total_Ingresos = Numero(f("TotalIngresos"))}).ToList()
+
+    End Function
+
+    ''' <summary>
+    ''' Una fila por nómina (sin agrupar por mes) con los ingresos del empleado entre <paramref name="desde"/> y <paramref name="hasta"/>:
+    ''' el detalle que imprime "Imp. Detalle" de la V.5.0. Mismas columnas y total que <see cref="ListarSalarios"/>, más INSS e IR.
+    ''' </summary>
+    Public Function ListarDetalleNominas(codEmpleado As Decimal, desde As Date, hasta As Date, variante As VarianteSalarios,
+                                         conIncentivos As Boolean, conHorasExtra As Boolean) As DataTable
+
+        Dim incentivos, total, extras As String
+        extras = "CAST(0 AS float) AS BonoProduccion, CAST(0 AS float) AS HorasExtras"
+
+        Select Case variante
+            Case VarianteSalarios.BonoProduccion
+                incentivos = "D.Incentivos + D.IncetivoProduccion"
+                total = "D.SalarioBasico + D.Destajo + D.BonoProduccion + D.SeptimoDia + D.OtrosIngresos + D.IncetivoProduccion + D.Antiguedad" &
+                        If(conHorasExtra, " + D.HorasExtras", "")
+                extras = "D.BonoProduccion AS BonoProduccion, " & If(conHorasExtra, "D.HorasExtras", "CAST(0 AS float)") & " AS HorasExtras"
+            Case Else
+                incentivos = If(conIncentivos, "D.Incentivos", "CAST(0 AS float)")
+                total = "D.SalarioBasico + D.Destajo + D.SeptimoDia + D.OtrosIngresos + D.Reembolso + D.Antiguedad" & If(conIncentivos, " + D.Incentivos", "")
+        End Select
+
+        Dim sql As String =
+            "SELECT N.Mes, N.Ano, N.FechaNominaINI AS FechaInicio, N.FechaNomina AS FechaFin, " &
+            "D.SalarioBasico + D.Antiguedad AS SalarioBasico, D.Destajo, D.SeptimoDia AS Septimo, D.OtrosIngresos AS Otros, " &
+            incentivos & " AS Incentivos, " & extras & ", D.MontoINSS, D.MontoIR, " & total & " AS TotalIngresos " &
+            "FROM DetalleNomina D INNER JOIN Nomina N ON D.NumNomina = N.NumNomina " &
+            "WHERE D.CodEmpleado = @Cod AND (D.SalarioBasico + D.Destajo + D.OtrosIngresos <> 0) " &
+            "AND N.FechaNomina BETWEEN @Desde AND @Hasta ORDER BY N.Ano, N.Mes, N.FechaNomina"
+
+        Return ConsultarTabla(sql, ParCod(codEmpleado),
+                              New SqlParameter("@Desde", SqlDbType.SmallDateTime) With {.Value = desde.Date},
+                              New SqlParameter("@Hasta", SqlDbType.SmallDateTime) With {.Value = hasta.Date})
 
     End Function
 

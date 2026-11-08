@@ -19,26 +19,7 @@ Public Class CsJustificacionDAL
     End Function
 
     Public Function ListarTipos() As DataTable
-        Return ConsultarTabla("SELECT Classid, Classname FROM LeaveClass ORDER BY Classname")
-    End Function
-
-    ''' <summary>Crea un tipo de justificación y devuelve su código.</summary>
-    Public Function AgregarTipo(nombre As String) As Integer
-
-        If String.IsNullOrWhiteSpace(nombre) Then
-            Throw New InvalidOperationException("Escriba la descripción del tipo de justificación.")
-        End If
-
-        If nombre.Trim().Length > LongTipo Then
-            Throw New InvalidOperationException("La descripción del tipo admite como máximo " & LongTipo & " caracteres.")
-        End If
-
-        Dim id As Object = Escalar(
-            "INSERT INTO LeaveClass (Classname, ViewColor) OUTPUT INSERTED.Classid VALUES (@N, 16777215)",
-            New SqlParameter("@N", nombre.Trim()))
-
-        Return Convert.ToInt32(id)
-
+        Return New CsTipoJustificacionDAL().Listar()
     End Function
 
     Public Function ListarPorEmpleado(codEmpleado1 As String) As DataTable

@@ -37,6 +37,7 @@ Public Class FrmJustificaciones
             FrmConsulta.AgregarBotonBuscar(cmbEmpleado, TipoBusqueda.Empleado, Me)
 
             RecargarTipos()
+            AddHandler FrmRegistroJustifica.TiposCambiados, AddressOf TiposCambiados
             Limpiar()
 
         Catch ex As Exception
@@ -48,10 +49,17 @@ Public Class FrmJustificaciones
     ''' <summary>Vuelve a leer los tipos de justificación.</summary>
     Public Sub RecargarTipos()
 
-        CmbTipo.Properties.DataSource = _dal.ListarTipos()
+        Dim anterior As Object = CmbTipo.EditValue
+        Dim tipos As DataTable = _dal.ListarTipos()
 
-        If CmbTipo.EditValue Is Nothing AndAlso CType(CmbTipo.Properties.DataSource, DataTable).Rows.Count > 0 Then
-            CmbTipo.EditValue = CType(CmbTipo.Properties.DataSource, DataTable).Rows(0)("Classid")
+        CmbTipo.Properties.DataSource = tipos
+
+        If anterior IsNot Nothing AndAlso tipos.Select("Classid = " & Convert.ToInt32(anterior)).Length > 0 Then
+            CmbTipo.EditValue = anterior
+        ElseIf tipos.Rows.Count > 0 Then
+            CmbTipo.EditValue = tipos.Rows(0)("Classid")
+        Else
+            CmbTipo.EditValue = Nothing
         End If
 
     End Sub
@@ -127,18 +135,20 @@ Public Class FrmJustificaciones
 
     Private Sub BtnTipo_Click(sender As Object, e As EventArgs) Handles BtnTipo.Click
 
-        Dim nombre As String = XtraInputBox.Show("Descripción del nuevo tipo de justificación:", "Zeus Nominas", "")
+        ' Los tipos se mantienen en FrmRegistroJustifica; al grabar allí, CmbTipo se recarga solo.
+        Dim frm As FrmRegistroJustifica = My.Forms.FrmRegistroJustifica
+        If MdiParent IsNot Nothing Then frm.MdiParent = MdiParent
+        frm.Show()
+        frm.Activate()
 
-        If String.IsNullOrWhiteSpace(nombre) Then Exit Sub
+    End Sub
 
-        Try
-            Dim id As Integer = _dal.AgregarTipo(nombre)
-            RecargarTipos()
-            CmbTipo.EditValue = id
-        Catch ex As Exception
-            MostrarError(ex)
-        End Try
+    Private Sub TiposCambiados()
+        If IsHandleCreated Then BeginInvoke(New Action(AddressOf RecargarTipos))
+    End Sub
 
+    Private Sub FrmJustificaciones_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        RemoveHandler FrmRegistroJustifica.TiposCambiados, AddressOf TiposCambiados
     End Sub
 
     Private Sub BtnAgregar_Click(sender As Object, e As EventArgs) Handles BtnAgregar.Click

@@ -31,6 +31,22 @@ Friend NotInheritable Class ConstructorReporte
         Return lbl
     End Function
 
+    ''' <summary>Imagen desde bytes (p. ej. DatosEmpresa.Logo); Nothing si no hay bytes o no son una imagen.</summary>
+    Public Shared Function Imagen(datos As Byte(), limites As RectangleF) As XRPictureBox
+        Try
+            If datos Is Nothing OrElse datos.Length = 0 Then Return Nothing
+            Dim img As Image
+            Using ms As New IO.MemoryStream(datos), original As Image = Image.FromStream(ms)
+                img = New Bitmap(original)
+            End Using
+            Return New XRPictureBox With {
+                .ImageSource = New DevExpress.XtraPrinting.Drawing.ImageSource(img),
+                .Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage, .BoundsF = limites}
+        Catch
+            Return Nothing
+        End Try
+    End Function
+
     ''' <summary>Imagen desde archivo; Nothing si la ruta está vacía, no existe o no es una imagen.</summary>
     Public Shared Function Imagen(ruta As String, limites As RectangleF) As XRPictureBox
         Try
@@ -54,7 +70,7 @@ Friend NotInheritable Class ConstructorReporte
     ''' </summary>
     Public Shared Function Encabezado(banda As Band, empresa As DatosEmpresa, titulo As String, periodo As String, ancho As Single) As Single
 
-        Dim logo As XRPictureBox = Imagen(empresa.Ruta_Logo, New RectangleF(0, 0, 100, 60))
+        Dim logo As XRPictureBox = Imagen(empresa.Logo, New RectangleF(0, 0, 100, 60))
         If logo IsNot Nothing Then banda.Controls.Add(logo)
 
         banda.Controls.Add(Etiqueta(empresa.Nombre_Empresa, 110, 0, ancho - 260, 20, True, 13, TextAlignment.MiddleCenter))

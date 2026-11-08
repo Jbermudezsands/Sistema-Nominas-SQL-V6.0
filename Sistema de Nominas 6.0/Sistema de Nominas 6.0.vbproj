@@ -15,6 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <ApplicationIcon>FrmEmpleados.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -86,15 +87,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\CsEmpleadoDAL.vb" />
+    <Compile Include="Clases\CsAdelantosDAL.vb" />
     <Compile Include="Clases\CalculadoraAguinaldo.vb" />
     <Compile Include="Clases\CsAguinaldoDAL.vb" />
     <Compile Include="Clases\CalculadoraNominaVacaciones.vb" />
     <Compile Include="Clases\CsNominaVacacionesDAL.vb" />
     <Compile Include="Clases\ExportadorBancos.vb" />
     <Compile Include="Reportes\RptColillaPago.vb" />
-    <Compile Include="Reportes\RptColillaDetalle.vb" />
+    <Compile Include="Reportes\RptColillaDetalle.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FrmDatosBanco.vb" />
     <Compile Include="FrmNominaVacaciones.vb" />
+    <Compile Include="FrmAdelantos13vo.vb" />
     <Compile Include="FrmAguinaldo.vb" />
     <Compile Include="FrmListadoNominaBase.vb" />
     <Compile Include="FrmListadoNominaVacaciones.vb" />
@@ -113,6 +118,18 @@
     <Compile Include="FrmSalarioHistorial.vb" />
     <Compile Include="FrmMonedas13vo.vb" />
     <Compile Include="Tablas\EmpleadoBaja.vb" />
+    <Compile Include="Tablas\ControlVacaciones.vb" />
+    <Compile Include="Clases\PaletaVacaciones.vb" />
+    <Compile Include="Clases\CsControlVacacionesDAL.vb" />
+    <Compile Include="Clases\CalendarioAnual.vb" />
+    <Compile Include="Reportes\RptControlVacaciones.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrmControlVacaciones.vb" />
+    <Compile Include="Tablas\DatosHistorialBaja.vb" />
+    <Compile Include="Reportes\RptHistorialLiquidacion.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tablas\SalarioMesBaja.vb" />
     <Compile Include="Tablas\OpcionesLiquidacion.vb" />
     <Compile Include="Tablas\Liquidacion.vb" />
@@ -182,6 +199,13 @@
     <Compile Include="Clases\GeneradorPeriodos.vb" />
     <Compile Include="Clases\EstiloGrid.vb" />
     <Compile Include="Clases\ExportadorGrid.vb" />
+    <Compile Include="Clases\ExportadorPlanilla.vb" />
+    <Compile Include="Clases\ImportadorTasas.vb" />
+    <Compile Include="Clases\CsListaBajasDAL.vb" />
+    <Compile Include="Reportes\RptListaBajas.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrmListaBajas.vb" />
     <Compile Include="Clases\CsHorasExtraDAL.vb" />
     <Compile Include="Clases\CsMovimientoNominaDAL.vb" />
     <Compile Include="FrmMovimientos.vb">
@@ -345,6 +369,52 @@
     <Compile Include="FrmControles.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmIncentivo.Designer.vb">
+      <DependentUpon>FrmIncentivo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIncentivo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIncentivoMetas.Designer.vb">
+      <DependentUpon>FrmIncentivoMetas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIncentivoMetas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDeduccionPorciento.Designer.vb">
+      <DependentUpon>FrmDeduccionPorciento.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDeduccionPorciento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGrupo.Designer.vb">
+      <DependentUpon>FrmGrupo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmGrupo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTraslados.Designer.vb">
+      <DependentUpon>FrmTraslados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTraslados.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRegistroJustifica.Designer.vb">
+      <DependentUpon>FrmRegistroJustifica.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRegistroJustifica.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\CsTipoIncentivoDAL.vb" />
+    <Compile Include="Clases\CsGrupoDAL.vb" />
+    <Compile Include="Clases\CsTipoJustificacionDAL.vb" />
+    <Compile Include="Clases\CsDeduccionPorcientoDAL.vb" />
+    <Compile Include="Clases\CsIncentivoMetasDAL.vb" />
+    <Compile Include="Clases\CsTrasladoDAL.vb" />
+    <Compile Include="Tablas\TipoIncentivo.vb" />
+    <Compile Include="Tablas\Grupos.vb" />
+    <Compile Include="Tablas\TipoJustificacion.vb" />
+    <Compile Include="Tablas\ConfiguracionIncentivo.vb" />
     <Compile Include="FrmDeduccion.Designer.vb">
       <DependentUpon>FrmDeduccion.vb</DependentUpon>
     </Compile>
@@ -364,6 +434,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Clases\CsUsuarioDAL.vb" />
+    <Compile Include="Clases\CsRespaldoDAL.vb" />
+    <Compile Include="FrmRespaldar.Designer.vb">
+      <DependentUpon>FrmRespaldar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRespaldar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tablas\Usuarios.vb" />
     <Compile Include="Modulo\Conversion.vb" />
     <Compile Include="Modulo\Variables.vb" />
@@ -423,6 +500,9 @@
     <Compile Include="Tablas\Historico.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmControles.resx">
+      <DependentUpon>FrmControles.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmEmpleados.resx">
       <DependentUpon>FrmEmpleados.vb</DependentUpon>
     </EmbeddedResource>
@@ -508,5 +588,38 @@
   <ItemGroup>
     <None Include="Resources\light_yellow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spreadsheetgroup_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spreadsheetgroup_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grouprows_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grouprows_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boresume_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boresume_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\meeting_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\meeting_16x16.png" />
+  </ItemGroup>
+  <PropertyGroup>
+    <InnoCompiler Condition="Exists('$(ProgramFiles)\Inno Setup 6\ISCC.exe')">$(ProgramFiles)\Inno Setup 6\ISCC.exe</InnoCompiler>
+    <InnoCompiler Condition="'$(InnoCompiler)' == '' And Exists('$(MSBuildProgramFiles32)\Inno Setup 6\ISCC.exe')">$(MSBuildProgramFiles32)\Inno Setup 6\ISCC.exe</InnoCompiler>
+  </PropertyGroup>
+  <!-- En Release genera el instalador (Instalador\Salida) si Inno Setup 6 esta instalado; si no, se omite sin error -->
+  <Target Name="GenerarInstalador" AfterTargets="Build" Condition="'$(Configuration)' == 'Release' And '$(InnoCompiler)' != ''">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Debug\CntNominas.dll;$(MSBuildProjectDirectory)\bin\Debug\Servidor.exe" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" Condition="Exists('$(MSBuildProjectDirectory)\bin\Debug\Servidor.exe') And !Exists('$(OutDir)Servidor.exe')" ContinueOnError="true" />
+    <Exec Command="&quot;$(InnoCompiler)&quot; &quot;$(MSBuildProjectDirectory)\Instalador\SistemaNominas.iss&quot;" ContinueOnError="true" />
+  </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

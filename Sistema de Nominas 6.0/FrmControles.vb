@@ -12,6 +12,9 @@ Public Class FrmControles
 
     Private Const FormatoConProduccion As String = "Nomina Bono Produccion"
 
+    '' Logo de la empresa en memoria (se graba en DatosEmpresa.Logo al pulsar Grabar).
+    Private _logo As Byte() = Nothing
+
 #Region "CARGA"
 
     Private Sub FrmControles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -36,7 +39,7 @@ Public Class FrmControles
         TxtTelefono.Text = d.Telefono
         TxtFax.Text = d.Fax
         TxtEmail.Text = d.Email
-        TxtRutaLogo.Text = d.Ruta_Logo
+        _logo = d.Logo
         TxtRutaFoto.Text = d.Ruta_Foto
         MostrarLogo()
 
@@ -80,17 +83,14 @@ Public Class FrmControles
             ImgLogo.Image = Nothing
         End If
 
-        Dim ruta As String = TxtRutaLogo.Text.Trim
-
-        If ruta = "" OrElse Not File.Exists(ruta) Then Exit Sub
+        If _logo Is Nothing OrElse _logo.Length = 0 Then Exit Sub
 
         Try
-            ' Se copia a memoria para no dejar el archivo bloqueado.
-            Using original As Image = Image.FromStream(New MemoryStream(File.ReadAllBytes(ruta)))
+            Using ms As New MemoryStream(_logo), original As Image = Image.FromStream(ms)
                 ImgLogo.Image = New Bitmap(original)
             End Using
         Catch
-            ' Un archivo que no es imagen simplemente no se muestra.
+            ' Bytes que no son una imagen: no se muestran.
         End Try
 
     End Sub
@@ -103,7 +103,7 @@ Public Class FrmControles
         Chk7mo.Visible = (CmbNominas.Text = FormatoConProduccion)
     End Sub
 
-    Private Sub BtnBuscarLogo_Click(sender As Object, e As EventArgs) Handles BtnBuscarLogo.Click
+    Private Sub BtnAgregarLogo_Click(sender As Object, e As EventArgs) Handles BtnAgregarLogo.Click
 
         Using dlg As New OpenFileDialog With {
             .Title = "Seleccione el logo de la empresa",
@@ -111,10 +111,24 @@ Public Class FrmControles
 
             If dlg.ShowDialog() <> DialogResult.OK Then Exit Sub
 
-            TxtRutaLogo.Text = dlg.FileName
-            MostrarLogo()
+            Try
+                Dim bytes As Byte() = File.ReadAllBytes(dlg.FileName)
+                ' Se valida que sea una imagen antes de aceptarla.
+                Using ms As New MemoryStream(bytes), prueba As Image = Image.FromStream(ms)
+                End Using
+                _logo = bytes
+                MostrarLogo()
+            Catch
+                MessageBox.Show("El archivo seleccionado no es una imagen válida.", "Zeus Nominas",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End Try
         End Using
 
+    End Sub
+
+    Private Sub BtnQuitarLogo_Click(sender As Object, e As EventArgs) Handles BtnQuitarLogo.Click
+        _logo = Nothing
+        MostrarLogo()
     End Sub
 
     Private Sub BtnBuscarFoto_Click(sender As Object, e As EventArgs) Handles BtnBuscarFoto.Click
@@ -128,10 +142,6 @@ Public Class FrmControles
             TxtRutaFoto.Text = dlg.SelectedPath
         End Using
 
-    End Sub
-
-    Private Sub TxtRutaLogo_Leave(sender As Object, e As EventArgs) Handles TxtRutaLogo.Leave
-        MostrarLogo()
     End Sub
 
     Private Sub BtnRecargar_Click(sender As Object, e As EventArgs) Handles BtnRecargar.Click
@@ -222,7 +232,7 @@ Public Class FrmControles
             .Telefono = TxtTelefono.Text.Trim,
             .Fax = TxtFax.Text.Trim,
             .Email = TxtEmail.Text.Trim,
-            .Ruta_Logo = TxtRutaLogo.Text.Trim,
+            .Logo = _logo,
             .Ruta_Foto = TxtRutaFoto.Text.Trim,
             .Formato_Colilla = CmbColillas.Text.Trim,
             .Formato_Nomina = CmbNominas.Text.Trim,

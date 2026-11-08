@@ -229,3 +229,4 @@ D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nom
 D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Debug\DevExpress.PivotGrid.v24.1.Core.xml
 D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\bin\Debug\DevExpress.Charts.v24.1.Core.xml
 D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Debug\Sistema_de_Nominas_6._0.FrmMovimientos.resources
+D:\Sistemas\Sistema-de-Nominas-SQL-V.6.0\Sistema-Nominas-SQL-V6.0\Sistema de Nominas 6.0\obj\Debug\Sistema_de_Nominas_6._0.FrmControles.resources

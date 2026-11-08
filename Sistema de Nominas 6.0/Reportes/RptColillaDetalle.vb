@@ -225,7 +225,7 @@ Public Class RptColillaDetalle
     Private Sub Logo_BeforePrint(sender As Object, e As System.ComponentModel.CancelEventArgs)
 
         Dim caja As XRPictureBox = DirectCast(sender, XRPictureBox)
-        Dim origen As XRPictureBox = ConstructorReporte.Imagen(_empresa.Ruta_Logo, caja.BoundsF)
+        Dim origen As XRPictureBox = ConstructorReporte.Imagen(_empresa.Logo, caja.BoundsF)
 
         If origen Is Nothing AndAlso _empresa.Ruta_Foto <> "" Then
             Dim codigo As String = Convert.ToString(GetCurrentColumnValue("Codigo"))

@@ -56,7 +56,7 @@ Public Class RptSolicitudVacaLargo
 
     Private Sub CrearEncabezado(banda As ReportHeaderBand, empresa As DatosEmpresa, sol As SolicitudVacaciones, hoy As Date)
 
-        Dim logo As XRPictureBox = Imagen(empresa.Ruta_Logo, New RectangleF(0, 0, 120, 75))
+        Dim logo As XRPictureBox = Imagen(empresa.Logo, New RectangleF(0, 0, 120, 75))
         If logo IsNot Nothing Then banda.Controls.Add(logo)
 
         banda.Controls.Add(Etiqueta(empresa.Nombre_Empresa, 130, 0, Ancho - 260, 22, True, 13, TextAlignment.MiddleCenter))
@@ -180,6 +180,10 @@ Public Class RptSolicitudVacaLargo
             .Text = If(texto, ""), .BoundsF = New RectangleF(x, y, ancho, alto), .TextAlignment = alineacion,
             .Font = New DXFont(Fuente, tamano, If(negrita, DXFontStyle.Bold, DXFontStyle.Regular)),
             .Padding = New PaddingInfo(2, 2, 0, 0), .CanGrow = False}
+    End Function
+
+    Private Shared Function Imagen(datos As Byte(), limites As RectangleF) As XRPictureBox
+        Return ConstructorReporte.Imagen(datos, limites)
     End Function
 
     ''' <summary>Imagen desde archivo; Nothing si la ruta está vacía, no existe o no es una imagen.</summary>

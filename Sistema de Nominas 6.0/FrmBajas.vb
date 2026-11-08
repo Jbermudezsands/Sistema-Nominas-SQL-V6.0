@@ -42,7 +42,7 @@ Public Class FrmBajas
     ' Historial y botones
     Private GridSalarios As GridControl
     Private VistaSalarios As GridView
-    Private BtnCalcular, BtnImprimir, BtnProcesar, BtnCerrar As SimpleButton
+    Private BtnCalcular, BtnImprimir, BtnHistorial, BtnDetalle, BtnProcesar, BtnCerrar As SimpleButton
 
     Public Sub New()
 
@@ -173,17 +173,21 @@ Public Class FrmBajas
 
         BtnCalcular = Boton("Calcular", "CalculateNow", 8)
         BtnImprimir = Boton("Imprimir", "Print", 109)
+        BtnHistorial = Boton("Imp. Historial", "Print", 210)
+        BtnDetalle = Boton("Imp. Detalle", "Print", 210)
         BtnProcesar = Boton("Procesar", "Apply", 210)
         BtnCerrar = Boton("Cerrar", "Close", 0)
         AddHandler BtnCalcular.Click, AddressOf BtnCalcular_Click
         AddHandler BtnImprimir.Click, Sub(s, e) MostrarReporte()
+        AddHandler BtnHistorial.Click, AddressOf BtnHistorial_Click
+        AddHandler BtnDetalle.Click, AddressOf BtnDetalle_Click
         AddHandler BtnProcesar.Click, AddressOf BtnProcesar_Click
         AddHandler BtnCerrar.Click, Sub(s, e) Close()
 
         ' Los botones van apilados en una columna derecha acoplada (siempre visibles); el resto hace scroll si no cabe.
         Dim pnlBotones As New PanelControl With {.Dock = DockStyle.Right, .Width = 111, .BorderStyle = BorderStyles.NoBorder}
         Dim yBoton As Integer = 8
-        For Each b As SimpleButton In New SimpleButton() {BtnCalcular, BtnImprimir, BtnProcesar, BtnCerrar}
+        For Each b As SimpleButton In New SimpleButton() {BtnCalcular, BtnImprimir, BtnHistorial, BtnDetalle, BtnProcesar, BtnCerrar}
             b.Location = New Point(8, yBoton)
             yBoton += 43
             pnlBotones.Controls.Add(b)
@@ -390,12 +394,16 @@ Public Class FrmBajas
         Text = "Despidos y Renuncias"
         HabilitarAcciones(False)
         BtnCalcular.Enabled = False
+        BtnHistorial.Enabled = False
+        BtnDetalle.Enabled = False
         _cargando = False
 
     End Sub
 
     Private Sub HabilitarAcciones(calculada As Boolean)
         BtnCalcular.Enabled = _estado IsNot Nothing
+        BtnHistorial.Enabled = _estado IsNot Nothing
+        BtnDetalle.Enabled = _estado IsNot Nothing
         BtnImprimir.Enabled = calculada
         BtnProcesar.Enabled = calculada
     End Sub
@@ -514,6 +522,62 @@ Public Class FrmBajas
             XtraMessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Catch ex As Exception
             XtraMessageBox.Show("No se pudo calcular la liquidación: " & ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            Cursor = Cursors.Default
+        End Try
+
+    End Sub
+
+    ''' <summary>Datos del encabezado de los reportes de historial y detalle, tomados de la pantalla (los salarios pueden estar editados).</summary>
+    Private Function LeerDatosHistorial() As DatosHistorialBaja
+        Return New DatosHistorialBaja With {
+            .Codigo = _svc.Empleado.Cod_Empleado1,
+            .Nombre_Completo = _svc.Empleado.Nombre_Completo,
+            .Departamento = TxtDepartamento.Text,
+            .Cargo = TxtCargo.Text,
+            .Annos = TxtAnnos.Text,
+            .Meses = TxtMeses.Text,
+            .Dias = Valor(TxtDiasTrabajados).ToString("n0"),
+            .Salario_Alto = Valor(TxtSalarioAlto),
+            .Salario_Basico = Valor(TxtSalarioBasico),
+            .Salario_Promedio = Valor(TxtSalarioPromedio),
+            .Tarifa = If(Double.TryParse(TxtTarifa.Text, Nothing), Double.Parse(TxtTarifa.Text), 0),
+            .Fecha_Ini_Vacaciones = DtpIniVaca.DateTime.Date,
+            .Fecha_Ini_Aguinaldo = DtpIniAgui.DateTime.Date}
+    End Function
+
+    ''' <summary>Imp. Historial (V.5.0 CmdImprimirHistorial): ingresos por mes de los últimos 6 meses, en un reporte DevExpress.</summary>
+    Private Sub BtnHistorial_Click(sender As Object, e As EventArgs)
+
+        If _svc?.Empleado Is Nothing Then Return
+
+        Try
+            Using rpt As RptHistorialLiquidacion = _svc.CrearReporteHistorial(LeerDatosHistorial())
+                FrmVisorReporte.Mostrar(rpt, "Historial salarios " & _svc.Empleado.Cod_Empleado1, Me)
+            End Using
+        Catch ex As InvalidOperationException
+            XtraMessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Catch ex As Exception
+            XtraMessageBox.Show("No se pudo mostrar el historial: " & ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
+    ''' <summary>Imp. Detalle (V.5.0 CmdDetalle_Click): una fila por nómina del mismo período, en un reporte DevExpress.</summary>
+    Private Sub BtnDetalle_Click(sender As Object, e As EventArgs)
+
+        If _svc?.Empleado Is Nothing Then Return
+
+        Try
+            Cursor = Cursors.WaitCursor
+            Using rpt As RptDetalleLiquidacion = _svc.CrearReporteDetalle(LeerDatosHistorial(), LeerOpciones())
+                Cursor = Cursors.Default
+                FrmVisorReporte.Mostrar(rpt, "Detalle salarios " & _svc.Empleado.Cod_Empleado1, Me)
+            End Using
+        Catch ex As InvalidOperationException
+            XtraMessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Catch ex As Exception
+            XtraMessageBox.Show("No se pudo mostrar el detalle: " & ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             Cursor = Cursors.Default
         End Try

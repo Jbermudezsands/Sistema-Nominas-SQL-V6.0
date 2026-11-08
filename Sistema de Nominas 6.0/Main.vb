@@ -30,7 +30,7 @@
         AbrirFormulario(My.Forms.FrmCargo)
     End Sub
 
-    Private Sub BarButtonDepartamento_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonDepartamento.ItemClick
+    Private Sub BarButtonDepartamento_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs)
         AbrirFormulario(My.Forms.FrmDepartamento)
     End Sub
 
@@ -98,7 +98,7 @@
         AbrirFormulario(My.Forms.FrmTipoIncapacidad)
     End Sub
     ''' <summary>Página "Procesos" > Bajas; "Despidos y Renuncias" de la página Acceso abre la misma pantalla.</summary>
-    Private Sub BarButtonBajas_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonBajas.ItemClick, BarButtonDespidos.ItemClick
+    Private Sub BarButtonBajas_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonDespidos.ItemClick
         AbrirFormulario(My.Forms.FrmBajas)
     End Sub
 
@@ -113,8 +113,23 @@
     End Sub
 
     ''' <summary>Página "Procesos" > Aguinaldo: nómina de 13vo mes (V.5.0 Frm13VacaMes, parte del 13vo).</summary>
-    Private Sub BarButtonAguinaldo_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonAguinaldo.ItemClick
+    Private Sub BarButtonAguinaldo_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonAguinaldo.ItemClick, BarButtonAguinaldoProc.ItemClick
         AbrirUnico(Of FrmAguinaldo)(Function() New FrmAguinaldo)
+    End Sub
+
+    ''' <summary>Procesos > Adelantos de 13vo mes y vacaciones (V.5.0 FrmAdelantos13vo): se descuentan en Aguinaldo y Vacaciones.</summary>
+    Private Sub BarButtonAdelantos13vo_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonAdelantos13vo.ItemClick
+        AbrirUnico(Of FrmAdelantos13vo)(Function() New FrmAdelantos13vo)
+    End Sub
+
+    ''' <summary>Procesos > Calendario de vacaciones del empleado, con su saldo y reporte (V.5.0 FrmControlVacaciones).</summary>
+    Private Sub BarButtonControlVacaciones_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonControlVacaciones.ItemClick
+        AbrirUnico(Of FrmControlVacaciones)(Function() New FrmControlVacaciones)
+    End Sub
+
+    ''' <summary>Acceso > Historicos y página Historicos > Lista Liquidacion: bajas calculadas pendientes de procesar (V.5.0 FrmListadoBajas).</summary>
+    Private Sub BarButtonListaLiquidacion_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonListaLiquidacion.ItemClick
+        AbrirUnico(Of FrmListaBajas)(Function() New FrmListaBajas)
     End Sub
 
     ''' <summary>Página "Historicos": listado de nóminas de vacaciones (V.5.0 FrmListadoNominaVacaciones, pestaña de vacaciones).</summary>
@@ -147,6 +162,11 @@
         AbrirFormulario(My.Forms.FrmUsuarios)
     End Sub
 
+    ''' <summary>Respaldo de la base de datos de la compañía conectada (V.5.0 FrmRespaldar).</summary>
+    Private Sub BarButtonRespaldar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonRespaldar.ItemClick
+        AbrirUnico(Of FrmRespaldar)(Function() New FrmRespaldar)
+    End Sub
+
     Private Sub BarButtonSalir_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonSalir.ItemClick
         Me.Close()
     End Sub
@@ -160,5 +180,41 @@
 
     Private Sub BarButtonSolicitud_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonSolicitud.ItemClick
         AbrirFormulario(My.Forms.FrmSolicitud)
+    End Sub
+
+    Private Sub BarButtonIncentivo_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonIncentivo.ItemClick
+        AbrirFormulario(My.Forms.FrmIncentivo)
+    End Sub
+
+    Private Sub BarButtonIncentivoMetas_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonIncentivoMetas.ItemClick
+        AbrirFormulario(My.Forms.FrmIncentivoMetas)
+    End Sub
+
+    Private Sub BarButtonDeduccionPorciento_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonDeduccionPorciento.ItemClick
+        AbrirFormulario(My.Forms.FrmDeduccionPorciento)
+    End Sub
+
+    Private Sub BarButtonGrupo_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonGrupo.ItemClick
+        AbrirFormulario(My.Forms.FrmGrupo)
+    End Sub
+
+    Private Sub BarButtonTraslados_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonTraslados.ItemClick
+        AbrirFormulario(My.Forms.FrmTraslados)
+    End Sub
+
+    Private Sub BarButtonRegistroJustifica_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonRegistroJustifica.ItemClick
+        AbrirFormulario(My.Forms.FrmRegistroJustifica)
+    End Sub
+
+    Private Sub BarButtonListaNomina2_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonListaNomina2.ItemClick
+        AbrirFormulario(My.Forms.FrmListNomina)
+    End Sub
+
+    Private Sub BarButtonDespidos2_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonDespidos2.ItemClick
+        AbrirFormulario(My.Forms.FrmBajas)
+    End Sub
+
+    Private Sub BarButtonDepartamento2_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonDepartamento2.ItemClick
+        AbrirFormulario(My.Forms.FrmDepartamento)
     End Sub
 End Class

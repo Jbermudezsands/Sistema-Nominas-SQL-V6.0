@@ -161,6 +161,7 @@ Partial Class FrmJustificaciones
         Me.BtnTipo.Size = New System.Drawing.Size(95, 22)
         Me.BtnTipo.TabIndex = 6
         Me.BtnTipo.Text = "Nuevo tipo..."
+        Me.BtnTipo.Visible = False
         '
         'CmbTipo
         '

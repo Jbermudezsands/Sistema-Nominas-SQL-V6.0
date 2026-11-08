@@ -7,7 +7,7 @@ Public Class DatosEmpresa
     Public Property Telefono As String = ""
     Public Property Fax As String = ""
     Public Property Email As String = ""
-    Public Property Ruta_Logo As String = ""
+    Public Property Logo As Byte() = Nothing
     Public Property Ruta_Foto As String = ""
     Public Property Formato_Colilla As String = ""
     Public Property Formato_Nomina As String = ""
